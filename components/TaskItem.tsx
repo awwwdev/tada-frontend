@@ -55,9 +55,30 @@ export default function TaskItem({
           <Icon name="bf-i-ph-copy" className="c-base11" />
           <span className="sr-only">Duplicate</span>
         </Button>
-        <Button variation="text" iconButton>
-          <Icon name="bf-i-ph-star" className="c-base11" />
-          <span className="sr-only">Star</span>
+        <Button variation="text" iconButton onClick={() => setTask({...task, pinned: !task.pinned})}>
+          {task.pinned ? (
+            <Icon name="bf-i-ph-push-pin-fill" className="c-accent11" />
+          ) : (
+            <Icon name="bf-i-ph-push-pin" className="c-base11" />
+          )}
+          {task.pinned ? (
+            <span className="sr-only">Un pin this task</span>
+          ) : (
+            <span className="sr-only">Pin this task</span>
+          )}
+        </Button>
+
+        <Button variation="text" iconButton onClick={() => setTask({...task, starred: !task.starred})}>
+          {task.starred ? (
+            <Icon name="bf-i-ph-star-fill" className="c-accent11" />
+          ) : (
+            <Icon name="bf-i-ph-star" className="c-base11" />
+          )}
+          {task.starred ? (
+            <span className="sr-only">Un-star this task</span>
+          ) : (
+            <span className="sr-only">Star this task</span>
+          )}
         </Button>
 
         <div className={`cursor-move px-2 flex items-center`} {...dragHandleProps}>

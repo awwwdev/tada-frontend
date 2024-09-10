@@ -22,10 +22,11 @@ export type Task = {
   orderInList?: number;
   preTasks?: string[];  
   postTasks?: string[];
-  pinned?: boolean;
   steps?: string[];
   listId?: string;
   deleted?: boolean;
+  starred?: boolean;
+  pinned?: boolean;
 }
 
 
