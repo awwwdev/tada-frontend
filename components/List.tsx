@@ -11,7 +11,10 @@ export default function List({ tasks, setTasks }: { tasks: Task[]; setTasks: any
   if (!tasks || tasks.length === 0) return <EmptyState />;
   const notDeletedTasks = tasks.filter((t: Task) => !t.deleted);
   if (notDeletedTasks.length === 0) return <EmptyState />;
-  return <ListContent tasks={notDeletedTasks} setTasks={setTasks} />;
+  const pinnedTasks = notDeletedTasks.filter((t: Task) => t.pinned);
+  const notPinnedTasks =  notDeletedTasks.filter((t: Task) => !t.pinned);
+  const orderedTasks = [...pinnedTasks, ...notPinnedTasks];
+  return <ListContent tasks={orderedTasks} setTasks={setTasks} />;
 }
 
 function ListContent({ tasks, setTasks }: { tasks: Task[]; setTasks: any }) {
@@ -25,7 +28,9 @@ function ListContent({ tasks, setTasks }: { tasks: Task[]; setTasks: any }) {
         template={(props: TemplateProps) => <ListItemTemplate tasks={tasks} setTasks={setTasks} {...props} />}
         list={tasks}
         onMoveEnd={(newList: Task[]) => {
-          const newListWithUpdatedOrders = newList.map((t: Task, index: number) => ({ ...t, orderInList: index }))
+          const pinnedTasks = newList.filter((t:Task) => t.pinned)
+          const notPinnedTasks = newList.filter((t:Task) => !t.pinned)
+          const newListWithUpdatedOrders = [...pinnedTasks, ...notPinnedTasks].map((t: Task, index: number) => ({ ...t, orderInList: index }))
           setTasks(newListWithUpdatedOrders)
         }
         }

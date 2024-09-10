@@ -35,12 +35,13 @@ export default function TaskItem({
       />
       <button
         type="button"
-        className="grow  h-10 self-stretch text-start"
+        className="grow cursor-default  h-10 self-stretch text-start"
         onClick={() => setSelectedTask(task)}
         {...dragHandleProps}
       >
         <span className="mis-3">{task.label}</span>
         <span className="sr-only">Select This Task</span>
+        <span> -- Order: {task.orderInList}</span>
       </button>
       <div className="mis-auto flex">
         <Button variation="text" iconButton onClick={() => setTask({ ...task, deleted: true })}>
