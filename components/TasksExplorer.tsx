@@ -30,7 +30,7 @@ export default function TasksExplorer() {
         onSubmit={(e) => {
           e.preventDefault();
           const draftId = uuid();
-          setTasks((currentTasks) => [...currentTasks, { ...draft,  id: draftId, dateCreated: new Date() }]);
+          setTasks((currentTasks) => [...currentTasks, { ...draft,  id: draftId, dateCreated: new Date(), orderInList: tasks.length }]);
           setDraft(EMPTY_TASK);
         }}
       >

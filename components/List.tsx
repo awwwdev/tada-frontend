@@ -7,11 +7,10 @@ import DraggableList from "react-draggable-list";
 import Icon from "./ui/Icon";
 import { v4 as uuid } from "uuid";
 
-
 export default function List({ tasks, setTasks }: { tasks: Task[]; setTasks: any }) {
   if (!tasks || tasks.length === 0) return <EmptyState />;
   const notDeletedTasks = tasks.filter((t: Task) => !t.deleted);
-  if (notDeletedTasks.length === 0) return <EmptyState />
+  if (notDeletedTasks.length === 0) return <EmptyState />;
   return <ListContent tasks={notDeletedTasks} setTasks={setTasks} />;
 }
 
@@ -20,21 +19,28 @@ function ListContent({ tasks, setTasks }: { tasks: Task[]; setTasks: any }) {
 
   return (
     <div ref={listContainerRef}>
-        <DraggableList<Task, void, typeof ListItemTemplate>
-          itemKey="id"
-          template={(props: TemplateProps) => <ListItemTemplate tasks={tasks} setTasks={setTasks} {...props} />}
-          list={tasks}
-          onMoveEnd={(newList: Task[]) => setTasks(newList)}
-          container={() => listContainerRef.current}
-        />
+      {/* @ts-ignore */}
+      <DraggableList
+        itemKey="id"
+        template={(props: TemplateProps) => <ListItemTemplate tasks={tasks} setTasks={setTasks} {...props} />}
+        list={tasks}
+        onMoveEnd={(newList: Task[]) => {
+          const newListWithUpdatedOrders = newList.map((t: Task, index: number) => ({ ...t, orderInList: index }))
+          setTasks(newListWithUpdatedOrders)
+        }
+        }
+        container={() => listContainerRef.current}
+      />
     </div>
   );
 }
 
 function EmptyState() {
-  return <div className='h-full w-full flex justify-center items-center'>
-    <p className='c-base11 italic'>No Task in this list</p>
-  </div>;
+  return (
+    <div className="h-full w-full flex justify-center items-center">
+      <p className="c-base11 italic">No Task in this list</p>
+    </div>
+  );
 }
 
 type TemplateProps = {
@@ -46,6 +52,7 @@ type ListItemTemplateProps = {
   tasks: Task[];
   setTasks: any;
 } & TemplateProps;
+
 
 function ListItemTemplate({ item, itemSelected, dragHandleProps, tasks, setTasks }: ListItemTemplateProps) {
   const scale = itemSelected * 0.05 + 1;
@@ -70,7 +77,7 @@ function ListItemTemplate({ item, itemSelected, dragHandleProps, tasks, setTasks
             const otherTasks = tasks.filter((t: Task) => t.id !== item.id);
             setTasks([...otherTasks, newTask]);
           }}
-          handleDuplicate={(t: Task) => setTasks([...tasks, {...t , id: uuid()}])}
+          handleDuplicate={(t: Task) => setTasks([...tasks, { ...t, id: uuid() }])}
           dragHandleProps={dragHandleProps}
         />
       </div>
