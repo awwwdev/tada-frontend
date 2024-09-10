@@ -8,7 +8,6 @@ import {
 import { presetRadix } from "unocss-preset-radix";
 // import * as radixColors from '@radix-ui/colors';
 import { rules, shortcuts } from './uno-rules';
-import { myPreset2 } from './myPreset2';
 // import presetPrimitives from "unocss-preset-primitives";
 
 export default defineConfig({
@@ -32,21 +31,30 @@ export default defineConfig({
       dark: "class"
     }),
     presetIcons(),
-    myPreset2({
-      prefix: 'rx',
-      useP3Colors: true,
-      extend: true,
-        // onlyOneTheme: 'dark',
-      safeListColors: ["slate11A", 'cyan8A'],
-      safeListAliases: ['base'],
+    presetRadix({
+      prefix: "--rx-",
+      palette: [
+        // neutrals
+        'gray', 'slate', 'mauve', 'olive', 'sage', 'sand',
+        // forground-colors
+        'amber', 'sky', 'yellow', 'lime', 'mint',
+        // orangish-colors
+        'bronze', 'gold', 'brown', 'orange', 'tomato',
+        //red-ish colors
+        'red', 'ruby', 'crimson', 'pink', 'plum',
+        // purplish-colors
+        'purple', 'violet', 'iris', 'indigo', 'blue',
+        // green-ish colors
+        'cyan', 'teal', 'jade', 'green', 'grass',
+      ],
       aliases: {
-        base: 'slate',
-        accent: 'cyan',
-        warning: 'yellow',
-        error: 'red',
-        success: 'green',
-        info: 'blue'
-      }
+        accent: "cyan",
+        base: "slate",
+        success: "jade",
+        warning: "amber",
+        error: "tomato",
+        info: "blue",
+      },
     }),
   ],
 });
