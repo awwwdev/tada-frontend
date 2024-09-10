@@ -11,6 +11,7 @@ import Header from "@/components/header";
 import SideMenu from "@/components/SideNav";
 import GlobalProvider from "@/components/Provider";
 import type { Metadata } from "next";
+import MyToaster from '@/components/Toaster';
 
 
 const title = "Hamid K.";
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
         {<SideMenu />}
       </div>
+      <MyToaster />
     </GlobalProvider>
 
       </body>

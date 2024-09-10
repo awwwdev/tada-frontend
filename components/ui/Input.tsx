@@ -80,9 +80,9 @@ const  Input = forwardRef<Ref, AllProps>(function ({
         />
         <SuffixBox suffix={suffix} />
       </div>
-      <div className="line-clamp-1" style={{height: 'var(--line-height)'}}>
+      {/* <div className="line-clamp-1" style={{height: 'var(--line-height)'}}>
         <ErrorMessage id={errorMessageId} >{errorMessage}</ErrorMessage>
-      </div>
+      </div> */}
     </div>
   );
 });

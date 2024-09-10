@@ -1,3 +1,5 @@
+"use client";
+
 import { useId } from "react";
 import Icon from "../Icon";
 
@@ -18,7 +20,7 @@ export default function Checkbox({
   onChange: (checked: boolean, value?: string, filterGroup?: string) => void;
   value?: string;
   name?: string;
-  label: string;
+  label?: string;
   description?: string;
   required?: boolean;
   filterGroup?: string;
@@ -29,7 +31,7 @@ export default function Checkbox({
     <div className="grid  ">
       <label htmlFor={id} className="flex gap-2 items-center ">
         <div
-          className={`w-1.5em h-1.5em b-1 b-base4 flex justify-center items-center p-1 rd-1.5 bg-white
+          className={`w-1.5em h-1.5em b-1 b-base4 flex justify-center items-center p-1 rd-1.5 bg-black
             focus-within:outline-brand-accent focus-within:outline-1px focus-within:outline-solid
             ${checked && "bg-accent9"}
             `}
@@ -52,10 +54,10 @@ export default function Checkbox({
           )}
         </div>
 
-        <span className="fw-500 c-base11 capitalize input ">{label}</span>
+        {label && <span className="fw-500 c-base11 capitalize input ">{label}</span>}
       </label>
       {description && <p id={id + "-description"}>{description}</p>}
-      <p className="min-h-2" />
+      {/* <p className="min-h-2" /> */}
     </div>
   );
 }
