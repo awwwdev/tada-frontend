@@ -2,22 +2,40 @@ import React, { Children, ElementType } from "react";
 
 type Emoji = string;
 
-export type List = {
-  tasks: Task[];
+export type Folder = {
+  id: string;
   name: string;
-  emojies: Emoji[]
-}
+  emojies?: Emoji[];
+  dateCreated: Date;
+};
+
+type FolderProperties = {
+  dateAddedToFolder: Date;
+  orderInPanel?: number;
+};
+
+export type List = {
+  id: string;
+  dateCreated: Date;
+  name: string;
+  emojies?: Emoji[];
+  description?: string;
+  filter: (t: Task) => boolean;
+  show?: boolean;
+  orderInFolder?: number;
+  folders: FolderProperties[] | null;
+};
 
 export type Comment = {
   authorId: string;
   dateCreated: Date;
   body: string;
-}
+};
 
 type ListPorpertis = {
   orderInList: number;
   dateAddedToList: Date;
-}
+};
 
 export type Task = {
   listId?: string;
@@ -25,14 +43,13 @@ export type Task = {
   preTasks?: string[];
   postTasks?: string[];
 
-  lists: Record<string, ListPorpertis | null>
+  lists: Record<string, ListPorpertis | null>;
   // inDoTodayList?: boolean;
   // inDoTomorrowList?: boolean;
 
-
-  id: string,
+  id: string;
   label: string;
-  status: 'todo' | 'done';
+  status: "todo" | "done";
   dateCreated: Date;
   dateModified?: Date;
 
@@ -49,33 +66,38 @@ export type Task = {
   attachments?: string[];
   assignedTo?: string[];
   comments?: Comment[];
-}
-
+};
 
 type RepeationPattern = {
   startDate: Date;
   endAfterXTimes?: number;
   endDate?: Date;
   everyXPeriods: number;
-  period: 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year'
-}
-
+  period: "minute" | "hour" | "day" | "week" | "month" | "year";
+};
 
 type Reminder = {
   startDate: Date;
   endAfterXTimes?: number;
   endDate?: Date;
   everyXPeriods: number;
-  period: 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year'
+  period: "minute" | "hour" | "day" | "week" | "month" | "year";
+};
+
+export type Settings = {
+  theme: "light" | "dark" | "system";
+  showCompletedTasks: boolean;
+  startOfWeek: "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
+  planForTommorowSettings: {};
 }
 
 
-export type RNode = React.ReactNode;
+// --------------------------------------------------------------------------------------
 
+export type RNode = React.ReactNode;
 
 export type Children = { children: React.ReactNode };
 export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
-export type HTMLProps<T extends ElementType> = React.ComponentPropsWithoutRef<T>
-// frequently used props type  in uikit ----------------------------------------------- 
-export type CLS = { className?: string | null, preStyled?: boolean; };
-
+export type HTMLProps<T extends ElementType> = React.ComponentPropsWithoutRef<T>;
+// frequently used props type  in uikit -----------------------------------------------
+export type CLS = { className?: string | null; preStyled?: boolean };
