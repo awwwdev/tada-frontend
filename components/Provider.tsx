@@ -20,18 +20,30 @@ type ContextType = {
   setTasks: React.Dispatch<SetStateAction<Task[]>>;
   addTask: (task: Task) => void;
   updateTaskById: (args: {id: string, task: Task}) => void;
+  settings: Settings;
+  setSettings: React.Dispatch<SetStateAction<Settings>>;
+  lists: List[];
+  setLists: React.Dispatch<SetStateAction<List[]>>;
+  folders: Folder[];
+  setFolders: React.Dispatch<SetStateAction<Folder[]>>;
 };
 const GloblaContext = createContext<ContextType>({
   isSideMenuOpen: false,
-  setIsSideMenuOpen: () => {},
   selectedTask: null,
-  setSelectedTask: () => {},
-  listName: 'all',
-  setListName: () => {},
   tasks: [],
+  listName: 'all',
+  settings: createInitialSettings(),
+  folders: createInitialFolders(),
+  lists: createInitialLists(),
+  setIsSideMenuOpen: () => {},
+  setSelectedTask: () => {},
+  setListName: () => {},
   setTasks: () => {},
   addTask: () => {},
-  updateTaskById: () => {}
+  updateTaskById: () => {},
+  setSettings: () => {},
+  setFolders: () => {},
+  setLists: () => {},
 });
 
 export default function GlobalProvider({ children }: { children: React.ReactNode }) {
@@ -64,7 +76,13 @@ export default function GlobalProvider({ children }: { children: React.ReactNode
         tasks,
         setTasks,
         addTask,
-        updateTaskById
+        updateTaskById,
+        settings, 
+        setSettings,
+        lists,
+        setLists,
+        folders,
+        setFolders,
       }}
     >
       {children}

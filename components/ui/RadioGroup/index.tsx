@@ -1,4 +1,5 @@
-import Legend from "@/components/Legend";
+'use client';
+import Legend from "@/components/ui/Legend";
 import { Children, HTMLProps, StateSetter } from "@/types";
 import { createContext, useContext, useId } from "react";
 
