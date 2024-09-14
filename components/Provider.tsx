@@ -1,7 +1,7 @@
 "use client";
 
-import { makeEmptyTask } from '@/constants';
-import { Task } from "@/types";
+import { createInitialFolders, createInitialLists, createInitialSettings, makeEmptyTask } from '@/initialData';
+import { Folder, List, Settings, Task } from "@/types";
 import { createContext, SetStateAction, useContext, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuid } from "uuid";
@@ -37,6 +37,10 @@ const GloblaContext = createContext<ContextType>({
 export default function GlobalProvider({ children }: { children: React.ReactNode }) {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
+  const [settings, setSettings, removeSettings] = useLocalStorage<Settings>("settings", createInitialSettings());
+  const [folders, setFolders, removeFolders] = useLocalStorage<Folder[]>("folders", createInitialFolders());
+  const [lists, setLists, removeLists] = useLocalStorage<List[]>("lists", createInitialLists());
   const [tasks, setTasks, removeTasks] = useLocalStorage<Task[]>("tasks", []);
   const [listName , setListName] = useState('all');
 
