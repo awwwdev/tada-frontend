@@ -30,18 +30,35 @@ function TaskDetailsContent({ task }: { task: Task }) {
     <div>
       <Title {...{ task, setTask }} />
       <div className="h-12"></div>
+      <Line />
       <Steps {...{ task, setTask }} />
+      <Line />
       <Note {...{ task, setTask }} />
+      <Line />
       <Emojies {...{ task, setTask }} />
+      <Line />
       <Reminders {...{ task, setTask }} />
+      <Line />
       <Repetition {...{ task, setTask }} />
+      <Line />
       <AsingedTo {...{ task, setTask }} />
+      <Line />
       <Comments {...{ task, setTask }} />
+      <Line />
       <Archive {...{ task, setTask }} />
+      <Line />
       <Delete {...{ task, setTask }} />
     </div>
   );
 }
+
+function Line(){
+
+return (
+  <div className='b-t-1 b-base6'>
+
+  </div>
+)};
 
 type Props = { task: Task; setTask: (t: Task) => void };
 
