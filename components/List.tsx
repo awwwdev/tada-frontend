@@ -73,7 +73,7 @@ function ListItemTemplate({ item, itemSelected, dragHandleProps }: TemplateProps
 
   return (
     <div
-      className={`overflow-hidden max-h-[100%]
+      className={`overflow-hidden max-h-[100%] rd-3
         ${dragged ? "dragged" : ""} `}
       style={{
         transformOrigin: "30% 50% 0px",
