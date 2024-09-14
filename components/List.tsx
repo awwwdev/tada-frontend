@@ -28,7 +28,7 @@ function ListContent({ tasks, listName }: { tasks: Task[];  listName: string }) 
   const { setTasks } = useGlobalContex();
   // const [parent, enableAnimations] = useAutoAnimate(/* optional config */)
   return (
-    <div ref={listContainerRef} className="">
+    <div ref={listContainerRef} className="" suppressHydrationWarning>
       {/* @ts-ignore */}
       <DraggableList
         itemKey="id"

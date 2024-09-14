@@ -33,6 +33,8 @@ export default defineConfig({
     presetIcons(),
     presetRadix({
       prefix: "--rx-",
+      darkSelector: '.dark-theme',
+      lightSelector: '.light-theme',
       palette: [
         // neutrals
         'gray', 'slate', 'mauve', 'olive', 'sage', 'sand',

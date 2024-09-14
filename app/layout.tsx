@@ -12,7 +12,9 @@ import SideMenu from "@/components/SideNav";
 import GlobalProvider from "@/components/Provider";
 import type { Metadata } from "next";
 import MyToaster from '@/components/Toaster';
+import { cookies } from 'next/headers';
 
+const theme = cookies().get("theme")
 
 const title = "Hamid K.";
 const description = "A Developer with Design Superpowers";
@@ -53,10 +55,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className="dark-theme style-scroll-bar" lang='en'>
+    <html className={`${theme?.value}-theme style-scroll-bar`} lang='en'>
       <head></head>
-      <body className={`dark-theme bg-base1 c-base12 relative isolate`}>
-      <GlobalProvider>
+      <body className={`bg-base1 c-base12 relative isolate`}>
+      <GlobalProvider theme={theme?.value}>
       <div className={`side-menu-container isolate h-full  overflow-x-clip  mx-auto max-w-screen  `}>
         <div className="main grid max-w-screen isolate" style={{ gridTemplateRows: "1fr auto" }}>
           {/* <Header /> */}

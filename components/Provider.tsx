@@ -26,6 +26,7 @@ type ContextType = {
   setLists: React.Dispatch<SetStateAction<List[]>>;
   folders: Folder[];
   setFolders: React.Dispatch<SetStateAction<Folder[]>>;
+  theme: Settings['theme']
 };
 const GloblaContext = createContext<ContextType>({
   isSideMenuOpen: false,
@@ -44,9 +45,11 @@ const GloblaContext = createContext<ContextType>({
   setSettings: () => {},
   setFolders: () => {},
   setLists: () => {},
+  theme: 'light'
 });
 
-export default function GlobalProvider({ children }: { children: React.ReactNode }) {
+export default function GlobalProvider({ children, theme }: { children: React.ReactNode , theme: string }) {
+  console.log("🚀 ~ theme:", theme)
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
@@ -83,6 +86,7 @@ export default function GlobalProvider({ children }: { children: React.ReactNode
         setLists,
         folders,
         setFolders,
+        theme
       }}
     >
       {children}

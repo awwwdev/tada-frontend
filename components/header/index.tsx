@@ -3,13 +3,15 @@ import HamburgerButton from "./HamburgerButton";
 import HybridLink from "./HybridLink";
 import Button from "../ui/button";
 import Icon from "../ui/Icon";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Header = () => {
   return (
     <header className={`flex gap-3 items-center `}>
       <h1 className=" H3 ">TADA</h1>
 
-      <div className="mis-auto flex items-center">
+      <div className="mis-auto flex items-center gap-3">
+        <ThemeSwitcher theme="dark" />
         <Button variation="ghost">
           <Icon name="bf-i-ph-signin" />
           Sign Up
