@@ -1,37 +1,37 @@
 "use client";
 
 import { Task } from "@/types";
-import TaskItem from "@/components/TaskItem";
 import { useLocalStorage } from "usehooks-ts";
-import { v4 as uuid } from "uuid";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/Input";
-import Pre from "@/components/ui/Pre";
-import { EMPTY_TASK } from '@/constants';
-import List from './List';
-
-const items: Task[] = [
-  { status: "todo", label: "Buy Bilk", dateCreated: new Date() },
-  { status: "done", label: "Buy Soap", dateCreated: new Date() },
-  { status: "todo", label: "Excercise", dateCreated: new Date() },
-];
+import { makeEmptyTask } from "@/constants";
+import List from "./List";
+import { useGlobalContex } from "./Provider";
 
 export default function TasksExplorer() {
-  // const draftTaskId = useId();
-  const [draft, setDraft, removeValue] = useLocalStorage<Task>("darft-task", EMPTY_TASK);
 
-  const [tasks, setTasks, removeTasks] = useLocalStorage<Task[]>("tasks", []);
+  const { list, setTasks, addTask } = useGlobalContex();
+  return (
+    <div className="h-full  flex flex-col">
+      <List listName='all' />
+      <div className="h-12"></div>
+      <TaskInput />
+    </div>
+  );
+}
+
+function TaskInput() {
+  const [draft, setDraft, removeValue] = useLocalStorage<Task>("darft-task", makeEmptyTask());
+  const { addTask } = useGlobalContex();
 
   return (
-    <div className="">
-      <List tasks={tasks} setTasks={setTasks} />
-      <div className="h-12"></div>
+    <div>
       <form
+        className="mt-auto"
         onSubmit={(e) => {
           e.preventDefault();
-          const draftId = uuid();
-          setTasks((currentTasks) => [...currentTasks, { ...draft,  id: draftId, dateCreated: new Date(), orderInList: tasks.length }]);
-          setDraft(EMPTY_TASK);
+          addTask(draft);
+          setDraft(makeEmptyTask());
         }}
       >
         <div className="flex gap-3 items-end">
@@ -49,13 +49,6 @@ export default function TasksExplorer() {
           </Button>
         </div>
       </form>
-
-      <div className="h-12"></div>
-      <div>
-        <h2 className="H4">Tasks</h2>
-        <Pre>{JSON.stringify(tasks, null, 2)}</Pre>
-      </div>
     </div>
   );
 }
-

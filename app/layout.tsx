@@ -58,12 +58,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`dark-theme bg-base1 c-base12 relative isolate`}>
       <GlobalProvider>
       <div className={`side-menu-container isolate h-full  overflow-x-clip  mx-auto max-w-screen  `}>
-        <div className="main grid max-w-screen isolate" style={{ gridTemplateRows: "auto 1fr auto" }}>
-          <Header />
+        <div className="main grid max-w-screen isolate" style={{ gridTemplateRows: "1fr auto" }}>
+          {/* <Header /> */}
           <main className={`  max-w-screen `}>{children}</main>
-          <Footer />
+          {/* <Footer /> */}
         </div>
-        {<SideMenu />}
+        {/* {<SideMenu />} */}
       </div>
       <MyToaster />
     </GlobalProvider>

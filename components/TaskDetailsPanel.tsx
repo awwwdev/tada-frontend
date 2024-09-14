@@ -2,7 +2,7 @@
 
 import { Task } from "@/types";
 import { useGlobalContex } from "./Provider";
-import { useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage } from "usehooks-ts";
 
 export default function TaskDetailsPanel() {
   const { selectedTask } = useGlobalContex();
@@ -20,36 +20,80 @@ function EmptyState() {
 }
 
 function TaskDetailsContent({ task }: { task: Task }) {
-
   const [tasks, setTasks, removeTasks] = useLocalStorage<Task[]>("tasks", []);
 
-  const handleTaskChange = (newTask: Task) => {
+  const setTask = (newTask: Task) => {
     const otherTasks = tasks.filter((t: Task) => t.id !== task.id);
-    return [...otherTasks, newTask]
-  }
+    setTasks([...otherTasks, newTask]);
+  };
   return (
     <div>
-      <dl>
-        <DescriptionItem term={<span className='sr-only'>Task Label</span>} >{task.label}</DescriptionItem>
-        <DescriptionItem term="description" >{task.description}</DescriptionItem>
-        <DescriptionItem term="Created On" >{task.dateCreated?.toISOString?.()}</DescriptionItem>
-        <DescriptionItem term="Steps" >{task.status}</DescriptionItem>
-        <DescriptionItem term="Due Date" >{task.status}</DescriptionItem>
-        <DescriptionItem term="Reminders" >{task.status}</DescriptionItem>
-        <DescriptionItem term="Repeat This Task" >{task.status}</DescriptionItem>
-        <DescriptionItem term="Status" >{task.status}</DescriptionItem>
-        <DescriptionItem term="Status" >{task.status}</DescriptionItem>
-      </dl>
+      <Title {...{ task, setTask }} />
+      <div className="h-12"></div>
+      <Steps {...{ task, setTask }} />
+      <Note {...{ task, setTask }} />
+      <Emojies {...{ task, setTask }} />
+      <Reminders {...{ task, setTask }} />
+      <Repetition {...{ task, setTask }} />
+      <AsingedTo {...{ task, setTask }} />
+      <Comments {...{ task, setTask }} />
+      <Archive {...{ task, setTask }} />
+      <Delete {...{ task, setTask }} />
     </div>
   );
 }
 
+type Props = { task: Task; setTask: (t: Task) => void };
 
-function DescriptionItem({ term , children}: {term: React.ReactNode, children: React.ReactNode}){
+function Title({ task, setTask }: Props) {
+  return (
+    <div>
+      <h3 className="H2">{task.label}</h3>
+    </div>
+  );
+}
 
-return (
-  <div className='flex gap-3' >
-    <dt className='c-base11'>{term}</dt>
-    <dd>{children}</dd>
-  </div>
-)};
+function Archive({ task, setTask }: Props) {
+  return <div>Archive</div>;
+}
+
+function AsingedTo({ task, setTask }: Props) {
+  return <div>Assing</div>;
+}
+
+function Comments({ task, setTask }: Props) {
+  return <div>Comments</div>;
+}
+
+function Delete({ task, setTask }: Props) {
+  return <div>Delete</div>;
+}
+
+function Emojies({ task, setTask }: Props) {
+  return <div>Emojies</div>;
+}
+
+function Note({ task, setTask }: Props) {
+  return <div>Note</div>;
+}
+
+function Reminders({ task, setTask }: Props) {
+  return <div>Reminders</div>;
+}
+
+function Repetition({ task, setTask }: Props) {
+  return <div>Repetition</div>;
+}
+
+function Steps({ task, setTask }: Props) {
+  return <div>Steps</div>;
+}
+
+function DescriptionItem({ term, children }: { term: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="flex gap-3">
+      <dt className="c-base11">{term}</dt>
+      <dd>{children}</dd>
+    </div>
+  );
+}

@@ -4,36 +4,46 @@ import { Task } from "@/types";
 import TaskItem from "./TaskItem";
 import { useRef } from "react";
 import DraggableList from "react-draggable-list";
-import Icon from "./ui/Icon";
-import { v4 as uuid } from "uuid";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { useGlobalContex } from "./Provider";
 
-export default function List({ tasks, setTasks }: { tasks: Task[]; setTasks: any }) {
+export default function List({
+  listName = "all",
+}: {
+  listName: string;
+}) {
+  const { tasks : allTasks } = useGlobalContex();
+  const tasks = allTasks.filter((t:Task) => t.lists && t.lists[listName]);
   if (!tasks || tasks.length === 0) return <EmptyState />;
   const notDeletedTasks = tasks.filter((t: Task) => !t.deleted);
   if (notDeletedTasks.length === 0) return <EmptyState />;
   const pinnedTasks = notDeletedTasks.filter((t: Task) => t.pinned);
-  const notPinnedTasks =  notDeletedTasks.filter((t: Task) => !t.pinned);
+  const notPinnedTasks = notDeletedTasks.filter((t: Task) => !t.pinned);
   const orderedTasks = [...pinnedTasks, ...notPinnedTasks];
-  return <ListContent tasks={orderedTasks} setTasks={setTasks} />;
+  return <ListContent tasks={orderedTasks} listName={listName} />;
 }
 
-function ListContent({ tasks, setTasks }: { tasks: Task[]; setTasks: any }) {
+function ListContent({ tasks, listName }: { tasks: Task[];  listName: string }) {
   const listContainerRef = useRef<HTMLDivElement>(null);
-
+  const { setTasks } = useGlobalContex();
+  // const [parent, enableAnimations] = useAutoAnimate(/* optional config */)
   return (
-    <div ref={listContainerRef}>
+    <div ref={listContainerRef} className="">
       {/* @ts-ignore */}
       <DraggableList
         itemKey="id"
-        template={(props: TemplateProps) => <ListItemTemplate tasks={tasks} setTasks={setTasks} {...props} />}
+        template={(props: TemplateProps) => <ListItemTemplate {...props} />}
         list={tasks}
         onMoveEnd={(newList: Task[]) => {
-          const pinnedTasks = newList.filter((t:Task) => t.pinned)
-          const notPinnedTasks = newList.filter((t:Task) => !t.pinned)
-          const newListWithUpdatedOrders = [...pinnedTasks, ...notPinnedTasks].map((t: Task, index: number) => ({ ...t, orderInList: index }))
-          setTasks(newListWithUpdatedOrders)
-        }
-        }
+          const pinnedTasks = newList.filter((t: Task) => t.pinned);
+          const notPinnedTasks = newList.filter((t: Task) => !t.pinned);
+          const newListWithUpdatedOrders = [...pinnedTasks, ...notPinnedTasks].map((t: Task, index: number) => {
+            const newTask = { ...t };
+            newTask.lists[listName].orderInList = index;
+            return newTask;
+          });
+          setTasks(newListWithUpdatedOrders);
+        }}
         container={() => listContainerRef.current}
       />
     </div>
@@ -53,16 +63,13 @@ type TemplateProps = {
   itemSelected: number;
   dragHandleProps: object;
 };
-type ListItemTemplateProps = {
-  tasks: Task[];
-  setTasks: any;
-} & TemplateProps;
 
-
-function ListItemTemplate({ item, itemSelected, dragHandleProps, tasks, setTasks }: ListItemTemplateProps) {
+function ListItemTemplate({ item, itemSelected, dragHandleProps }: TemplateProps) {
   const scale = itemSelected * 0.05 + 1;
   const shadow = itemSelected * 15 + 1;
   const dragged = itemSelected !== 0;
+
+  const { updateTaskById, addTask } = useGlobalContex();
 
   return (
     <div
@@ -77,12 +84,7 @@ function ListItemTemplate({ item, itemSelected, dragHandleProps, tasks, setTasks
       <div className="grid" style={{ gridTemplateColumns: "1fr auto" }}>
         <TaskItem
           task={item}
-          setTasks={setTasks}
-          setTask={(newTask: Task) => {
-            const otherTasks = tasks.filter((t: Task) => t.id !== item.id);
-            setTasks([...otherTasks, newTask]);
-          }}
-          handleDuplicate={(t: Task) => setTasks([...tasks, { ...t, id: uuid() }])}
+          setTask={(newTask) => updateTaskById({ id: item.id, task: newTask })}
           dragHandleProps={dragHandleProps}
         />
       </div>

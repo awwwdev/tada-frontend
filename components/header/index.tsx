@@ -1,20 +1,21 @@
 import Link from "next/link";
 import HamburgerButton from "./HamburgerButton";
-import BlogLink from "./HybridLink";
-import DesktopHeaderTempalte from "./DesktopHeaderContainer";
 import HybridLink from "./HybridLink";
-import MobileHeaderTempalte from "./MobileHeaderContainer";
+import Button from "../ui/button";
+import Icon from "../ui/Icon";
 
 const Header = () => {
   return (
-    <>
-      <MobileHeaderTempalte>
-        <MobileHeader />
-      </MobileHeaderTempalte>
-      <DesktopHeaderTempalte>
-        <PublicWebsiteNav />
-      </DesktopHeaderTempalte>
-    </>
+    <header className={`flex gap-3 items-center `}>
+      <h1 className=" H3 ">TADA</h1>
+
+      <div className="mis-auto flex items-center">
+        <Button variation="ghost">
+          <Icon name="bf-i-ph-signin" />
+          Sign Up
+        </Button>
+      </div>
+    </header>
   );
 };
 
