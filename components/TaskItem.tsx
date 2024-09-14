@@ -13,17 +13,13 @@ type SetTasks = (arg: Task[]) => void;
 export default function TaskItem({
   task,
   setTask,
-  setTasks,
   dragHandleProps,
-  handleDuplicate,
 }: {
   task: Task;
   setTask: SetTask;
-  setTasks: SetTasks;
   dragHandleProps: Object;
-  handleDuplicate: (arg: Task) => void;
 }) {
-  const { setSelectedTask } = useGlobalContex();
+  const { setSelectedTask, addTask } = useGlobalContex();
 
   return (
     <div className="b-1 b-base6 rd-3 p-3 flex items-center bg-mauve3A">
@@ -41,9 +37,8 @@ export default function TaskItem({
       >
         <span className="mis-3">{task.label}</span>
         <span className="sr-only">Select This Task</span>
-        <span> -- Order: {task.orderInList}</span>
       </button>
-      <div className="mis-auto flex">
+      <div className="mis-auto flex opacity-20 hover:opacity-100">
         <Button variation="text" iconButton onClick={() => setTask({ ...task, deleted: true })}>
           <Icon name="bf-i-ph-trash" className="c-base11" />
           <span className="sr-only">Delete</span>
@@ -52,7 +47,7 @@ export default function TaskItem({
           <Icon name="bf-i-ph-pencil" className="c-base11" />
           <span className="sr-only">Edit</span>
         </Button>
-        <Button variation="text" iconButton onClick={() => handleDuplicate(task)}>
+        <Button variation="text" iconButton onClick={() => addTask(task)}>
           <Icon name="bf-i-ph-copy" className="c-base11" />
           <span className="sr-only">Duplicate</span>
         </Button>
