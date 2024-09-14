@@ -14,6 +14,7 @@
 
 --- ready for public use ---
 
+- fix draggable list hydration error
 - arrows 
 - formkit list animation
 - emoji picker

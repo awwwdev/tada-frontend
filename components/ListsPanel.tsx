@@ -34,14 +34,6 @@ export default function ListsPanel() {
         <span className="italic c-base11">Add a List</span>
       </Button>
       <div className="mt-auto flex flex-col gap-3">
-        <LinkButton variation='text' href="/settings" className='!text-start !justify-start w-full'>
-          <Icon name="bf-i-ph-gear-six" className="mie-1.5 c-base11" />
-          Settings
-        </LinkButton>
-        <LinkButton variation='text' href="https://github.com/awwwdev/tada" className='!text-start w-full !justify-start'>
-          <Icon name="bf-i-ph-github-logo" className="mie-1.5 c-base11" />
-          Source Code
-        </LinkButton>
         <Modal trigger={<Button variation="ghost">Tasks </Button>}>
           <div className="h-12"></div>
           <div>
