@@ -1,16 +1,17 @@
 - emoji picker
-
-- formkit list animation
-
+- ordering bug
 - detail panel
-
 - lists panel
 - prefrences
+- style
+- db
+- backend
 
 
+--- ready for public use ---
 
 - arrows 
-- style 
+- formkit list animation
 
-- db 
-- backend
+- if dragging -> use DraggableListContainer
+- if not dragging -> use formkit list animation
