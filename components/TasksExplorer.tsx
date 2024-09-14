@@ -4,13 +4,13 @@ import { Task } from "@/types";
 import { useLocalStorage } from "usehooks-ts";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/Input";
-import { makeEmptyTask } from "@/constants";
+import { makeEmptyTask } from "@/initialData";
 import List from "./List";
 import { useGlobalContex } from "./Provider";
 
 export default function TasksExplorer() {
 
-  const { list, setTasks, addTask } = useGlobalContex();
+  const { listName, setTasks, addTask } = useGlobalContex();
   return (
     <div className="h-full  flex flex-col">
       <List listName='all' />
