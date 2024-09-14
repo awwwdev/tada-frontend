@@ -8,25 +8,47 @@ export type List = {
   emojies: Emoji[]
 }
 
+export type Comment = {
+  authorId: string;
+  dateCreated: Date;
+  body: string;
+}
+
+type ListPorpertis = {
+  orderInList: number;
+  dateAddedToList: Date;
+}
+
 export type Task = {
-  id?: string,
-  label: string;
-  emojis?: string[];
-  status: 'todo' | 'done';
-  dateCreated?: Date;
-  dateModified?: Date;
-  description?: string;
-  dueDate?: Date;
-  reminders?: Reminder[];
-  repeatitionPatterns?: RepeationPattern[];
-  orderInList?: number;
-  preTasks?: string[];  
-  postTasks?: string[];
-  steps?: string[];
   listId?: string;
+  orderInList?: number;
+  preTasks?: string[];
+  postTasks?: string[];
+
+  lists: Record<string, ListPorpertis | null>
+  // inDoTodayList?: boolean;
+  // inDoTomorrowList?: boolean;
+
+
+  id: string,
+  label: string;
+  status: 'todo' | 'done';
+  dateCreated: Date;
+  dateModified?: Date;
+
+  emojis?: string[];
+  note?: string;
+  steps?: string[];
+  dueDate?: Date;
   deleted?: boolean;
+  arhived?: boolean;
   starred?: boolean;
   pinned?: boolean;
+  reminders?: Reminder[];
+  repeatitionPatterns?: RepeationPattern[];
+  attachments?: string[];
+  assignedTo?: string[];
+  comments?: Comment[];
 }
 
 
