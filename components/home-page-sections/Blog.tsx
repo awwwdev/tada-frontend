@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { toRelativeOrReadableDate } from "@/utils/formatter";
-import Icon from "../ui/Icon";
-import Space from "../ui/Space";
-import ScrollArea from "../ui/ScrollArea";
+import Icon from ".@/components/ui/Icon";
+import Space from ".@/components/ui/Space";
+import ScrollArea from ".@/components/ui/ScrollArea";
 import BluredCircle from "./BluredCircle";
-import GradientBorderOverlay from "../ui/GradientBorderOverlay";
+import GradientBorderOverlay from ".@/components/ui/GradientBorderOverlay";
 
 export default function Blog({ posts }) {
   return (

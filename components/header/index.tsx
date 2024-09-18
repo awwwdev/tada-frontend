@@ -1,10 +1,10 @@
 import Link from "next/link";
 import HamburgerButton from "./HamburgerButton";
 import HybridLink from "./HybridLink";
-import Button from "../ui/button";
-import Icon from "../ui/Icon";
+import Button from ".@/components/ui/button";
+import Icon from ".@/components/ui/Icon";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import LinkButton from "../ui/button/LinkButton";
+import LinkButton from ".@/components/ui/button/LinkButton";
 
 const Header = () => {
   return (
@@ -24,6 +24,10 @@ const Header = () => {
 
         <ThemeSwitcher theme="dark" />
         <Button variation="ghost">
+          <Icon name="bf-i-ph-signin" />
+          Login
+        </Button>
+        <Button variation="solid">
           <Icon name="bf-i-ph-signin" />
           Sign Up
         </Button>

@@ -1,7 +1,7 @@
 import { HTMLProps } from "@/types";
 import { forwardRef, useId } from "react";
 import Label from './Label';
-import ErrorMessage from './ErrorMessage.tsx';
+import ErrorMessage from './ErrorMessage';
 
 const classes = {
   hint: "text-xs c-base11 italic pt-0.3em pb-0.5em",

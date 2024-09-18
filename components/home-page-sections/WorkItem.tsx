@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import Modal from "../ui/modal";
+import Modal from ".@/components/ui/modal";
 import WorkItemCard from "./WorkItemCard";
 import WorkItemModalContent from "./WorkItemModalContent";
 import { Post } from "@/lib/api";

@@ -11,6 +11,7 @@ import { useGlobalContex } from "./Provider";
 export default function TasksExplorer() {
 
   const { listName, setTasks, addTask } = useGlobalContex();
+
   return (
     <div className="h-full  flex flex-col">
       <List listName='all' />

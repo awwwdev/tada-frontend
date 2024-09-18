@@ -1,7 +1,7 @@
 import BluredCircle from "./BluredCircle";
 import Image from "next/image";
-import Space from "../ui/Space";
-import { gradientMask } from "../ui/GradientMask";
+import Space from ".@/components/ui/Space";
+import { gradientMask } from ".@/components/ui/GradientMask";
 import MouseCursor from "./MouseCursor";
 import ProfilePicture from "@/public/profile-picture.png";
 export default function Hero() {

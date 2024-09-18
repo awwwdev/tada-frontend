@@ -6,8 +6,8 @@ import darsoonLogoIcon from "@/public/static/logo/darsoon-logo-icon.png";
 import Image from "next/image";
 import * as Toggle from "@radix-ui/react-toggle";
 import { createContext, useContext, useState } from "react";
-import MobileOnly from "./ui/MobileOnly";
-import Button from "./ui/button";
+import MobileOnly from "@/components/ui/MobileOnly";
+import Button from "@/components/ui/button";
 import Icon from "@/components/ui/Icon";
 import { useGlobalContex } from "./Provider";
 

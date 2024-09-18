@@ -4,9 +4,9 @@
 import { Settings } from "@/types";
 import { useState } from "react";
 import { useGlobalContex } from '../Provider';
-import Button from "../ui/button";
-import Icon from "../ui/Icon";
-import ToggleGroup from '../ui/ToggleGroup';
+import Button from ".@/components/ui/button";
+import Icon from ".@/components/ui/Icon";
+import ToggleGroup from '.@/components/ui/ToggleGroup';
 import { setThemeCookie } from '@/app/actions';
 
 type Theme = Settings["theme"];

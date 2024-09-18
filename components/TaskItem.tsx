@@ -19,10 +19,10 @@ export default function TaskItem({
   setTask: SetTask;
   dragHandleProps: Object;
 }) {
-  const { setSelectedTask, addTask } = useGlobalContex();
+  const { setSelectedTask, addTask , selectedTask } = useGlobalContex();
 
   return (
-    <div className="b-1 b-base6 rd-3 p-3 flex items-center bg-mauve3A">
+    <div className={`b-1 b-base6 rd-3 p-3 flex items-center bg-mauve3A ${selectedTask?.id === task.id && '!b-accent8'}`}>
       <Checkbox
         checked={task.status === "done"}
         onChange={(checked) => {

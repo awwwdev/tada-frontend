@@ -3,6 +3,11 @@
 import { Task } from "@/types";
 import { useGlobalContex } from "./Provider";
 import { useLocalStorage } from "usehooks-ts";
+import TextArea from '@/components/ui/TextArea';
+import { useCallback } from 'react';
+import Icon from '@/components/ui/Icon';
+import Button from '@/components/ui/button';
+import Input from '@/components/ui/Input';
 
 export default function TaskDetailsPanel() {
   const { selectedTask } = useGlobalContex();
@@ -10,7 +15,7 @@ export default function TaskDetailsPanel() {
   return (
     <div className="rd-3 p-6 b-1 b-base6">
       {!selectedTask && <EmptyState />}
-      {selectedTask && <TaskDetailsContent task={selectedTask} />}
+      {selectedTask && <TaskDetailsContent  />}
     </div>
   );
 }
@@ -19,21 +24,18 @@ function EmptyState() {
   return <div className="w-full h-full flex items-center justify-center b-base11 italic">No task is selected</div>;
 }
 
-function TaskDetailsContent({ task }: { task: Task }) {
-  const [tasks, setTasks, removeTasks] = useLocalStorage<Task[]>("tasks", []);
-
-  const setTask = (newTask: Task) => {
-    const otherTasks = tasks.filter((t: Task) => t.id !== task.id);
-    setTasks([...otherTasks, newTask]);
-  };
+function TaskDetailsContent() {
+  const {updateTaskById, selectedTask } = useGlobalContex();
+  const task = selectedTask as Task
+  const setTask = useCallback((newTask: Task) => updateTaskById({id: selectedTask.id, task: newTask}) , [selectedTask.id]);
   return (
     <div>
       <Title {...{ task, setTask }} />
       <div className="h-12"></div>
       <Line />
-      <Steps {...{ task, setTask }} />
-      <Line />
       <Note {...{ task, setTask }} />
+      <Line />
+      <Steps {...{ task, setTask }} />
       <Line />
       <Emojies {...{ task, setTask }} />
       <Line />
@@ -63,8 +65,10 @@ return (
 type Props = { task: Task; setTask: (t: Task) => void };
 
 function Title({ task, setTask }: Props) {
+  const {updateTaskById, selectedTask } = useGlobalContex();
   return (
     <div>
+      <Input label='Title' value={task.label} onChange={(e) => updateTaskById({id: selectedTask?.id , task: {...task, label: e.target.value}})} />
       <h3 className="H2">{task.label}</h3>
     </div>
   );
@@ -83,7 +87,12 @@ function Comments({ task, setTask }: Props) {
 }
 
 function Delete({ task, setTask }: Props) {
-  return <div>Delete</div>;
+  return <div>
+    <Button variation="ghost" onClick={() => setTask({ ...task, deleted: true })}>
+      <Icon name="bf-i-ph-trash" className="c-base11" />
+      <span className="">Delete</span>
+      </Button>
+  </div>;
 }
 
 function Emojies({ task, setTask }: Props) {
@@ -91,7 +100,11 @@ function Emojies({ task, setTask }: Props) {
 }
 
 function Note({ task, setTask }: Props) {
-  return <div>Note</div>;
+  const {updateTaskById, selectedTask } = useGlobalContex();
+
+  return <div>
+    <TextArea name='note' label="Note" value={task.note} onChange={(e) => updateTaskById({id: selectedTask?.id , tass: {...task, note: e.target.value}})} />
+  </div>;
 }
 
 function Reminders({ task, setTask }: Props) {

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Icon from "./ui/Icon";
-import Space from "./ui/Space";
-import Button from "./ui/button";
-import GradientBorderOverlay from './ui/GradientBorderOverlay';
+import Icon from "@/components/ui/Icon";
+import Space from "@/components/ui/Space";
+import Button from "@/components/ui/button";
+import GradientBorderOverlay from '@/components/ui/GradientBorderOverlay';
 
 export default function ShowMore({ children, minHeight = "0fr" }) {
   const [expanded, setExpanded] = useState(false);

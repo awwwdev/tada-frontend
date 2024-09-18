@@ -1,10 +1,11 @@
+- mongodb setup 
+- express setup 
+
+
+
 - ordering bug
 - detail panel
 - lists panel 
--- eash list has a filter rule.
--- but lists Object can store order in the list, and date added to the list.
--- I need a list table that has the list filter rule and other info
-
 - prefrences
 - style
 - db
