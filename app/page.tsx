@@ -19,7 +19,7 @@ export default function Page() {
       <Header />
       <div className="grid gap-6 " style={{ gridTemplateColumns: "1fr 3fr 3fr" }}>
         <ListsPanel />
-        <TasksExplorer />
+        {/* <TasksExplorer /> */}
         <TaskDetailsPanel />
       </div>
     </div>

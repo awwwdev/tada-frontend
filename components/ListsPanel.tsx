@@ -10,10 +10,20 @@ import { Task } from "@/types";
 import Link from "next/link";
 import { useGlobalContex } from "./Provider";
 import React from "react";
-import LinkButton from './ui/button/LinkButton';
+import LinkButton from '@/components/ui/button/LinkButton';
+import { useQuery, useSuspenseQueries, useSuspenseQuery} from '@tanstack/react-query';
+import { API } from '@/consts';
 
 export default function ListsPanel() {
   const { setListName, tasks } = useGlobalContex();
+  const listsQ = useQuery({
+    queryKey: ['list'],
+    queryFn: async () => {
+      const response = await fetch(API + '/lists');
+      return response.json()
+    },
+  })
+  console.log("🚀 ~ listsQ:", listsQ.data)
   return (
     <div className="flex flex-col ">
       <ul className="flex flex-col gap-3  ">

@@ -1,3 +1,4 @@
+
 import "@unocss/reset/sanitize/sanitize.css";
 import "@unocss/reset/tailwind.css";
 import "@/styles/reset.css";
@@ -6,7 +7,7 @@ import "@/styles/globals.css";
 import "@/public/fonts/nohemi/css/nohemi.css";
 import "@/public/fonts/geist/css/geist.css";
 import "@/public/fonts/space-mono/css/space-mono.css";
-import GlobalProvider from "@/components/Provider";
+import Providers from "@/components/Provider";
 import type { Metadata } from "next";
 import MyToaster from '@/components/Toaster';
 import { cookies } from 'next/headers';
@@ -55,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html className={`${theme?.value}-theme style-scroll-bar`} lang='en'>
       <head></head>
       <body className={`bg-base1 c-base12 relative isolate`}>
-      <GlobalProvider theme={theme?.value}>
+      <Providers theme={theme?.value}>
       <div className={`side-menu-container isolate h-full  overflow-x-clip  mx-auto max-w-screen  `}>
         <div className="main grid max-w-screen isolate" style={{ gridTemplateRows: "1fr auto" }}>
           {/* <Header /> */}
@@ -65,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* {<SideMenu />} */}
       </div>
       <MyToaster />
-    </GlobalProvider>
+    </Providers>
 
       </body>
     </html>

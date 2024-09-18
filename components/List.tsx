@@ -20,8 +20,22 @@ export default function List({
   const pinnedTasks = notDeletedTasks.filter((t: Task) => t.pinned);
   const notPinnedTasks = notDeletedTasks.filter((t: Task) => !t.pinned);
   const orderedTasks = [...pinnedTasks, ...notPinnedTasks];
-  return <ListContent tasks={orderedTasks} listName={listName} />;
+  return <ListContentSimple tasks={orderedTasks} listName={listName} />;
+  
 }
+
+function ListContentSimple({ tasks, listName }: { tasks: Task[];  listName: string }) {
+
+const { updateTaskById, addTask } = useGlobalContex();
+
+return (
+  <div className='gap-3 grid'>
+    {tasks.map((task , index) => {
+      return <TaskItem key={index} task={task} 
+      setTask={(newTask) => updateTaskById({ id: task.id, task: newTask })} />
+    })}
+  </div>
+)};
 
 function ListContent({ tasks, listName }: { tasks: Task[];  listName: string }) {
   const listContainerRef = useRef<HTMLDivElement>(null);
