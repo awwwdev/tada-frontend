@@ -6,16 +6,32 @@ import { useRef } from "react";
 import DraggableList from "react-draggable-list";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useGlobalContex } from "./Provider";
+import { useQuery } from '@tanstack/react-query';
+import { API } from '@/consts';
 
 export default function List({
   listName = "all",
 }: {
   listName: string;
 }) {
-  const { tasks : allTasks } = useGlobalContex();
-  const tasks = allTasks.filter((t:Task) => t.lists && t.lists[listName]);
-  if (!tasks || tasks.length === 0) return <EmptyState />;
-  const notDeletedTasks = tasks.filter((t: Task) => !t.deleted);
+
+  const allTasksQ = useQuery({
+    queryKey: ["all-tasks"],
+    queryFn: async () => {
+      const res = await fetch(`${API}/tasks`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message);
+      return json;
+    },
+  })
+  const allTasks = allTasksQ.data ?? [];
+  const notDeletedTasks = allTasks.filter((t: Task) => !t.deleted);
   if (notDeletedTasks.length === 0) return <EmptyState />;
   const pinnedTasks = notDeletedTasks.filter((t: Task) => t.pinned);
   const notPinnedTasks = notDeletedTasks.filter((t: Task) => !t.pinned);
