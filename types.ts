@@ -1,87 +1,106 @@
 import React, { Children, ElementType } from "react";
 
+type Document = {
+  _id: string;
+  id: string;
+  createAt: Date;
+  updateAt: Date;
+  __v: string;
+};
+
 type Emoji = string;
 
-export type Folder = {
-  id: string;
+export type User = Document & {
+  email: string;
+};
+
+export type Folder = Document & {
   name: string;
   emojies?: Emoji[];
-  dateCreated: Date;
+  // authorId: string;
+  lists: FolderListProperties[] | null;
 };
 
-type FolderProperties = {
-  dateAddedToFolder: Date;
-  orderInPanel?: number;
+type FolderListProperties = {
+  addedAt: Date;
+  id: string ;
+  show?: boolean | null | undefined;
+  orderInFolder?: number | null | undefined;
 };
 
-export type List = {
-  id: string;
-  dateCreated: Date;
+export type List = Document & {
   name: string;
-  emojies?: Emoji[];
-  description?: string;
-  filter: (t: Task) => boolean;
-  show?: boolean;
-  orderInFolder?: number;
-  folders: FolderProperties[] | null;
-};
-
-export type Comment = {
   authorId: string;
-  dateCreated: Date;
-  body: string;
+  emojies?: string[] | null;
+  tasks? : ListTasktPorpertis[] | null;
+  description?: string | null;
+  // show?: boolean;
 };
 
-type ListPorpertis = {
-  orderInList: number;
-  dateAddedToList: Date;
-};
-
-export type Task = {
-  listId?: string;
-  orderInList?: number;
-  preTasks?: string[];
-  postTasks?: string[];
-
-  lists: Record<string, ListPorpertis | null>;
-  // inDoTodayList?: boolean;
-  // inDoTomorrowList?: boolean;
-
+type ListTasktPorpertis = {
+  addedAt: Date;
   id: string;
+  orderInList?: number | null;
+};
+
+export type Task = Document & {
+  name: string;
+  author: User;
   label: string;
-  status: "todo" | "done";
-  dateCreated: Date;
-  dateModified?: Date;
+  status: "done" | "to-do";
+  emojies?: string[] | null;
+  note?: string | null;
+  // lists?: TaskListPorpertis[] | null;
 
-  emojis?: string[];
-  note?: string;
-  steps?: string[];
-  dueDate?: Date;
-  deleted?: boolean;
-  arhived?: boolean;
-  starred?: boolean;
-  pinned?: boolean;
-  reminders?: Reminder[];
-  repeatitionPatterns?: RepeationPattern[];
-  attachments?: string[];
-  assignedTo?: string[];
-  comments?: Comment[];
+  dueAt?: Date | null;
+
+  deleted?: boolean | null;
+  arhived?: boolean | null;
+  starred?: boolean | null;
+  pinned?: boolean | null;
+  archived: boolean | null | undefined;
+  steps?: string[] | null;
+  preTasks?: string[] | null;
+  postTasks?: string[] | null;
+  comments?: TaskComment[] | null;
+  assingnees?: TaskAssignee[] | null;
+  attachments?: TaskAttachment[] | null;
+  routins: TaskRoutine[] | null;
+  reminders?: TaskReminder[] | null;
 };
 
-type RepeationPattern = {
-  startDate: Date;
-  endAfterXTimes?: number;
-  endDate?: Date;
-  everyXPeriods: number;
-  period: "minute" | "hour" | "day" | "week" | "month" | "year";
+
+
+export type TaskComment = {
+  createdAt: Date;
+  body: string;
+  authorId?: string | null;
+  // replyToCommentId?: string | null;
 };
 
-type Reminder = {
-  startDate: Date;
-  endAfterXTimes?: number;
-  endDate?: Date;
+type TaskAttachment = {
+  createdAt: Date;
+  body: string;
+  authorId?: string | null | undefined;
+};
+
+type TaskAssignee = {
+  createdAt: Date;
+  authorId?: string | null;
+};
+
+type TaskRoutine = {
+  startAt: Date;
+  endAt: Date;
+  numberOfRepeats: number;
+  periods: "minute" | "hour" | "day" | "week" | "month" | "year";
+  notification?: boolean | null | undefined;
   everyXPeriods: number;
-  period: "minute" | "hour" | "day" | "week" | "month" | "year";
+};
+
+type TaskReminder = {
+  minutesBeforeDueDate: number;
+  remindAt: Date;
 };
 
 export type Settings = {
@@ -89,10 +108,9 @@ export type Settings = {
   showCompletedTasks: boolean;
   startOfWeek: "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
   planForTommorowSettings: {};
-}
+};
 
-
-// --------------------------------------------------------------------------------------
+// ---------------------------
 
 export type RNode = React.ReactNode;
 
