@@ -9,11 +9,19 @@ import Modal from "@/components/ui/modal";
 import Pre from "@/components/ui/Pre";
 
 import { useLocalStorage } from "usehooks-ts";
-import { Task } from "@/types";
+import { Task, User } from "@/types";
 import Header from "@/components/header";
 import ListsPanel from '@/components/ListsPanel';
+import { API } from '@/consts';
+import { useGlobalContex } from '@/components/Provider';
+import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { throws } from 'assert';
 
 export default function Page() {
+
+
+
   return (
     <div className="grid gap-6 h-[100vh] p-6" style={{ gridTemplateRows: "auto 1fr" }}>
       <Header />

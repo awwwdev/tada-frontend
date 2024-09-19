@@ -1,15 +1,12 @@
 "use client";
 
-import { createInitialFolders, createInitialLists, createInitialSettings, makeEmptyTask } from "@/initialData";
-import { Folder, List, Settings, Task } from "@/types";
+import { createInitialFolders, createInitialLists, createInitialSettings } from "@/initialData";
+import { Folder, List, Settings, Task, User } from "@/types";
 import { createContext, SetStateAction, useContext, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuid } from "uuid";
-import { QueryClientProvider } from "@tanstack/react-query";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { getQueryClient } from "@/react-query/getQueryClient";
 import type * as React from "react";
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import useUserMe from '@/hooks/userMe';
 
 // add helper functions updateTaskById, addTask, getTaskById
 
@@ -31,6 +28,8 @@ type ContextType = {
   folders: Folder[];
   setFolders: React.Dispatch<SetStateAction<Folder[]>>;
   theme: Settings["theme"];
+  userMe: User | null;
+  setUserMe: React.Dispatch<SetStateAction<User | null>>;
 };
 const GloblaContext = createContext<ContextType>({
   isSideMenuOpen: false,
@@ -40,6 +39,7 @@ const GloblaContext = createContext<ContextType>({
   settings: createInitialSettings(),
   folders: createInitialFolders(),
   lists: createInitialLists(),
+  userMe: null,
   setIsSideMenuOpen: () => {},
   setSelectedTask: () => {},
   setListName: () => {},
@@ -49,13 +49,14 @@ const GloblaContext = createContext<ContextType>({
   setSettings: () => {},
   setFolders: () => {},
   setLists: () => {},
+  setUserMe: () => {},
   theme: "light",
 });
 
 export default function Providers({ children, theme }: { children: React.ReactNode; theme: string }) {
-  const queryClient = getQueryClient();
 
-  console.log("🚀 ~ theme:", theme);
+  const userMeQ = useUserMe(); // to initialize userMe
+  console.log("userMeQ", userMeQ.data);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
@@ -64,6 +65,7 @@ export default function Providers({ children, theme }: { children: React.ReactNo
   const [lists, setLists, removeLists] = useLocalStorage<List[]>("lists", createInitialLists());
   const [tasks, setTasks, removeTasks] = useLocalStorage<Task[]>("tasks", []);
   const [listName, setListName] = useState("all");
+  const [userMe, setUserMe] = useState<User | null>(null);
 
   const addTask = (t: Task) =>
     setTasks((currentTasks) => [
@@ -80,33 +82,31 @@ export default function Providers({ children, theme }: { children: React.ReactNo
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <GloblaContext.Provider
-        value={{
-          selectedTask,
-          setSelectedTask,
-          isSideMenuOpen,
-          setIsSideMenuOpen,
-          listName,
-          setListName,
-          tasks,
-          setTasks,
-          addTask,
-          updateTaskById,
-          settings,
-          setSettings,
-          lists,
-          setLists,
-          folders,
-          setFolders,
-          theme,
-        }}
-      >
-        <HydrationBoundary state={dehydrate(queryClient)}>
-        {children}
-        </HydrationBoundary>
-      </GloblaContext.Provider>
-    </QueryClientProvider>
+    <GloblaContext.Provider
+      value={{
+        selectedTask,
+        setSelectedTask,
+        isSideMenuOpen,
+        setIsSideMenuOpen,
+        listName,
+        setListName,
+        tasks,
+        setTasks,
+        addTask,
+        updateTaskById,
+        settings,
+        setSettings,
+        lists,
+        setLists,
+        folders,
+        setFolders,
+        theme,
+        userMe,
+        setUserMe,
+      }}
+    >
+      {children}
+    </GloblaContext.Provider>
   );
 }
 

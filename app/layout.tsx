@@ -1,4 +1,3 @@
-
 import "@unocss/reset/sanitize/sanitize.css";
 import "@unocss/reset/tailwind.css";
 import "@/styles/reset.css";
@@ -9,10 +8,11 @@ import "@/public/fonts/geist/css/geist.css";
 import "@/public/fonts/space-mono/css/space-mono.css";
 import Providers from "@/components/Provider";
 import type { Metadata } from "next";
-import MyToaster from '@/components/Toaster';
-import { cookies } from 'next/headers';
+import MyToaster from "@/components/Toaster";
+import { cookies } from "next/headers";
+import ReactQueryProvider from "@/components/ReactQueryProvider";
 
-const theme = cookies().get("theme")
+const theme = cookies().get("theme");
 
 const title = "Hamid K.";
 const description = "A Developer with Design Superpowers";
@@ -24,19 +24,19 @@ export const metadata: Metadata = {
   },
   alternates: {
     // canonical: '/blog',
-},
+  },
   description: description,
   metadataBase: new URL("https://awww.dev"),
   twitter: {
     card: "summary_large_image",
     title: title,
-    description: description ,
+    description: description,
     creator: title,
     images: ["https://awww.dev/opengraph-image.jpg"], // Must be an absolute URL
   },
   openGraph: {
     title: title,
-    description: description ,
+    description: description,
     url: "",
     siteName: "Hamid K.",
     images: [
@@ -53,21 +53,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={`${theme?.value}-theme style-scroll-bar`} lang='en'>
+    <html className={`${theme?.value}-theme style-scroll-bar`} lang="en">
       <head></head>
       <body className={`bg-base1 c-base12 relative isolate`}>
-      <Providers theme={theme?.value}>
-      <div className={`side-menu-container isolate h-full  overflow-x-clip  mx-auto max-w-screen  `}>
-        <div className="main grid max-w-screen isolate" style={{ gridTemplateRows: "1fr auto" }}>
-          {/* <Header /> */}
-          <main className={`  max-w-screen `}>{children}</main>
-          {/* <Footer /> */}
-        </div>
-        {/* {<SideMenu />} */}
-      </div>
-      <MyToaster />
-    </Providers>
-
+        <ReactQueryProvider>
+          <Providers theme={theme?.value}>
+            <div className={`side-menu-container isolate h-full  overflow-x-clip  mx-auto max-w-screen  `}>
+              <div className="main grid max-w-screen isolate" style={{ gridTemplateRows: "1fr auto" }}>
+                {/* <Header /> */}
+                <main className={`  max-w-screen `}>{children}</main>
+                {/* <Footer /> */}
+              </div>
+              {/* {<SideMenu />} */}
+            </div>
+            <MyToaster />
+          </Providers>
+        </ReactQueryProvider>
       </body>
     </html>
   );
