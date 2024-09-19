@@ -1,17 +1,10 @@
-import { Folder, List, Settings, Task } from "@/types";
+import { Folder, List, Settings, Task, TaskFields } from "@/types";
 import { v4 as uuid } from "uuid";
 
-export const makeEmptyTask = (): Task => ({
-  id: uuid(),
+export const makeEmptyTask = (): TaskFields => ({
   label: "",
-  dateCreated: new Date(),
-  status: "todo",
-  lists: {
-    all: {
-      dateAddedToList: new Date(),
-      orderInList: -1,
-    },
-  },
+  status: "to-do",
+  author: ""
 });
 
 export const createInitialSettings = (): Settings => ({ 

@@ -8,13 +8,19 @@ type Document = {
   __v: string;
 };
 
+export type User = Document & UserFields;
+export type Folder = Document & FolderFields;
+export type List = Document & ListFields;
+export type Task = Document & TaskFields;
+
+
 type Emoji = string;
 
-export type User = Document & {
+export type UserFields =  {
   email: string;
 };
 
-export type Folder = Document & {
+export type FolderFields =  {
   name: string;
   emojies?: Emoji[];
   // authorId: string;
@@ -28,7 +34,7 @@ type FolderListProperties = {
   orderInFolder?: number | null | undefined;
 };
 
-export type List = Document & {
+export type ListFields =  {
   name: string;
   authorId: string;
   emojies?: string[] | null;
@@ -43,11 +49,11 @@ type ListTasktPorpertis = {
   orderInList?: number | null;
 };
 
-export type Task = Document & {
-  name: string;
-  author: User;
+export type TaskFields = {
+  author: string;
   label: string;
   status: "done" | "to-do";
+
   emojies?: string[] | null;
   note?: string | null;
   // lists?: TaskListPorpertis[] | null;
@@ -58,14 +64,14 @@ export type Task = Document & {
   arhived?: boolean | null;
   starred?: boolean | null;
   pinned?: boolean | null;
-  archived: boolean | null | undefined;
+  archived?: boolean | null | undefined;
   steps?: string[] | null;
   preTasks?: string[] | null;
   postTasks?: string[] | null;
   comments?: TaskComment[] | null;
   assingnees?: TaskAssignee[] | null;
   attachments?: TaskAttachment[] | null;
-  routins: TaskRoutine[] | null;
+  routins?: TaskRoutine[] | null;
   reminders?: TaskReminder[] | null;
 };
 
