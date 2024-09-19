@@ -1,9 +1,9 @@
 import BluredCircle from "./BluredCircle";
-import Space from ".@/components/ui/Space";
+import Space from "@/components/ui/Space";
 import ShowMore from "../ShowMore";
-import DesktopOnly from ".@/components/ui/DesktopOnly";
-import MobileOnly from ".@/components/ui/MobileOnly";
-import GradientMask from ".@/components/ui/GradientMask";
+import DesktopOnly from "@/components/ui/DesktopOnly";
+import MobileOnly from "@/components/ui/MobileOnly";
+import GradientMask from "@/components/ui/GradientMask";
 import EXPERIENCES_DATA from "@/constants/EXPERIENCES_DATA";
 
 export default function Experiences() {

@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
-import GradientMask from ".@/components/ui/GradientMask";
-import GradientBorderOverlay from ".@/components/ui/GradientBorderOverlay";
+import GradientMask from "@/components/ui/GradientMask";
+import GradientBorderOverlay from "@/components/ui/GradientBorderOverlay";
 import { Post } from '@/lib/api';
 
 type Props = {

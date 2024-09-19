@@ -1,9 +1,9 @@
 import Icon from "@/components/ui/Icon";
-import Space from ".@/components/ui/Space";
+import Space from "@/components/ui/Space";
 import WorkItem from "./WorkItem";
 import WORKS_DATA from "@/constants/WORKS_DATA";
 import { CardContainer } from "./WorkItemCard";
-import GradientBorderOverlay from ".@/components/ui/GradientBorderOverlay";
+import GradientBorderOverlay from "@/components/ui/GradientBorderOverlay";
 import { Post } from "@/lib/api";
 
 export default function Works({ posts }: { posts: Post[] }) {

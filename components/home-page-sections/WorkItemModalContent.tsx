@@ -1,8 +1,8 @@
 import { Post } from "@/lib/api";
-import Space from ".@/components/ui/Space";
-import LinkButton from ".@/components/ui/button/LinkButton";
-import Icon from ".@/components/ui/Icon";
-import Gallery from ".@/components/ui/Gallery";
+import Space from "@/components/ui/Space";
+import LinkButton from "@/components/ui/button/LinkButton";
+import Icon from "@/components/ui/Icon";
+import Gallery from "@/components/ui/Gallery";
 import { StaticImageData } from "next/image";
 
 type Category = 'UI Design' | 'Front End' | 'Back End';

@@ -4,9 +4,9 @@
 import { Settings } from "@/types";
 import { useState } from "react";
 import { useGlobalContex } from '../Provider';
-import Button from ".@/components/ui/button";
-import Icon from ".@/components/ui/Icon";
-import ToggleGroup from '.@/components/ui/ToggleGroup';
+import Button from "@/components/ui/button";
+import Icon from "@/components/ui/Icon";
+import ToggleGroup from '@/components/ui/ToggleGroup';
 import { setThemeCookie } from '@/app/actions';
 
 type Theme = Settings["theme"];
@@ -61,7 +61,7 @@ export const ThemeSwitcher = () => {
   // };
 
   return (
-    <ToggleGroup value={_theme} setValue={setTheme} legend="Theme">
+    <ToggleGroup value={_theme} setValue={setTheme} >
       <ToggleGroup.Item value="dark">
         <Icon name="bf-i-ph-moon" />
         <span>Dark</span>

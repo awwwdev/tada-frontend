@@ -2,11 +2,11 @@
 
 import BluredCircle from "./BluredCircle";
 import Icon from "@/components/ui/Icon";
-import Space from ".@/components/ui/Space";
-import Button from ".@/components/ui/button";
-import ToolTip from ".@/components/ui/Tooltip";
+import Space from "@/components/ui/Space";
+import Button from "@/components/ui/button";
+import ToolTip from "@/components/ui/Tooltip";
 import { useState } from "react";
-import GradientBorderOverlay from '.@/components/ui/GradientBorderOverlay';
+import GradientBorderOverlay from '@/components/ui/GradientBorderOverlay';
 
 export default function Tools() {
   const [glowingCategory, setGlowingCategory] = useState<"favorite" | "most-used" | "painful" | null>(null);

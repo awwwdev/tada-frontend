@@ -1,8 +1,8 @@
 import LinkButton from "@/components/ui/button/LinkButton";
 import BluredCircle from "./BluredCircle";
 import Icon from "@/components/ui/Icon";
-import Space from ".@/components/ui/Space";
-import GradientBorderOverlay from ".@/components/ui/GradientBorderOverlay";
+import Space from "@/components/ui/Space";
+import GradientBorderOverlay from "@/components/ui/GradientBorderOverlay";
 
 export default function ContactMe() {
   return (

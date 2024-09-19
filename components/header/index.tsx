@@ -1,36 +1,32 @@
-import Link from "next/link";
-import HamburgerButton from "./HamburgerButton";
-import HybridLink from "./HybridLink";
-import Button from ".@/components/ui/button";
-import Icon from ".@/components/ui/Icon";
+"use client";
+
+import Button from "@/components/ui/button";
+import Icon from "@/components/ui/Icon";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import LinkButton from ".@/components/ui/button/LinkButton";
+import LinkButton from "@/components/ui/button/LinkButton";
+import Modal from "../ui/modal";
+import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
+import { API } from "@/consts";
+import toast from "react-hot-toast";
+import useUserMe from "@/hooks/userMe";
+import { useQueryClient } from '@tanstack/react-query';
 
 const Header = () => {
   return (
-    <header className={`flex gap-3 items-center `}>
+    <header className={`flex gap-3 items-center b-b-1 b-base5 pb-1.5`}>
       <h1 className=" H3 ">TADA</h1>
 
       <div className="mis-auto flex items-center gap-3">
         <LinkButton variation="ghost" href="/settings" className="" iconButton>
-          <Icon name="bf-i-ph-gear-six" className="mie-1.5 c-base11" />
+          <Icon name="bf-i-ph-gear-six" className="c-base11" />
           <span className="sr-only">Settings</span>
         </LinkButton>
-
         <LinkButton iconButton variation="ghost" href="https://github.com/awwwdev/tada" className="justify-center">
-          <Icon name="bf-i-ph-github-logo" className="mie-1.5 c-base11" />
+          <Icon name="bf-i-ph-github-logo" className="c-base11" />
           <span className="sr-only">Source Code</span>
         </LinkButton>
-
         <ThemeSwitcher theme="dark" />
-        <Button variation="ghost">
-          <Icon name="bf-i-ph-signin" />
-          Login
-        </Button>
-        <Button variation="solid">
-          <Icon name="bf-i-ph-signin" />
-          Sign Up
-        </Button>
+        <AuthButtons />
       </div>
     </header>
   );
@@ -38,59 +34,67 @@ const Header = () => {
 
 export default Header;
 
-function MobileHeader() {
-  return (
-    <div className={` w-full max-w-page mx-auto grid `} style={{ gridTemplateColumns: "1fr auto 1fr" }}>
-      <div className="flex ">
-        <HamburgerButton />
-      </div>
-      <Link href="/" className="fs-sm fw-300 c-base11 tracking-wider font-display flex justify-center items-center">
-        awwww.dev
-      </Link>
-      <div className="flex justify-end items-center">
-        {/* <LocaleSwitcher /> */}
-        {/* <MobileAccountButtons /> */}
-      </div>
-    </div>
-  );
-}
+function AuthButtons() {
+  const userMeQ = useUserMe();
+  const queryClient = useQueryClient();
 
-function PublicWebsiteNav() {
   return (
-    <nav className="w-full font-display">
-      <ul className="flex items-center gap-4  text-xs sm:text-base w-full ">
-        <li className="flex items-center">
-          <HybridLink
-            pageUrl="/"
-            inSamePageHref={"#hero"}
-            href={"/"}
-            className="rd-1 text-xs sm:text-base flex justify-center  items-center  tracking-wider fw-300"
+    <>
+      {userMeQ.data ? (
+        <Button
+          variation="ghost"
+          onClick={async () => {
+            const res = await fetch(`${API}/auth/logout`, {
+              method: "POST",
+              credentials: "include",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            const json = await res.json();
+            queryClient.invalidateQueries({ queryKey: ["userMe"] });
+
+            toast(json.message);
+          }}
+        >
+          Logout
+        </Button>
+      ) : (
+        <>
+          <Modal
+            trigger={
+              <Button variation="ghost">
+                <Icon name="bf-i-ph-signin" />
+                Login
+              </Button>
+            }
           >
-            awww.dev
-          </HybridLink>
-        </li>
-        <li className="mis-auto">
-          <a href="#works" className="hover:c-base11 rd-1">
-            Works
-          </a>
-        </li>
-        <li>
-          <a href="/#tools" className="hover:c-base11 rd-1">
-            Tools
-          </a>
-        </li>
-        <li>
-          <HybridLink pageUrl="/" inSamePageHref={"#blog"} href={"/blog"} className="hover:c-base11 rd-1">
-            Blog
-          </HybridLink>
-        </li>
-
-        <li>
-          <a href="#contact" className="hover:c-base11 rd-1">
-            Contact
-          </a>
-        </li>
-      </ul>
-    </nav>
+            <LoginOrSignUpBox initalTab="login" />
+          </Modal>
+          <Modal
+            trigger={
+              <Button variation="ghost">
+                <Icon name="bf-i-ph-signin" />
+                Sign Up
+              </Button>
+            }
+          >
+            <LoginOrSignUpBox initalTab="signup" />
+          </Modal>
+          <Button
+            variation="ghost"
+            onClick={async () => {
+              const res = await fetch(`${API}/auth/user`, {
+                credentials: "include",
+              });
+              const json = await res.json();
+              toast(json.message);
+            }}
+          >
+            User Status
+          </Button>
+        </>
+      )}
+    </>
   );
 }

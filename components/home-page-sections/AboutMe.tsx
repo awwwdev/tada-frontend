@@ -1,4 +1,4 @@
-import Space from ".@/components/ui/Space";
+import Space from "@/components/ui/Space";
 import BluredCircle from "./BluredCircle";
 
 export default function AboutMe() {
