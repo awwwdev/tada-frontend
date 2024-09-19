@@ -1,7 +1,4 @@
-- mongodb setup 
-- express setup 
-
-
+- initial userMe from session.userId
 
 - ordering bug
 - detail panel
