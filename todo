@@ -1,18 +1,15 @@
-- initial userMe from session.userId
+- add tasks to lists
+- add folders to lists
 
-- ordering bug
-- detail panel
-- lists panel 
+- delete tasks
 - prefrences
-- style
-- db
-- backend
-- authentication
 
+- drag and drop ordering bug
+- connect panel details to api
 
 --- ready for public use ---
 
-- fix draggable list hydration error
+- fix draggable list hydration error  
 - arrows 
 - formkit list animation
 - emoji picker

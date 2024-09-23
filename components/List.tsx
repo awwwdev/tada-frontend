@@ -8,6 +8,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useGlobalContex } from "./Provider";
 import { useQuery } from '@tanstack/react-query';
 import { API } from '@/consts';
+import fetchAPI from '@/utils/fetchAPI';
 
 export default function List({
   listName = "all",
@@ -16,18 +17,16 @@ export default function List({
 }) {
 
   const allTasksQ = useQuery({
-    queryKey: ["all-tasks"],
+    queryKey: ["tasks"],
     queryFn: async () => {
-      const res = await fetch(`${API}/tasks`, {
+      const data = await fetchAPI(`/tasks`, {
         method: "GET",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.message);
-      return json;
+      return data;
     },
   })
   const allTasks = allTasksQ.data ?? [];

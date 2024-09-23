@@ -27,7 +27,7 @@ export default function LoginBox() {
   const onSubmit = async ({ email, password }: { email: string; password: string }) => {
     const response = await fetch(API + '/auth/login/with-password' , {
       method: "POST",
-      credentials: 'include',
+      credentials: 'omit', // so you don't use old ones
       headers: {
         "Content-Type": "application/json",
       },

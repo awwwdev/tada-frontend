@@ -8,6 +8,9 @@ export default function useUserMe(){
     queryFn: async () => {
       const res = await fetch(`${API}/auth/user`, {
         credentials: "include",
+        headers: {
+          
+        }
       });
       const json = await res.json();
       return json.user;

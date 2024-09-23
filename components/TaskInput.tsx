@@ -4,13 +4,15 @@ import { useLocalStorage } from 'usehooks-ts';
 import Input from './ui/Input';
 import Button from './ui/button';
 import { Task, TaskFields } from '@/types';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { API } from '@/consts';
 import toast from 'react-hot-toast';
 import useUserMe from '@/hooks/userMe';
+import fetchAPI from '@/utils/fetchAPI';
 
 export default function TaskInput() {
 
+  const queryClient = useQueryClient();
   const [draft, setDraft, removeValue] = useLocalStorage<TaskFields>("darft-task", {
     label: "",
     status: "to-do",
@@ -20,7 +22,7 @@ export default function TaskInput() {
   // const { addTask } = useGlobalContex();
   const addTaskM = useMutation({
     mutationFn: async (task: TaskFields) => {
-      const res = await fetch(`${API}/tasks`, {
+      const data = await fetchAPI(`/tasks`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -28,9 +30,7 @@ export default function TaskInput() {
         },
         body: JSON.stringify({ ...task, author: userMeQ.data?.id }),
       });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.message);
-      return json;
+      return data
     },
     onError: (err) => {
       console.log('dfdfsd')
@@ -42,6 +42,8 @@ export default function TaskInput() {
         status: "to-do",
         author: ""
       });
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+
     }
   })
 

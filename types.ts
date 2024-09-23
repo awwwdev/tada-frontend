@@ -8,7 +8,7 @@ type Document = {
   __v: string;
 };
 
-export type User = Document & UserFields;
+export type User = Document & UserFields & UserPopulated;
 export type Folder = Document & FolderFields;
 export type List = Document & ListFields;
 export type Task = Document & TaskFields;
@@ -20,11 +20,15 @@ export type UserFields =  {
   email: string;
 };
 
+type UserPopulated = {
+  folders: Folder[];
+}
+
 export type FolderFields =  {
   name: string;
   emojies?: Emoji[];
-  // authorId: string;
-  lists: FolderListProperties[] | null;
+  author: string;
+  lists?: FolderListProperties[] | null;
 };
 
 type FolderListProperties = {
@@ -36,10 +40,11 @@ type FolderListProperties = {
 
 export type ListFields =  {
   name: string;
-  authorId: string;
+  author: string;
   emojies?: string[] | null;
   tasks? : ListTasktPorpertis[] | null;
   description?: string | null;
+  folderId?: string | null;
   // show?: boolean;
 };
 

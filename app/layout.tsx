@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={`${theme?.value}-theme style-scroll-bar`} lang="en">
+    <html className={`${theme?.value ?? "light"}-theme style-scroll-bar`} lang="en">
       <head></head>
       <body className={`bg-base1 c-base12 relative isolate`}>
         <ReactQueryProvider>
