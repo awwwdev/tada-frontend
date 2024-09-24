@@ -39,10 +39,10 @@ export default function TaskItem({
         <span className="sr-only">Select This Task</span>
       </button>
       <div className="mis-auto flex opacity-20 hover:opacity-100">
-        <Button variation="text" iconButton onClick={() => setTask({ ...task, deleted: true })}>
+        {/* <Button variation="text" iconButton onClick={() => setTask({ ...task, deleted: true })}>
           <Icon name="bf-i-ph-trash" className="c-base11" />
           <span className="sr-only">Delete</span>
-        </Button>
+        </Button> */}
         <Button variation="text" iconButton>
           <Icon name="bf-i-ph-pencil" className="c-base11" />
           <span className="sr-only">Edit</span>

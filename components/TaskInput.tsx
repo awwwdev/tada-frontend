@@ -3,9 +3,8 @@ import { useGlobalContex } from './Provider';
 import { useLocalStorage } from 'usehooks-ts';
 import Input from './ui/Input';
 import Button from './ui/button';
-import { Task, TaskFields } from '@/types';
+import {  TaskFields } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { API } from '@/consts';
 import toast from 'react-hot-toast';
 import useUserMe from '@/hooks/userMe';
 import fetchAPI from '@/utils/fetchAPI';
@@ -22,18 +21,10 @@ export default function TaskInput() {
   // const { addTask } = useGlobalContex();
   const addTaskM = useMutation({
     mutationFn: async (task: TaskFields) => {
-      const data = await fetchAPI(`/tasks`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...task, author: userMeQ.data?.id }),
-      });
+      const data = await fetchAPI.POST(`/tasks`, { ...task, author: userMeQ.data?.id });
       return data
     },
     onError: (err) => {
-      console.log('dfdfsd')
       toast.error("Something went wrong: " + err.message);
     },
     onSuccess: () => {
@@ -66,7 +57,7 @@ export default function TaskInput() {
               onChange={(e) => setDraft((s) => ({ ...s, label: e.target.value }))}
             />
           </div>
-          <Button variation="solid" type="submit" isLoading={addTaskM.isPending} disabled={!userMeQ.data?.id}>
+          <Button variation="solid" type="submit" isLoading={addTaskM.isPending} disabled={!userMeQ.data?._id}>
             Add Task
           </Button>
         </div>

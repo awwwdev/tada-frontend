@@ -10,6 +10,7 @@ import { API } from "@/consts";
 import toast from "react-hot-toast";
 import useUserMe from "@/hooks/userMe";
 import { useQueryClient } from '@tanstack/react-query';
+import fetchAPI from '@/utils/fetchAPI';
 
 const Header = () => {
   return (
@@ -44,13 +45,7 @@ function AuthButtons() {
         <Button
           variation="ghost"
           onClick={async () => {
-            const res = await fetch(`${API}/auth/logout`, {
-              method: "POST",
-              credentials: "include",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
+            const res = await fetchAPI.POST(`/auth/logout`);
             const json = await res.json();
             queryClient.invalidateQueries({ queryKey: ["userMe"] });
 
@@ -84,15 +79,25 @@ function AuthButtons() {
           <Button
             variation="ghost"
             onClick={async () => {
-              const res = await fetch(`${API}/auth/user`, {
-                credentials: "include",
-              });
+              const res = await fetchAPI.GET(`/auth/user`);
               const json = await res.json();
               toast(json.message);
             }}
           >
             User Status
           </Button>
+          <Button
+          variation="ghost"
+          onClick={async () => {
+            const res = await fetchAPI.POST(`/auth/logout`);
+            const json = await res.json();
+            queryClient.invalidateQueries({ queryKey: ["userMe"] });
+
+            toast(json.message);
+          }}
+        >
+          Logout
+        </Button>
         </>
       )}
     </>

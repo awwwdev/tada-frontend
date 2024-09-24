@@ -2,12 +2,14 @@
 
 import { Task } from "@/types";
 import { useGlobalContex } from "./Provider";
-import { useLocalStorage } from "usehooks-ts";
-import TextArea from '@/components/ui/TextArea';
-import { useCallback } from 'react';
-import Icon from '@/components/ui/Icon';
-import Button from '@/components/ui/button';
-import Input from '@/components/ui/Input';
+import TextArea from "@/components/ui/TextArea";
+import { useCallback } from "react";
+import Icon from "@/components/ui/Icon";
+import Button from "@/components/ui/button";
+import Input from "@/components/ui/Input";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import fetchAPI from "@/utils/fetchAPI";
+import toast from "react-hot-toast";
 
 export default function TaskDetailsPanel() {
   const { selectedTask } = useGlobalContex();
@@ -15,7 +17,7 @@ export default function TaskDetailsPanel() {
   return (
     <div className="rd-3 p-6 b-1 b-base6">
       {!selectedTask && <EmptyState />}
-      {selectedTask && <TaskDetailsContent  />}
+      {selectedTask && <TaskDetailsContent />}
     </div>
   );
 }
@@ -25,50 +27,50 @@ function EmptyState() {
 }
 
 function TaskDetailsContent() {
-  const {updateTaskById, selectedTask } = useGlobalContex();
-  const task = selectedTask as Task
-  const setTask = useCallback((newTask: Task) => updateTaskById({id: selectedTask.id, task: newTask}) , [selectedTask.id]);
+  const {  selectedTask } = useGlobalContex();
+  const task = selectedTask as Task;
+
   return (
     <div>
-      <Title {...{ task, setTask }} />
+      <Title {...{ task }} />
       <div className="h-12"></div>
       <Line />
-      <Note {...{ task, setTask }} />
+      <Note {...{ task }} />
       <Line />
-      <Steps {...{ task, setTask }} />
+      <Steps {...{ task }} />
       <Line />
-      <Emojies {...{ task, setTask }} />
+      <Emojies {...{ task }} />
       <Line />
-      <Reminders {...{ task, setTask }} />
+      <Reminders {...{ task }} />
       <Line />
-      <Repetition {...{ task, setTask }} />
+      <Repetition {...{ task }} />
       <Line />
-      <AsingedTo {...{ task, setTask }} />
+      <AsingedTo {...{ task }} />
       <Line />
-      <Comments {...{ task, setTask }} />
+      <Comments {...{ task }} />
       <Line />
-      <Archive {...{ task, setTask }} />
+      <Archive {...{ task }} />
       <Line />
-      <Delete {...{ task, setTask }} />
+      <Delete {...{ task }} />
     </div>
   );
 }
 
-function Line(){
-
-return (
-  <div className='b-t-1 b-base6'>
-
-  </div>
-)};
+function Line() {
+  return <div className="b-t-1 b-base6"></div>;
+}
 
 type Props = { task: Task; setTask: (t: Task) => void };
 
 function Title({ task, setTask }: Props) {
-  const {updateTaskById, selectedTask } = useGlobalContex();
+  const {  selectedTask } = useGlobalContex();
   return (
     <div>
-      <Input label='Title' value={task.label} onChange={(e) => updateTaskById({id: selectedTask?.id , task: {...task, label: e.target.value}})} />
+      <Input
+        label="Title"
+        value={task.label}
+        onChange={(e) => updateTaskById({ id: selectedTask?.id, task: { ...task, label: e.target.value } })}
+      />
       <h3 className="H2">{task.label}</h3>
     </div>
   );
@@ -78,21 +80,40 @@ function Archive({ task, setTask }: Props) {
   return <div>Archive</div>;
 }
 
-function AsingedTo({ task, setTask }: Props) {
+function AsingedTo({ task }: Props) {
   return <div>Assing</div>;
 }
 
-function Comments({ task, setTask }: Props) {
+function Comments({ task }: Props) {
   return <div>Comments</div>;
 }
 
 function Delete({ task, setTask }: Props) {
-  return <div>
-    <Button variation="ghost" onClick={() => setTask({ ...task, deleted: true })}>
-      <Icon name="bf-i-ph-trash" className="c-base11" />
-      <span className="">Delete</span>
+  const queryClient = useQueryClient();
+  const { setSelectedTask } = useGlobalContex();
+
+  const deleteTaskM = useMutation({
+    mutationFn: async (id: string) => {
+      const data = await fetchAPI.DELETE(`/tasks/${id}`);
+      return data;
+    },
+    onError: (err) => {
+      toast.error("Something went wrong: " + err.message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      setSelectedTask(null);
+    },
+  });
+
+  return (
+    <div>
+      <Button variation="ghost" onClick={() => deleteTaskM.mutate(task.id)} isLoading={deleteTaskM.isPending}>
+        <Icon name="bf-i-ph-trash" className="c-base11" />
+        <span className="">Delete</span>
       </Button>
-  </div>;
+    </div>
+  );
 }
 
 function Emojies({ task, setTask }: Props) {
@@ -100,11 +121,18 @@ function Emojies({ task, setTask }: Props) {
 }
 
 function Note({ task, setTask }: Props) {
-  const {updateTaskById, selectedTask } = useGlobalContex();
+  const { updateTaskById, selectedTask } = useGlobalContex();
 
-  return <div>
-    <TextArea name='note' label="Note" value={task.note} onChange={(e) => updateTaskById({id: selectedTask?.id , tass: {...task, note: e.target.value}})} />
-  </div>;
+  return (
+    <div>
+      <TextArea
+        name="note"
+        label="Note"
+        value={task.note}
+        onChange={(e) => updateTaskById({ id: selectedTask?.id, tass: { ...task, note: e.target.value } })}
+      />
+    </div>
+  );
 }
 
 function Reminders({ task, setTask }: Props) {

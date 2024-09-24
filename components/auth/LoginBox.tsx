@@ -6,43 +6,27 @@ import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import Icon from "@/components/ui/Icon";
-import { API } from '@/consts';
-import { useGlobalContex } from '../Provider';
+import { API } from "@/consts";
+import { useGlobalContex } from "../Provider";
+import fetchAPI from "@/utils/fetchAPI";
 
 export default function LoginBox() {
-
   const { setUserMe } = useGlobalContex();
 
   const schema = z.object({
-    email: z
-      .string({ required_error: "Email is required!"})
-      .email({ message: "Please enter a valid email." }),
+    email: z.string({ required_error: "Email is required!" }).email({ message: "Please enter a valid email." }),
     password: z
-      .string({ required_error: "Password is required!"})
+      .string({ required_error: "Password is required!" })
       .min(1, { message: "Password must be at least 8 characters long." }),
   });
 
   const queryClient = useQueryClient();
 
   const onSubmit = async ({ email, password }: { email: string; password: string }) => {
-    const response = await fetch(API + '/auth/login/with-password' , {
-      method: "POST",
-      credentials: 'omit', // so you don't use old ones
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!response.ok) {
-      throw new Error('Something went wrong');
-    } 
+    const response = await fetchAPI.POST("/auth/login/with-password", { email, password });
     const data = await response.json();
-    if (data.error) {
-      throw new Error('Something went wrong');
-    } 
+    if (data.error) throw new Error("Something went wrong");
     setUserMe(data.user);
-    console.log("🚀 ~ data.user:", data)
-    
     toast.success("You are Logged in.");
     queryClient.invalidateQueries({ queryKey: ["userMe"] });
   };

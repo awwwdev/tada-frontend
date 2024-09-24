@@ -7,8 +7,9 @@ import Fieldset from "@/components/ui/Fieldset";
 import Button from "@/components/ui/button";
 import { useRouter } from "next/router";
 import Icon from "@/components/ui/Icon";
-import { API } from '@/consts';
-import { useGlobalContex } from '../Provider';
+import { API } from "@/consts";
+import { useGlobalContex } from "../Provider";
+import fetchAPI from "@/utils/fetchAPI";
 
 const schema = z.object({
   email: z
@@ -34,26 +35,26 @@ export default function SignUpBox() {
 
   const { setUserMe } = useGlobalContex();
 
-  const onSubmit = async ({email , password , confirmPassword}: { email: string; password: string; confirmPassword: string }) => {
+  const onSubmit = async ({
+    email,
+    password,
+    confirmPassword,
+  }: {
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }) => {
     if (password !== confirmPassword) {
       console.log("Passwords must match. Try again.");
       // error message should be farsi if locale is fa.
       throw new Error("Passwords must match. Try again.");
     }
-    const response = await fetch(API + '/auth/signup' , {
-      method: "POST",
-      credentials: 'include',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!response.ok) {
-      throw new Error('Something went wrong');
-    } 
+    const response = await fetchAPI.POST("/auth/signup", { email, password });
+    if (!response.ok) throw new Error("Something went wrong");
     const data = await response.json();
-    if (data.error) throw new Error('Something went wrong');
+    if (data.error) throw new Error("Something went wrong");
 
+    toast.success("You are successfully signed up.");
     setUserMe(data.user);
   };
 
@@ -89,7 +90,7 @@ export default function SignUpBox() {
           />
           <div className="h-3"></div>
           <Form.ServerErrorMessage />
-          <Form.SubmitButton className='w-full'>{"Submit"}</Form.SubmitButton>
+          <Form.SubmitButton className="w-full">{"Submit"}</Form.SubmitButton>
         </Form>
       </div>
     </div>

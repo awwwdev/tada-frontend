@@ -7,7 +7,6 @@ import DraggableList from "react-draggable-list";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useGlobalContex } from "./Provider";
 import { useQuery } from '@tanstack/react-query';
-import { API } from '@/consts';
 import fetchAPI from '@/utils/fetchAPI';
 
 export default function List({
@@ -19,13 +18,7 @@ export default function List({
   const allTasksQ = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
-      const data = await fetchAPI(`/tasks`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const data = await fetchAPI.GET(`/tasks`)
       return data;
     },
   })

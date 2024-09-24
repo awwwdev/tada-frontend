@@ -19,15 +19,7 @@ import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
 
 export default function ListsPanel() {
-  const { tasks } = useGlobalContex();
 
-  const listsQ = useQuery({
-    queryKey: ["list"],
-    queryFn: async () => {
-      const response = await fetch(API + "/lists", { credentials: "include" });
-      return response.json();
-    },
-  });
   return (
     <div className="flex flex-col b-ie-1 pie-6">
       <DefaultLists />
@@ -107,8 +99,7 @@ function Folders() {
   const foldersQ = useQuery({
     queryKey: ["folders"],
     queryFn: async () => {
-      // const response = await fetch(API + "/folders?userId=" + userMeQ.data?.id, { credentials: "include" });
-      const response = await fetch(API + "/folders", { credentials: "include" });
+      const response = await fetchAPI.GET("/folders");
       return response.json();
     },
     enabled: !!userMeQ.data?.id,
@@ -117,9 +108,8 @@ function Folders() {
 
   const deleteFolderM = useMutation({
     mutationFn: async (id: string) => {
-      const data = await fetchAPI(`/folders/${id}`, {
+      const data = await fetchAPI.DELETE(`/folders/${id}`, {
         method: "DELETE",
-        credentials: "include",
       });
       return data;
     },
@@ -191,14 +181,7 @@ function AddFolderButton() {
 
   const addFolderM = useMutation({
     mutationFn: async (folder: FolderFields) => {
-      const data = await fetchAPI(`/folders`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...folder, author: userMeQ.data?.id }),
-      });
+      const data = await fetchAPI.POST(`/folders`, { ...folder, author: userMeQ.data?.id });
       return data;
     },
     onError: (err) => {
@@ -262,8 +245,7 @@ function Lists() {
   const listQ = useQuery({
     queryKey: ["lists"],
     queryFn: async () => {
-      // const response = await fetch(API + "/folders?userId=" + userMeQ.data?.id, { credentials: "include" });
-      const response = await fetch(API + "/lists", { credentials: "include" });
+      const response = await fetchAPI("/lists");
       return response.json();
     },
     enabled: !!userMeQ.data?.id,
@@ -272,10 +254,7 @@ function Lists() {
 
   const deleteListM = useMutation({
     mutationFn: async (id: string) => {
-      const data = await fetchAPI(`/lists/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      const data = await fetchAPI.DELETE(`/lists/${id}`);
       return data;
     },
     onError: (err) => {
@@ -345,14 +324,7 @@ function AddListButton() {
 
   const addListM = useMutation({
     mutationFn: async (list: ListFields) => {
-      const data = await fetchAPI(`/lists`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...list, author: userMeQ.data?.id }),
-      });
+      const data = await fetchAPI.POST(`/lists`,{ ...list, author: userMeQ.data?.id });
       return data;
     },
     onError: (err) => {
