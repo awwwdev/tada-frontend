@@ -6,25 +6,21 @@ import { useRef } from "react";
 import DraggableList from "react-draggable-list";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useGlobalContex } from "./Provider";
-import { useQuery } from '@tanstack/react-query';
-import fetchAPI from '@/utils/fetchAPI';
-import useUserMe from '@/hooks/userMe';
-import QUERY_KEYS from '@/react-query/queryKeys';
+import { useQuery } from "@tanstack/react-query";
+import fetchAPI from "@/utils/fetchAPI";
+import useUserMe from "@/hooks/userMe";
+import QUERY_KEYS from "@/react-query/queryKeys";
 
-export default function List({
-  listName = "all",
-}: {
-  listName: string;
-}) {
+export default function UserList({ listName = "all" }: { listName: string }) {
   const userMeQ = useUserMe();
   const allTasksQ = useQuery({
     queryKey: [QUERY_KEYS.TASKS],
     queryFn: async () => {
-      const data = await fetchAPI.GET(`/tasks?userId=${userMeQ.data?._id}`)
+      const data = await fetchAPI.GET(`/tasks?userId=${userMeQ.data?._id}`);
       return data;
     },
     enabled: !!userMeQ.data?._id,
-  })
+  });
   const allTasks = allTasksQ.data ?? [];
   const notDeletedTasks = allTasks.filter((t: Task) => !t.deleted);
   if (notDeletedTasks.length === 0) return <EmptyState />;
@@ -32,23 +28,26 @@ export default function List({
   const notPinnedTasks = notDeletedTasks.filter((t: Task) => !t.pinned);
   const orderedTasks = [...pinnedTasks, ...notPinnedTasks];
   return <ListContentSimple tasks={orderedTasks} listName={listName} />;
-  
 }
 
-function ListContentSimple({ tasks, listName }: { tasks: Task[];  listName: string }) {
+function ListContentSimple({ tasks, listName }: { tasks: Task[]; listName: string }) {
+  const { updateTaskById, addTask } = useGlobalContex();
 
-const { updateTaskById, addTask } = useGlobalContex();
+  return (
+    <div className="gap-3 grid">
+      <div>
+        <h2 className="H2">{listName}</h2>
+      </div>
+      {tasks.map((task, index) => {
+        return (
+          <TaskItem key={index} task={task} setTask={(newTask) => updateTaskById({ id: task.id, task: newTask })} />
+        );
+      })}
+    </div>
+  );
+}
 
-return (
-  <div className='gap-3 grid'>
-    {tasks.map((task , index) => {
-      return <TaskItem key={index} task={task} 
-      setTask={(newTask) => updateTaskById({ id: task.id, task: newTask })} />
-    })}
-  </div>
-)};
-
-function ListContent({ tasks, listName }: { tasks: Task[];  listName: string }) {
+function ListContent({ tasks, listName }: { tasks: Task[]; listName: string }) {
   const listContainerRef = useRef<HTMLDivElement>(null);
   const { setTasks } = useGlobalContex();
   // const [parent, enableAnimations] = useAutoAnimate(/* optional config */)
