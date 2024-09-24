@@ -13,8 +13,8 @@ import useUserMe from '@/hooks/userMe';
 type ContextType = {
   isSideMenuOpen: boolean;
   setIsSideMenuOpen: React.Dispatch<SetStateAction<boolean | null>>;
-  selectedTask: Task | null;
-  setSelectedTask: React.Dispatch<SetStateAction<Task | null>>;
+  selectedTaskId: string | null;
+  setSelectedTaskId: React.Dispatch<SetStateAction<string | null>>;
   listName: string;
   setListName: React.Dispatch<SetStateAction<string>>;
   tasks: Task[];
@@ -33,7 +33,7 @@ type ContextType = {
 };
 const GloblaContext = createContext<ContextType>({
   isSideMenuOpen: false,
-  selectedTask: null,
+  selectedTaskId: null,
   tasks: [],
   listName: "all",
   settings: createInitialSettings(),
@@ -41,7 +41,7 @@ const GloblaContext = createContext<ContextType>({
   lists: createInitialLists(),
   userMe: null,
   setIsSideMenuOpen: () => {},
-  setSelectedTask: () => {},
+  setSelectedTaskId: () => {},
   setListName: () => {},
   setTasks: () => {},
   addTask: () => {},
@@ -57,7 +57,7 @@ export default function Providers({ children, theme, hasSession }: { children: R
 
   useUserMe(); // to initialize userMe
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [selectedTaskId, setSelectedTaskId] = useState<Task | null>(null);
 
 
   const [listName, setListName] = useState("all");
@@ -71,8 +71,8 @@ export default function Providers({ children, theme, hasSession }: { children: R
   return (
     <GloblaContext.Provider
       value={{
-        selectedTask,
-        setSelectedTask,
+        selectedTaskId,
+        setSelectedTaskId,
         isSideMenuOpen,
         setIsSideMenuOpen,
         listName,

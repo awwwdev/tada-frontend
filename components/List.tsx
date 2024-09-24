@@ -8,19 +8,22 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useGlobalContex } from "./Provider";
 import { useQuery } from '@tanstack/react-query';
 import fetchAPI from '@/utils/fetchAPI';
+import useUserMe from '@/hooks/userMe';
+import QUERY_KEYS from '@/react-query/queryKeys';
 
 export default function List({
   listName = "all",
 }: {
   listName: string;
 }) {
-
+  const userMeQ = useUserMe();
   const allTasksQ = useQuery({
-    queryKey: ["tasks"],
+    queryKey: [QUERY_KEYS.TASKS],
     queryFn: async () => {
-      const data = await fetchAPI.GET(`/tasks`)
+      const data = await fetchAPI.GET(`/tasks?userId=${userMeQ.data?._id}`)
       return data;
     },
+    enabled: !!userMeQ.data?._id,
   })
   const allTasks = allTasksQ.data ?? [];
   const notDeletedTasks = allTasks.filter((t: Task) => !t.deleted);

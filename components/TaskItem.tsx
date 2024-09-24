@@ -19,10 +19,10 @@ export default function TaskItem({
   setTask: SetTask;
   dragHandleProps: Object;
 }) {
-  const { setSelectedTask, addTask , selectedTask } = useGlobalContex();
+  const { setSelectedTaskId, addTask, selectedTaskId } = useGlobalContex();
 
   return (
-    <div className={`b-1 b-base6 rd-3 p-3 flex items-center bg-mauve3A ${selectedTask?.id === task.id && '!b-accent8'}`}>
+    <div className={`b-1 b-base6 rd-3 p-3 flex items-center bg-mauve3A ${selectedTaskId === task.id && "!b-accent8"}`}>
       <Checkbox
         checked={task.status === "done"}
         onChange={(checked) => {
@@ -32,7 +32,7 @@ export default function TaskItem({
       <button
         type="button"
         className="grow cursor-default  h-10 self-stretch text-start"
-        onClick={() => setSelectedTask(task)}
+        onClick={() => setSelectedTaskId(task.id)}
         {...dragHandleProps}
       >
         <span className="mis-3">{task.label}</span>
@@ -51,7 +51,7 @@ export default function TaskItem({
           <Icon name="bf-i-ph-copy" className="c-base11" />
           <span className="sr-only">Duplicate</span>
         </Button>
-        <Button variation="text" iconButton onClick={() => setTask({...task, pinned: !task.pinned})}>
+        <Button variation="text" iconButton onClick={() => setTask({ ...task, pinned: !task.pinned })}>
           {task.pinned ? (
             <Icon name="bf-i-ph-push-pin-fill" className="c-accent11" />
           ) : (
@@ -64,7 +64,7 @@ export default function TaskItem({
           )}
         </Button>
 
-        <Button variation="text" iconButton onClick={() => setTask({...task, starred: !task.starred})}>
+        <Button variation="text" iconButton onClick={() => setTask({ ...task, starred: !task.starred })}>
           {task.starred ? (
             <Icon name="bf-i-ph-star-fill" className="c-accent11" />
           ) : (

@@ -1,0 +1,8 @@
+const QUERY_KEYS = {
+  USERME: "userMe",
+  TASKS: "tasks",
+  FOLDERS: "folders",
+  LISTS: "lists",
+};
+
+export default QUERY_KEYS;
