@@ -99,8 +99,8 @@ function Folders() {
   const foldersQ = useQuery({
     queryKey: ["folders"],
     queryFn: async () => {
-      const response = await fetchAPI.GET("/folders");
-      return response.json();
+      const data = await fetchAPI.GET("/folders");
+      return data;
     },
     enabled: !!userMeQ.data?.id,
   });
@@ -245,8 +245,8 @@ function Lists() {
   const listQ = useQuery({
     queryKey: ["lists"],
     queryFn: async () => {
-      const response = await fetchAPI("/lists");
-      return response.json();
+      const data = await fetchAPI.GET("/lists");
+      return data;
     },
     enabled: !!userMeQ.data?.id,
   });

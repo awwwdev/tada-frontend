@@ -49,11 +49,8 @@ export default function SignUpBox() {
       // error message should be farsi if locale is fa.
       throw new Error("Passwords must match. Try again.");
     }
-    const response = await fetchAPI.POST("/auth/signup", { email, password });
-    if (!response.ok) throw new Error("Something went wrong");
-    const data = await response.json();
+    const data = await fetchAPI.POST("/auth/signup", { email, password });
     if (data.error) throw new Error("Something went wrong");
-
     toast.success("You are successfully signed up.");
     setUserMe(data.user);
   };

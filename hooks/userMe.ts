@@ -7,9 +7,8 @@ export default function useUserMe() {
   return useQuery<User, Error>({
     queryKey: ["userMe"],
     queryFn: async () => {
-      const res = await fetchAPI.GET(`/auth/user`);
-      const json = await res.json();
-      return json.user;
+      const data = await fetchAPI.GET(`/auth/user`);
+      return data.user;
     },
   });
 }

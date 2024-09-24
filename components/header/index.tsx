@@ -45,11 +45,9 @@ function AuthButtons() {
         <Button
           variation="ghost"
           onClick={async () => {
-            const res = await fetchAPI.POST(`/auth/logout`);
-            const json = await res.json();
+            const data = await fetchAPI.POST(`/auth/logout`);
             queryClient.invalidateQueries({ queryKey: ["userMe"] });
-
-            toast(json.message);
+            toast(data.message);
           }}
         >
           Logout
@@ -79,9 +77,8 @@ function AuthButtons() {
           <Button
             variation="ghost"
             onClick={async () => {
-              const res = await fetchAPI.GET(`/auth/user`);
-              const json = await res.json();
-              toast(json.message);
+              const data = await fetchAPI.GET(`/auth/user`);
+              toast(data.message);
             }}
           >
             User Status
@@ -89,11 +86,9 @@ function AuthButtons() {
           <Button
           variation="ghost"
           onClick={async () => {
-            const res = await fetchAPI.POST(`/auth/logout`);
-            const json = await res.json();
+            const data = await fetchAPI.POST(`/auth/logout`);
             queryClient.invalidateQueries({ queryKey: ["userMe"] });
-
-            toast(json.message);
+            toast(data.message);
           }}
         >
           Logout

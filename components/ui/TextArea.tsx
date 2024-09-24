@@ -44,7 +44,7 @@ const TextArea = forwardRef<Ref, AllProps>(function ({
   setValue,
   errorMessage,
   ...props
-}: TextAreaProps) {
+}: TextAreaProps, ref) {
 
   const id = useId();
   const hintId = hint ? `${id}-hint` : "";

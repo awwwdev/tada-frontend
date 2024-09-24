@@ -23,8 +23,7 @@ export default function LoginBox() {
   const queryClient = useQueryClient();
 
   const onSubmit = async ({ email, password }: { email: string; password: string }) => {
-    const response = await fetchAPI.POST("/auth/login/with-password", { email, password });
-    const data = await response.json();
+    const data = await fetchAPI.POST("/auth/login/with-password", { email, password });
     if (data.error) throw new Error("Something went wrong");
     setUserMe(data.user);
     toast.success("You are Logged in.");
