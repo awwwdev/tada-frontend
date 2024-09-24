@@ -3,6 +3,7 @@ const QUERY_KEYS = {
   TASKS: "tasks",
   FOLDERS: "folders",
   LISTS: "lists",
+  SETTINGS: "SETTINGS "
 };
 
 export default QUERY_KEYS;

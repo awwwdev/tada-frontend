@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import useUserMe from '@/hooks/userMe';
 import fetchAPI from '@/utils/fetchAPI';
+import QUERY_KEYS from '@/react-query/queryKeys';
 
 export default function TaskInput() {
 
@@ -33,7 +34,7 @@ export default function TaskInput() {
         status: "to-do",
         author: ""
       });
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
 
     }
   })
