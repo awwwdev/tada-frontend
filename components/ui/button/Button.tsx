@@ -38,7 +38,7 @@ const parts = {
       accent: "hover:bg-accent2A active:bg-accent3A",
     },
     soft: {
-      gray: "bg-base2A hover:bg-base3 active:bg-base4",
+      gray: "bg-base3A hover:bg-base4 active:bg-base5",
       accent: "bg-accent3A hover:bg-accent4A active:bg-accent5A",
     },
     solid: {

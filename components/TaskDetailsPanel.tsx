@@ -10,6 +10,8 @@ import Input from "@/components/ui/Input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchAPI from "@/utils/fetchAPI";
 import toast from "react-hot-toast";
+import AlertDialog from "./ui/alert";
+import Modal from "./ui/modal";
 
 export default function TaskDetailsPanel() {
   const { selectedTask } = useGlobalContex();
@@ -27,7 +29,7 @@ function EmptyState() {
 }
 
 function TaskDetailsContent() {
-  const {  selectedTask } = useGlobalContex();
+  const { selectedTask } = useGlobalContex();
   const task = selectedTask as Task;
 
   return (
@@ -63,7 +65,7 @@ function Line() {
 type Props = { task: Task; setTask: (t: Task) => void };
 
 function Title({ task, setTask }: Props) {
-  const {  selectedTask } = useGlobalContex();
+  const { selectedTask } = useGlobalContex();
   return (
     <div>
       <Input
@@ -108,10 +110,21 @@ function Delete({ task, setTask }: Props) {
 
   return (
     <div>
-      <Button variation="ghost" onClick={() => deleteTaskM.mutate(task.id)} isLoading={deleteTaskM.isPending}>
-        <Icon name="bf-i-ph-trash" className="c-base11" />
-        <span className="">Delete</span>
-      </Button>
+      <Modal  trigger={<Button variation="ghost">Delete</Button>}>
+        <p>Are your sure you want to delete this task?</p>
+        <div className="h-6"></div>
+        <div className='flex justify-end gap-3'>
+        <Modal.Close>
+          <Button variation='soft'>Cancel</Button>
+        </Modal.Close>
+        <Modal.Close>
+          <Button variation='solid' onClick={() => deleteTaskM.mutate(task.id)} isLoading={deleteTaskM.isPending}>
+            <Icon name="bf-i-ph-trash" className="c-base11" />
+            <span className="">Delete</span>
+          </Button>
+        </Modal.Close>
+        </div>
+      </Modal>
     </div>
   );
 }

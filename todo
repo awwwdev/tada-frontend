@@ -7,6 +7,9 @@
 - drag and drop ordering bug
 - connect panel details to api
 
+- auth confirm email 
+- auth reset password + magic link
+
 --- ready for public use ---
 
 - fix draggable list hydration error  
