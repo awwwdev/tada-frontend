@@ -1,11 +1,12 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "cSpell.words": [
-    "Darsoon",
-    "firstname",
-    "lastname"
-  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.organizeImports": "always",
+    "source.sortMembers": "always"
+  },
+  "cSpell.words": ["Darsoon", "firstname", "lastname"],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#3f56b4",
     "activityBar.background": "#3f56b4",

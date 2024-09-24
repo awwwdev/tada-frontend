@@ -187,6 +187,9 @@ devDependencies:
   eslint-config-prettier:
     specifier: ^8.6.0
     version: 8.6.0(eslint@8.25.0)
+  eslint-plugin-unused-imports:
+    specifier: ^4.1.4
+    version: 4.1.4(eslint@8.25.0)
   husky:
     specifier: ^8.0.3
     version: 8.0.3
@@ -5604,6 +5607,18 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
+    dev: true
+
+  /eslint-plugin-unused-imports@4.1.4(eslint@8.25.0):
+    resolution: {integrity: sha512-YptD6IzQjDardkl0POxnnRBhU1OEePMV0nd6siHaRBbd+lyh6NAhFEobiznKU7kTsSsDeSD62Pe7kAM1b7dAZQ==}
+    peerDependencies:
+      '@typescript-eslint/eslint-plugin': ^8.0.0-0 || ^7.0.0 || ^6.0.0 || ^5.0.0
+      eslint: ^9.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      '@typescript-eslint/eslint-plugin':
+        optional: true
+    dependencies:
+      eslint: 8.25.0
     dev: true
 
   /eslint-scope@5.1.1:
