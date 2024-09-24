@@ -3,30 +3,43 @@
 import Button from "@/components/ui/button";
 import Checkbox from "@/components/ui/Checkbox";
 import Icon from "@/components/ui/Icon";
-import { Task } from "@/types";
+import { Task, TaskFields } from "@/types";
 import { useGlobalContex } from "./Provider";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useTaskMutation from "@/hooks/taskMutation";
+import fetchAPI from "@/utils/fetchAPI";
+import useUserMe from "@/hooks/userMe";
+import toast from "react-hot-toast";
+import QUERY_KEYS from "@/react-query/queryKeys";
 
 type Callback = (task: Task) => Task;
 type SetTask = (arg: Task) => void;
 type SetTasks = (arg: Task[]) => void;
 
-export default function TaskItem({
-  task,
-  setTask,
-  dragHandleProps,
-}: {
-  task: Task;
-  setTask: SetTask;
-  dragHandleProps: Object;
-}) {
-  const { setSelectedTaskId, addTask, selectedTaskId } = useGlobalContex();
+export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHandleProps: Object }) {
+  const { setSelectedTaskId, selectedTaskId } = useGlobalContex();
+
+  const taskMutation = useTaskMutation();
+  const queryClient = useQueryClient();
+  const userMeQ = useUserMe();
+
+  const addTaskMutation = useMutation<Task, Error, TaskFields>({
+    mutationFn: (newTask: TaskFields) =>
+      fetchAPI.POST(`/tasks`, { ...newTask, author: userMeQ.data?.id, id: undefined, _id: undefined }),
+    onError: (err) => {
+      toast.error("Something went wrong: " + err.message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
+    },
+  });
 
   return (
     <div className={`b-1 b-base6 rd-3 p-3 flex items-center bg-mauve3A ${selectedTaskId === task.id && "!b-accent8"}`}>
       <Checkbox
         checked={task.status === "done"}
         onChange={(checked) => {
-          setTask({ ...task, status: checked ? "done" : "todo" });
+          taskMutation.mutate({ id: task.id, status: checked ? "done" : "to-do" });
         }}
       />
       <button
@@ -47,11 +60,11 @@ export default function TaskItem({
           <Icon name="bf-i-ph-pencil" className="c-base11" />
           <span className="sr-only">Edit</span>
         </Button>
-        <Button variation="text" iconButton onClick={() => addTask(task)}>
+        <Button variation="text" iconButton onClick={() => addTaskMutation.mutate(task)}>
           <Icon name="bf-i-ph-copy" className="c-base11" />
           <span className="sr-only">Duplicate</span>
         </Button>
-        <Button variation="text" iconButton onClick={() => setTask({ ...task, pinned: !task.pinned })}>
+        <Button variation="text" iconButton onClick={() => taskMutation.mutate({ id: task.id, pinned: !task.pinned })}>
           {task.pinned ? (
             <Icon name="bf-i-ph-push-pin-fill" className="c-accent11" />
           ) : (
@@ -64,7 +77,11 @@ export default function TaskItem({
           )}
         </Button>
 
-        <Button variation="text" iconButton onClick={() => setTask({ ...task, starred: !task.starred })}>
+        <Button
+          variation="text"
+          iconButton
+          onClick={() => taskMutation.mutate({ id: task.id, starred: !task.starred })}
+        >
           {task.starred ? (
             <Icon name="bf-i-ph-star-fill" className="c-accent11" />
           ) : (

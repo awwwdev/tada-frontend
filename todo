@@ -1,19 +1,19 @@
-- add tasks to lists
-- add folders to lists
-
-- delete tasks
-- prefrences
-
+- add tasks to a list
+- add folders to a folder
+- default lists (smart lists)
+- show or hide lists
 - drag and drop ordering bug
-- connect panel details to api
+- detail panel editing
 
 - auth confirm email 
 - auth reset password + magic link
 
 --- ready for public use ---
 
+- sort by
+
 - fix draggable list hydration error  
-- arrows 
+- arrows for post task and pre task  
 - formkit list animation
 - emoji picker
 

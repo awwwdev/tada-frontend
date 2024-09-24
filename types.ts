@@ -18,6 +18,7 @@ type Emoji = string;
 
 export type UserFields =  {
   email: string;
+  settings: Settings;
 };
 
 type UserPopulated = {
