@@ -33,7 +33,7 @@ export default function LoginOrSignUpBox({ initalTab = "signup" }: { initalTab?:
               Already a user?{` `}
               <Button className="underline" variation="text" preStyled={false} onClick={() => setTabValue("login")}>
                 {" "}
-                Login here
+                Login here.
               </Button>
             </p>
           </Tabs.Content>

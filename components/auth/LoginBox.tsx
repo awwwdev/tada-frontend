@@ -29,6 +29,8 @@ export default function LoginBox() {
     toast.success("You are Logged in.");
     queryClient.setQueryData(["userMe"], () => data.user);
     queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: 'all' });
+    queryClient.removeQueries(); // removes cached data for all queries
+    await queryClient.resetQueries(); // reset all queyries to their initial state 
   };
 
   const form = useFormHook({ schema, onSubmit });

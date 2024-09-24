@@ -49,7 +49,7 @@ function AuthButtons() {
           <Modal
             trigger={
               <Button variation="ghost">
-                <Icon name="bf-i-ph-signin" />
+                <Icon name="bf-i-ph-sign-in" />
                 Login
               </Button>
             }
@@ -59,7 +59,7 @@ function AuthButtons() {
           <Modal
             trigger={
               <Button variation="ghost">
-                <Icon name="bf-i-ph-signin" />
+                <Icon name="bf-i-ph-sign-in" />
                 Sign Up
               </Button>
             }
@@ -95,6 +95,7 @@ function LogoutButton() {
         toast.success(data.message);
       }}
     >
+      <Icon name='bf-i-ph-sign-out' />
       Logout
     </Button>
   );

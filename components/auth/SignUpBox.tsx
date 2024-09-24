@@ -89,7 +89,7 @@ export default function SignUpBox() {
             required
             label={"Confirm Password"}
           />
-          <div className="h-3"></div>
+          <div className="h-6"></div>
           <Form.ServerErrorMessage />
           <Form.SubmitButton className="w-full">{"Submit"}</Form.SubmitButton>
         </Form>
