@@ -21,6 +21,7 @@ export default function Delete({ task }: { task: Task }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.LISTS] });
       setSelectedTaskId(null);
     },
   });

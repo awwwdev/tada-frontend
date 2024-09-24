@@ -241,6 +241,7 @@ function AddFolderButton() {
 
 function Lists() {
   const userMeQ = useUserMe();
+  const {setSelectedUserListId} = useGlobalContex();
   const listQ = useQuery({
     queryKey: ["lists"],
     queryFn: async () => {
@@ -275,9 +276,11 @@ function Lists() {
               <li key={"menu-item-list-" + index} className="flex gap-3 items-center">
                 <Icon name="bf-i-ph-list" className="c-base11" />
 
-                {/* <Button variation="text" className="!text-start w-full"> */}
+                <Button variation="text" className="!text-start w-full"
+                onClick={() => setSelectedUserListId(list.id)}
+                >
                 <span className="grow">{list.name}</span>
-                {/* </Button> */}
+                </Button>
 
                 <div>
                   <DropdownMenu

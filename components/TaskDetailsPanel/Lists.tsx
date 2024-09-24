@@ -65,7 +65,7 @@ export default function Lists({ task }: { task: Task }) {
                           id: list.id,
                           tasks: hasThisTask
                             ? list.tasks.filter((t: TasktPorpertisInList) => t.id !== task.id)
-                            : [...list.tasks, { id: task.id, addedAt: new Date(), orderInList: list.tasks?.length }],
+                            : [...list.tasks, { id: task.id, task: task.id , addedAt: new Date(), orderInList: list.tasks?.length }],
                         });
                       }}
                     />

@@ -1,4 +1,4 @@
-import React, { Children, ElementType } from "react";
+import React, { ElementType } from "react";
 
 type Document = {
   _id: string;
@@ -51,6 +51,7 @@ export type ListFields = {
 export type TasktPorpertisInList = {
   addedAt: Date;
   id: string;
+  task: string;
   orderInList?: number | null;
 };
 

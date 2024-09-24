@@ -12,10 +12,6 @@ import useUserMe from "@/hooks/userMe";
 import toast from "react-hot-toast";
 import QUERY_KEYS from "@/react-query/queryKeys";
 
-type Callback = (task: Task) => Task;
-type SetTask = (arg: Task) => void;
-type SetTasks = (arg: Task[]) => void;
-
 export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHandleProps: Object }) {
   const { setSelectedTaskId, selectedTaskId } = useGlobalContex();
 
