@@ -10,8 +10,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import fetchAPI from "@/utils/fetchAPI";
 import toast from "react-hot-toast";
 import Modal from "./ui/modal";
-import useUserMe from '@/hooks/userMe';
-import QUERY_KEYS from '@/react-query/queryKeys';
+import useUserMe from "@/hooks/userMe";
+import QUERY_KEYS from "@/react-query/queryKeys";
+import { useId, useRef, useState } from "react";
+import useAutosizeTextArea from "@/hooks/useAutoSizeTextArea";
 
 export default function TaskDetailsPanel() {
   const { selectedTaskId } = useGlobalContex();
@@ -19,11 +21,11 @@ export default function TaskDetailsPanel() {
   const allTasksQ = useQuery({
     queryKey: [QUERY_KEYS.TASKS],
     queryFn: async () => {
-      const data = await fetchAPI.GET(`/tasks?userId=${userMeQ.data?._id}`)
+      const data = await fetchAPI.GET(`/tasks?userId=${userMeQ.data?._id}`);
       return data;
     },
     enabled: !!userMeQ.data?._id,
-  })
+  });
 
   const selectedTask = allTasksQ.data?.find((t: Task) => t._id === selectedTaskId);
 
@@ -39,8 +41,7 @@ function EmptyState() {
   return <div className="w-full h-full flex items-center justify-center b-base11 italic">No task is selected</div>;
 }
 
-function TaskDetailsContent({task}: {task: Task}) {
-
+function TaskDetailsContent({ task }: { task: Task }) {
   return (
     <div className="space-y-3">
       <Title task={task} />
@@ -71,34 +72,69 @@ function Line() {
   return <div className="b-t-1 b-base6"></div>;
 }
 
-type Props = { task: Task };;
+type Props = { task: Task };
 
 function Title({ task }: Props) {
-  return (
-    <div>
-      <Input
-        name='label'
-        label="Title"
-        value={task.label}
-        // onChange={(e) => updateTaskById({ id: selectedTask?.id, task: { ...task, label: e.target.value } })}
-      />
-      <h3 className="H2">{task.label}</h3>
-    </div>
-  );
-}
-
-function Archive({task}: Props) {
   const queryClient = useQueryClient();
-  const archiveTaskM = useMutation({
-    mutationFn: async  (id: string) => {
-      const data = await fetchAPI.PUT(`/tasks/${id}`, { archived: !task?.archived });
-      return data;
-    },
+  const [value, setValue] = useState<string>(task.label);
+  const [showEdit, setShowEdit] = useState(false);
+
+  const taskMutation = useMutation({
+    mutationFn: async ({ id, label }: { id: string; label: string }) => fetchAPI.PUT(`/tasks/${id}`, { label }),
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
     },
     onSuccess: (data) => {
-      queryClient.setQueryData(["tasks", task.id], data);
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
+      setShowEdit(false);
+    },
+  });
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  useAutosizeTextArea(textareaRef.current, value);
+  return (
+    <div className="flex gap-3">
+      <textarea
+        name="label"
+        ref={textareaRef}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        className={`H2  ${showEdit ? "" : "b-transparent"} b-1 px-1.5 rd-1.5 w-full overflow-hidden resize-none`}
+        disabled={!showEdit}
+        rows={1}
+        // autoFocus
+      ></textarea>
+      {showEdit ? (
+        <Button variation="solid" onClick={() => taskMutation.mutate({ id: task._id, label: value })}>
+          Save
+        </Button>
+      ) : (
+        <Button
+          variation="ghost"
+          onClick={() => {
+            setShowEdit(true);
+            if (textareaRef.current) {
+              textareaRef.current.disabled = false;
+              textareaRef.current?.focus();
+            }
+          }}
+          iconButton
+          className="mis-auto"
+        >
+          <Icon name="bf-i-ph-pencil" className="c-base11" />
+        </Button>
+      )}
+    </div>
+  );
+}
+
+function Archive({ task }: Props) {
+  const queryClient = useQueryClient();
+  const archiveTaskM = useMutation({
+    mutationFn: async (id: string) => fetchAPI.PUT(`/tasks/${id}`, { archived: !task?.archived }),
+    onError: (err) => {
+      toast.error("Something went wrong: " + err.message);
+    },
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
     },
   });
@@ -122,17 +158,14 @@ function Comments({ task }: Props) {
 
 function Delete({ task }: Props) {
   const queryClient = useQueryClient();
-  const {setSelectedTaskId} = useGlobalContex();
+  const { setSelectedTaskId } = useGlobalContex();
   const deleteTaskM = useMutation({
-    mutationFn: async (id: string) => {
-      const data = await fetchAPI.DELETE(`/tasks/${id}`);
-      return data;
-    },
+    mutationFn: (id: string) => fetchAPI.DELETE(`/tasks/${id}`),
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
       setSelectedTaskId(null);
     },
   });
@@ -170,15 +203,57 @@ function Emojies({ task }: Props) {
 }
 
 function Note({ task }: Props) {
+  const [value, setValue] = useState<string>(task.note ?? "");
+  const [showEdit, setShowEdit] = useState(false);
+  const queryClient = useQueryClient();
 
+  const taskMutation = useMutation({
+    mutationFn: async ({ id, note }: { id: string; note: string }) => fetchAPI.PUT(`/tasks/${id}`, { note }),
+    onError: (err) => {
+      toast.error("Something went wrong: " + err.message);
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
+      setShowEdit(false);
+    },
+  });
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  useAutosizeTextArea(textareaRef.current, value);
   return (
     <div>
-      <TextArea
-        name="note"
-        label="Note"
-        value={task.note ?? ""}
-        // onChange={(e) => updateTaskById({ id: selectedTask?.id, tass: { ...task, note: e.target.value } })}
-      />
+      <h3>Note</h3>
+      <div className="flex gap-3">
+        <textarea
+          name="label"
+          ref={textareaRef}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className={`H2  ${showEdit ? "" : "b-transparent"} b-1 px-1.5 rd-1.5 w-full overflow-hidden resize-none`}
+          disabled={!showEdit}
+          rows={1}
+          // autoFocus
+        ></textarea>
+        {showEdit ? (
+          <Button variation="solid" onClick={() => taskMutation.mutate({ id: task._id, note: value })}>
+            Save
+          </Button>
+        ) : (
+          <Button
+            variation="ghost"
+            onClick={() => {
+              setShowEdit(true);
+              if (textareaRef.current) {
+                textareaRef.current.disabled = false;
+                textareaRef.current?.focus();
+              }
+            }}
+            iconButton
+            className="mis-auto"
+          >
+            <Icon name="bf-i-ph-pencil" className="c-base11" />
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
