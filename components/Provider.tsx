@@ -12,9 +12,9 @@ import useUserMe from '@/hooks/userMe';
 
 type ContextType = {
   isSideMenuOpen: boolean;
-  setIsSideMenuOpen: (arg: boolean) => void;
+  setIsSideMenuOpen: React.Dispatch<SetStateAction<boolean | null>>;
   selectedTask: Task | null;
-  setSelectedTask: (arg: Task) => void;
+  setSelectedTask: React.Dispatch<SetStateAction<Task | null>>;
   listName: string;
   setListName: React.Dispatch<SetStateAction<string>>;
   tasks: Task[];
@@ -53,33 +53,20 @@ const GloblaContext = createContext<ContextType>({
   theme: "light",
 });
 
-export default function Providers({ children, theme }: { children: React.ReactNode; theme: string }) {
+export default function Providers({ children, theme, hasSession }: { children: React.ReactNode; theme: string; hasSession: boolean }) {
 
-  const userMeQ = useUserMe(); // to initialize userMe
-  console.log("userMeQ", userMeQ.data);
-  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  useUserMe(); // to initialize userMe
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
-  const [settings, setSettings, removeSettings] = useLocalStorage<Settings>("settings", createInitialSettings());
-  const [folders, setFolders, removeFolders] = useLocalStorage<Folder[]>("folders", createInitialFolders());
-  const [lists, setLists, removeLists] = useLocalStorage<List[]>("lists", createInitialLists());
-  const [tasks, setTasks, removeTasks] = useLocalStorage<Task[]>("tasks", []);
+
   const [listName, setListName] = useState("all");
   const [userMe, setUserMe] = useState<User | null>(null);
+  console.log("🚀 ~ userMe:", userMe);
 
-  const addTask = (t: Task) =>
-    setTasks((currentTasks) => [
-      ...currentTasks,
-      { ...t, id: uuid(), dateCreated: new Date(), orderInList: tasks.length },
-    ]);
+ 
 
-  const updateTaskById = ({ id, task }: { id: string; task: Task }) => {
-    console.log("[hiiii");
-    const index = tasks.findIndex((t: Task) => t.id === id);
-    console.log("🚀 ~ index:", index);
-    if (index === -1) return;
-    tasks[index] = { ...task, id: id };
-  };
+
 
   return (
     <GloblaContext.Provider
@@ -90,16 +77,6 @@ export default function Providers({ children, theme }: { children: React.ReactNo
         setIsSideMenuOpen,
         listName,
         setListName,
-        tasks,
-        setTasks,
-        addTask,
-        updateTaskById,
-        settings,
-        setSettings,
-        lists,
-        setLists,
-        folders,
-        setFolders,
         theme,
         userMe,
         setUserMe,

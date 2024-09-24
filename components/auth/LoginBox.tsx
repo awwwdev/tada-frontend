@@ -27,7 +27,8 @@ export default function LoginBox() {
     if (data.error) throw new Error("Something went wrong");
     setUserMe(data.user);
     toast.success("You are Logged in.");
-    queryClient.invalidateQueries({ queryKey: ["userMe"] });
+    queryClient.setQueryData(["userMe"], () => data.user);
+    queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: 'all' });
   };
 
   const form = useFormHook({ schema, onSubmit });
@@ -49,6 +50,7 @@ export default function LoginBox() {
           </button>
         }
       />
+      <div className='h-6'></div>
       <Form.ServerErrorMessage />
       <Form.SubmitButton className="w-full">Login</Form.SubmitButton>
     </Form>

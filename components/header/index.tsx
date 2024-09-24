@@ -9,8 +9,8 @@ import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
 import { API } from "@/consts";
 import toast from "react-hot-toast";
 import useUserMe from "@/hooks/userMe";
-import { useQueryClient } from '@tanstack/react-query';
-import fetchAPI from '@/utils/fetchAPI';
+import { useQueryClient } from "@tanstack/react-query";
+import fetchAPI from "@/utils/fetchAPI";
 
 const Header = () => {
   return (
@@ -41,17 +41,9 @@ function AuthButtons() {
 
   return (
     <>
+      {userMeQ.data && <p>{userMeQ.data.email}</p>}
       {userMeQ.data ? (
-        <Button
-          variation="ghost"
-          onClick={async () => {
-            const data = await fetchAPI.POST(`/auth/logout`);
-            queryClient.invalidateQueries({ queryKey: ["userMe"] });
-            toast(data.message);
-          }}
-        >
-          Logout
-        </Button>
+        <LogoutButton />
       ) : (
         <>
           <Modal
@@ -74,7 +66,7 @@ function AuthButtons() {
           >
             <LoginOrSignUpBox initalTab="signup" />
           </Modal>
-          <Button
+          {/* <Button
             variation="ghost"
             onClick={async () => {
               const data = await fetchAPI.GET(`/auth/user`);
@@ -82,19 +74,28 @@ function AuthButtons() {
             }}
           >
             User Status
-          </Button>
-          <Button
-          variation="ghost"
-          onClick={async () => {
-            const data = await fetchAPI.POST(`/auth/logout`);
-            queryClient.invalidateQueries({ queryKey: ["userMe"] });
-            toast(data.message);
-          }}
-        >
-          Logout
-        </Button>
+          </Button> */}
         </>
       )}
     </>
+  );
+}
+
+function LogoutButton() {
+  const queryClient = useQueryClient();
+  return (
+    <Button
+      variation="ghost"
+      onClick={async () => {
+        const data = await fetchAPI.POST(`/auth/logout`);
+        queryClient.setQueryData(["userMe"], null);
+        queryClient.invalidateQueries({ queryKey: ["userMe"]});
+        queryClient.removeQueries(); // removes cached data for all queries
+        await queryClient.resetQueries(); // reset all queyries to their initial state 
+        toast.success(data.message);
+      }}
+    >
+      Logout
+    </Button>
   );
 }

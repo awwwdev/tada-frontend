@@ -34,6 +34,7 @@ export default function SignUpBox() {
   // const queryClient = useQueryClient();
 
   const { setUserMe } = useGlobalContex();
+  const queryClient = useQueryClient();
 
   const onSubmit = async ({
     email,
@@ -52,6 +53,9 @@ export default function SignUpBox() {
     const data = await fetchAPI.POST("/auth/signup", { email, password });
     if (data.error) throw new Error("Something went wrong");
     toast.success("You are successfully signed up.");
+    // queryClient.setQueryData(['userMe'], () => data.user);
+    queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: 'all' });
+  
     setUserMe(data.user);
   };
 

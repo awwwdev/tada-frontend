@@ -22,7 +22,7 @@ export default function LoginOrSignUpBox({ initalTab = "signup" }: { initalTab?:
     <div className=" b-solid rd-lg w-full ">
       <div className="">
         <Tabs value={tabVelue} onValueChange={(v: TabValue) => setTabValue(v)}>
-          <Tabs.TabsList className="flex gap-1.5 pb-2 b-b-1 b-sand5">
+          <Tabs.TabsList className="flex gap-1.5  b-b-1 b-sand5">
             <Tabs.Trigger value="signup">Sign Up</Tabs.Trigger>
             <Tabs.Trigger value="login">Login</Tabs.Trigger>
           </Tabs.TabsList>
