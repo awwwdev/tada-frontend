@@ -44,7 +44,7 @@ export default function ListsPanel() {
 function MenuItem({ icon, children, onClick }: { icon: string; children: React.ReactNode; onClick?: () => void }) {
   return (
     <li>
-      <Button variation="text" className="!text-start w-full" onClick={onClick}>
+      <Button variation="text" className="!text-start w-full !px-3" onClick={onClick}>
         <Icon name={icon} className="mie-1.5 c-base11" />
         {children}{" "}
       </Button>
@@ -56,7 +56,7 @@ function DefaultLists() {
   const { setListName } = useGlobalContex();
 
   return (
-    <ul className="flex flex-col gap-3  ">
+    <ul className="flex flex-col gap-3 -mis-3 ">
       <MenuItem icon="bf-i-ph-list" onClick={() => setListName("all")}>
         All Tasks
       </MenuItem>
