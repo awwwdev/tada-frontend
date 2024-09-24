@@ -44,6 +44,10 @@ function EmptyState() {
 function TaskDetailsContent({ task }: { task: Task }) {
   return (
     <div className="space-y-3">
+      <div className='flex justify-end gap-3'>
+        <p>Starred</p>
+        <p>Pinned</p>
+      </div>
       <Title task={task} />
       <div className="h-12"></div>
       <Line />
@@ -53,9 +57,17 @@ function TaskDetailsContent({ task }: { task: Task }) {
       <Line />
       <Emojies task={task} />
       <Line />
+      <Due task={task} />
+      <Line />
       <Reminders task={task} />
       <Line />
-      <Repetition task={task} />
+      <Routines task={task} />
+      <Line />
+      <Attachements task={task} />
+      <Line />
+      <PreTasks task={task} />
+      <Line />
+      <PostTasks task={task} />
       <Line />
       <AsingedTo task={task} />
       <Line />
@@ -149,11 +161,14 @@ function Archive({ task }: Props) {
 }
 
 function AsingedTo({ task }: Props) {
-  return <div>Assing</div>;
+  return <div>Assinged To</div>;
 }
 
 function Comments({ task }: Props) {
   return <div>Comments</div>;
+}
+function Due({ task }: Props) {
+  return <div>Due Date</div>;
 }
 
 function Delete({ task }: Props) {
@@ -220,39 +235,42 @@ function Note({ task }: Props) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   useAutosizeTextArea(textareaRef.current, value);
   return (
-    <div>
-      <h3>Note</h3>
-      <div className="flex gap-3">
-        <textarea
-          name="label"
-          ref={textareaRef}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          className={`H2  ${showEdit ? "" : "b-transparent"} b-1 px-1.5 rd-1.5 w-full overflow-hidden resize-none`}
-          disabled={!showEdit}
-          rows={1}
-          // autoFocus
-        ></textarea>
-        {showEdit ? (
-          <Button variation="solid" onClick={() => taskMutation.mutate({ id: task._id, note: value })}>
-            Save
-          </Button>
-        ) : (
-          <Button
-            variation="ghost"
-            onClick={() => {
-              setShowEdit(true);
-              if (textareaRef.current) {
-                textareaRef.current.disabled = false;
-                textareaRef.current?.focus();
-              }
-            }}
-            iconButton
-            className="mis-auto"
-          >
-            <Icon name="bf-i-ph-pencil" className="c-base11" />
-          </Button>
-        )}
+    <div className="flex gap-1.5">
+      <Icon name="bf-i-ph-note-blank" className="c-base11" />
+      <div className="grow">
+        <h3 className="c-base11">Note</h3>
+        <div className="flex gap-3">
+          <textarea
+            name="label"
+            ref={textareaRef}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            className={`  ${showEdit ? "" : "b-transparent"} b-1 px-1.5 rd-1.5 w-full overflow-hidden resize-none`}
+            disabled={!showEdit}
+            rows={1}
+            // autoFocus
+          ></textarea>
+          {showEdit ? (
+            <Button variation="solid" onClick={() => taskMutation.mutate({ id: task._id, note: value })}>
+              Save
+            </Button>
+          ) : (
+            <Button
+              variation="ghost"
+              onClick={() => {
+                setShowEdit(true);
+                if (textareaRef.current) {
+                  textareaRef.current.disabled = false;
+                  textareaRef.current?.focus();
+                }
+              }}
+              iconButton
+              className="mis-auto"
+            >
+              <Icon name="bf-i-ph-pencil" className="c-base11" />
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -262,9 +280,26 @@ function Reminders({ task }: Props) {
   return <div>Reminders</div>;
 }
 
-function Repetition({ task }: Props) {
-  return <div>Repetition</div>;
+function Routines({ task }: Props) {
+  return <div>Routines</div>;
 }
+
+
+function Attachements({ task }: Props) {
+  return <div>Atachements</div>;
+}
+
+
+function PreTasks({ task }: Props) {
+  return <div>PreTasks</div>;
+}
+
+
+
+function PostTasks({ task }: Props) {
+  return <div>PostTasks</div>;
+}
+
 
 function Steps({ task }: Props) {
   return <div>Steps</div>;
