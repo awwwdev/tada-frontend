@@ -52,26 +52,26 @@ function MenuItem({ icon, children, onClick }: { icon: string; children: React.R
 }
 
 function DefaultLists() {
-  const { setListName } = useGlobalContex();
+  const { setSelectedUserListId } = useGlobalContex();
 
   return (
     <ul className="flex flex-col gap-3 -mis-3 ">
-      <MenuItem icon="bf-i-ph-list" onClick={() => setListName("all")}>
+      <MenuItem icon="bf-i-ph-list" onClick={() => setSelectedUserListId(null)}>
         All Tasks
       </MenuItem>
-      <MenuItem icon="bf-i-ph-sun" onClick={() => setListName("doToday")}>
+      <MenuItem icon="bf-i-ph-sun" onClick={() => {}}>
         Do Today
       </MenuItem>
-      <MenuItem icon="bf-i-ph-sun-horizon" onClick={() => setListName("doTomorrow")}>
+      <MenuItem icon="bf-i-ph-sun-horizon" onClick={() => {}}>
         Do Tomorrow
       </MenuItem>
-      <MenuItem icon="bf-i-ph-star" onClick={() => setListName("starred")}>
+      <MenuItem icon="bf-i-ph-star" onClick={() => {}}>
         Starred
       </MenuItem>
-      <MenuItem icon="bf-i-ph-calendar-dots" onClick={() => setListName("withDueDates")}>
+      <MenuItem icon="bf-i-ph-calendar-dots" onClick={() => {}}>
         With Due dates
       </MenuItem>
-      <MenuItem icon="bf-i-ph-users" onClick={() => setListName("assigned")}>
+      <MenuItem icon="bf-i-ph-users" onClick={() => {}}>
         Asigned
       </MenuItem>
       {/* <MenuItem icon="bf-i-ph-user" onClick={() => setListName("assignedToMe")}>
@@ -241,7 +241,7 @@ function AddFolderButton() {
 
 function Lists() {
   const userMeQ = useUserMe();
-  const {setSelectedUserListId} = useGlobalContex();
+  const { setSelectedUserListId } = useGlobalContex();
   const listQ = useQuery({
     queryKey: ["lists"],
     queryFn: async () => {
@@ -276,10 +276,8 @@ function Lists() {
               <li key={"menu-item-list-" + index} className="flex gap-3 items-center">
                 <Icon name="bf-i-ph-list" className="c-base11" />
 
-                <Button variation="text" className="!text-start w-full"
-                onClick={() => setSelectedUserListId(list.id)}
-                >
-                <span className="grow">{list.name}</span>
+                <Button variation="text" className="!text-start w-full" onClick={() => setSelectedUserListId(list.id)}>
+                  <span className="grow">{list.name}</span>
                 </Button>
 
                 <div>

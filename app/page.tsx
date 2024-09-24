@@ -17,7 +17,6 @@ export default function Page() {
       <div className="grid gap-6 " style={{ gridTemplateColumns: "1fr 3fr 3fr" }}>
         <ListsPanel />
         <div className="h-full  flex flex-col">
-          <p>{selectedTaskId}</p>
           {selectedUserListId ? <UserList listId={selectedUserListId} /> : <AllTasksList />}
           <div className="h-12 mt-auto"></div>
           <TaskInput />

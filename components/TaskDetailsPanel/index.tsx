@@ -37,12 +37,8 @@ function EmptyState() {
 }
 
 function TaskDetailsContent({ task }: { task: Task }) {
-  const { selectedTaskId } = useGlobalContex();
-  const derived = useMemo(() => selectedTaskId+ "HIIIII", [selectedTaskId]);
   return (
     <div className="space-y-3">
-      <div>{derived}</div>
-      <div>{task.id}</div>
       <div className="flex justify-end gap-3">
         <p>Starred</p>
         <p>Pinned</p>
