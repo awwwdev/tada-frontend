@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import GradientMask from "@/components/ui/GradientMask";
 import GradientBorderOverlay from "@/components/ui/GradientBorderOverlay";
-import { Post } from '@/lib/api';
+import { Post } from "@/lib/api";
 
 type Props = {
   title: string;
@@ -11,16 +11,9 @@ type Props = {
   borderColor?: string;
   borderGradeintFrom: string;
   borderGradeintTo?: string;
-}
+};
 
-export default function WorkItemCard({
-  title,
-  imgs,
-  subtitle,
-  gradient,
-  borderGradeintFrom,
-  borderGradeintTo,
-}: Props) {
+export default function WorkItemCard({ title, imgs, subtitle, gradient, borderGradeintFrom, borderGradeintTo }: Props) {
   return (
     <CardContainer {...{ title, gradient, borderGradeintFrom, borderGradeintTo }}>
       <CardContent title={title} subtitle={subtitle} imgs={imgs} />

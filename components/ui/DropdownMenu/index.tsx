@@ -4,8 +4,7 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import Icon from "@/components/ui/Icon";
 // import { CheckIcon, ChevronRightIcon, DotFilledIcon } from "@radix-ui/react-icons";
 
-
-export default function DropdownMenu ({ trigger, children }: {trigger: React.ReactNode, children: React.ReactNode}) {
+export default function DropdownMenu({ trigger, children }: { trigger: React.ReactNode; children: React.ReactNode }) {
   return (
     <DropdownMenuPrimitive.Root>
       <DropdownMenuPrimitive.Trigger asChild>{trigger}</DropdownMenuPrimitive.Trigger>
@@ -16,7 +15,7 @@ export default function DropdownMenu ({ trigger, children }: {trigger: React.Rea
       </DropdownMenuPrimitive.Portal>
     </DropdownMenuPrimitive.Root>
   );
-};
+}
 
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 
@@ -36,7 +35,9 @@ const DropdownMenuSubTrigger = React.forwardRef<
 >(({ className, inset, children, ...props }, ref) => (
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
-    className={`flex cursor-default select-none items-center rd-1.5rem px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent ${inset ? "pis-8": ""} ${className}`}
+    className={`flex cursor-default select-none items-center rd-1.5rem px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent ${
+      inset ? "pis-8" : ""
+    } ${className}`}
     {...props}
   >
     {children}
@@ -104,7 +105,9 @@ const DropdownMenuItem = React.forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <DropdownMenuPrimitive.Item
     ref={ref}
-    className={`relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${inset ? "pis-8": "" } ${className}`}
+    className={`relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${
+      inset ? "pis-8" : ""
+    } ${className}`}
     {...props}
   />
 ));
@@ -158,7 +161,7 @@ const DropdownMenuLabel = React.forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
-    className={`px-2 py-1.5 text-sm font-semibold ${inset ? "pis-8": ""} ${className}`}
+    className={`px-2 py-1.5 text-sm font-semibold ${inset ? "pis-8" : ""} ${className}`}
     {...props}
   />
 ));

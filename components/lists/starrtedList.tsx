@@ -1,7 +1,3 @@
-function Comp(){
-
-return (
-  <div >
-
-  </div>
-)};
+function Comp() {
+  return <div></div>;
+}

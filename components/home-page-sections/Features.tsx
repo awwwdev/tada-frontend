@@ -16,7 +16,6 @@ import Avatar from "@/components/ui/Avatar";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import Icon from "@/components/ui/Icon";
 
-
 export default function Features() {
   const { t } = useTranslation();
 
@@ -29,19 +28,19 @@ export default function Features() {
             title={t("home:why.first.title")}
             description={t("home:why.first.description")}
             color="bg-pink4"
-            icon='bf-i-ph-devices'
-            />
+            icon="bf-i-ph-devices"
+          />
           <FeatureCard
             title={t("home:why.second.title")}
             description={t("home:why.second.description")}
             color="bg-sky4"
-            icon='bf-i-ph-piggy-bank'
-            />
+            icon="bf-i-ph-piggy-bank"
+          />
           <FeatureCard
             title={t("home:why.third.title")}
             description={t("home:why.third.description")}
             color="bg-yellow4"
-            icon='bf-i-ph-star'
+            icon="bf-i-ph-star"
           />
         </ul>
       </div>
@@ -49,12 +48,12 @@ export default function Features() {
   );
 }
 
-function FeatureCard({ color, title, description , icon}) {
+function FeatureCard({ color, title, description, icon }) {
   const { t } = useTranslation();
 
   return (
     <li className="rd-4 text-sm  flex sm:flex-col sm:items-start md:flex-row gap-3 items-center">
-      <FeatureIcon color={color} icon={icon}/>
+      <FeatureIcon color={color} icon={icon} />
       <div className="flex-1 leading-tight c-melow">
         <p className="font-bold   ">{title}</p>
         <p>{description}</p>
@@ -67,7 +66,7 @@ function FeatureIcon({ color, icon }) {
   return (
     <div className={`w-12 h-12 rd-full ${color} flex justify-center items-center shd-tinted-3`}>
       {/* <Icon name="bf-i-ph-list" /> */}
-      <Icon name={icon} className='text-lg c-brand-dark-blue' subdued={false} />
+      <Icon name={icon} className="text-lg c-brand-dark-blue" subdued={false} />
     </div>
   );
 }

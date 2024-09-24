@@ -89,13 +89,13 @@ function LogoutButton() {
       onClick={async () => {
         const data = await fetchAPI.POST(`/auth/logout`);
         queryClient.setQueryData(["userMe"], null);
-        queryClient.invalidateQueries({ queryKey: ["userMe"]});
+        queryClient.invalidateQueries({ queryKey: ["userMe"] });
         queryClient.removeQueries(); // removes cached data for all queries
-        await queryClient.resetQueries(); // reset all queyries to their initial state 
+        await queryClient.resetQueries(); // reset all queyries to their initial state
         toast.success(data.message);
       }}
     >
-      <Icon name='bf-i-ph-sign-out' />
+      <Icon name="bf-i-ph-sign-out" />
       Logout
     </Button>
   );

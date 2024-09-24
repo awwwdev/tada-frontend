@@ -1,10 +1,10 @@
 import type { Rule, Shortcut } from "unocss";
 export const rules: Rule[] = [
-  ["max-w-page", { "max-width": 'var(--max-w-page)' }],
-  ["font-display", { "font-family": 'var(--font-display)' }],
-  ["font-content", { "font-family": 'var(--font-content)' }],
-  ["font-mono", { "font-family": 'var(--font-mono)' }],
-  ["text-larger", { "font-size": 'var(--larger-font-size)' }],
+  ["max-w-page", { "max-width": "var(--max-w-page)" }],
+  ["font-display", { "font-family": "var(--font-display)" }],
+  ["font-content", { "font-family": "var(--font-content)" }],
+  ["font-mono", { "font-family": "var(--font-mono)" }],
+  ["text-larger", { "font-size": "var(--larger-font-size)" }],
   ["text-smaller", { "font-size": "var(--smaller-font-size)" }],
   [/^line-height-(.*)$/, ([, x]) => ({ "line-height": `calc(${x} * var(--line-height))` })],
   // project specific
@@ -125,8 +125,8 @@ export const shortcuts: Shortcut[] = [
     H2: "fs-2xl sm:fs-3xl  ls-tighter",
     H3: "fs-xl sm:fs-2xl  ls-tighter",
     H4: "fs-lg sm:fs-xl ls-tight",
-    'text-caption': "text-xs ",
-    'text-all-caps': "uppercase tracking-wider",
+    "text-caption": "text-xs ",
+    "text-all-caps": "uppercase tracking-wider",
     "large-title": "fs-5xl sm:fs-7xl md:fs-9xl  fw-900 ls-tightest ",
     "text-note": "c-base11 text-sm",
     "text-tiny-note": "c-base11 text-xs",
@@ -140,9 +140,10 @@ export const shortcuts: Shortcut[] = [
     "px-responsive": "px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 2xl:px-36",
     "py-responsive": "py-4 sm:py-4 md:py-6 lg:py-8 xl:py-12 2xl:py-24",
 
-    "bf-shadow-layer": "relative before:absolute before:rd-inherit before:top-0 before:bottom-0 before:left-0 before:right-0   before:mix-blend-multiply before:content-empty -before:z-100",
-    "bf-glow-layer": "relative  before:absolute before:rd-inherit before:top-0 before:bottom-0 before:left-0 before:right-0  before:mix-blend-screen before:content-empty -before:z-100"
-
+    "bf-shadow-layer":
+      "relative before:absolute before:rd-inherit before:top-0 before:bottom-0 before:left-0 before:right-0   before:mix-blend-multiply before:content-empty -before:z-100",
+    "bf-glow-layer":
+      "relative  before:absolute before:rd-inherit before:top-0 before:bottom-0 before:left-0 before:right-0  before:mix-blend-screen before:content-empty -before:z-100",
   },
   [
     /^bf-i-(.*)$/,
@@ -155,5 +156,4 @@ export const shortcuts: Shortcut[] = [
       `after:opacity-40 after:mis-2 empty:after:mis-0 after:vertical-middle after:scale-120  after:content-empty before:inline-block after:i-${iconName}`,
   ],
   [/^ol-(.*)$/, ([, val]) => `outline-${val}`],
-
 ];

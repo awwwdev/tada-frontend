@@ -4,7 +4,7 @@ import { useState } from "react";
 import Icon from "@/components/ui/Icon";
 import Space from "@/components/ui/Space";
 import Button from "@/components/ui/button";
-import GradientBorderOverlay from '@/components/ui/GradientBorderOverlay';
+import GradientBorderOverlay from "@/components/ui/GradientBorderOverlay";
 
 export default function ShowMore({ children, minHeight = "0fr" }) {
   const [expanded, setExpanded] = useState(false);
@@ -36,8 +36,7 @@ export default function ShowMore({ children, minHeight = "0fr" }) {
         }}
       />
       <div className="flex justify-center items-center">
-        <div className="c-base5 h-1px grow bg-gradient-to-l from-current-color via-current-color to-transparent via-80%"
-        ></div>
+        <div className="c-base5 h-1px grow bg-gradient-to-l from-current-color via-current-color to-transparent via-80%"></div>
         <Button
           variation="ghost"
           rounded
@@ -46,8 +45,8 @@ export default function ShowMore({ children, minHeight = "0fr" }) {
             setExpanded((s) => !s);
           }}
         >
-             <GradientBorderOverlay to="to-transparent" via="via-slate2A" direction="135deg" />
-             <GradientBorderOverlay from="from-transparent" via="via-slate2A" direction="135deg" />
+          <GradientBorderOverlay to="to-transparent" via="via-slate2A" direction="135deg" />
+          <GradientBorderOverlay from="from-transparent" via="via-slate2A" direction="135deg" />
           <span className={` ${expanded ? "rotate-180" : "rotate-0"}`} style={{ transition: "transform 500ms ease" }}>
             <Icon name="bf-i-ph-caret-down-bold" subdued />
           </span>

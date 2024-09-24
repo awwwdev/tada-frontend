@@ -39,7 +39,7 @@ export default function Works({ posts }: { posts: Post[] }) {
             relatedBlogPost={posts.find((p) => p.id === "dbilia")}
             gradient="from-[#0F6E52]  via-[#0F6E52]/30"
             borderGradeintFrom="from-[#0F6E52]/90"
-            />
+          />
           <WorkItem
             {...WORKS_DATA.momenta}
             gridRow="xs:g-row-1/4"

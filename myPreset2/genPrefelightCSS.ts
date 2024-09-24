@@ -1,7 +1,6 @@
-import { AliasesInUse, Alpha, ColorsInUse, Dark, Options, P3, RadixHue, Shade } from './types';
+import { AliasesInUse, Alpha, ColorsInUse, Dark, Options, P3, RadixHue, Shade } from "./types";
 import Color from "colorjs.io";
 import * as radixColors from "@radix-ui/colors";
-
 
 export function genPreflightCSS({
   colorsInUse,
@@ -37,7 +36,6 @@ export function genPreflightCSS({
             `--${prefix}-P3-${hue}${shade}${alpha}: ${getColorValue({ hue, shade, alpha, dark: "", p3: "P3" })};`
           );
         }
-        
       } else {
         lightThemeCSSRules.push(
           `--${prefix}-${hue}${shade}${alpha}: ${getColorValue({ hue, shade, alpha, dark: "", p3: "" })};`
@@ -62,8 +60,6 @@ export function genPreflightCSS({
       }
     }
   }
-
-
 
   // define aliases that are set in preset options
 
@@ -139,8 +135,6 @@ ${darkSelector} {
 
   return css;
 }
-
-
 
 function getColorValue({
   hue,

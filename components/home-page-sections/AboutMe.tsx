@@ -24,7 +24,8 @@ export default function AboutMe() {
             high-fidelity UI prototypes ready for development.
           </p>
           <p>
-            Outside of work, I enjoy drawing, photography, and playing music. I'm always excited to explore new ways to combine art and web technologies.
+            Outside of work, I enjoy drawing, photography, and playing music. I'm always excited to explore new ways to
+            combine art and web technologies.
           </p>
         </div>
       </div>

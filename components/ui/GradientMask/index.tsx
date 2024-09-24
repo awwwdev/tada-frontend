@@ -10,7 +10,7 @@ type StopTransparency = Number0to100;
 type TransparencyStop = [StopPosition, StopTransparency];
 
 export default function GradientMask({
-  direction = 'to bottom',
+  direction = "to bottom",
   transparencyStops,
   children,
   className,
@@ -20,14 +20,26 @@ export default function GradientMask({
   direction?: string;
   transparencyStops: TransparencyStop[];
   children?: React.ReactNode;
-  className?: string,
-  style?: React.CSSProperties
-  disable?: boolean
+  className?: string;
+  style?: React.CSSProperties;
+  disable?: boolean;
 }) {
-  return <div className={className} style={{ ...style , ...gradientMask({ direction, transparencyStops , disable}) }}>{children}</div>;
+  return (
+    <div className={className} style={{ ...style, ...gradientMask({ direction, transparencyStops, disable }) }}>
+      {children}
+    </div>
+  );
 }
 
-export function gradientMask({ direction = 'to bottom', transparencyStops, disable }: { direction: string; transparencyStops: TransparencyStop[], disable?: boolean }) {
+export function gradientMask({
+  direction = "to bottom",
+  transparencyStops,
+  disable,
+}: {
+  direction: string;
+  transparencyStops: TransparencyStop[];
+  disable?: boolean;
+}) {
   if (disable) return {};
   const gradientStops = transparencyStops
     .map((tStop) => {

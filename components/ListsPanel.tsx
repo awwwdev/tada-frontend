@@ -19,7 +19,6 @@ import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
 
 export default function ListsPanel() {
-
   return (
     <div className="flex flex-col b-ie-1 pie-6">
       <DefaultLists />
@@ -324,7 +323,7 @@ function AddListButton() {
 
   const addListM = useMutation({
     mutationFn: async (list: ListFields) => {
-      const data = await fetchAPI.POST(`/lists`,{ ...list, author: userMeQ.data?.id });
+      const data = await fetchAPI.POST(`/lists`, { ...list, author: userMeQ.data?.id });
       return data;
     },
     onError: (err) => {

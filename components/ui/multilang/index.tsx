@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 export function Fa({ children }: { children?: React.ReactNode }) {
   const router = useRouter();

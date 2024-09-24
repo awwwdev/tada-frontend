@@ -2,10 +2,7 @@ import React from "react";
 import * as RadixSwitch from "@radix-ui/react-switch";
 import Label from "../Label";
 
-export default function Switch({
-  label,
-  ...props
-}: RadixSwitch.SwitchProps & { label?: React.ReactNode }) {
+export default function Switch({ label, ...props }: RadixSwitch.SwitchProps & { label?: React.ReactNode }) {
   return (
     <div className="flex justify-between gap-2 ">
       <Label className="text-sm font-display fw-300  c-base11">{label}</Label>

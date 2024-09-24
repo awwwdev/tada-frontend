@@ -5,7 +5,7 @@ type Props = {
   color?: "orange" | "inherit";
 };
 
-export default function LoadingSpinner({ className, wrapped = false, color = 'orange' }: Props) {
+export default function LoadingSpinner({ className, wrapped = false, color = "orange" }: Props) {
   return (
     <Wrapper wrapped={wrapped}>
       {` `}

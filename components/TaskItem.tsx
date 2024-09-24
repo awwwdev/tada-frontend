@@ -6,7 +6,7 @@ import Icon from "@/components/ui/Icon";
 import { Task, TaskFields } from "@/types";
 import { useGlobalContex } from "./Provider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useTaskMutation from "@/hooks/taskMutation";
+import useTaskMutation from "@/hooks/useTaskMutation";
 import fetchAPI from "@/utils/fetchAPI";
 import useUserMe from "@/hooks/userMe";
 import toast from "react-hot-toast";
@@ -23,9 +23,9 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
   const queryClient = useQueryClient();
   const userMeQ = useUserMe();
 
-  const addTaskMutation = useMutation<Task, Error, TaskFields>({
+  const duplicateTaskMutation = useMutation<Task, Error, TaskFields>({
     mutationFn: (newTask: TaskFields) =>
-      fetchAPI.POST(`/tasks`, { ...newTask, author: userMeQ.data?.id, id: undefined, _id: undefined }),
+      fetchAPI.POST(`/tasks`, { ...newTask, author: userMeQ.data?.id, id: undefined, _id: undefined, createdAt: undefined, updateAt: undefined, __v: undefined }),
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
     },
@@ -60,7 +60,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
           <Icon name="bf-i-ph-pencil" className="c-base11" />
           <span className="sr-only">Edit</span>
         </Button>
-        <Button variation="text" iconButton onClick={() => addTaskMutation.mutate(task)}>
+        <Button variation="text" iconButton onClick={() => duplicateTaskMutation.mutate(task)}>
           <Icon name="bf-i-ph-copy" className="c-base11" />
           <span className="sr-only">Duplicate</span>
         </Button>

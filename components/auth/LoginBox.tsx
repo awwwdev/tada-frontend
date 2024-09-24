@@ -28,9 +28,9 @@ export default function LoginBox() {
     setUserMe(data.user);
     toast.success("You are Logged in.");
     queryClient.setQueryData(["userMe"], () => data.user);
-    queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: 'all' });
+    queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
     queryClient.removeQueries(); // removes cached data for all queries
-    await queryClient.resetQueries(); // reset all queyries to their initial state 
+    await queryClient.resetQueries(); // reset all queyries to their initial state
   };
 
   const form = useFormHook({ schema, onSubmit });
@@ -52,7 +52,7 @@ export default function LoginBox() {
           </button>
         }
       />
-      <div className='h-6'></div>
+      <div className="h-6"></div>
       <Form.ServerErrorMessage />
       <Form.SubmitButton className="w-full">Login</Form.SubmitButton>
     </Form>

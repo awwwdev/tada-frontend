@@ -56,7 +56,6 @@ in Chrome Dev Channel, learn how create accessible and responsive UI elements.
 </p>
 </li>
 
-
 <li>
 <a href='https://www.youtube.com/@heydonworks/videos'>
 GUI challenges
@@ -66,8 +65,6 @@ Heydone Pickering Channel
 This one is one the most under appreciated channels I've seen.
 </p>
 </li>
-
-
 
 ## PodCasts
 

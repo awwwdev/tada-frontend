@@ -2,11 +2,11 @@
 title: Restarting a Start-up
 subtitle: My Experience in Darsoon
 date: 2023-12-03
-color: 'c-orange-11'
-bg: 'bg-gradient-to-br from-orange4 via-tomato4 to-red4'
-href: '/works/darsoon'
-logoSrc: '/darsoon/logo.png'
-darkLogoSrc: '/darsoon/logo-dark.png'
+color: "c-orange-11"
+bg: "bg-gradient-to-br from-orange4 via-tomato4 to-red4"
+href: "/works/darsoon"
+logoSrc: "/darsoon/logo.png"
+darkLogoSrc: "/darsoon/logo-dark.png"
 features:
   - A Brand new website was created.
   - +80k rows from Google Sheets to Supabase migrated

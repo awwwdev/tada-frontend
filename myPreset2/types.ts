@@ -1,4 +1,4 @@
-import { RADIC_HUES } from './consts';
+import { RADIC_HUES } from "./consts";
 
 export type Alpha = "A" | "";
 export type RadixHue = (typeof RADIC_HUES)[number];
@@ -36,7 +36,13 @@ export type Property = string;
 export type Alias = string;
 export type Aliases = Record<Alias, RadixHue>;
 
-export type SafeListColor = RadixHue | `${RadixHue}${Shade}${Alpha}` | "black" | "white" | `black${Shade}A` | `white${Shade}A`;
+export type SafeListColor =
+  | RadixHue
+  | `${RadixHue}${Shade}${Alpha}`
+  | "black"
+  | "white"
+  | `black${Shade}A`
+  | `white${Shade}A`;
 export interface Options {
   /**
    * The prefix of the generated css variables
@@ -100,5 +106,5 @@ export type AliasInUse = {
   possibleHues: RadixHue[];
 };
 
-export  type ColorsInUse = Record<RadixHue | "black" | "white", ColorInUse>;
+export type ColorsInUse = Record<RadixHue | "black" | "white", ColorInUse>;
 export type AliasesInUse = Record<string, AliasInUse>;

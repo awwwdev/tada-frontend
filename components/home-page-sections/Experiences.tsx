@@ -35,7 +35,7 @@ export default function Experiences() {
           <WorkExperience {...EXPERIENCES_DATA.momenta}></WorkExperience>
           <WorkExperience {...EXPERIENCES_DATA.webFreelancer}></WorkExperience>
           <WorkExperience {...EXPERIENCES_DATA.designerFreelancer}></WorkExperience>
-          </ul>
+        </ul>
       </div>
     </section>
   );

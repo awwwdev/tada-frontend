@@ -4,7 +4,7 @@ import type { Theme } from "unocss/preset-uno";
 import Color from "colorjs.io";
 
 // 🔴 use variant to wrap css variables into the one .light-theme ...
-// 🔴 P3 opt in opt out options @supports (color:color(display-p3 0 0 0)) 
+// 🔴 P3 opt in opt out options @supports (color:color(display-p3 0 0 0))
 // 🔴 unified way for handling black and white
 // 🔴 fg shade
 // 🔴 dynamic aliasing
@@ -147,10 +147,10 @@ function createRules({ prefix, darkSelector, lightSelector, aliases }) {
         return `
         ${selector} {
         ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-            .map((shade) => {
-              return `--${prefix}-${alias}${shade}${alpha}: --${prefix}-${hue}${shade}${alpha}${p3};`;
-            })
-            .join(" ")}
+          .map((shade) => {
+            return `--${prefix}-${alias}${shade}${alpha}: --${prefix}-${hue}${shade}${alpha}${p3};`;
+          })
+          .join(" ")}
         }
 
         ${lightSelector} {
@@ -162,16 +162,16 @@ function createRules({ prefix, darkSelector, lightSelector, aliases }) {
           }
           ${darkSelector} {
             ${["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"]
-            .map((shade: Shade) => {
-              return `--${prefix}-${hue}${shade}${alpha}${p3}: ${getColorValue({
-                alpha,
-                dark: "Dark",
-                shade,
-                hue,
-                p3,
-              })}`;
-            })
-            .join(" ")}
+              .map((shade: Shade) => {
+                return `--${prefix}-${hue}${shade}${alpha}${p3}: ${getColorValue({
+                  alpha,
+                  dark: "Dark",
+                  shade,
+                  hue,
+                  p3,
+                })}`;
+              })
+              .join(" ")}
         }
         `;
       },
@@ -210,7 +210,7 @@ function createRules({ prefix, darkSelector, lightSelector, aliases }) {
           p3,
         })};}`;
       },
-      { internal: true, layer: 'theme-layer' },
+      { internal: true, layer: "theme-layer" },
     ],
   ] as Rule[];
 }
@@ -399,8 +399,7 @@ export function myPreset(options: Options): Preset<Theme> {
         getCSS: () => {
           console.log("In PreFlights");
           return genCSS(safeListColors, safeListAliases, aliases, darkSelector, lightSelector, prefix);
-        } 
-
+        },
       },
     ],
     // postprocess: (util) => {

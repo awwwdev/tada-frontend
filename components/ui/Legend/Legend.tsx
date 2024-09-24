@@ -1,4 +1,3 @@
-
 const classes = {
   labelText: "capitalize",
   requiredStar: "mis-1 c-red11",
@@ -10,12 +9,16 @@ type LabelProps = {
   required?: boolean;
 };
 
-export default function Label({ children,  required,  noPreStyle = false }: LabelProps) {
+export default function Label({ children, required, noPreStyle = false }: LabelProps) {
   if (!children) return <></>;
   return (
-    <legend >
+    <legend>
       <span className={` ${!noPreStyle && classes.labelText} `}>{children}</span>
-      {required && <span aria-hidden={true} className={classes.requiredStar}>*</span>}
+      {required && (
+        <span aria-hidden={true} className={classes.requiredStar}>
+          *
+        </span>
+      )}
     </legend>
   );
 }

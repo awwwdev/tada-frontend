@@ -8,8 +8,8 @@ export default function BluredCircle({ top, left, radius, bg, blur }) {
         width: 2 * radius,
         height: 2 * radius,
         filter: `blur(${blur})`,
-        transform: 'translate(-50% , -50%)',
-        pointerEvents: 'none'
+        transform: "translate(-50% , -50%)",
+        pointerEvents: "none",
       }}
     ></div>
   );

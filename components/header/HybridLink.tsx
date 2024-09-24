@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function HybridLink({ pageUrl,  inSamePageHref, href , children , className , style = {}}) {
+export default function HybridLink({ pageUrl, inSamePageHref, href, children, className, style = {} }) {
   const pathname = usePathname();
   if (pathname === pageUrl) {
     return (
@@ -13,7 +13,7 @@ export default function HybridLink({ pageUrl,  inSamePageHref, href , children ,
     );
   }
   return (
-    <Link href={href} className={className} >
+    <Link href={href} className={className}>
       {children}
     </Link>
   );

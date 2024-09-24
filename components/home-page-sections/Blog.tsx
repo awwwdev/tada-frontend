@@ -47,7 +47,6 @@ export default function Blog({ posts }) {
   );
 }
 
-
 function BlogCard({ title, subtitle, date, slug, gap }) {
   return (
     <li className={`${gap}`}>
@@ -87,4 +86,3 @@ function ScrollPadding() {
     ></li>
   );
 }
-

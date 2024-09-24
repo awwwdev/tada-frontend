@@ -54,8 +54,8 @@ export default function SignUpBox() {
     if (data.error) throw new Error("Something went wrong");
     toast.success("You are successfully signed up.");
     // queryClient.setQueryData(['userMe'], () => data.user);
-    queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: 'all' });
-  
+    queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
+
     setUserMe(data.user);
   };
 

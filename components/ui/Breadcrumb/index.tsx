@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { En, Fa } from "../multilang";
-import Icon from '../Icon';
+import Icon from "../Icon";
 
 const BreadcrumbRoot = React.forwardRef<
   HTMLElement,
@@ -59,12 +59,9 @@ const BreadcrumbSeparator = ({ children, className, ...props }: React.ComponentP
   <li role="presentation" aria-hidden="true" className={`[&>svg]:size-3.5 ${className}`} {...props}>
     {children ?? (
       <>
-        
-          <Icon name="bf-i-ph-caret-left" />
-        
-        
-          <Icon name="bf-i-ph-caret-right" />
-        
+        <Icon name="bf-i-ph-caret-left" />
+
+        <Icon name="bf-i-ph-caret-right" />
       </>
     )}
   </li>
@@ -79,7 +76,7 @@ const BreadcrumbEllipsis = ({ className, ...props }: React.ComponentProps<"span"
     {...props}
   >
     <div className="w-4 h-4">
-      <Icon name="bf-i-ph-dots-three"/>
+      <Icon name="bf-i-ph-dots-three" />
     </div>
     <span className="sr-only">More</span>
   </span>
@@ -111,7 +108,7 @@ export default function Breadcrumb({ steps }: { steps: Step[] }) {
             return (
               <React.Fragment key={`breac-crumb-item-${index}`}>
                 {index !== 0 && <BreadcrumbSeparator />}
-                <BreadcrumbItem >
+                <BreadcrumbItem>
                   <BreadcrumbLink href={step.href}>{step.title}</BreadcrumbLink>
                 </BreadcrumbItem>
               </React.Fragment>

@@ -2,14 +2,16 @@
 
 import * as RadixScrollArea from "@radix-ui/react-scroll-area";
 
-export default function ScrollArea({ children , }) {
+export default function ScrollArea({ children }) {
   return (
     <RadixScrollArea.Root
       className="blog-section-fade-x"
-      style={{
-        // marginLeft: "-1rem",
-        // marginRight: "-1rem",
-      }}
+      style={
+        {
+          // marginLeft: "-1rem",
+          // marginRight: "-1rem",
+        }
+      }
       scrollHideDelay={1000}
     >
       <RadixScrollArea.Viewport className="w-full h-full rd-2 ">{children}</RadixScrollArea.Viewport>

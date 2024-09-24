@@ -6,7 +6,7 @@ import { createContext, SetStateAction, useContext, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuid } from "uuid";
 import type * as React from "react";
-import useUserMe from '@/hooks/userMe';
+import useUserMe from "@/hooks/userMe";
 
 // add helper functions updateTaskById, addTask, getTaskById
 
@@ -53,20 +53,22 @@ const GloblaContext = createContext<ContextType>({
   theme: "light",
 });
 
-export default function Providers({ children, theme, hasSession }: { children: React.ReactNode; theme: string; hasSession: boolean }) {
-
+export default function Providers({
+  children,
+  theme,
+  hasSession,
+}: {
+  children: React.ReactNode;
+  theme: string;
+  hasSession: boolean;
+}) {
   useUserMe(); // to initialize userMe
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
   const [selectedTaskId, setSelectedTaskId] = useState<Task | null>(null);
 
-
   const [listName, setListName] = useState("all");
   const [userMe, setUserMe] = useState<User | null>(null);
   console.log("🚀 ~ userMe:", userMe);
-
- 
-
-
 
   return (
     <GloblaContext.Provider

@@ -25,7 +25,7 @@ export default function MouseCursor() {
         }}
       >
         <span className="grid">
-          <span className='blur-20 opacity-40' style={{ gridArea: "1/1/-1/-1" }}>
+          <span className="blur-20 opacity-40" style={{ gridArea: "1/1/-1/-1" }}>
             <PointerSVG />
           </span>
           <span style={{ gridArea: "1/1/-1/-1" }}>

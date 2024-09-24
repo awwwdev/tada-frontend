@@ -1,7 +1,7 @@
 import { HTMLProps } from "@/types";
 import { forwardRef, useId } from "react";
-import Label from './Label';
-import ErrorMessage from './ErrorMessage';
+import Label from "./Label";
+import ErrorMessage from "./ErrorMessage";
 
 const classes = {
   hint: "text-xs c-base11 italic pt-0.3em pb-0.5em",
@@ -29,27 +29,17 @@ type InputProps = {
   required?: boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
-  setValue?: (val: string) => void ; 
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setValue?: (val: string) => void;
   errorMessage?: string;
 } & HTMLProps<"input">;
 type Ref = HTMLInputElement;
 type AllProps = React.ComponentPropsWithoutRef<"input"> & InputProps;
 
-const  Input = forwardRef<Ref, AllProps>(function ({
-  hint,
-  label,
-  name,
-  className,
-  required,
-  prefix,
-  suffix,
-  disabled,
-  onChange,
-  setValue,
-  errorMessage,
-  ...props
-}, ref) {
+const Input = forwardRef<Ref, AllProps>(function (
+  { hint, label, name, className, required, prefix, suffix, disabled, onChange, setValue, errorMessage, ...props },
+  ref
+) {
   const id = useId();
 
   const hintId = hint ? `${id}-hint` : "";
@@ -57,11 +47,14 @@ const  Input = forwardRef<Ref, AllProps>(function ({
 
   return (
     <div className="grid ">
-      <Label name={name} required={required} >{label}</Label>
+      <Label name={name} required={required}>
+        {label}
+      </Label>
       <Hint id={hintId} hint={hint} />
-      <div className={`${classes.wrapper.base} ${disabled && classes.wrapper.disabled} `}
+      <div
+        className={`${classes.wrapper.base} ${disabled && classes.wrapper.disabled} `}
         style={{
-          gridTemplateColumns: `${prefix ? "auto" : ""} 1fr ${suffix ? "auto": ""}`,
+          gridTemplateColumns: `${prefix ? "auto" : ""} 1fr ${suffix ? "auto" : ""}`,
         }}
       >
         <PrefixBox prefix={prefix} />
@@ -70,11 +63,11 @@ const  Input = forwardRef<Ref, AllProps>(function ({
           name={name}
           id={id}
           className={` ${classes.inputElement.base}  ${disabled && classes.inputElement.disabled} `}
-          aria-describedby={`${errorMessageId} ${hintId}` }
+          aria-describedby={`${errorMessageId} ${hintId}`}
           aria-invalid={!!errorMessage}
           onChange={(e) => {
             setValue?.(e.target.value);
-            onChange?.(e)
+            onChange?.(e);
           }}
           {...props}
         />
@@ -87,9 +80,8 @@ const  Input = forwardRef<Ref, AllProps>(function ({
   );
 });
 
-Input.displayName = 'Input';
+Input.displayName = "Input";
 export default Input;
-
 
 function Hint({ hint, id }) {
   if (!hint) return <></>;

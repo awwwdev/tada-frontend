@@ -2,7 +2,7 @@
 
 import * as RadixToolTip from "@radix-ui/react-tooltip";
 import styles from "./styles.module.css";
-import GradientBorderOverlay from '../GradientBorderOverlay';
+import GradientBorderOverlay from "../GradientBorderOverlay";
 export default function ToolTip({
   trigger,
   children,
@@ -35,11 +35,7 @@ export default function ToolTip({
                shadow-2xl shadow-black bg-base2A  backdrop-blur-10
             "
             >
-              <GradientBorderOverlay
-                from={"from-base3A"}
-                via={"via-transparent"}
-                to={"to-transparent"}
-              />
+              <GradientBorderOverlay from={"from-base3A"} via={"via-transparent"} to={"to-transparent"} />
 
               {children}
               <RadixToolTip.Arrow

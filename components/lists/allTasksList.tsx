@@ -9,9 +9,7 @@ import fetchAPI from "@/utils/fetchAPI";
 import useUserMe from "@/hooks/userMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
 
-
-function AllTasksList(){
-
+function AllTasksList() {
   const userMeQ = useUserMe();
   const allTasksQ = useQuery({
     queryKey: [QUERY_KEYS.TASKS],
@@ -22,9 +20,5 @@ function AllTasksList(){
     enabled: !!userMeQ.data?._id,
   });
 
-
-return (
-  <div >
-
-  </div>
-)};
+  return <div></div>;
+}

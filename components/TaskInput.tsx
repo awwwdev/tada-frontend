@@ -1,29 +1,28 @@
-import { makeEmptyTask } from '@/initialData';
-import { useGlobalContex } from './Provider';
-import { useLocalStorage } from 'usehooks-ts';
-import Input from './ui/Input';
-import Button from './ui/button';
-import {  TaskFields } from '@/types';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
-import useUserMe from '@/hooks/userMe';
-import fetchAPI from '@/utils/fetchAPI';
-import QUERY_KEYS from '@/react-query/queryKeys';
+import { makeEmptyTask } from "@/initialData";
+import { useGlobalContex } from "./Provider";
+import { useLocalStorage } from "usehooks-ts";
+import Input from "./ui/Input";
+import Button from "./ui/button";
+import { TaskFields } from "@/types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import useUserMe from "@/hooks/userMe";
+import fetchAPI from "@/utils/fetchAPI";
+import QUERY_KEYS from "@/react-query/queryKeys";
 
 export default function TaskInput() {
-
   const queryClient = useQueryClient();
   const [draft, setDraft, removeValue] = useLocalStorage<TaskFields>("darft-task", {
     label: "",
     status: "to-do",
-    author: ""
+    author: "",
   });
   const userMeQ = useUserMe();
   // const { addTask } = useGlobalContex();
   const addTaskM = useMutation({
     mutationFn: async (task: TaskFields) => {
       const data = await fetchAPI.POST(`/tasks`, { ...task, author: userMeQ.data?.id });
-      return data
+      return data;
     },
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
@@ -32,12 +31,11 @@ export default function TaskInput() {
       setDraft({
         label: "",
         status: "to-do",
-        author: ""
+        author: "",
       });
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
-
-    }
-  })
+    },
+  });
 
   return (
     <div>

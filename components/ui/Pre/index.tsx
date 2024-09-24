@@ -15,9 +15,7 @@ const Pre = ({
         {children}
       </pre>
       <button
-        className={`${
-          styles["copy-button"]
-        } bg-teal-blue before:mie-1 b-base11 !before:mis-0 ${
+        className={`${styles["copy-button"]} bg-teal-blue before:mie-1 b-base11 !before:mis-0 ${
           isCopied ? "bf-i-ph-check c-green11 " : "bf-i-ph-copy"
         } @2xl:px-3 @2xl:py-1 p-1 pie-0 flex items-center  text-xs  rounded-lg  `}
         onClick={() =>
@@ -33,9 +31,7 @@ const Pre = ({
           )
         }
       >
-        <span className={styles["copy-button-text"]}>
-          {/* {isCopied ? "Copied" : "Copy"} */}
-        </span>
+        <span className={styles["copy-button-text"]}>{/* {isCopied ? "Copied" : "Copy"} */}</span>
       </button>
     </div>
   );

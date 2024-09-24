@@ -1,28 +1,28 @@
 import { CSSProperties } from "react";
 import Noise from "../Noise";
-import { NoiseProps } from '../Noise/Noise';
+import { NoiseProps } from "../Noise/Noise";
 
 type Props = {
   children: React.ReactNode;
   className?: string;
   noiseLayer?: {
-    opacity?: string,
-    frequency?: string,
-    numOctaves?: string
-    className?: string
+    opacity?: string;
+    frequency?: string;
+    numOctaves?: string;
+    className?: string;
   };
   borderGradient?: string;
 };
 
-export default function GlassCard({ children, className, style ,noiseLayer  , borderGradient }: Props) {
+export default function GlassCard({ children, className, style, noiseLayer, borderGradient }: Props) {
   return (
     <div
       style={{
-        position: 'relative',
-        isolation: 'isolate',
-        borderColor: 'transparent',
+        position: "relative",
+        isolation: "isolate",
+        borderColor: "transparent",
         borderWidth: 0,
-        ...style
+        ...style,
       }}
       className={`${className} `}
     >
@@ -81,22 +81,21 @@ function ShadowLayer({ className }) {
   );
 }
 
-
-function NoiseLayer({ className , style , ...rest }: NoiseProps) {
+function NoiseLayer({ className, style, ...rest }: NoiseProps) {
   return (
     <Noise
       style={{
-        position: 'absolute',
+        position: "absolute",
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
         // gridArea: "1/1/-1/-1",
-        borderRadius: 'inherit',
+        borderRadius: "inherit",
         borderColor: "transparent",
-        borderWidth: 'inherit',
+        borderWidth: "inherit",
         // zIndex: 5,
-        ...style
+        ...style,
       }}
       className={className}
       // opacity='1'
@@ -112,12 +111,12 @@ function BorderLayer({ className }) {
     <div
       style={{
         // gridArea: "1/1/-1/-1",
-        position: 'absolute',
+        position: "absolute",
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
-        borderRadius: 'inherit',
+        borderRadius: "inherit",
         // overflow: 'clip',
         // borderWidth: 'inherit',
         borderStyle: "solid",

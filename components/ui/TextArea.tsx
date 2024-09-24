@@ -1,7 +1,7 @@
 import { HTMLProps } from "@/types";
 import { forwardRef, useId } from "react";
-import Label from './Label';
-import ErrorMessage from './ErrorMessage';
+import Label from "./Label";
+import ErrorMessage from "./ErrorMessage";
 
 const classes = {
   hint: "text-xs c-base11 italic pt-0.3em pb-0.5em",
@@ -26,57 +26,49 @@ type TextAreaProps = {
   label?: React.ReactNode;
   hint?: string;
   required?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; 
-  setValue?: (val: string) => void ; 
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  setValue?: (val: string) => void;
   errorMessage?: string;
 } & HTMLProps<"textarea">;
 type Ref = HTMLTextAreaElement;
 type AllProps = React.ComponentPropsWithoutRef<"textarea"> & TextAreaProps;
 
-const TextArea = forwardRef<Ref, AllProps>(function ({
-  hint,
-  label,
-  name,
-  className,
-  required,
-  disabled,
-  onChange,
-  setValue,
-  errorMessage,
-  ...props
-}: TextAreaProps, ref) {
-
+const TextArea = forwardRef<Ref, AllProps>(function (
+  { hint, label, name, className, required, disabled, onChange, setValue, errorMessage, ...props }: TextAreaProps,
+  ref
+) {
   const id = useId();
   const hintId = hint ? `${id}-hint` : "";
   const errorMessageId = errorMessage ? `${id}-error-message` : "";
 
   return (
     <div className="grid">
-      <Label name={name} required={required} >{label}</Label>
+      <Label name={name} required={required}>
+        {label}
+      </Label>
       <Hint id={hintId} hint={hint} />
       <div className={`${classes.wrapper.base} ${disabled && classes.wrapper.disabled} `}>
         <textarea
           name={name}
           id={id}
           className={` ${classes.textAreaElement.base}  ${disabled && classes.textAreaElement.disabled} `}
-          aria-describedby={`${errorMessageId} ${hintId}` }
+          aria-describedby={`${errorMessageId} ${hintId}`}
           aria-invalid={!!errorMessage}
           onChange={(e) => {
             setValue?.(e.target.value);
-            onChange?.(e)
+            onChange?.(e);
           }}
           {...props}
-        >
-          </textarea>
+        ></textarea>
       </div>
-      <div className="line-clamp-1" style={{height: 'var(--line-height)'}}>
-        <ErrorMessage id={errorMessageId} >{errorMessage}</ErrorMessage>
+      <div className="line-clamp-1" style={{ height: "var(--line-height)" }}>
+        <ErrorMessage id={errorMessageId}>{errorMessage}</ErrorMessage>
       </div>
     </div>
   );
 });
 
-TextArea.displayName = 'TextArea';
+TextArea.displayName = "TextArea";
 export default TextArea;
 
 function Hint({ hint, id }) {
@@ -87,4 +79,3 @@ function Hint({ hint, id }) {
     </p>
   );
 }
-

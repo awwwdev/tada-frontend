@@ -128,8 +128,6 @@ export const InputEl = ({ name, ...inputProps }: InputElProps) => {
   return <input {...register(name)} aria-invalid={error ? "true" : "false"} {...inputProps} />;
 };
 
-
-
 export const ErrMsg = ({ name }: { name: string }) => {
   const {
     formState: { errors },
@@ -137,7 +135,7 @@ export const ErrMsg = ({ name }: { name: string }) => {
   const error = errors[name];
   // console.log("we are the errors", name, errors);
   // return <ErrorMessage errors={errors} name={name} as="p" role="alert" className="c-red11 bf-i-ph-warning-octagon" />;
-  return (<ErrorMessage id=''>{error?.message?.toString() ?? ""}</ErrorMessage>)
+  return <ErrorMessage id="">{error?.message?.toString() ?? ""}</ErrorMessage>;
 };
 
 // const ErrMsgEl = ({ errors, name }: { errors: any; name: string }) => (
@@ -181,7 +179,7 @@ const FormServerErrorMessage = function () {
     formState: { errors },
   } = useFormContext();
   const error = errors?.root?.submit;
-  return (<ErrorMessage id=''>{error?.message?.toString() ?? ""}</ErrorMessage>);
+  return <ErrorMessage id="">{error?.message?.toString() ?? ""}</ErrorMessage>;
 };
 
 Form.ServerErrorMessage = FormServerErrorMessage;

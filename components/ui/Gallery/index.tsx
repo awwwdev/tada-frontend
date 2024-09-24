@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useMemo, useState } from "react";
 import Button from "../button";
 import Icon from "../Icon";
@@ -24,8 +24,8 @@ export default function Gallery({ images }: { images: Image[] }) {
             src={currentImage.imgObject ?? currentImage.src}
             alt={currentImage.alt}
             className="min-w-0 max-h-full max-w-full  object-contain "
-            />
-            </div>
+          />
+        </div>
         {images.length > 1 && (
           <div style={{ gridArea: "1/1/-1/-1" }} className="flex items-center p-1 ">
             <Button

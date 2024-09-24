@@ -10,7 +10,7 @@ type ErrorMessageProps = {
   children?: React.ReactNode;
 };
 
-export default function ErrorMessage({ children, preStyled = true , id }: ErrorMessageProps) {
+export default function ErrorMessage({ children, preStyled = true, id }: ErrorMessageProps) {
   if (!children) return <></>;
   return (
     <p id={id} className={` ${preStyled && classes.messageText}`}>

@@ -11,11 +11,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  pageExtensions: ['js', 'jsx', 'mdx', 'md', 'ts', 'tsx'],
+  pageExtensions: ["js", "jsx", "mdx", "md", "ts", "tsx"],
   // sassOptions: {
   //   includePaths: [path.join(__dirname, 'styles')],
   // },
 };
-
 
 module.exports = nextConfig;

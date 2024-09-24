@@ -13,43 +13,42 @@ export type Folder = Document & FolderFields;
 export type List = Document & ListFields;
 export type Task = Document & TaskFields;
 
-
 type Emoji = string;
 
-export type UserFields =  {
+export type UserFields = {
   email: string;
   settings: Settings;
 };
 
 type UserPopulated = {
   folders: Folder[];
-}
+};
 
-export type FolderFields =  {
+export type FolderFields = {
   name: string;
   emojies?: Emoji[];
   author: string;
-  lists?: FolderListProperties[] | null;
+  lists?: FolderListProperties[];
 };
 
 type FolderListProperties = {
   addedAt: Date;
-  id: string ;
+  id: string;
   show?: boolean | null | undefined;
   orderInFolder?: number | null | undefined;
 };
 
-export type ListFields =  {
+export type ListFields = {
   name: string;
   author: string;
-  emojies?: string[] | null;
-  tasks? : ListTasktPorpertis[] | null;
+  emojies: string[];
+  tasks: TasktPorpertisInList[];
   description?: string | null;
   folderId?: string | null;
   // show?: boolean;
 };
 
-type ListTasktPorpertis = {
+export type TasktPorpertisInList = {
   addedAt: Date;
   id: string;
   orderInList?: number | null;
@@ -60,9 +59,9 @@ export type TaskFields = {
   label: string;
   status: "done" | "to-do";
 
-  emojies?: string[] | null;
+  emojies?: string[];
   note?: string | null;
-  // lists?: TaskListPorpertis[] | null;
+  // lists?: TaskListPorpertis[];
 
   dueAt?: Date | null;
 
@@ -71,17 +70,15 @@ export type TaskFields = {
   starred?: boolean | null;
   pinned?: boolean | null;
   archived?: boolean | null | undefined;
-  steps?: string[] | null;
-  preTasks?: string[] | null;
-  postTasks?: string[] | null;
-  comments?: TaskComment[] | null;
-  assingnees?: TaskAssignee[] | null;
-  attachments?: TaskAttachment[] | null;
-  routins?: TaskRoutine[] | null;
-  reminders?: TaskReminder[] | null;
+  steps?: string[];
+  preTasks?: string[];
+  postTasks?: string[];
+  comments?: TaskComment[];
+  assingnees?: TaskAssignee[];
+  attachments?: TaskAttachment[];
+  routins?: TaskRoutine[];
+  reminders?: TaskReminder[];
 };
-
-
 
 export type TaskComment = {
   createdAt: Date;

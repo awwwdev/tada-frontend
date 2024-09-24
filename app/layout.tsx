@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head></head>
       <body className={`bg-base1 c-base12 relative isolate`}>
         <ReactQueryProvider>
-          <Providers theme={theme?.value} >
+          <Providers theme={theme?.value}>
             <div className={`side-menu-container isolate h-full  overflow-x-clip  mx-auto max-w-screen  `}>
               <div className="main grid max-w-screen isolate" style={{ gridTemplateRows: "1fr auto" }}>
                 {/* <Header /> */}

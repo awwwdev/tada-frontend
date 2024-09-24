@@ -16,7 +16,7 @@ import {
 } from "./types";
 import { genPreflightCSS } from "./genPrefelightCSS";
 import { extendTheme } from "./extendTheme";
-import { RADIC_HUES } from './consts';
+import { RADIC_HUES } from "./consts";
 
 const ALPHAS: Alpha[] = ["", "A"];
 const P3S: P3[] = ["", "P3"];
@@ -48,14 +48,11 @@ export function myPreset2({
       [/^(.*)-(transparent|white|black|current|current-color|inherit)$/, ([token]) => `${token}`],
       [
         /^([a-z]|[a-z][a-z]|[a-z-]+[a-z-]+[a-z])-([A-Za-z]+)(1|2|3|4|5|6|7|8|9|10|11|12)(A)?$/,
-        (
-          match,
-          context: RuleContext
-        ) => {
+        (match, context: RuleContext) => {
           if (!match) return;
           const [token, property, hueOrAlias, shade, alpha = ""] = match as [Token, Property, HueOrAlias, Shade, Alpha];
-          // do nothing for anything other than radix huse, black and white and aliases 
-          if (!['black', 'white', ...RADIC_HUES, ...Object.keys(aliasesInUse)].includes(hueOrAlias)) return token;
+          // do nothing for anything other than radix huse, black and white and aliases
+          if (!["black", "white", ...RADIC_HUES, ...Object.keys(aliasesInUse)].includes(hueOrAlias)) return token;
 
           // filters out white and black without alpha, early and no need to worry about them later on.
           if (["black", "white"].includes(hueOrAlias) && alpha === "") {
@@ -64,9 +61,9 @@ export function myPreset2({
 
           if (["black", "white", ...RADIC_HUES].includes(hueOrAlias)) {
             addColorToColorsInUse({
-              hue: hueOrAlias as RadixHue | 'white' | 'black',
+              hue: hueOrAlias as RadixHue | "white" | "black",
               shade,
-              alpha
+              alpha,
             });
           }
           if (Object.keys(aliasesInUse).includes(hueOrAlias)) {
@@ -91,9 +88,7 @@ export function myPreset2({
         },
       ],
     ],
-    variants: useP3Colors
-      ? [p3FallbackVariant({ prefix })] : undefined
-    ,
+    variants: useP3Colors ? [p3FallbackVariant({ prefix })] : undefined,
     preflights: [
       {
         getCSS: (context) => {
@@ -111,17 +106,16 @@ export function myPreset2({
         },
         layer: "radix-colors",
       },
-
     ],
     extendTheme: (theme: Theme) => extendTheme({ theme, prefix, extend, useP3Colors, aliasesInUse }),
   };
 }
 
-function addSafeListColorsToColorsInUse({ safeListColors }: Pick<Options, 'safeListColors'>) {
+function addSafeListColorsToColorsInUse({ safeListColors }: Pick<Options, "safeListColors">) {
   for (const color of safeListColors) {
     const match = color.match(/^([A-Za-z]+)(1|2|3|4|5|6|7|8|9|10|11|12)?(A)?$/);
     if (!match) continue;
-    const [token, hue, shade, alpha] = match as [string, RadixHue | 'black' | 'white', Shade, Alpha];
+    const [token, hue, shade, alpha] = match as [string, RadixHue | "black" | "white", Shade, Alpha];
 
     // if its a single shade
     if (shade) {
@@ -140,7 +134,7 @@ function addSafeListColorsToColorsInUse({ safeListColors }: Pick<Options, 'safeL
   }
 }
 
-function addSafeListAliasesToAliasesInUse({ aliases, safeListAliases }: Pick<Options, 'aliases' | 'safeListAliases'>) {
+function addSafeListAliasesToAliasesInUse({ aliases, safeListAliases }: Pick<Options, "aliases" | "safeListAliases">) {
   for (const color of safeListAliases) {
     const match = color.match(/^([A-Za-z]+)(1|2|3|4|5|6|7|8|9|10|11|12)?(A)?$/);
     if (!match) return;
@@ -168,7 +162,7 @@ function addSafeListAliasesToAliasesInUse({ aliases, safeListAliases }: Pick<Opt
   }
 }
 
-function addOtherAliasesToAliasesInUse({ aliases, safeListAliases }: Pick<Options, 'aliases' | 'safeListAliases'>) {
+function addOtherAliasesToAliasesInUse({ aliases, safeListAliases }: Pick<Options, "aliases" | "safeListAliases">) {
   for (const alias of Object.keys(aliases)) {
     if (safeListAliases.includes(alias)) continue;
     addHueToAnAliasInUse({ alias, hue: aliases[alias] });
@@ -201,7 +195,15 @@ function addOtherAliasesToAliasesInUse({ aliases, safeListAliases }: Pick<Option
   }
 }
 
-function addColorToColorsInUse({ hue, shade, alpha }: { hue: RadixHue | 'black' | 'white', shade: Shade, alpha: Alpha }) {
+function addColorToColorsInUse({
+  hue,
+  shade,
+  alpha,
+}: {
+  hue: RadixHue | "black" | "white";
+  shade: Shade;
+  alpha: Alpha;
+}) {
   colorsInUse[hue] = colorsInUse[hue] ?? {};
   colorsInUse[hue].shadesInUse = colorsInUse[hue].shadesInUse ?? {};
   colorsInUse[hue].shadesInUse[`${shade}${alpha}`] = { hue, shade, alpha };
@@ -235,7 +237,7 @@ function addHueToAnAliasInUse({ alias, hue }: { alias: Alias; hue?: RadixHue }) 
   }
 }
 
-function p3FallbackVariant({ prefix }: { prefix: Options['prefix'] }) {
+function p3FallbackVariant({ prefix }: { prefix: Options["prefix"] }) {
   return {
     name: "with P3 fallbacks",
     match: (matcher: string, context: Readonly<VariantContext<Theme>>) => {
@@ -264,4 +266,3 @@ function p3FallbackVariant({ prefix }: { prefix: Options['prefix'] }) {
     },
   };
 }
-

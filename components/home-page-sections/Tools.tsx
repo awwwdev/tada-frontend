@@ -6,7 +6,7 @@ import Space from "@/components/ui/Space";
 import Button from "@/components/ui/button";
 import ToolTip from "@/components/ui/Tooltip";
 import { useState } from "react";
-import GradientBorderOverlay from '@/components/ui/GradientBorderOverlay';
+import GradientBorderOverlay from "@/components/ui/GradientBorderOverlay";
 
 export default function Tools() {
   const [glowingCategory, setGlowingCategory] = useState<"favorite" | "most-used" | "painful" | null>(null);
@@ -138,7 +138,7 @@ export default function Tools() {
             borderGradeintFrom="from-lime4A"
             glowColor="bg-lime3A"
             glowBlur="blur-50"
-            glowOpacity='opacity-50'
+            glowOpacity="opacity-50"
             gridPosition="g-col-2/3 g-row-3/4  xxs:g-col-7/9 xxs:g-row-2/4 "
             src="/tool-logos/nodejs.svg"
             alt="NodeJS"
@@ -152,7 +152,7 @@ export default function Tools() {
             borderGradeintFrom="from-bronze5A"
             glowColor="bg-ruby3A"
             glowBlur="blur-90"
-            glowOpacity='opacity-30'
+            glowOpacity="opacity-30"
             gridPosition="g-col-1/4 g-row-5/7  xxs:g-col-4/7 xxs:g-row-4/6"
             src="/tool-logos/figma.svg"
             alt="Figma"
@@ -254,16 +254,19 @@ function Li(props) {
       <GlowOverlay
         className={`-z-3 rd-inherit  ${props?.glowColor ?? "bg-base4A"} 
         ${props.glowBlur ?? "blur-20"} mix-blend-overlay 
-        ${props.glowingCategory && props.isGlowing ? props.glowOpacity ?? "opacity-100": "opacity-0"}
+        ${props.glowingCategory && props.isGlowing ? props.glowOpacity ?? "opacity-100" : "opacity-0"}
         transition-filter transition-opacity duration-1s ease`}
       />
       <BgOverlay className="bg-base1 opacity-30 rd-inherit -z-2 backdrop-blur-20" />
-      <BgOverlay className={` rd-inherit -z-1 bg-gradient-to-b ${props.bgGradient}`} style={{
-        "--un-gradient-shape": "135deg"
-      }}/>
+      <BgOverlay
+        className={` rd-inherit -z-1 bg-gradient-to-b ${props.bgGradient}`}
+        style={{
+          "--un-gradient-shape": "135deg",
+        }}
+      />
 
-      <GradientBorderOverlay from={props?.borderGradeintFrom} to="to-transparent" direction='135deg' />
-      <GradientBorderOverlay from="from-transparent" direction='135deg' />
+      <GradientBorderOverlay from={props?.borderGradeintFrom} to="to-transparent" direction="135deg" />
+      <GradientBorderOverlay from="from-transparent" direction="135deg" />
       <div className="flex justify-center items-center p-4  xxs:!p-3 xs:p-4 sm:p-4 h-full">
         {props.icon && <Icon name={props.icon} className={`${props.size}`} />}
         {props.src && <img src={props.src} alt={props.alt} className={`object-cover  ${props?.size}`} />}
@@ -271,7 +274,6 @@ function Li(props) {
     </li>
   );
 }
-
 
 function BgOverlay({ className, style = {} }) {
   return (
@@ -282,7 +284,7 @@ function BgOverlay({ className, style = {} }) {
         left: 0,
         bottom: 0,
         right: 0,
-        ...style
+        ...style,
       }}
       className={`${className}`}
     ></div>
@@ -341,13 +343,13 @@ function ButtonWithToolTip({
             from={glowingCategory === category ? "from-accent5A" : "from-base5A"}
             via={glowingCategory === category ? "via-accent2A" : "via-base2A"}
             to="transparent"
-            direction='135deg'
+            direction="135deg"
           />
-            <GradientBorderOverlay
+          <GradientBorderOverlay
             from="transparent"
             via={glowingCategory === category ? "via-accent2A" : "via-base2A"}
             to={glowingCategory === category ? "to-accent4A" : "to-base4A"}
-            direction='135deg'
+            direction="135deg"
           />
           {label}
         </Button>

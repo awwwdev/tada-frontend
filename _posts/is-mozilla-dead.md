@@ -1,5 +1,5 @@
 ---
-title: 'Is Mozilla Dead?'
+title: "Is Mozilla Dead?"
 subtitle: "A review on Mozilla's future"
 date: 2023-02-10
 ---

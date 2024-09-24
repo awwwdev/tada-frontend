@@ -7,16 +7,16 @@ export default function Tabs({
   children: React.ReactNode;
 } & RadixTabs.TabsProps) {
   return (
-    <RadixTabs.Root className=""  {...props}>
+    <RadixTabs.Root className="" {...props}>
       {children}
     </RadixTabs.Root>
   );
 }
 
 const TabsList = (props: RadixTabs.TabsListProps) => (
-  <RadixTabs.TabsList className={'TabsList' + props.className} {...props} />
+  <RadixTabs.TabsList className={"TabsList" + props.className} {...props} />
 );
-TabsList.displayName = 'Tabs.TabsList';
+TabsList.displayName = "Tabs.TabsList";
 
 const Content = (props: RadixTabs.TabsContentProps) => (
   <RadixTabs.Content className={"TabsContent" + props.className} {...props} />

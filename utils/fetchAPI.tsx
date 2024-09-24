@@ -26,7 +26,8 @@ export default async function fetchAPI(url: string, body?: Body, options?: Reque
 }
 
 fetchAPI.GET = (url: string, body?: Body, options?: RequestInit) => fetchAPI(url, body, { method: "GET", ...options });
-fetchAPI.POST = (url: string, body?: Body, options?: RequestInit) => fetchAPI(url, body, { method: "POST", ...options });
+fetchAPI.POST = (url: string, body?: Body, options?: RequestInit) =>
+  fetchAPI(url, body, { method: "POST", ...options });
 fetchAPI.PUT = (url: string, body?: Body, options?: RequestInit) => fetchAPI(url, body, { method: "PUT", ...options });
 fetchAPI.DELETE = (url: string, body?: Body, options?: RequestInit) =>
   fetchAPI(url, body, { method: "DELETE", ...options });

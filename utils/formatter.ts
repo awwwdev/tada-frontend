@@ -69,7 +69,7 @@ export const deCamel = (str) => {
  * "a minute ago", "in 2 hours", "yesterday", "3 months ago", etc.
  * using Intl.RelativeTimeFormat
  */
-export function getRelativeTimeString(date: Date | number, lang = 'en'): string {
+export function getRelativeTimeString(date: Date | number, lang = "en"): string {
   // Allow dates or times to be passed
   const timeMs = typeof date === "number" ? date : date.getTime();
 
@@ -95,28 +95,27 @@ export function getRelativeTimeString(date: Date | number, lang = 'en'): string 
 }
 
 export const toReadableDate = (date: string | Date, timeZone?: TimeZone) => {
-
   if (!(date instanceof Date) && !z.string().datetime().safeParse(date)) return "Invalid Date";
   if (!date) return "";
   if (typeof date === "string" && date.trim() === "") return "";
-  
+
   const d = date instanceof Date ? date : new Date(date);
   const currentDate = new Date();
   const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    const dateFormatter = new Intl.DateTimeFormat("en-CA", {
-      month: "short",
-      day: "numeric",
-      year: d.getFullYear() === currentDate.getFullYear() ? undefined : "numeric",
-      timeZone: clientTimeZone
-    });
-    return dateFormatter.format(d);
+  const dateFormatter = new Intl.DateTimeFormat("en-CA", {
+    month: "short",
+    day: "numeric",
+    year: d.getFullYear() === currentDate.getFullYear() ? undefined : "numeric",
+    timeZone: clientTimeZone,
+  });
+  return dateFormatter.format(d);
 };
 
-export const toRelativeOrReadableDate = (date: number | Date, timeZone?: TimeZone, lang ='en') => {
+export const toRelativeOrReadableDate = (date: number | Date, timeZone?: TimeZone, lang = "en") => {
   let d: Date;
   if (date instanceof Date) d = date;
-  if (typeof date === "string" || typeof date === 'number') d = new Date(date);
+  if (typeof date === "string" || typeof date === "number") d = new Date(date);
   // Allow dates or times to be passed
   const timeMs = d.getTime();
 
