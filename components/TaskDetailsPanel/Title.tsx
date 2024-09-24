@@ -25,7 +25,7 @@ export default function Title({ task }: { task: Task }) {
       toast.error("Something went wrong: " + err.message);
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS , task._id] });
       setShowEdit(false);
     },
   });

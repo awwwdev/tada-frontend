@@ -52,6 +52,8 @@ function TaskDetailsContent({ task }: { task: Task }) {
       <Line />
       <Note task={task} />
       <Line />
+      <Lists task={task} />
+      <Line />
       <Steps task={task} />
       <Line />
       <Emojies task={task} />
@@ -71,8 +73,6 @@ function TaskDetailsContent({ task }: { task: Task }) {
       <AsingedTo task={task} />
       <Line />
       <Comments task={task} />
-      <Line />
-      <Lists task={task} />
       <Line />
       <Archive task={task} />
       <Line />
