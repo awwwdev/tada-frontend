@@ -15,6 +15,7 @@ export default function useTaskMutation() {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.LISTS] });
     },
   });
 }

@@ -52,10 +52,6 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
           <Icon name="bf-i-ph-trash" className="c-base11" />
           <span className="sr-only">Delete</span>
         </Button> */}
-        <Button variation="text" iconButton>
-          <Icon name="bf-i-ph-pencil-simple" className="c-base11" />
-          <span className="sr-only">Edit</span>
-        </Button>
         <Button variation="text" iconButton onClick={() => duplicateTaskMutation.mutate(task)}>
           <Icon name="bf-i-ph-copy" className="c-base11" />
           <span className="sr-only">Duplicate</span>
