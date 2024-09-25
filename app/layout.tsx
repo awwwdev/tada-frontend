@@ -12,7 +12,6 @@ import MyToaster from "@/components/Toaster";
 import { cookies } from "next/headers";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
 
-const theme = cookies().get("theme");
 
 const title = "Hamid K.";
 const description = "A Developer with Design Superpowers";
@@ -52,6 +51,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const theme = cookies().get("theme");
   return (
     <html className={`${theme?.value ?? "light"}-theme style-scroll-bar  `} lang="en">
       <head></head>

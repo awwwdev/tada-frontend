@@ -16,7 +16,7 @@ import UserListDropDown from "./UserListDropDown";
 import Input from "./ui/Input";
 import Line from "./ui/Line";
 import LoadingSpinner from "./ui/LoadingSpinner";
-import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuItem } from "./ui/DropdownMenu";
 import Modal from "./ui/modal";
 
 export default function ListsPanel() {

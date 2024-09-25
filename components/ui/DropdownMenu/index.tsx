@@ -1,15 +1,15 @@
 "use client";
+
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import Icon from "@/components/ui/Icon";
-// import { CheckIcon, ChevronRightIcon, DotFilledIcon } from "@radix-ui/react-icons";
+import Icon from "../Icon";
 
 export default function DropdownMenu({ trigger, children }: { trigger: React.ReactNode; children: React.ReactNode }) {
   return (
     <DropdownMenuPrimitive.Root>
       <DropdownMenuPrimitive.Trigger asChild>{trigger}</DropdownMenuPrimitive.Trigger>
       <DropdownMenuPrimitive.Portal>
-        <DropdownMenuPrimitive.Content className="w-56 bg-gray1 " align="end">
+        <DropdownMenuPrimitive.Content className="w-56 bg-gray1 shadow-2xl rd-3 p-1.5" align="end">
           {children}
         </DropdownMenuPrimitive.Content>
       </DropdownMenuPrimitive.Portal>
@@ -35,13 +35,13 @@ const DropdownMenuSubTrigger = React.forwardRef<
 >(({ className, inset, children, ...props }, ref) => (
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
-    className={`flex cursor-default select-none items-center rd-1.5rem px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent ${
+    className={`flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent ${
       inset ? "pis-8" : ""
     } ${className}`}
     {...props}
   >
     {children}
-    <Icon name="bf-i-ph-caret-right" className="mis-auto h-4 w-4" />
+    <Icon name="bf-i-ph-arrow-down" className="c-base11 mie-auto h-4 w-4" />
   </DropdownMenuPrimitive.SubTrigger>
 ));
 DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
@@ -52,19 +52,7 @@ const DropdownMenuSubContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.SubContent
     ref={ref}
-    className={`
-      z-50 min-w-[8rem] overflow-hidden rd-1.5rem  p-1 shd-tinted-3 
-      data-[state=open]:animate-in 
-      data-[state=closed]:animate-out 
-      data-[state=closed]:fade-out-0 
-      data-[state=open]:fade-in-0 
-      data-[state=closed]:zoom-out-95
-      data-[state=open]:zoom-in-95
-      data-[side=bottom]:slide-in-from-top-2 
-      data-[side=left]:slide-in-from-right-2 
-      data-[side=right]:slide-in-from-left-2 
-      data-[side=top]:slide-in-from-bottom-2 
-      ${className}`}
+    className={`z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shd-tinted-3 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ${className}`}
     {...props}
   />
 ));
@@ -78,19 +66,7 @@ const DropdownMenuContent = React.forwardRef<
     <DropdownMenuPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
-      className={`
-        z-50 min-w-[8rem] overflow-hidden rd-.75rem  p-2  shd-tinted-3
-        data-[state=open]:animate-in 
-        data-[state=closed]:animate-out
-        data-[state=closed]:fade-out-0 
-        data-[state=open]:fade-in-0
-        data-[state=closed]:zoom-out-95 
-        data-[state=open]:zoom-in-95 
-        data-[side=bottom]:slide-in-from-top-2
-        data-[side=left]:slide-in-from-right-2 
-        data-[side=right]:slide-in-from-left-2 
-        data-[side=top]:slide-in-from-bottom-2 
-        ${className}`}
+      className={`z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ${className}`}
       {...props}
     />
   </DropdownMenuPrimitive.Portal>
@@ -105,9 +81,10 @@ const DropdownMenuItem = React.forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <DropdownMenuPrimitive.Item
     ref={ref}
-    className={`relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${
-      inset ? "pis-8" : ""
-    } ${className}`}
+    className={`relative flex cursor-default select-none items-center  px-2 py-1.5 text-sm outline-none transition-colors rd-1.5
+      hover:bg-base3
+      focus:bg-accent focus:text-accent-foreground 
+      data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${inset ? "pis-8" : ""} ${className}`}
     {...props}
   />
 ));
@@ -125,7 +102,8 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Icon name="bf-i-ph-check" className="h-4 w-4" />
+        {/* <CheckIcon className="h-4 w-4" /> */}
+        <Icon name='bf-i-ph-check' className="h-4 w-4" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -145,7 +123,6 @@ const DropdownMenuRadioItem = React.forwardRef<
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
         {/* <DotFilledIcon className="h-4 w-4 fill-current" /> */}
-        {/* <Icon name="bf-i-ph-" className="h-4 w-4" /> */}
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}

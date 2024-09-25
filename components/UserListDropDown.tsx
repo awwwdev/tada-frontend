@@ -13,7 +13,7 @@ import useUserMe from "@/hooks/useUserMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import Input from "./ui/Input";
 import LoadingSpinner from "./ui/LoadingSpinner";
-import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuItem } from "./ui/DropdownMenu";
 import Modal from "./ui/modal";
 
 export default function UserListDropDown({ listId }: { listId: string }) {
