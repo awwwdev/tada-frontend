@@ -9,19 +9,20 @@ export default function Modal({
   description,
   trigger,
   title,
-  isOpen,
+  open,
   setOpen,
   width,
 }: {
-  isOpen?: boolean;
-  setOpen?: (arg?: boolean) => void;
+  open?: boolean;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   children?: RNode;
   trigger: RNode;
   title?: RNode;
   description?: React.ReactNode;
+  width?: string;
 }) {
   return (
-    <RadixDialog.Root open={isOpen} onOpenChange={setOpen}>
+    <RadixDialog.Root open={open} onOpenChange={setOpen}>
       <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="fixed inset-0 z-20 bg-black/20 backdrop-blur-10 " />

@@ -14,7 +14,7 @@ import Input from "./ui/Input";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
 import Modal from "./ui/modal";
-import Line from './ui/Line';
+import Line from "./ui/Line";
 
 export default function ListsPanel() {
   return (
@@ -173,7 +173,6 @@ function AddFolderButton() {
     name: "",
     author: "",
   };
-  const [showForm, setShowForm] = useState<boolean>(false);
   const [folderDraft, setFolderDraft] = useState<FolderFields>(initialFolderDraft);
 
   const userMeQ = useUserMe();
@@ -190,14 +189,18 @@ function AddFolderButton() {
       queryClient.invalidateQueries({ queryKey: ["userMe"] });
       queryClient.invalidateQueries({ queryKey: ["folders"] });
       setFolderDraft(initialFolderDraft);
-      setShowForm(false);
+      setShowModal(false);
     },
   });
 
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <Modal
+      open={showModal}
+      setOpen={setShowModal}
       trigger={
-        <Button variation="text" iconButton className=" shrink-0" onClick={() => setShowForm(true)}>
+        <Button variation="text" iconButton className=" shrink-0">
           <Icon name="bf-i-ph-plus" className=" c-base11" />
           <span className="sr-only">Add a Folder</span>
         </Button>
@@ -220,6 +223,7 @@ function AddFolderButton() {
                 label=""
                 type="text"
                 placeholder="New Folder"
+                autoFocus
                 value={folderDraft.name}
                 onChange={(e) => setFolderDraft((s) => ({ ...s, name: e.target.value }))}
               />
@@ -233,7 +237,7 @@ function AddFolderButton() {
                 disabled={!userMeQ.data?.id}
               >
                 <Icon name="bf-i-ph-plus" className="c-base11" />
-                <span className="">Add Folder</span>
+                <span className="">Create</span>
               </Button>
             </Modal.Close>
           </div>
@@ -322,7 +326,7 @@ function AddListButton() {
     name: "",
     author: "",
   };
-  const [showForm, setShowForm] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [listDraft, setListDraft] = useState<ListFields>(initialListDraft);
 
   const userMeQ = useUserMe();
@@ -339,14 +343,16 @@ function AddListButton() {
       queryClient.invalidateQueries({ queryKey: ["userMe"] });
       queryClient.invalidateQueries({ queryKey: ["lists"] });
       setListDraft(initialListDraft);
-      setShowForm(false);
+      setShowModal(false);
     },
   });
 
   return (
     <Modal
+      open={showModal}
+      setOpen={setShowModal}
       trigger={
-        <Button variation="text" iconButton className="shrink-0" onClick={() => setShowForm(true)}>
+        <Button variation="text" iconButton className="shrink-0">
           <Icon name="bf-i-ph-plus" className=" c-base11" />
           <span className="sr-only">Add a List</span>
         </Button>
@@ -370,6 +376,7 @@ function AddListButton() {
                 type="text"
                 placeholder="New Folder"
                 value={listDraft.name}
+                autoFocus
                 onChange={(e) => setListDraft((s) => ({ ...s, name: e.target.value }))}
               />
             </div>
