@@ -16,7 +16,7 @@ export default function Modal({
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   children?: RNode;
-  trigger: RNode;
+  trigger?: RNode;
   title?: RNode;
   description?: React.ReactNode;
   width?: string;

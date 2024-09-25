@@ -4,7 +4,7 @@ import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-export default function useListMutation() {
+export default function useListMutation({onSuccess}: { onSuccess?: () => void }) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -15,6 +15,7 @@ export default function useListMutation() {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.LISTS] });
+      onSuccess?.();
     },
   });
 }

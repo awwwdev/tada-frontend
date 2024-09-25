@@ -1,15 +1,18 @@
 "use client";
 
-import useUserMe from "@/hooks/userMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task, TasktPorpertisInList } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import DraggableList from "react-draggable-list";
 import { useGlobalContex } from "./Provider";
 import TaskItem from "./TaskItem";
-import List from './List';
+
+import useDeleteList from "@/hooks/useDeleteList";
+import useListMutation from "@/hooks/useListMutation";
+import useUserMe from "@/hooks/userMe";
+import UserListDropDown from "./UserListDropDown";
 
 export default function UserList({ listId }: { listId: string }) {
   const listQ = useQuery({
@@ -22,9 +25,43 @@ export default function UserList({ listId }: { listId: string }) {
   const pinnedTasks = notDeletedTasks.filter((t) => t.pinned);
   const notPinnedTasks = notDeletedTasks.filter((t) => !t.pinned);
   const orderedTasks = [...pinnedTasks, ...notPinnedTasks];
-  return <List tasks={orderedTasks} listName={listQ.data?.name} />;
+  return <List tasks={orderedTasks} listName={listQ.data?.name} listId={listId} />;
 }
 
+function List({ tasks, listName, listId }: { tasks: Task[]; listName: string; listId: string }) {
+  const userMeQ = useUserMe();
+  const { setSelectedUserListId } = useGlobalContex();
+  const listQ = useQuery({
+    queryKey: ["lists"],
+    queryFn: async () => {
+      const data = await fetchAPI.GET("/lists");
+      return data;
+    },
+    enabled: !!userMeQ.data?.id,
+  });
+
+  const [listNameValue, setListNameValue] = useState<string>(listName ?? "");
+  useEffect(() => {
+    setListNameValue(listName ?? "");
+  }, [listName]);
+  const deleteListMutation = useDeleteList();
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const listMutation = useListMutation({ onSuccess: () => setShowModal(false) });
+
+  return (
+    <div className="gap-3 grid overflow-hidden" style={{ gridTemplateRows: "auto 1fr" }}>
+      <div className="px-3 flex justify-between">
+        <h2 className="H2">{listName}</h2>
+        <UserListDropDown listId={listId} />
+      </div>
+      <ul className=" gap-3 flex flex-col overflow-y-scroll px-3">
+        {tasks.map((task, index) => {
+          return <TaskItem key={index} task={task} dragHandleProps={{}} />;
+        })}
+      </ul>
+    </div>
+  );
+}
 
 function ListContent({ tasks, listName }: { tasks: Task[]; listName: string }) {
   const listContainerRef = useRef<HTMLDivElement>(null);

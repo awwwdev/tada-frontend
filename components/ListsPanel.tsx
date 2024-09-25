@@ -15,6 +15,7 @@ import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
 import Modal from "./ui/modal";
 import Line from "./ui/Line";
+import UserListDropDown from './UserListDropDown';
 
 export default function ListsPanel() {
   return (
@@ -291,26 +292,7 @@ function Lists() {
                 >
                   <span className="grow">{list.name}</span>
                 </Button>
-                <DropdownMenu
-                  trigger={
-                    <Button variation="text" className="shrink-0" iconButton>
-                      <Icon name="bf-i-ph-dots-three" className=" c-base11" />
-                    </Button>
-                  }
-                >
-                  <DropdownMenuItem>
-                    <Icon name="bf-i-ph-pencil" className="c-base11 mie-3" />
-                    Edit
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onSelect={() => deleteListM.mutate(list._id)}>
-                    {deleteListM.isPending ? (
-                      <LoadingSpinner />
-                    ) : (
-                      <Icon name="bf-i-ph-trash" className="c-base11 mie-3" />
-                    )}
-                    Delete
-                  </DropdownMenuItem>
-                </DropdownMenu>{" "}
+                <UserListDropDown listId={list.id} />
               </li>
             );
           })}
@@ -332,13 +314,8 @@ function AddListButton() {
   const userMeQ = useUserMe();
 
   const addListM = useMutation({
-    mutationFn: async (list: ListFields) => {
-      const data = await fetchAPI.POST(`/lists`, { ...list, author: userMeQ.data?.id });
-      return data;
-    },
-    onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
-    },
+    mutationFn: async (list: ListFields) => fetchAPI.POST(`/lists`, { ...list, author: userMeQ.data?.id }),
+    onError: (err) => toast.error("Something went wrong: " + err.message),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userMe"] });
       queryClient.invalidateQueries({ queryKey: ["lists"] });
