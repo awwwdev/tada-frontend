@@ -1,5 +1,5 @@
 const QUERY_KEYS = {
-  USERME: "userMe",
+  USER_ME: "userMe",
   TASKS: "tasks",
   FOLDERS: "folders",
   LISTS: "lists",

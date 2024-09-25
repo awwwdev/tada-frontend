@@ -8,14 +8,9 @@ import { useGlobalContex } from '@/components/Provider';
 
 export default function useSelectedTask() {
   const { selectedTaskId } = useGlobalContex();
-  const userMeQ = useUserMe();
   const allTasksQ = useQuery({
     queryKey: [QUERY_KEYS.TASKS],
-    queryFn: async () => {
-      const data = await fetchAPI.GET(`/tasks?userId=${userMeQ.data?._id}`);
-      return data;
-    },
-    enabled: !!userMeQ.data?._id,
+    queryFn: async () => fetchAPI.GET(`/tasks`),
   });
 
   const selectedTask = useMemo(

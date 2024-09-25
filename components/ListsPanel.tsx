@@ -15,7 +15,8 @@ import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
 import Modal from "./ui/modal";
 import Line from "./ui/Line";
-import UserListDropDown from './UserListDropDown';
+import UserListDropDown from "./UserListDropDown";
+import QUERY_KEYS from '@/react-query/queryKeys';
 
 export default function ListsPanel() {
   return (
@@ -102,21 +103,13 @@ function Folders() {
   const userMeQ = useUserMe();
   const foldersQ = useQuery({
     queryKey: ["folders"],
-    queryFn: async () => {
-      const data = await fetchAPI.GET("/folders");
-      return data;
-    },
+    queryFn: () => fetchAPI.GET("/folders"),
     enabled: !!userMeQ.data?.id,
   });
   const queryClient = useQueryClient();
 
   const deleteFolderM = useMutation({
-    mutationFn: async (id: string) => {
-      const data = await fetchAPI.DELETE(`/folders/${id}`, {
-        method: "DELETE",
-      });
-      return data;
-    },
+    mutationFn: (id: string) => fetchAPI.DELETE(`/folders/${id}`),
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
     },
@@ -179,10 +172,7 @@ function AddFolderButton() {
   const userMeQ = useUserMe();
 
   const addFolderM = useMutation({
-    mutationFn: async (folder: FolderFields) => {
-      const data = await fetchAPI.POST(`/folders`, { ...folder, author: userMeQ.data?.id });
-      return data;
-    },
+    mutationFn: async (folder: FolderFields) => fetchAPI.POST(`/folders`, { ...folder, author: userMeQ.data?.id }),
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
     },
@@ -252,20 +242,14 @@ function Lists() {
   const userMeQ = useUserMe();
   const { setSelectedUserListId } = useGlobalContex();
   const listQ = useQuery({
-    queryKey: ["lists"],
-    queryFn: async () => {
-      const data = await fetchAPI.GET("/lists");
-      return data;
-    },
+    queryKey: [QUERY_KEYS.LISTS],
+    queryFn: () => fetchAPI.GET("/lists"),
     enabled: !!userMeQ.data?.id,
   });
   const queryClient = useQueryClient();
 
   const deleteListM = useMutation({
-    mutationFn: async (id: string) => {
-      const data = await fetchAPI.DELETE(`/lists/${id}`);
-      return data;
-    },
+    mutationFn:  (id: string) => fetchAPI.DELETE(`/lists/${id}`),
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
     },

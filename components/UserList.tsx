@@ -32,12 +32,8 @@ function List({ tasks, listName, listId }: { tasks: Task[]; listName: string; li
   const userMeQ = useUserMe();
   const { setSelectedUserListId } = useGlobalContex();
   const listQ = useQuery({
-    queryKey: ["lists"],
-    queryFn: async () => {
-      const data = await fetchAPI.GET("/lists");
-      return data;
-    },
-    enabled: !!userMeQ.data?.id,
+    queryKey: [QUERY_KEYS.LISTS, listId],
+    queryFn:() => fetchAPI.GET(`/lists/${listId}`),
   });
 
   const [listNameValue, setListNameValue] = useState<string>(listName ?? "");

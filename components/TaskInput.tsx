@@ -20,10 +20,7 @@ export default function TaskInput() {
   const userMeQ = useUserMe();
   // const { addTask } = useGlobalContex();
   const addTaskM = useMutation({
-    mutationFn: async (task: TaskFields) => {
-      const data = await fetchAPI.POST(`/tasks`, { ...task, author: userMeQ.data?.id });
-      return data;
-    },
+    mutationFn: (task: TaskFields) => fetchAPI.POST(`/tasks`, { ...task, author: userMeQ.data?.id }),
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
     },
@@ -38,9 +35,9 @@ export default function TaskInput() {
   });
 
   return (
-    <div className='relative'>
+    <div className="relative">
       <div className="bottom-100% h-6 bg-gradient-to-t from-base1 to-transparent  absolute w-full z-10"></div>
-      <div className='h-2 bg-base1'></div>
+      <div className="h-2 bg-base1"></div>
       <form
         className="mt-auto"
         onSubmit={(e) => {
