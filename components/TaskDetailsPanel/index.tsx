@@ -12,7 +12,9 @@ import Delete from "./Delete";
 import Lists from "./Lists";
 import Note from "./Note";
 import Title from "./Title";
-import useSelectedTask from '@/hooks/useSelectedTask';
+import useSelectedTask from "@/hooks/useSelectedTask";
+import StarButton from "./StarButton";
+import PinButton from "./PinButton";
 
 export default function TaskDetailsPanel() {
   const { selectedTaskId } = useGlobalContex();
@@ -22,7 +24,6 @@ export default function TaskDetailsPanel() {
     queryFn: () => fetchAPI.GET(`/tasks/${selectedTaskId}`),
     enabled: !!userMeQ.data?._id && !!selectedTaskId,
   });
-
 
   return (
     <div className="rd-3 p-6 b-1 b-base6">
@@ -39,11 +40,14 @@ function EmptyState() {
 function TaskDetailsContent({ task }: { task: Task }) {
   return (
     <div className="space-y-3">
-      <div className="flex justify-end gap-3">
-        <p>Starred</p>
-        <p>Pinned</p>
+      <div className="flex  gap-3">
+        <Title task={task} />
+        <div className="mis-auto flex gap-3">
+          <StarButton task={task} />
+
+          <PinButton task={task} />
+        </div>
       </div>
-      <Title task={task} />
       <div className="h-12"></div>
       <Line />
       <Note task={task} />

@@ -25,7 +25,7 @@ export default function Title({ task }: { task: Task }) {
       toast.error("Something went wrong: " + err.message);
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS , task._id] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS, task._id] });
       setShowEdit(false);
     },
   });
@@ -59,9 +59,10 @@ export default function Title({ task }: { task: Task }) {
             }
           }}
           iconButton
-          className="mis-auto"
+          className="mis-auto shrink-0"
         >
           <Icon name="bf-i-ph-pencil" className="c-base11" />
+          <span className="sr-only">Edit</span>
         </Button>
       )}
     </div>
