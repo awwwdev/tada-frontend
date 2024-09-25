@@ -11,7 +11,6 @@ import { useGlobalContex } from "../Provider";
 import fetchAPI from "@/utils/fetchAPI";
 
 export default function LoginBox() {
-  const { setUserMe } = useGlobalContex();
 
   const schema = z.object({
     email: z.string({ required_error: "Email is required!" }).email({ message: "Please enter a valid email." }),
@@ -25,7 +24,6 @@ export default function LoginBox() {
   const onSubmit = async ({ email, password }: { email: string; password: string }) => {
     const data = await fetchAPI.POST("/auth/login/with-password", { email, password });
     if (data.error) throw new Error("Something went wrong");
-    setUserMe(data.user);
     toast.success("You are Logged in.");
     queryClient.setQueryData(["userMe"], () => data.user);
     queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
@@ -38,7 +36,7 @@ export default function LoginBox() {
   return (
     <Form form={form} className="" hasSubmitButton={false}>
       <Form.Input name="email" label={"Email"} required />
-
+      <div className="h-3"></div>
       <Form.Input
         name="password"
         type={isPassVisible ? "text" : "password"}
@@ -54,7 +52,7 @@ export default function LoginBox() {
       />
       <div className="h-6"></div>
       <Form.ServerErrorMessage />
-      <Form.SubmitButton className="w-full">Login</Form.SubmitButton>
+      <Form.SubmitButton variation='solid' className="w-full">Login</Form.SubmitButton>
     </Form>
   );
 }

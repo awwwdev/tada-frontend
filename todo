@@ -1,12 +1,11 @@
 - cancel proton
 
-- click to edit note and task label
 - smart lists
 - add lists to a folder
-- show or hide lists
 - drag and drop ordering bug
 - lists ordering
 - detail panel editing
+-- click to edit note and task label
 
 - style 
   - fading scroll area
@@ -17,6 +16,7 @@
 
 - sort by
 
+- show or hide lists
 - fix draggable list hydration error  
 - arrows for post task and pre task  
 - formkit list animation

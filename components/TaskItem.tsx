@@ -3,14 +3,14 @@
 import Button from "@/components/ui/button";
 import Checkbox from "@/components/ui/Checkbox";
 import Icon from "@/components/ui/Icon";
-import { Task, TaskFields } from "@/types";
-import { useGlobalContex } from "./Provider";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useTaskMutation from "@/hooks/useTaskMutation";
-import fetchAPI from "@/utils/fetchAPI";
-import useUserMe from "@/hooks/userMe";
-import toast from "react-hot-toast";
+import useUserMe from "@/hooks/useUserMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
+import { Task, TaskFields } from "@/types";
+import fetchAPI from "@/utils/fetchAPI";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { useGlobalContex } from "./Provider";
 
 export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHandleProps: Object }) {
   const { setSelectedTaskId, selectedTaskId } = useGlobalContex();
@@ -53,7 +53,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
           <span className="sr-only">Delete</span>
         </Button> */}
         <Button variation="text" iconButton>
-          <Icon name="bf-i-ph-pencil" className="c-base11" />
+          <Icon name="bf-i-ph-pencil-simple" className="c-base11" />
           <span className="sr-only">Edit</span>
         </Button>
         <Button variation="text" iconButton onClick={() => duplicateTaskMutation.mutate(task)}>

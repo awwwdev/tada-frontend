@@ -65,7 +65,7 @@ export default function Note({ task }: { task: Task }) {
               iconButton
               className="mis-auto"
             >
-              <Icon name="bf-i-ph-pencil" className="c-base11" />
+              <Icon name="bf-i-ph-pencil-simple" className="c-base11" />
             </Button>
           )}
         </div>

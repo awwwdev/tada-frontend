@@ -3,19 +3,18 @@
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { useGlobalContex } from "./Provider";
 
 import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/button";
 
 import useDeleteList from "@/hooks/useDeleteList";
 import useListMutation from "@/hooks/useListMutation";
-import useUserMe from "@/hooks/userMe";
+import useUserMe from "@/hooks/useUserMe";
+import QUERY_KEYS from "@/react-query/queryKeys";
 import Input from "./ui/Input";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
 import Modal from "./ui/modal";
-import QUERY_KEYS from "@/react-query/queryKeys";
 
 export default function UserListDropDown({ listId }: { listId: string }) {
   const userMeQ = useUserMe();
@@ -44,7 +43,7 @@ export default function UserListDropDown({ listId }: { listId: string }) {
         }
       >
         <DropdownMenuItem onSelect={() => setShowModal(true)}>
-          <Icon name="bf-i-ph-pencil" className="c-base11 mie-3" />
+          <Icon name="bf-i-ph-pencil-simple" className="c-base11 mie-3" />
           Rename
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={() => deleteListMutation.mutate(listId)}>
@@ -83,7 +82,7 @@ export default function UserListDropDown({ listId }: { listId: string }) {
                   isLoading={listMutation.isPending}
                   disabled={!userMeQ.data?.id}
                 >
-                  <Icon name="bf-i-ph-pencil" className="c-base11" />
+                  <Icon name="bf-i-ph-pencil-simple" className="c-base11" />
                   <span className="">Rename</span>
                 </Button>
             </div>

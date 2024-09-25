@@ -11,7 +11,7 @@ import TaskItem from "./TaskItem";
 
 import useDeleteList from "@/hooks/useDeleteList";
 import useListMutation from "@/hooks/useListMutation";
-import useUserMe from "@/hooks/userMe";
+import useUserMe from "@/hooks/useUserMe";
 import UserListDropDown from "./UserListDropDown";
 
 export default function UserList({ listId }: { listId: string }) {
@@ -50,7 +50,7 @@ function List({ tasks, listName, listId }: { tasks: Task[]; listName: string; li
         <h2 className="H2">{listName}</h2>
         <UserListDropDown listId={listId} />
       </div>
-      <ul className=" gap-3 flex flex-col overflow-y-scroll px-3">
+      <ul className=" gap-3 flex flex-col overflow-y-scroll px-3 pb-9">
         {tasks.map((task, index) => {
           return <TaskItem key={index} task={task} dragHandleProps={{}} />;
         })}

@@ -1,15 +1,14 @@
 "use client";
 
-import useUserMe from "@/hooks/userMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
-import { Task, TasktPorpertisInList } from "@/types";
+import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import { useRef } from "react";
 import DraggableList from "react-draggable-list";
-import { useGlobalContex } from "./Provider";
-import TaskItem from "./TaskItem";
-import List from './List';
+import List from '../List';
+import { useGlobalContex } from "../Provider";
+import TaskItem from "../TaskItem";
 
 export default function AllTasksList() {
   const allTasksQ = useQuery({

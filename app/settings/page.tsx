@@ -1,14 +1,13 @@
 "use client";
 
-import { useGlobalContex } from "@/components/Provider";
 import Icon from "@/components/ui/Icon";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import RadioGroup from "@/components/ui/RadioGroup";
-import useUserMe from "@/hooks/userMe";
+import useUserMe from "@/hooks/useUserMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import { Settings } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import toast from "react-hot-toast";
 

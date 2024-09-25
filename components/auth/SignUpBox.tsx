@@ -33,7 +33,6 @@ const schema = z.object({
 export default function SignUpBox() {
   // const queryClient = useQueryClient();
 
-  const { setUserMe } = useGlobalContex();
   const queryClient = useQueryClient();
 
   const onSubmit = async ({
@@ -55,8 +54,7 @@ export default function SignUpBox() {
     toast.success("You are successfully signed up.");
     // queryClient.setQueryData(['userMe'], () => data.user);
     queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
-
-    setUserMe(data.user);
+    queryClient.setQueryData(["userMe"], () => data.user);
   };
 
   const form = useFormHook({ schema, onSubmit });
@@ -91,7 +89,7 @@ export default function SignUpBox() {
           />
           <div className="h-6"></div>
           <Form.ServerErrorMessage />
-          <Form.SubmitButton className="w-full">{"Submit"}</Form.SubmitButton>
+          <Form.SubmitButton variation='solid' className="w-full">{"Submit"}</Form.SubmitButton>
         </Form>
       </div>
     </div>

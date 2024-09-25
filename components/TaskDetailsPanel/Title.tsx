@@ -61,7 +61,7 @@ export default function Title({ task }: { task: Task }) {
           iconButton
           className="mis-auto shrink-0"
         >
-          <Icon name="bf-i-ph-pencil" className="c-base11" />
+          <Icon name="bf-i-ph-pencil-simple" className="c-base11" />
           <span className="sr-only">Edit</span>
         </Button>
       )}

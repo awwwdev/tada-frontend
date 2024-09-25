@@ -3,25 +3,26 @@
 import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/button";
 
-import useUserMe from "@/hooks/userMe";
+import SMART_LIST_IDS from '@/constants/smartListIds';
+import useUserMe from "@/hooks/useUserMe";
+import QUERY_KEYS from '@/react-query/queryKeys';
 import { Folder, FolderFields, List, ListFields } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useGlobalContex } from "./Provider";
+import UserListDropDown from "./UserListDropDown";
 import Input from "./ui/Input";
+import Line from "./ui/Line";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
 import Modal from "./ui/modal";
-import Line from "./ui/Line";
-import UserListDropDown from "./UserListDropDown";
-import QUERY_KEYS from '@/react-query/queryKeys';
 
 export default function ListsPanel() {
   return (
-    <div className="flex flex-col b-ie-1 pie-6 gap-3 ">
-      <DefaultLists />
+    <div className="flex flex-col b-ie-1 pie-6 gap-3 overflow-y-auto ???">
+      <SmartLists />
       <Line />
       <div className="flex gap-3 justify-between items-center">
         <span className="c-base11">My Folders</span>
@@ -57,44 +58,44 @@ function MenuItem({ icon, children, onClick }: { icon: string; children: React.R
   );
 }
 
-function DefaultLists() {
-  const { setSelectedUserListId } = useGlobalContex();
+function SmartLists() {
+  const { setSelectedSmartListId } = useGlobalContex();
 
   return (
     <ul className="flex flex-col gap-3 -mis-3 ">
-      <MenuItem icon="bf-i-ph-list" onClick={() => setSelectedUserListId(null)}>
+      <MenuItem icon="bf-i-ph-list" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS)}>
         All Tasks
       </MenuItem>
-      <MenuItem icon="bf-i-ph-sun" onClick={() => {}}>
+      <MenuItem icon="bf-i-ph-sun" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DO_TODAY)}>
         Do Today
       </MenuItem>
-      <MenuItem icon="bf-i-ph-sun-horizon" onClick={() => {}}>
+      <MenuItem icon="bf-i-ph-sun-horizon" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DO_TOMORROW)}>
         Do Tomorrow
       </MenuItem>
-      <MenuItem icon="bf-i-ph-star" onClick={() => {}}>
+      <MenuItem icon="bf-i-ph-star" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.STARRED)}>
         Starred
       </MenuItem>
-      <MenuItem icon="bf-i-ph-calendar-dots" onClick={() => {}}>
+      <MenuItem icon="bf-i-ph-calendar-dots" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.WITH_DUE_DATES)}>
         With Due dates
       </MenuItem>
-      <MenuItem icon="bf-i-ph-users" onClick={() => {}}>
-        Asigned
-      </MenuItem>
-      {/* <MenuItem icon="bf-i-ph-user" onClick={() => setListName("assignedToMe")}>
+      <MenuItem icon="bf-i-ph-user" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ASSIGNED_TO_ME)}>
         Asigned To Me
       </MenuItem>
-      <MenuItem icon="bf-i-ph-user" onClick={() => setListName("withReminders")}>
+      <MenuItem icon="bf-i-ph-users" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ASSIGNED)}>
+        Asigned
+      </MenuItem>
+      <MenuItem icon="bf-i-ph-alarm" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.WITH_REMINDERS)}>
         With Reminders
       </MenuItem>
-      <MenuItem icon="bf-i-ph-user" onClick={() => setListName("withRepetition")}>
-        With Repetition
+      <MenuItem icon="bf-i-ph-sneaker-move" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ROUTINES)} >
+        Rutines
       </MenuItem>
-      <MenuItem icon="bf-i-ph-archive" onClick={() => setListName("archived")}>
+      <MenuItem icon="bf-i-ph-archive" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ARCHIVED)}>
         Archived Tasks
       </MenuItem>
-      <MenuItem icon="bf-i-ph-trash" onClick={() => setListName("deleted")}>
+      <MenuItem icon="bf-i-ph-trash" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DELETED)} >
         Deleted Tasks
-      </MenuItem> */}
+      </MenuItem>
     </ul>
   );
 }
@@ -140,7 +141,7 @@ function Folders() {
                   }
                 >
                   <DropdownMenuItem>
-                    <Icon name="bf-i-ph-pencil" className="c-base11 mie-3" />
+                    <Icon name="bf-i-ph-pencil-simple" className="c-base11 mie-3" />
                     Edit
                   </DropdownMenuItem>
                   <DropdownMenuItem onSelect={() => deleteFolderM.mutate(folder._id)}>

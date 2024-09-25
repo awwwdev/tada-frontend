@@ -1,7 +1,7 @@
 import { Task } from '@/types';
 import fetchAPI from '@/utils/fetchAPI';
 import { useMemo } from 'react';
-import useUserMe from './userMe';
+import useUserMe from './useUserMe';
 import { useQuery } from '@tanstack/react-query';
 import QUERY_KEYS from '@/react-query/queryKeys';
 import { useGlobalContex } from '@/components/Provider';

@@ -1,4 +1,15 @@
 import React, { ElementType } from "react";
+import SMART_LIST_IDS from './constants/smartListIds';
+
+export type SmartListId = typeof SMART_LIST_IDS[keyof typeof SMART_LIST_IDS];
+
+export type CurrentList = {
+  type: 'user-list';
+  id: string;
+} | {
+  type: 'smart-list';
+  id: SmartListId;
+};
 
 type Document = {
   _id: string;
@@ -77,7 +88,7 @@ export type TaskFields = {
   comments?: TaskComment[];
   assingnees?: TaskAssignee[];
   attachments?: TaskAttachment[];
-  routins?: TaskRoutine[];
+  routines?: TaskRoutine[];
   reminders?: TaskReminder[];
 };
 

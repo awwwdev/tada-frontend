@@ -1,16 +1,15 @@
 "use client";
 
 import Button from "@/components/ui/button";
-import Icon from "@/components/ui/Icon";
-import { ThemeSwitcher } from "./ThemeSwitcher";
 import LinkButton from "@/components/ui/button/LinkButton";
-import Modal from "../ui/modal";
-import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
-import { API } from "@/consts";
-import toast from "react-hot-toast";
-import useUserMe from "@/hooks/userMe";
-import { useQueryClient } from "@tanstack/react-query";
+import Icon from "@/components/ui/Icon";
+import useUserMe from "@/hooks/useUserMe";
 import fetchAPI from "@/utils/fetchAPI";
+import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
+import Modal from "../ui/modal";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Header = () => {
   return (
@@ -88,8 +87,8 @@ function LogoutButton() {
       variation="ghost"
       onClick={async () => {
         const data = await fetchAPI.POST(`/auth/logout`);
+        // queryClient.invalidateQueries({ queryKey: ["userMe"] });
         queryClient.setQueryData(["userMe"], null);
-        queryClient.invalidateQueries({ queryKey: ["userMe"] });
         queryClient.removeQueries(); // removes cached data for all queries
         await queryClient.resetQueries(); // reset all queyries to their initial state
         toast.success(data.message);
