@@ -13,17 +13,25 @@ import { useGlobalContex } from "./Provider";
 import Input from "./ui/Input";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
+import Modal from "./ui/modal";
+import Line from './ui/Line';
 
 export default function ListsPanel() {
   return (
-    <div className="flex flex-col b-ie-1 pie-6  ">
+    <div className="flex flex-col b-ie-1 pie-6 gap-3 ">
       <DefaultLists />
-      My Folders
+      <Line />
+      <div className="flex gap-3 justify-between items-center">
+        <span className="c-base11">My Folders</span>
+        <AddFolderButton />
+      </div>
       <Folders />
-      <AddFolderButton />
-      My Lists
+      <Line />
+      <div className="flex gap-3 justify-between items-center">
+        <span className="c-base11">My Lists</span>
+        <AddListButton />
+      </div>
       <Lists />
-      <AddListButton />
       {/* <div className="mt-auto flex flex-col gap-3">
         <Modal trigger={<Button variation="ghost">Tasks </Button>}>
           <div className="h-12"></div>
@@ -127,33 +135,29 @@ function Folders() {
             return (
               <li key={"menu-item-folder-" + index} className="flex gap-3 items-center">
                 <Icon name="bf-i-ph-folder" className="c-base11" />
-
                 {/* <Button variation="text" className="!text-start w-full"> */}
                 <span className="grow">{folder.name}</span>
                 {/* </Button> */}
-
-                <div>
-                  <DropdownMenu
-                    trigger={
-                      <Button variation="text" className="!text-start w-full shrink-0" iconButton>
-                        <Icon name="bf-i-ph-dots-three" className=" c-base11" />
-                      </Button>
-                    }
-                  >
-                    <DropdownMenuItem>
-                      <Icon name="bf-i-ph-pencil" className="c-base11 mie-3" />
-                      Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={() => deleteFolderM.mutate(folder._id)}>
-                      {deleteFolderM.isPending ? (
-                        <LoadingSpinner />
-                      ) : (
-                        <Icon name="bf-i-ph-trash" className="c-base11 mie-3" />
-                      )}
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenu>
-                </div>
+                <DropdownMenu
+                  trigger={
+                    <Button variation="text" className="shrink-0" iconButton>
+                      <Icon name="bf-i-ph-dots-three" className=" c-base11" />
+                    </Button>
+                  }
+                >
+                  <DropdownMenuItem>
+                    <Icon name="bf-i-ph-pencil" className="c-base11 mie-3" />
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => deleteFolderM.mutate(folder._id)}>
+                    {deleteFolderM.isPending ? (
+                      <LoadingSpinner />
+                    ) : (
+                      <Icon name="bf-i-ph-trash" className="c-base11 mie-3" />
+                    )}
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenu>{" "}
               </li>
             );
           })}
@@ -191,47 +195,51 @@ function AddFolderButton() {
   });
 
   return (
-    <div>
-      {showForm ? (
-        <div>
-          <form
-            className="mt-auto"
-            onSubmit={(e) => {
-              e.preventDefault();
-              addFolderM.mutate(folderDraft);
-            }}
-          >
-            <div className="flex gap-3 items-end">
-              <div className="grow">
-                <Input
-                  name="name"
-                  label=""
-                  type="text"
-                  placeholder="New Folder"
-                  value={folderDraft.name}
-                  onChange={(e) => setFolderDraft((s) => ({ ...s, name: e.target.value }))}
-                />
-              </div>
+    <Modal
+      trigger={
+        <Button variation="text" iconButton className=" shrink-0" onClick={() => setShowForm(true)}>
+          <Icon name="bf-i-ph-plus" className=" c-base11" />
+          <span className="sr-only">Add a Folder</span>
+        </Button>
+      }
+    >
+      <div>
+        <h3 className="H3">Add a Folder</h3>
+        <div className="h-6"></div>
+        <form
+          className="mt-auto"
+          onSubmit={(e) => {
+            e.preventDefault();
+            addFolderM.mutate(folderDraft);
+          }}
+        >
+          <div className="grid gap-3 items-end">
+            <div className="grow">
+              <Input
+                name="name"
+                label=""
+                type="text"
+                placeholder="New Folder"
+                value={folderDraft.name}
+                onChange={(e) => setFolderDraft((s) => ({ ...s, name: e.target.value }))}
+              />
+            </div>
+            <Modal.Close>
               <Button
-                iconButton
+                className="w-full"
                 variation="solid"
                 type="submit"
                 isLoading={addFolderM.isPending}
                 disabled={!userMeQ.data?.id}
               >
                 <Icon name="bf-i-ph-plus" className="c-base11" />
-                <span className="sr-only">Add Folder</span>
+                <span className="">Add Folder</span>
               </Button>
-            </div>
-          </form>
-        </div>
-      ) : (
-        <Button variation="text" className="!text-start mt-3 w-full" onClick={() => setShowForm(true)}>
-          <Icon name="bf-i-ph-plus" className="mie-1.5 c-base11" />
-          <span className="italic c-base11">Add a Folder</span>
-        </Button>
-      )}
-    </div>
+            </Modal.Close>
+          </div>
+        </form>
+      </div>
+    </Modal>
   );
 }
 
@@ -271,33 +279,34 @@ function Lists() {
             return (
               <li key={"menu-item-list-" + index} className="flex gap-3 items-center">
                 <Icon name="bf-i-ph-list" className="c-base11" />
-
-                <Button variation="text" className="!text-start w-full" onClick={() => setSelectedUserListId(list.id)}>
+                <Button
+                  variation="text"
+                  preStyled={false}
+                  className="!text-start w-full"
+                  onClick={() => setSelectedUserListId(list.id)}
+                >
                   <span className="grow">{list.name}</span>
                 </Button>
-
-                <div>
-                  <DropdownMenu
-                    trigger={
-                      <Button variation="text" className="!text-start w-full shrink-0" iconButton>
-                        <Icon name="bf-i-ph-dots-three" className=" c-base11" />
-                      </Button>
-                    }
-                  >
-                    <DropdownMenuItem>
-                      <Icon name="bf-i-ph-pencil" className="c-base11 mie-3" />
-                      Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={() => deleteListM.mutate(list._id)}>
-                      {deleteListM.isPending ? (
-                        <LoadingSpinner />
-                      ) : (
-                        <Icon name="bf-i-ph-trash" className="c-base11 mie-3" />
-                      )}
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenu>
-                </div>
+                <DropdownMenu
+                  trigger={
+                    <Button variation="text" className="shrink-0" iconButton>
+                      <Icon name="bf-i-ph-dots-three" className=" c-base11" />
+                    </Button>
+                  }
+                >
+                  <DropdownMenuItem>
+                    <Icon name="bf-i-ph-pencil" className="c-base11 mie-3" />
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => deleteListM.mutate(list._id)}>
+                    {deleteListM.isPending ? (
+                      <LoadingSpinner />
+                    ) : (
+                      <Icon name="bf-i-ph-trash" className="c-base11 mie-3" />
+                    )}
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenu>{" "}
               </li>
             );
           })}
@@ -335,46 +344,42 @@ function AddListButton() {
   });
 
   return (
-    <div>
-      {showForm ? (
-        <div>
-          <form
-            className="mt-auto"
-            onSubmit={(e) => {
-              e.preventDefault();
-              addListM.mutate(listDraft);
-            }}
-          >
-            <div className="flex gap-3 items-end">
-              <div className="grow">
-                <Input
-                  name="name"
-                  label=""
-                  type="text"
-                  placeholder="New Folder"
-                  value={listDraft.name}
-                  onChange={(e) => setListDraft((s) => ({ ...s, name: e.target.value }))}
-                />
-              </div>
-              <Button
-                iconButton
-                variation="solid"
-                type="submit"
-                isLoading={addListM.isPending}
-                disabled={!userMeQ.data?.id}
-              >
-                <Icon name="bf-i-ph-plus" className="c-base11" />
-                <span className="sr-only">Add List</span>
-              </Button>
-            </div>
-          </form>
-        </div>
-      ) : (
-        <Button variation="text" className="!text-start mt-3 w-full" onClick={() => setShowForm(true)}>
-          <Icon name="bf-i-ph-plus" className="mie-1.5 c-base11" />
-          <span className="italic c-base11">Add a List</span>
+    <Modal
+      trigger={
+        <Button variation="text" iconButton className="shrink-0" onClick={() => setShowForm(true)}>
+          <Icon name="bf-i-ph-plus" className=" c-base11" />
+          <span className="sr-only">Add a List</span>
         </Button>
-      )}
-    </div>
+      }
+    >
+      <div>
+        <h3 className="H3">Add a List</h3>
+        <div className="h-6"></div>
+        <form
+          className="mt-auto"
+          onSubmit={(e) => {
+            e.preventDefault();
+            addListM.mutate(listDraft);
+          }}
+        >
+          <div className="grid gap-3 items-end">
+            <div className="grow">
+              <Input
+                name="name"
+                label=""
+                type="text"
+                placeholder="New Folder"
+                value={listDraft.name}
+                onChange={(e) => setListDraft((s) => ({ ...s, name: e.target.value }))}
+              />
+            </div>
+            <Button variation="solid" type="submit" isLoading={addListM.isPending} disabled={!userMeQ.data?.id}>
+              <Icon name="bf-i-ph-plus" className="c-base11" />
+              <span className="">Create</span>
+            </Button>
+          </div>
+        </form>
+      </div>
+    </Modal>
   );
 }

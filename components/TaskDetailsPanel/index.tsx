@@ -15,6 +15,7 @@ import Title from "./Title";
 import useSelectedTask from "@/hooks/useSelectedTask";
 import StarButton from "./StarButton";
 import PinButton from "./PinButton";
+import Line from '../ui/Line';
 
 export default function TaskDetailsPanel() {
   const { selectedTaskId } = useGlobalContex();
@@ -26,7 +27,7 @@ export default function TaskDetailsPanel() {
   });
 
   return (
-    <div className="rd-3 p-6 b-1 b-base6">
+    <div className=" p-6 pie-0 b-s-1 b-base6">
       {!selectedTaskQ.data && <EmptyState />}
       {selectedTaskQ.data && <TaskDetailsContent task={selectedTaskQ.data} />}
     </div>
@@ -79,10 +80,6 @@ function TaskDetailsContent({ task }: { task: Task }) {
       <Delete task={task} />
     </div>
   );
-}
-
-function Line() {
-  return <div className="b-t-1 b-base6"></div>;
 }
 
 function AsingedTo({ task }: { task: Task }) {
