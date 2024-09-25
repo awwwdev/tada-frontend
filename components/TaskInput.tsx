@@ -38,7 +38,9 @@ export default function TaskInput() {
   });
 
   return (
-    <div>
+    <div className='relative'>
+      <div className="bottom-100% h-6 bg-gradient-to-t from-base1 to-transparent  absolute w-full z-10"></div>
+      <div className='h-2 bg-base1'></div>
       <form
         className="mt-auto"
         onSubmit={(e) => {
@@ -46,7 +48,7 @@ export default function TaskInput() {
           addTaskM.mutate(draft);
         }}
       >
-        <div className="flex gap-3 items-end">
+        <div className="flex gap-3 items-end px-3">
           <div className="grow">
             <Input
               name="new-task"

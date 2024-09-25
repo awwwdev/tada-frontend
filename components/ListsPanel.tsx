@@ -2,25 +2,21 @@
 
 import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/button";
-import Modal from "@/components/ui/modal";
-import Pre from "@/components/ui/Pre";
 
-import { useGlobalContex } from "./Provider";
-import React, { useMemo, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { API } from "@/consts";
+import useUserMe from "@/hooks/userMe";
 import { Folder, FolderFields, List, ListFields } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { boolean } from "zod";
+import { useGlobalContex } from "./Provider";
 import Input from "./ui/Input";
-import useUserMe from "@/hooks/userMe";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import { DropdownMenu, DropdownMenuItem } from "./ui/dropdown-menu";
 
 export default function ListsPanel() {
   return (
-    <div className="flex flex-col b-ie-1 pie-6">
+    <div className="flex flex-col b-ie-1 pie-6  ">
       <DefaultLists />
       My Folders
       <Folders />

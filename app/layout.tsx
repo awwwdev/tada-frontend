@@ -53,19 +53,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={`${theme?.value ?? "light"}-theme style-scroll-bar`} lang="en">
+    <html className={`${theme?.value ?? "light"}-theme style-scroll-bar  `} lang="en">
       <head></head>
-      <body className={`bg-base1 c-base12 relative isolate`}>
+      <body className={`bg-base1 c-base12 relative isolate  overflow-hidden`}>
         <ReactQueryProvider>
           <Providers theme={theme?.value}>
-            <div className={`side-menu-container isolate h-full  overflow-x-clip  mx-auto max-w-screen  `}>
-              <div className="main grid max-w-screen isolate" style={{ gridTemplateRows: "1fr auto" }}>
-                {/* <Header /> */}
-                <main className={`  max-w-screen `}>{children}</main>
-                {/* <Footer /> */}
-              </div>
-              {/* {<SideMenu />} */}
-            </div>
+            {/* <main className={`  max-w-screen max-h-full`}>{children}</main> */}
+            {children}
             <MyToaster />
           </Providers>
         </ReactQueryProvider>

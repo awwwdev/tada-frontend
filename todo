@@ -1,12 +1,17 @@
 - cancel proton
 
-- add tasks to a list
-- add folders to a folder
-- default lists (smart lists)
+- smart lists
+- starr button
+- pin button
+- use modal for folder and list creation
+- add lists to a folder
 - show or hide lists
 - drag and drop ordering bug
+- lists ordering
 - detail panel editing
 
+- style 
+  - fading scroll area
 - auth confirm email 
 - auth reset password + magic link
 

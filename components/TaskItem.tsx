@@ -31,7 +31,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
   });
 
   return (
-    <div className={`b-1 b-base6 rd-3 p-3 flex items-center bg-mauve3A ${selectedTaskId === task.id && "!b-accent8"}`}>
+    <li className={`b-1 b-base6 rd-3 p-3 flex items-center bg-mauve3A ${selectedTaskId === task.id && "!b-accent8"}`}>
       <Checkbox
         checked={task.status === "done"}
         onChange={(checked) => {
@@ -94,6 +94,6 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
           <Icon name="bf-i-ph-dots-six-vertical" />
         </div>
       </div>
-    </div>
+    </li>
   );
 }

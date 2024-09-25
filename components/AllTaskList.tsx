@@ -9,6 +9,7 @@ import { useRef } from "react";
 import DraggableList from "react-draggable-list";
 import { useGlobalContex } from "./Provider";
 import TaskItem from "./TaskItem";
+import List from './List';
 
 export default function AllTasksList() {
   const allTasksQ = useQuery({
@@ -20,24 +21,9 @@ export default function AllTasksList() {
   const pinnedTasks = notDeletedTasks.filter((t: Task) => t.pinned);
   const notPinnedTasks = notDeletedTasks.filter((t: Task) => !t.pinned);
   const orderedTasks = [...pinnedTasks, ...notPinnedTasks];
-  return <ListContentSimple tasks={orderedTasks} listName={'All Tasks'} />;
+  return <List tasks={orderedTasks} listName={"All Tasks"} />;
 }
 
-function ListContentSimple({ tasks , listName }: { tasks: Task[]; listName: string }) {
-
-  return (
-    <div className="gap-3 grid">
-      <div>
-        <h2 className="H2">{listName}</h2>
-      </div>
-      {tasks.map((task, index) => {
-        return (
-          <TaskItem key={index} task={task} dragHandleProps={{}} />
-        );
-      })}
-    </div>
-  );
-}
 
 function ListContent({ tasks, listName }: { tasks: Task[]; listName: string }) {
   const listContainerRef = useRef<HTMLDivElement>(null);

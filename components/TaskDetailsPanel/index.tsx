@@ -50,26 +50,26 @@ function TaskDetailsContent({ task }: { task: Task }) {
       <Line />
       <Lists task={task} />
       <Line />
-      <Steps task={task} />
-      <Line />
-      <Emojies task={task} />
-      <Line />
-      <Due task={task} />
-      <Line />
-      <Reminders task={task} />
-      <Line />
-      <Routines task={task} />
-      <Line />
-      <Attachements task={task} />
-      <Line />
-      <PreTasks task={task} />
-      <Line />
-      <PostTasks task={task} />
-      <Line />
-      <AsingedTo task={task} />
-      <Line />
-      <Comments task={task} />
-      <Line />
+      {/* <Steps task={task} /> */}
+      {/* <Line /> */}
+      {/* <Emojies task={task} /> */}
+      {/* <Line /> */}
+      {/* <Due task={task} /> */}
+      {/* <Line /> */}
+      {/* <Reminders task={task} /> */}
+      {/* <Line /> */}
+      {/* <Routines task={task} /> */}
+      {/* <Line /> */}
+      {/* <Attachements task={task} /> */}
+      {/* <Line /> */}
+      {/* <PreTasks task={task} /> */}
+      {/* <Line /> */}
+      {/* <PostTasks task={task} /> */}
+      {/* <Line /> */}
+      {/* <AsingedTo task={task} /> */}
+      {/* <Line /> */}
+      {/* <Comments task={task} /> */}
+      {/* <Line /> */}
       <Archive task={task} />
       <Line />
       <Delete task={task} />
