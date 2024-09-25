@@ -21,15 +21,15 @@ import Modal from "./ui/modal";
 
 export default function ListsPanel() {
   return (
-    <div className="flex flex-col b-ie-1 pie-6 gap-3 overflow-y-auto ???">
+    <div className="flex flex-col b-ie-1 pie-6 gap-3 overflow-y-auto ">
       <SmartLists />
       <Line />
-      <div className="flex gap-3 justify-between items-center">
+      {/* <div className="flex gap-3 justify-between items-center">
         <span className="c-base11">My Folders</span>
         <AddFolderButton />
       </div>
       <Folders />
-      <Line />
+      <Line /> */}
       <div className="flex gap-3 justify-between items-center">
         <span className="c-base11">My Lists</span>
         <AddListButton />
@@ -66,36 +66,36 @@ function SmartLists() {
       <MenuItem icon="bf-i-ph-list" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS)}>
         All Tasks
       </MenuItem>
-      <MenuItem icon="bf-i-ph-sun" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DO_TODAY)}>
+      {/* <MenuItem icon="bf-i-ph-sun" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DO_TODAY)}>
         Do Today
-      </MenuItem>
-      <MenuItem icon="bf-i-ph-sun-horizon" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DO_TOMORROW)}>
+      </MenuItem> */}
+      {/* <MenuItem icon="bf-i-ph-sun-horizon" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DO_TOMORROW)}>
         Do Tomorrow
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem icon="bf-i-ph-star" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.STARRED)}>
         Starred
       </MenuItem>
-      <MenuItem icon="bf-i-ph-calendar-dots" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.WITH_DUE_DATES)}>
+      {/* <MenuItem icon="bf-i-ph-calendar-dots" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.WITH_DUE_DATES)}>
         With Due dates
-      </MenuItem>
-      <MenuItem icon="bf-i-ph-user" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ASSIGNED_TO_ME)}>
+      </MenuItem> */}
+      {/* <MenuItem icon="bf-i-ph-user" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ASSIGNED_TO_ME)}>
         Asigned To Me
-      </MenuItem>
-      <MenuItem icon="bf-i-ph-users" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ASSIGNED)}>
+      </MenuItem> */}
+      {/* <MenuItem icon="bf-i-ph-users" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ASSIGNED)}>
         Asigned
-      </MenuItem>
-      <MenuItem icon="bf-i-ph-alarm" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.WITH_REMINDERS)}>
+      </MenuItem> */}
+      {/* <MenuItem icon="bf-i-ph-alarm" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.WITH_REMINDERS)}>
         With Reminders
-      </MenuItem>
-      <MenuItem icon="bf-i-ph-sneaker-move" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ROUTINES)} >
+      </MenuItem> */}
+      {/* <MenuItem icon="bf-i-ph-sneaker-move" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ROUTINES)} >
         Rutines
-      </MenuItem>
-      <MenuItem icon="bf-i-ph-archive" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ARCHIVED)}>
+      </MenuItem> */}
+      {/* <MenuItem icon="bf-i-ph-archive" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ARCHIVED)}>
         Archived Tasks
-      </MenuItem>
-      <MenuItem icon="bf-i-ph-trash" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DELETED)} >
+      </MenuItem> */}
+      {/* <MenuItem icon="bf-i-ph-trash" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DELETED)} >
         Deleted Tasks
-      </MenuItem>
+      </MenuItem> */}
     </ul>
   );
 }

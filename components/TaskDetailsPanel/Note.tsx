@@ -35,7 +35,6 @@ export default function Note({ task }: { task: Task }) {
       <Icon name="bf-i-ph-note-blank" className="c-base11" />
       <div className="grow">
         <h3 className="c-base11">Note</h3>
-        <p>value: {value}</p>
         <div className="flex gap-3">
           <textarea
             name="label"
@@ -63,7 +62,7 @@ export default function Note({ task }: { task: Task }) {
                 // }
               }}
               iconButton
-              className="mis-auto"
+              className="mis-auto shrink-0"
             >
               <Icon name="bf-i-ph-pencil-simple" className="c-base11" />
             </Button>

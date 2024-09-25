@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html className={`${theme?.value ?? "light"}-theme style-scroll-bar  `} lang="en">
       <head></head>
-      <body className={`bg-base1 c-base12 relative isolate  overflow-hidden`}>
+      <body className={`bg-base3 c-base12 relative isolate  overflow-hidden`}>
         <ReactQueryProvider>
           <Providers theme={theme?.value}>
             {/* <main className={`  max-w-screen max-h-full`}>{children}</main> */}

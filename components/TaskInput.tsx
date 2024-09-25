@@ -34,8 +34,8 @@ export default function TaskInput() {
 
   return (
     <div className="relative">
-      <div className="bottom-100% h-6 bg-gradient-to-t from-base1 to-transparent  absolute w-full z-10"></div>
-      <div className="h-2 bg-base1"></div>
+      <div className="bottom-100% h-6 bg-gradient-to-t from-base3 to-transparent  absolute w-full z-10"></div>
+      <div className="h-2 bg-base3"></div>
       <form
         className="mt-auto"
         onSubmit={(e) => {

@@ -25,7 +25,7 @@ export default function TaskDetailsPanel() {
   });
 
   return (
-    <div className=" p-6 pie-0 b-s-1 b-base6">
+    <div className=" px-6   pie-0 b-s-1 b-base6 h-full">
       {!selectedTaskQ.data && <EmptyState />}
       {selectedTaskQ.data && <TaskDetailsContent task={selectedTaskQ.data} />}
     </div>
@@ -38,7 +38,7 @@ function EmptyState() {
 
 function TaskDetailsContent({ task }: { task: Task }) {
   return (
-    <div className="space-y-3">
+    <div className="flex flex-col gap-3 h-full ">
       <div className="flex  gap-3">
         <Title task={task} />
         <div className="mis-auto flex gap-3">
@@ -47,11 +47,11 @@ function TaskDetailsContent({ task }: { task: Task }) {
           <PinButton task={task} />
         </div>
       </div>
-      <div className="h-12"></div>
-      <Line />
-      <Note task={task} />
+      <div className="h-6"></div>
       <Line />
       <Lists task={task} />
+      <Line />
+      <Note task={task} />
       <Line />
       {/* <Steps task={task} /> */}
       {/* <Line /> */}
@@ -73,9 +73,10 @@ function TaskDetailsContent({ task }: { task: Task }) {
       {/* <Line /> */}
       {/* <Comments task={task} /> */}
       {/* <Line /> */}
+      <div className='flex gap-3 justify-end mt-auto '>
       <Archive task={task} />
-      <Line />
       <Delete task={task} />
+      </div>
     </div>
   );
 }

@@ -20,8 +20,8 @@ export default function Page() {
       <main className="grid gap-3  overflow-hidden" style={{ gridTemplateColumns: "1fr 3fr 3fr" }}>
         <ListsPanel />
         <div className="grid gap-0  overflow-hidden" style={{ gridTemplateRows: "1fr auto" }}>
-          {currentList.type === "user-list" && <UserList listId={currentList.id} />}
-          {currentList.type === "smart-list" && <SmartList listId={currentList.id}/>}
+            {currentList.type === "user-list" && <UserList listId={currentList.id} />}
+            {currentList.type === "smart-list" && <SmartList listId={currentList.id} />}
           <TaskInput />
         </div>
         <TaskDetailsPanel />
