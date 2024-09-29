@@ -16,25 +16,3 @@ const Footer = () => {
 
 export default Footer;
 
-function DotGrid({ rows, cols }) {
-  return (
-    <div
-      className="grid aspect-ratio-1/1  justify-items-center fade-y w-full min-w-50rem opacity-10"
-      style={{
-        gridTemplateColumns: `repeat(${cols} , 1fr)`,
-        gridTemplateRows: `repeat(${rows} , 1fr)`,
-        // gap: `calc((100% - ${rows} * 0.25rem) / ${rows - 1})`,
-        maskImage: "linear-gradient(to top, black 0%, black 20%,  transparent 60%)",
-        WebkitMaskImage: "linear-gradient(to top, black  0%, black 20%, transparent 60%)",
-      }}
-    >
-      {Array.from(Array(rows * cols).keys()).map((i) => {
-        return (
-          <div key={`dot-${i}`} className={`rd-full  w-1 h-1 `}>
-            +
-          </div>
-        );
-      })}
-    </div>
-  );
-}

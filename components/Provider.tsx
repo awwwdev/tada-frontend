@@ -35,11 +35,9 @@ const GloblaContext = createContext<ContextType>({
 export default function Providers({
   children,
   theme,
-  hasSession,
 }: {
   children: React.ReactNode;
   theme: Settings["theme"];
-  hasSession: boolean;
 }) {
   useUserMe(); // to initialize userMe
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);

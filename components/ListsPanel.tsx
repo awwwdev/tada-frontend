@@ -144,7 +144,7 @@ function Folders() {
                     <Icon name="bf-i-ph-pencil-simple" className="c-base11 mie-3" />
                     Edit
                   </DropdownMenuItem>
-                  <DropdownMenuItem onSelect={() => deleteFolderM.mutate(folder._id)}>
+                  <DropdownMenuItem onSelect={() => deleteFolderM.mutate(folder.id)}>
                     {deleteFolderM.isPending ? (
                       <LoadingSpinner />
                     ) : (
@@ -289,9 +289,11 @@ function Lists() {
 function AddListButton() {
   const queryClient = useQueryClient();
 
-  const initialListDraft = {
+  const initialListDraft: ListFields = {
     name: "",
     author: "",
+    tasks: [],
+    emojies: [],
   };
   const [showModal, setShowModal] = useState<boolean>(false);
   const [listDraft, setListDraft] = useState<ListFields>(initialListDraft);

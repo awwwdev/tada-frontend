@@ -21,7 +21,7 @@ export default function TaskDetailsPanel() {
   const selectedTaskQ = useQuery({
     queryKey: [QUERY_KEYS.TASKS, selectedTaskId],
     queryFn: () => fetchAPI.GET(`/tasks/${selectedTaskId}`),
-    enabled: !!userMeQ.data?._id && !!selectedTaskId,
+    enabled: !!userMeQ.data?.id && !!selectedTaskId,
   });
 
   return (

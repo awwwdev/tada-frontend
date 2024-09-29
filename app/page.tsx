@@ -2,7 +2,6 @@
 
 import TaskDetailsPanel from "@/components/TaskDetailsPanel";
 
-import AllTasksList from "@/components/AllTaskList";
 import Header from "@/components/header";
 import ListsPanel from "@/components/ListsPanel";
 import { useGlobalContex } from "@/components/Provider";

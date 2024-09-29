@@ -11,6 +11,7 @@ import type { Metadata } from "next";
 import MyToaster from "@/components/Toaster";
 import { cookies } from "next/headers";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
+import { Settings } from '@/types';
 
 
 const title = "Hamid K.";
@@ -57,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head></head>
       <body className={`bg-base3 c-base12 relative isolate  overflow-hidden`}>
         <ReactQueryProvider>
-          <Providers theme={theme?.value}>
+          <Providers theme={theme?.value as Settings['theme']}>
             {/* <main className={`  max-w-screen max-h-full`}>{children}</main> */}
             {children}
             <MyToaster />

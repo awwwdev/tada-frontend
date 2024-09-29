@@ -15,8 +15,8 @@ export default function Lists({ task }: { task: Task }) {
 
   const listsQ = useQuery({
     queryKey: [QUERY_KEYS.LISTS],
-    queryFn: () => fetchAPI.GET(`/lists?userId=${userMeQ.data?._id}`),
-    enabled: !!userMeQ.data?._id,
+    queryFn: () => fetchAPI.GET(`/lists?userId=${userMeQ.data?.id}`),
+    enabled: !!userMeQ.data?.id,
   });
 
   const listWithThisTask = useMemo(() => {

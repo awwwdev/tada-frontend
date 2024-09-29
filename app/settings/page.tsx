@@ -17,13 +17,13 @@ export default function Page() {
   const queryClient = useQueryClient();
   const settingsMutation = useMutation({
     mutationFn: async (changedSettings: Partial<Settings>) =>
-      fetchAPI.PUT(`/settings/${userMeQ.data?._id}`, changedSettings),
+      fetchAPI.PUT(`/settings/${userMeQ.data?.id}`, changedSettings),
     onError: (err) => {
       toast.error("Something went wrong: " + err.message);
     },
     onSuccess: (data) => {
       toast.success("Settings updated successfully");
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USERME] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USER_ME] });
     },
   });
 

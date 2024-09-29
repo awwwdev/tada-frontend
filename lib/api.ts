@@ -10,7 +10,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
-import addClasses from "rehype-add-classes";
+import addClasses  from "rehype-add-classes";
 import rehypeVideo from "rehype-video";
 import rehypeRaw from "rehype-raw";
 

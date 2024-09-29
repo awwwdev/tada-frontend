@@ -7,6 +7,7 @@ import QUERY_KEYS from '@/react-query/queryKeys';
 import { useGlobalContex } from '@/components/Provider';
 
 export default function useSelectedTask() {
+  const userMeQ = useUserMe();
   const { selectedTaskId } = useGlobalContex();
   const allTasksQ = useQuery({
     queryKey: [QUERY_KEYS.TASKS],
@@ -16,9 +17,9 @@ export default function useSelectedTask() {
   const selectedTask = useMemo(
     () => {
       if (!allTasksQ.data) return null;
-      return allTasksQ.data?.find((t: Task) => t._id === selectedTaskId)
+      return allTasksQ.data?.find((t: Task) => t.id === selectedTaskId)
     },
-    [allTasksQ.data, selectedTaskId, userMeQ.data?._id]
+    [allTasksQ.data, selectedTaskId, userMeQ.data?.id]
   );
 
   return selectedTask

@@ -25,7 +25,7 @@ export default function Title({ task }: { task: Task }) {
       toast.error("Something went wrong: " + err.message);
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS, task._id] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS, task.id] });
       setShowEdit(false);
     },
   });
@@ -45,7 +45,7 @@ export default function Title({ task }: { task: Task }) {
         // autoFocus
       ></textarea>
       {showEdit ? (
-        <Button variation="solid" onClick={() => taskMutation.mutate({ id: task._id, label: value })}>
+        <Button variation="solid" onClick={() => taskMutation.mutate({ id: task.id, label: value })}>
           Save
         </Button>
       ) : (
