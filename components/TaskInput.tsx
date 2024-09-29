@@ -53,7 +53,7 @@ export default function TaskInput() {
               onChange={(e) => setDraft((s) => ({ ...s, label: e.target.value }))}
             />
           </div>
-          <Button variation="solid" type="submit" isLoading={addTaskM.isPending} disabled={!userMeQ.data?._id}>
+          <Button variation="solid" type="submit" isLoading={addTaskM.isPending} disabled={!userMeQ.data?.id}>
             Add Task
           </Button>
         </div>

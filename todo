@@ -1,17 +1,20 @@
-- cancel proton
-
-- drag and drop ordering bug
-- lists ordering
+- optimistic updates
+- local storage persistence
 - detail panel editing
 -- click to edit note and task label
+- account dropdown
 
 - style 
-  - fading scroll area
+-- fading scroll area
+-- dark mode light mode
+
 - auth confirm email 
 - auth reset password + magic link
 
 --- ready for public use ---
 
+- drag and drop ordering bug
+- lists ordering
 - add lists to a folder
 - smart lists
 - sort by

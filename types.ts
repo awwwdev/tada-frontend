@@ -12,11 +12,11 @@ export type CurrentList = {
 };
 
 type Document = {
-  _id: string;
+  // _id: string;
   id: string;
   createAt: Date;
   updateAt: Date;
-  __v: string;
+  // __v: string;
 };
 
 export type User = Document & UserFields & UserPopulated;
