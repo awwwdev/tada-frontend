@@ -61,7 +61,7 @@ function SmartLists() {
   const { setSelectedSmartListId , currentList } = useGlobalContex();
 
   return (
-    <ul className="flex flex-col gap-3 -mis-3 ">
+    <ul className="flex flex-col gap-3  ">
       <MenuItem icon="bf-i-ph-list" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS)} active={currentList.id === SMART_LIST_IDS.ALL_TASKS}>
         All Tasks
       </MenuItem>

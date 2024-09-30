@@ -12,7 +12,7 @@ export default function SmartList({ listId }: { listId: SmartListId }) {
   return (
     <div className="grid gap-3 overflow-hidden " style={{ gridTemplateRows: "auto 1fr" }}>
       <div className="px-3 flex gap-3">
-        <h3 className="capitalize">{listId.replaceAll("_", " ")}</h3>
+        <h3 className="capitalize H2 fw-500 tracking-tight">{listId.replaceAll("_", " ").toLowerCase()}</h3>
       </div>
       <ul className=" gap-3 flex flex-col overflow-y-scroll px-3 pb-9">
         {tasksQ.data &&
