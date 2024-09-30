@@ -8,14 +8,15 @@ export default function useTaskMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ id, ...updates }: Partial<TaskFields> & { id: string }) =>
-      fetchAPI.PUT(`/tasks/${id}`, { ...updates, id: undefined, _id: undefined }),
+    mutationFn: async ({ id, ...updates }: Partial<TaskFields> & { id: string }) => {
+      console.log("🚀 ~ updates:", updates);
+      return fetchAPI.PUT(`/tasks/${id}`, { ...updates, id: undefined });
+    },
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.LISTS] });
     },
   });
 }

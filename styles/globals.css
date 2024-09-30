@@ -19,7 +19,7 @@ button:focus-visible {
   --line-height: 1.5em;
   line-height: 1.5;
 
-  --font-display: nohemi, geist, inter, "sans-serif", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  --font-display: geist, inter, "sans-serif", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   --font-content: geist, "Roboto", "sans-serif", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

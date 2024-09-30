@@ -11,7 +11,10 @@ import Button from "@/components/ui/button";
 import Icon from "@/components/ui/Icon";
 import { useGlobalContex } from "./Provider";
 
-const NavContext = createContext({ isCollapsed: false, setIsCollapsed: () => {} });
+const NavContext = createContext<{
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}>({ isCollapsed: false, setIsCollapsed: () => {} });
 
 export default function SideMenu() {
   const { isSideMenuOpen } = useGlobalContex();
@@ -43,11 +46,11 @@ const MobileSideMenuOverlay = () => {
   );
 };
 
-function SideNav({ className }) {
+function SideNav({ className }: { className?: string }) {
   const { isSideMenuOpen, setIsSideMenuOpen } = useGlobalContex();
   const [isCollapsed, _setIsCollapsed] = useState(false);
 
-  const setIsCollapsed = (v) => {
+  const setIsCollapsed = (v: boolean) => {
     document.documentElement.style.setProperty("--sidebar-width", v ? "4rem" : "14.5rem");
     _setIsCollapsed(v);
   };
@@ -77,7 +80,7 @@ function SideNav({ className }) {
   );
 }
 
-function Logo({ isCollapsed }) {
+function Logo({ isCollapsed }: { isCollapsed: boolean }) {
   return (
     <Link href="/" className="fw-300 leading-0 ">
       {isCollapsed ? (
@@ -90,7 +93,13 @@ function Logo({ isCollapsed }) {
   );
 }
 
-function CollapseToggle({ isCollapsed, setIsCollapsed }) {
+function CollapseToggle({
+  isCollapsed,
+  setIsCollapsed,
+}: {
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <div className="hidden sm:block  -mis-1.5">
       <Toggle.Root

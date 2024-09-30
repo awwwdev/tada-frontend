@@ -17,7 +17,7 @@ export default function Delete({ task }: { task: Task }) {
   const deleteTaskM = useMutation({
     mutationFn: (id: string) => fetchAPI.DELETE(`/tasks/${id}`),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });

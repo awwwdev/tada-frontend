@@ -6,7 +6,7 @@ import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
-import Line from '../ui/Line';
+import Line from "../ui/Line";
 import Archive from "./Archive";
 import Delete from "./Delete";
 import Lists from "./Lists";
@@ -17,11 +17,10 @@ import Title from "./Title";
 
 export default function TaskDetailsPanel() {
   const { selectedTaskId } = useGlobalContex();
-  const userMeQ = useUserMe();
   const selectedTaskQ = useQuery({
-    queryKey: [QUERY_KEYS.TASKS, selectedTaskId],
+    queryKey: ["tasks", selectedTaskId],
     queryFn: () => fetchAPI.GET(`/tasks/${selectedTaskId}`),
-    enabled: !!userMeQ.data?.id && !!selectedTaskId,
+    enabled: !!selectedTaskId,
   });
 
   return (
@@ -73,9 +72,9 @@ function TaskDetailsContent({ task }: { task: Task }) {
       {/* <Line /> */}
       {/* <Comments task={task} /> */}
       {/* <Line /> */}
-      <div className='flex gap-3 justify-end mt-auto '>
-      <Archive task={task} />
-      <Delete task={task} />
+      <div className="flex gap-3 justify-end mt-auto ">
+        <Archive task={task} />
+        <Delete task={task} />
       </div>
     </div>
   );

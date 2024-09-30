@@ -22,7 +22,7 @@ export default function Title({ task }: { task: Task }) {
   const taskMutation = useMutation({
     mutationFn: async ({ id, label }: { id: string; label: string }) => fetchAPI.PUT(`/tasks/${id}`, { label }),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS, task.id] });

@@ -7,3 +7,9 @@ const QUERY_KEYS = {
 };
 
 export default QUERY_KEYS;
+
+
+// if a todo is updates
+
+// 'todos' , 'todo', todo.id
+// 'todos' , 'list', has-todo , todo.id

@@ -1,5 +1,5 @@
 import fetchAPI from "@/utils/fetchAPI";
-import {  useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 export default function useDeleteList() {
@@ -7,7 +7,7 @@ export default function useDeleteList() {
 
   return useMutation({
     mutationFn: async (id: string) => fetchAPI.DELETE(`/lists/${id}`),
-    onError: (err) => toast.error("Something went wrong: " + err.message),
+    onError: (err) => toast.error("Error: " + err.message),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
   });
 }

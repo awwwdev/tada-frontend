@@ -24,31 +24,30 @@ export default function AllTasksList() {
 }
 
 
-function ListContent({ tasks, listName }: { tasks: Task[]; listName: string }) {
-  const listContainerRef = useRef<HTMLDivElement>(null);
-  const { setTasks } = useGlobalContex();
-  // const [parent, enableAnimations] = useAutoAnimate(/* optional config */)
-  return (
-    <div ref={listContainerRef} className="" suppressHydrationWarning>
-      {/* @ts-ignore */}
-      <DraggableList
-        itemKey="id"
-        template={(props: TemplateProps) => <ListItemTemplate {...props} />}
-        list={tasks}
-        onMoveEnd={(newList: Task[]) => {
-          const pinnedTasks = newList.filter((t: Task) => t.pinned);
-          const notPinnedTasks = newList.filter((t: Task) => !t.pinned);
-          const newListWithUpdatedOrders = [...pinnedTasks, ...notPinnedTasks].map((t: Task, index: number) => {
-            const newTask = { ...t };
-            newTask.lists[listName].orderInList = index;
-            return newTask;
-          });
-          setTasks(newListWithUpdatedOrders);
-        }}
-        container={() => listContainerRef.current}
-      />
-    </div>
-  );
+// function ListContent({ tasks, listName }: { tasks: Task[]; listName: string }) {
+//   const listContainerRef = useRef<HTMLDivElement>(null);
+//   // const [parent, enableAnimations] = useAutoAnimate(/* optional config */)
+//   return (
+//     <div ref={listContainerRef} className="" suppressHydrationWarning>
+//       {/* @ts-ignore */}
+//       <DraggableList
+//         itemKey="id"
+//         template={(props: TemplateProps) => <ListItemTemplate {...props} />}
+//         list={tasks}
+//         onMoveEnd={(newList: Task[]) => {
+//           const pinnedTasks = newList.filter((t: Task) => t.pinned);
+//           const notPinnedTasks = newList.filter((t: Task) => !t.pinned);
+//           const newListWithUpdatedOrders = [...pinnedTasks, ...notPinnedTasks].map((t: Task, index: number) => {
+//             const newTask = { ...t };
+//             newTask.lists[listName].orderInList = index;
+//             return newTask;
+//           });
+//           setTasks(newListWithUpdatedOrders);
+//         }}
+//         container={() => listContainerRef.current}
+//       />
+//     </div>
+//   );
 }
 
 function EmptyState() {
@@ -70,7 +69,6 @@ function ListItemTemplate({ item, itemSelected, dragHandleProps }: TemplateProps
   const shadow = itemSelected * 15 + 1;
   const dragged = itemSelected !== 0;
 
-  const { updateTaskById, addTask } = useGlobalContex();
 
   return (
     <div
@@ -85,7 +83,7 @@ function ListItemTemplate({ item, itemSelected, dragHandleProps }: TemplateProps
       <div className="grid" style={{ gridTemplateColumns: "1fr auto" }}>
         <TaskItem
           task={item}
-          setTask={(newTask) => updateTaskById({ id: item.id, task: newTask })}
+          // setTask={(newTask) => updateTaskById({ id: item.id, task: newTask })}
           dragHandleProps={dragHandleProps}
         />
       </div>

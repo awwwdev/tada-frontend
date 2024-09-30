@@ -3,29 +3,15 @@
 import Icon from "@/components/ui/Icon";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import RadioGroup from "@/components/ui/RadioGroup";
+import useSettingsMutation from '@/hooks/useSettingsMutation';
 import useUserMe from "@/hooks/useUserMe";
-import QUERY_KEYS from "@/react-query/queryKeys";
 import { Settings } from "@/types";
-import fetchAPI from "@/utils/fetchAPI";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import toast from "react-hot-toast";
 
 export default function Page() {
   const userMeQ = useUserMe();
   const settings = userMeQ.data?.settings;
-  const queryClient = useQueryClient();
-  const settingsMutation = useMutation({
-    mutationFn: async (changedSettings: Partial<Settings>) =>
-      fetchAPI.PUT(`/settings/${userMeQ.data?.id}`, changedSettings),
-    onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
-    },
-    onSuccess: (data) => {
-      toast.success("Settings updated successfully");
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USER_ME] });
-    },
-  });
+  const settingsMutation = useSettingsMutation();
 
   if (userMeQ.isLoading || !settings) return <LoadingSpinner />;
 

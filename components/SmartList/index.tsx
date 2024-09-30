@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import TaskItem from "../TaskItem";
 
 export default function SmartList({ listId }: { listId: SmartListId }) {
-  const tasksQ = useQuery({
-    queryKey: [listId],
+  const tasksQ = useQuery<Task[]>({
+    queryKey: ['tasks'], // TODO add query key per list and send filters to api
     queryFn: () => fetchAPI.GET(`/tasks`),
     select: (data: Task[]) => smartListSelect[listId](data),
   });
@@ -16,7 +16,7 @@ export default function SmartList({ listId }: { listId: SmartListId }) {
       </div>
       <ul className=" gap-3 flex flex-col overflow-y-scroll px-3 pb-9">
         {tasksQ.data &&
-        tasksQ.data.length > 0 &&
+          tasksQ.data.length > 0 &&
           tasksQ.data.map((task, index) => {
             return <TaskItem key={index} task={task} dragHandleProps={{}} />;
           })}

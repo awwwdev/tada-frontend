@@ -1,4 +1,4 @@
-import type { Rule, Shortcut } from "unocss";
+import type { Rule, Shortcut, UserShortcuts } from "unocss";
 export const rules: Rule[] = [
   ["max-w-page", { "max-width": "var(--max-w-page)" }],
   ["font-display", { "font-family": "var(--font-display)" }],
@@ -72,7 +72,7 @@ export const rules: Rule[] = [
   ],
 ];
 
-export const shortcuts: Shortcut[] = [
+export const shortcuts: UserShortcuts = [
   {
     "skeleton-text": "animate-pulse rounded-md bg-base5 h-[calc(var(--line-height)-0.2em)] py-[0.1em]  bg-clip-content",
     skeleton: "animate-pulse rounded-md bg-base5 h-[var(--line-height)]",

@@ -1,21 +1,23 @@
 import React, { ElementType } from "react";
-import SMART_LIST_IDS from './constants/smartListIds';
+import SMART_LIST_IDS from "./constants/smartListIds";
 
-export type SmartListId = typeof SMART_LIST_IDS[keyof typeof SMART_LIST_IDS];
+export type SmartListId = (typeof SMART_LIST_IDS)[keyof typeof SMART_LIST_IDS];
 
-export type CurrentList = {
-  type: 'user-list';
-  id: string;
-} | {
-  type: 'smart-list';
-  id: SmartListId;
-};
+export type CurrentList =
+  | {
+      type: "user-list";
+      id: string;
+    }
+  | {
+      type: "smart-list";
+      id: SmartListId;
+    };
 
 type Document = {
   // _id: string;
   id: string;
-  createAt: Date;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
   // __v: string;
 };
 
@@ -38,7 +40,7 @@ type UserPopulated = {
 export type FolderFields = {
   name: string;
   emojies?: Emoji[];
-  author: string;
+  authorId: string;
   lists?: FolderListProperties[];
 };
 
@@ -51,7 +53,7 @@ type FolderListProperties = {
 
 export type ListFields = {
   name: string;
-  author: string;
+  authorId: string;
   emojies: string[];
   tasks: TasktPorpertisInList[];
   description?: string | null;
@@ -67,7 +69,8 @@ export type TasktPorpertisInList = {
 };
 
 export type TaskFields = {
-  author: string;
+  authorId: string;
+  listId?: string | null;
   label: string;
   status: "done" | "to-do";
 

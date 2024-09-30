@@ -1,13 +1,14 @@
 "use client";
 
 import Checkbox from "@/components/ui/Checkbox";
+import useTaskMutation from '@/hooks/useTaskMutation';
 import useUserMe from "@/hooks/useUserMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
-import { List, ListFields, Task, TasktPorpertisInList } from "@/types";
+import { List, ListFields, Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function Lists({ task }: { task: Task }) {
@@ -19,22 +20,24 @@ export default function Lists({ task }: { task: Task }) {
     enabled: !!userMeQ.data?.id,
   });
 
-  const listWithThisTask = useMemo(() => {
-    if (!listsQ.data) return [];
-    return listsQ.data.filter((l: List) => {
-      return l.tasks?.some((t: { id: string }) => t.id === task.id);
-    });
-  }, [listsQ.data, task]);
+  // const listWithThisTask = useMemo(() => {
+  //   if (!listsQ.data) return [];
+  //   return listsQ.data.filter((l: List) => {
+  //     return l.tasks?.some((t: { id: string }) => t.id === task.id);
+  //   });
+  // }, [listsQ.data, task]);
 
   const [showEdit, setShowEdit] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
 
+  const taskMutation = useTaskMutation();
+
   const listMutation = useMutation<List , Error , Partial<ListFields> & { id: string}>({
     mutationFn: async ({ id, ...updates }: Partial<ListFields> & { id: string }) =>
       fetchAPI.PUT(`/lists/${id}`, { ...updates, id: undefined, _id: undefined }),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.LISTS] });
@@ -50,21 +53,18 @@ export default function Lists({ task }: { task: Task }) {
       <div>
         <ul className="flex gap-3" ref={parentRef}>
           {listsQ.data &&
-            [...listWithThisTask, ...listsQ.data.filter((l: List) => !listWithThisTask.includes(l))].map(
+            listsQ.data.map(
               (list: List) => {
-                const hasThisTask = listWithThisTask.includes(list) ?? false;
                 return (
                   <li key={list.id} className="rd-3 p-3 b-1 b-base6 bg-base2">
                     <Checkbox
                       label={list.name}
-                      checked={hasThisTask}
+                      checked={task.listId === list.id}
                       value={list.id}
                       onChange={() => {
-                        listMutation.mutate({
-                          id: list.id,
-                          tasks: hasThisTask
-                            ? list.tasks.filter((t: TasktPorpertisInList) => t.id !== task.id)
-                            : [...list.tasks, { id: task.id, task: task.id , addedAt: new Date(), orderInList: list.tasks?.length }],
+                        taskMutation.mutate({
+                          id: task.id,
+                          listId: task.listId === list.id ? null : list.id,
                         });
                       }}
                     />

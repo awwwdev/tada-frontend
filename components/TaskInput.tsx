@@ -13,20 +13,20 @@ export default function TaskInput() {
   const [draft, setDraft, removeValue] = useLocalStorage<TaskFields>("darft-task", {
     label: "",
     status: "to-do",
-    author: "",
+    authorId: "",
   });
   const userMeQ = useUserMe();
   // const { addTask } = useGlobalContex();
   const addTaskM = useMutation({
-    mutationFn: (task: TaskFields) => fetchAPI.POST(`/tasks`, { ...task, author: userMeQ.data?.id }),
+    mutationFn: (task: TaskFields) => fetchAPI.POST(`/tasks`, { ...task, authorId: userMeQ.data?.id }),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: () => {
       setDraft({
         label: "",
         status: "to-do",
-        author: "",
+        authorId: "",
       });
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
     },

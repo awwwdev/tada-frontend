@@ -1,23 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import Icon from "@/components/ui/Icon";
 import Space from "@/components/ui/Space";
 import Button from "@/components/ui/button";
 import GradientBorderOverlay from "@/components/ui/GradientBorderOverlay";
 
-export default function ShowMore({ children, minHeight = "0fr" }) {
+export default function ShowMore({ children, minHeight = "0fr" }: { children: React.ReactNode; minHeight?: string }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div className="">
       <div
         className={`grid fade-to-b`}
-        style={{
-          gridTemplateRows: expanded ? `1fr ${minHeight}` : `0fr ${minHeight}`,
-          maskImage: `linear-gradient(to bottom, black 0%,  rgba(0 0 0 / var(--fade-to-opacity)) 100%)`,
-          "--fade-to-opacity": expanded ? "1" : "0",
-          transition: "grid-template-rows 500ms ease-out,  --fade-to-opacity 500ms ease-out",
-        }}
+        style={
+          {
+            gridTemplateRows: expanded ? `1fr ${minHeight}` : `0fr ${minHeight}`,
+            maskImage: `linear-gradient(to bottom, black 0%,  rgba(0 0 0 / var(--fade-to-opacity)) 100%)`,
+            "--fade-to-opacity": expanded ? "1" : "0",
+            transition: "grid-template-rows 500ms ease-out,  --fade-to-opacity 500ms ease-out",
+          } as CSSProperties
+        }
       >
         <div
           className={`overflow-hidden `}

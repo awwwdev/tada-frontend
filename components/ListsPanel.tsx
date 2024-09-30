@@ -5,7 +5,6 @@ import Button from "@/components/ui/button";
 
 import SMART_LIST_IDS from '@/constants/smartListIds';
 import useUserMe from "@/hooks/useUserMe";
-import QUERY_KEYS from '@/react-query/queryKeys';
 import { Folder, FolderFields, List, ListFields } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -13,10 +12,10 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useGlobalContex } from "./Provider";
 import UserListDropDown from "./UserListDropDown";
+import { DropdownMenu, DropdownMenuItem } from "./ui/DropdownMenu";
 import Input from "./ui/Input";
 import Line from "./ui/Line";
 import LoadingSpinner from "./ui/LoadingSpinner";
-import { DropdownMenu, DropdownMenuItem } from "./ui/DropdownMenu";
 import Modal from "./ui/modal";
 
 export default function ListsPanel() {
@@ -47,10 +46,10 @@ export default function ListsPanel() {
   );
 }
 
-function MenuItem({ icon, children, onClick }: { icon: string; children: React.ReactNode; onClick?: () => void }) {
+function MenuItem({ icon, children, onClick, active }: { icon: string; children: React.ReactNode; onClick?: () => void; active?: boolean }) {
   return (
     <li>
-      <Button variation="text" className="!text-start w-full !px-3" onClick={onClick}>
+      <Button variation="text" className={`!text-start w-full !px-3 ${active ? "???" : ""}`} onClick={onClick}>
         <Icon name={icon} className="mie-1.5 c-base11" />
         {children}{" "}
       </Button>
@@ -59,11 +58,11 @@ function MenuItem({ icon, children, onClick }: { icon: string; children: React.R
 }
 
 function SmartLists() {
-  const { setSelectedSmartListId } = useGlobalContex();
+  const { setSelectedSmartListId , currentList } = useGlobalContex();
 
   return (
     <ul className="flex flex-col gap-3 -mis-3 ">
-      <MenuItem icon="bf-i-ph-list" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS)}>
+      <MenuItem icon="bf-i-ph-list" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS)} active={currentList.id === SMART_LIST_IDS.ALL_TASKS}>
         All Tasks
       </MenuItem>
       {/* <MenuItem icon="bf-i-ph-sun" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DO_TODAY)}>
@@ -72,7 +71,9 @@ function SmartLists() {
       {/* <MenuItem icon="bf-i-ph-sun-horizon" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.DO_TOMORROW)}>
         Do Tomorrow
       </MenuItem> */}
-      <MenuItem icon="bf-i-ph-star" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.STARRED)}>
+      <MenuItem icon="bf-i-ph-star" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.STARRED)}
+      active={currentList.id === SMART_LIST_IDS.STARRED}
+      >
         Starred
       </MenuItem>
       {/* <MenuItem icon="bf-i-ph-calendar-dots" onClick={() => setSelectedSmartListId(SMART_LIST_IDS.WITH_DUE_DATES)}>
@@ -112,7 +113,7 @@ function Folders() {
   const deleteFolderM = useMutation({
     mutationFn: (id: string) => fetchAPI.DELETE(`/folders/${id}`),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["folders"] });
@@ -175,7 +176,7 @@ function AddFolderButton() {
   const addFolderM = useMutation({
     mutationFn: async (folder: FolderFields) => fetchAPI.POST(`/folders`, { ...folder, author: userMeQ.data?.id }),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userMe"] });
@@ -243,16 +244,17 @@ function Lists() {
   const userMeQ = useUserMe();
   const { setSelectedUserListId } = useGlobalContex();
   const listQ = useQuery({
-    queryKey: [QUERY_KEYS.LISTS],
+    queryKey: ['lists'],
     queryFn: () => fetchAPI.GET("/lists"),
     enabled: !!userMeQ.data?.id,
   });
+  
   const queryClient = useQueryClient();
 
   const deleteListM = useMutation({
     mutationFn:  (id: string) => fetchAPI.DELETE(`/lists/${id}`),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["lists"] });
@@ -302,7 +304,7 @@ function AddListButton() {
 
   const addListM = useMutation({
     mutationFn: async (list: ListFields) => fetchAPI.POST(`/lists`, { ...list, author: userMeQ.data?.id }),
-    onError: (err) => toast.error("Something went wrong: " + err.message),
+    onError: (err) => toast.error("Error: " + err.message),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userMe"] });
       queryClient.invalidateQueries({ queryKey: ["lists"] });

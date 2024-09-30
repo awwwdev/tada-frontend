@@ -1,7 +1,7 @@
 export const toLocalISOString = (date: Date) => {
   var tzo = -date.getTimezoneOffset(),
     dif = tzo >= 0 ? "+" : "-",
-    pad = function (num) {
+    pad = function (num: number) {
       return (num < 10 ? "0" : "") + num;
     };
 
@@ -22,7 +22,7 @@ export const toLocalISOString = (date: Date) => {
 export const toLocalISOStringWithOffset = (date: Date) => {
   var tzo = -date.getTimezoneOffset(),
     dif = tzo >= 0 ? "+" : "-",
-    pad = function (num) {
+    pad = function (num: number) {
       return (num < 10 ? "0" : "") + num;
     };
 

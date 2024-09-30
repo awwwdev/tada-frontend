@@ -1,5 +1,10 @@
-- optimistic updates
-- local storage persistence
+instead of smart list + user list -> lists with filtes + initate default lists for users in the database
+
+in version 1 only user lists. samrt lists are hard coded. 
+
+for tasks -> only select label + status + id + starred + pinned
+for taas -> select all
+
 - detail panel editing
 -- click to edit note and task label
 - account dropdown
@@ -13,6 +18,8 @@
 
 --- ready for public use ---
 
+- local storage persistence
+- optimistic updates
 - drag and drop ordering bug
 - lists ordering
 - add lists to a folder

@@ -5,8 +5,7 @@ import Checkbox from "@/components/ui/Checkbox";
 import Icon from "@/components/ui/Icon";
 import useTaskMutation from "@/hooks/useTaskMutation";
 import useUserMe from "@/hooks/useUserMe";
-import QUERY_KEYS from "@/react-query/queryKeys";
-import { Task, TaskFields } from "@/types";
+import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -19,14 +18,14 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
   const queryClient = useQueryClient();
   const userMeQ = useUserMe();
 
-  const duplicateTaskMutation = useMutation<Task, Error, TaskFields>({
-    mutationFn: (newTask: TaskFields) =>
-      fetchAPI.POST(`/tasks`, { ...newTask, author: userMeQ.data?.id, id: undefined, _id: undefined, createdAt: undefined, updateAt: undefined, __v: undefined }),
-    onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+  const duplicateTaskMutation = useMutation<Task, Error, Task>({
+    mutationFn: (copiedTask: Task) => {
+      const { id, authorId, createdAt, updatedAt, ...values } = copiedTask;
+      return fetchAPI.POST(`/tasks`, { ...values, authorId: userMeQ.data?.id });
     },
+    onError: (err) => toast.error("Error: " + err.message),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
   });
 
@@ -34,9 +33,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
     <li className={`b-base6 rd-3 p-3 pis-6 flex items-center bg-base1 ${selectedTaskId === task.id && "!b-accent8"}`}>
       <Checkbox
         checked={task.status === "done"}
-        onChange={(checked) => {
-          taskMutation.mutate({ id: task.id, status: checked ? "done" : "to-do" });
-        }}
+        onChange={(checked) => taskMutation.mutate({ id: task.id, status: task.status === 'done' ? "to-do" : "done" })}
       />
       <button
         type="button"
@@ -85,7 +82,6 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
             <span className="sr-only">Star this task</span>
           )}
         </Button>
-
         <div className={`cursor-move px-2 flex items-center`} {...dragHandleProps}>
           <Icon name="bf-i-ph-dots-six-vertical" />
         </div>

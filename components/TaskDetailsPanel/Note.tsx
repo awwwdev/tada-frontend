@@ -2,13 +2,11 @@
 
 import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/button";
-import useAutosizeTextArea from "@/hooks/useAutoSizeTextArea";
-import useSelectedTask from "@/hooks/useSelectedTask";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function Note({ task }: { task: Task }) {
@@ -21,7 +19,7 @@ export default function Note({ task }: { task: Task }) {
   const taskMutation = useMutation({
     mutationFn: async ({ id, note }: { id: string; note: string }) => fetchAPI.PUT(`/tasks/${id}`, { note }),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS , task.id] });

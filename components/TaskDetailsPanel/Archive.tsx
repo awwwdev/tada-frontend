@@ -14,7 +14,7 @@ export default function Archive({ task }: { task: Task }) {
   const archiveTaskM = useMutation({
     mutationFn: async (id: string) => fetchAPI.PUT(`/tasks/${id}`, { archived: !task?.archived }),
     onError: (err) => {
-      toast.error("Something went wrong: " + err.message);
+      toast.error("Error: " + err.message);
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
