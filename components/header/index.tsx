@@ -1,16 +1,10 @@
 "use client";
 
 import Button from "@/components/ui/button";
-import LinkButton from "@/components/ui/button/LinkButton";
 import Icon from "@/components/ui/Icon";
-import useUserMe from "@/hooks/useUserMe";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
-import Modal from "../ui/modal";
-import { ThemeSwitcher } from "./ThemeSwitcher";
-import AccountDropdown from './AccountDropdown';
 
 const Header = () => {
   return (
@@ -18,7 +12,7 @@ const Header = () => {
       <h1 className=" H3 ">TADA</h1>
 
       <div className="mis-auto flex items-center gap-3">
-        <AuthButtons />
+        {/* <AuthButtons /> */}
       </div>
     </header>
   );
@@ -26,50 +20,6 @@ const Header = () => {
 
 export default Header;
 
-function AuthButtons() {
-  const userMeQ = useUserMe();
-  const queryClient = useQueryClient();
-
-  return (
-    <>
-      {userMeQ.data ? (
-        <AccountDropdown />
-      ) : (
-        <>
-          <Modal
-            trigger={
-              <Button variation="ghost">
-                <Icon name="bf-i-ph-sign-in" />
-                Login
-              </Button>
-            }
-          >
-            <LoginOrSignUpBox initalTab="login" />
-          </Modal>
-          <Modal
-            trigger={
-              <Button variation="ghost">
-                <Icon name="bf-i-ph-sign-in" />
-                Sign Up
-              </Button>
-            }
-          >
-            <LoginOrSignUpBox initalTab="signup" />
-          </Modal>
-          {/* <Button
-            variation="ghost"
-            onClick={async () => {
-              const data = await fetchAPI.GET(`/auth/user`);
-              toast(data.message);
-            }}
-          >
-            User Status
-          </Button> */}
-        </>
-      )}
-    </>
-  );
-}
 
 function LogoutButton() {
   const queryClient = useQueryClient();

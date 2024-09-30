@@ -21,7 +21,7 @@ import ActionButtons from './ActionButtons';
 
 export default function ListsPanel() {
   return (
-    <div className="flex flex-col b-ie-1 pie-6 gap-3 overflow-y-auto ">
+    <div className="flex flex-col b-ie-1 b-base6 pie-6 py-6 pis-3  gap-3 overflow-y-auto ">
       <SmartLists />
       <Line />
       {/* <div className="flex gap-3 justify-between items-center">
@@ -31,7 +31,7 @@ export default function ListsPanel() {
       <Folders />
       <Line /> */}
       <div className="flex gap-3 justify-between items-center">
-        <span className="c-base11">My Lists</span>
+        <span className="c-base10 pis-3 ">My Lists</span>
         <AddListButton />
       </div>
       <Lists />
@@ -45,7 +45,7 @@ export default function ListsPanel() {
 function MenuItem({ icon, children, onClick, active }: { icon: string; children: React.ReactNode; onClick?: () => void; active?: boolean }) {
   return (
     <li>
-      <Button variation="text" className={`!text-start w-full !px-3 ${active ? "???" : ""}`} onClick={onClick}>
+      <Button variation="text" className={`!text-start w-full !px-3 ${active ? "" : ""}`} onClick={onClick}>
         <Icon name={icon} className="mie-1.5 c-base11" />
         {children}{" "}
       </Button>
@@ -265,7 +265,7 @@ function Lists() {
           listQ.data.length > 0 &&
           listQ.data.map((list: List, index: number) => {
             return (
-              <li key={"menu-item-list-" + index} className="flex gap-3 items-center">
+              <li key={"menu-item-list-" + index} className="flex gap-3 items-center pis-3 hover:bg-base4 rd-1.5">
                 <Icon name="bf-i-ph-list" className="c-base11" />
                 <Button
                   variation="text"

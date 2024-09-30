@@ -24,7 +24,7 @@ export default function FAQItem({ question, children, number }) {
         </div> */}
 
         <div
-          className=" shd-tinted-2 b-1 b-white flex items-center bg-white/65  px-4 py-4 sm:py-8  sm:px-8 fw-600 rd-4 w-full "
+          className=" shd-tinted-2 b-1 b-base5 flex items-center bg-white/65  px-4 py-4 sm:py-8  sm:px-8 fw-600 rd-4 w-full "
           style={{
             backgroundImage: "url('/static/noise.svg')",
             backgroundSize: "auto",

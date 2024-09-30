@@ -24,7 +24,7 @@ export default function TaskDetailsPanel() {
   });
 
   return (
-    <div className=" px-6   pie-0 b-s-1 b-base6 h-full">
+    <div className=" px-6   pie-0 b-s-1 b-base6 h-full bg-base1">
       {!selectedTaskQ.data && <EmptyState />}
       {selectedTaskQ.data && <TaskDetailsContent task={selectedTaskQ.data} />}
     </div>
@@ -32,7 +32,7 @@ export default function TaskDetailsPanel() {
 }
 
 function EmptyState() {
-  return <div className="w-full h-full flex items-center justify-center b-base11 italic">No task is selected</div>;
+  return <div className="w-full h-full py-6 flex items-center justify-center b-base11 italic">No task is selected</div>;
 }
 
 function TaskDetailsContent({ task }: { task: Task }) {

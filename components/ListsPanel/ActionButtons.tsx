@@ -1,6 +1,13 @@
 import { ThemeSwitcher } from "../header/ThemeSwitcher";
 import LinkButton from "../ui/button/LinkButton";
 import Icon from "../ui/Icon";
+import Button from "@/components/ui/button";
+import useUserMe from "@/hooks/useUserMe";
+import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
+import Modal from "../ui/modal";
+import AccountDropdown from '../header/AccountDropdown';
+
+
 
 export default function ActionButtons() {
   return (
@@ -14,6 +21,43 @@ export default function ActionButtons() {
         <span className="sr-only">Source Code</span>
       </LinkButton>
       <ThemeSwitcher />
+      <AuthButtons />
     </div>
+  );
+}
+
+
+function AuthButtons() {
+  const userMeQ = useUserMe();
+
+  return (
+    <>
+      {userMeQ.data ? (
+        <AccountDropdown />
+      ) : (
+        <>
+          <Modal
+            trigger={
+              <Button variation="ghost">
+                <Icon name="bf-i-ph-sign-in" />
+                Login
+              </Button>
+            }
+          >
+            <LoginOrSignUpBox initalTab="login" />
+          </Modal>
+          <Modal
+            trigger={
+              <Button variation="ghost">
+                <Icon name="bf-i-ph-sign-in" />
+                Sign Up
+              </Button>
+            }
+          >
+            <LoginOrSignUpBox initalTab="signup" />
+          </Modal>
+        </>
+      )}
+    </>
   );
 }

@@ -63,24 +63,12 @@ export const ThemeSwitcher = () => {
     });
   }, []);
 
-  // const toogleTheme = () => {
-  //   const root = document.getElementsByTagName("html")[0];
-  //   root.classList.toggle("dark-theme");
-  //   if (root.classList.contains("dark")) {
-  //     setTheme("dark");
-  //     document.cookie = `theme=dark`;
-  //   } else {
-  //     setTheme("light");
-  //     document.cookie = `theme=light`;
-  //   }
-  // };
 
   return (
     <div>
       <ToggleGroup<Theme>
         value={theme}
         setValue={setTheme}
-        className=" ???"
       >
         <ToggleGroup.Item value="light">
           <Icon name="bf-i-ph-sun" />
