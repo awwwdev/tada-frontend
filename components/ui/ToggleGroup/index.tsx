@@ -4,18 +4,18 @@ import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import * as RadixTypes from "@radix-ui/react-toggle-group";
 import { Children } from "@/types";
 
-export default function ToggleGroup({ children, type, value, setValue, legend, className, ...props }: Children & any) {
+export default function ToggleGroup<T>({ children, type, value, setValue, legend, className, ...props }: Children & any) {
   return (
     <RadixToggleGroup.Root
       aria-label={legend}
       type={type ?? "single"}
       value={value}
-      onValueChange={(v) => setValue(v)}
+      onValueChange={(v: T) => setValue(v)}
       className={`   b-accent6  ${className}`}
       {...props}
     >
       {legend && <span className="block fw-400 text-sm c-base11 mt-0.5em font-display fw-300">{legend}</span>}
-      <div className="flex gap-0.4em flex-wrap ">{children}</div>
+      <div className="flex gap-1 flex-wrap b-1 b-base6 w-fit p-1 rd-1.5">{children}</div>
     </RadixToggleGroup.Root>
   );
 }

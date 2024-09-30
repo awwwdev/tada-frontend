@@ -1,9 +1,6 @@
 import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
-import useGetUserMe from "@/hooks/useGetUserMe";
-import { useQuery } from "@tanstack/react-query";
 
 const AvatarRoot = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -37,7 +34,7 @@ const AvatarFallback = React.forwardRef<
 ));
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
-export default function Avatar({ src, name }) {
+export default function Avatar({ src, name }: {src: string, name: string}) {
   return (
     <AvatarRoot>
       <AvatarImage src={src} />

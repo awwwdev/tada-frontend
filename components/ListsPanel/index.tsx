@@ -3,6 +3,13 @@
 import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/button";
 
+import { useGlobalContex } from "@/components/Provider";
+import UserListDropDown from "@/components/UserListDropDown";
+import { DropdownMenu, DropdownMenuItem } from "@/components/ui/DropdownMenu";
+import Input from "@/components/ui/Input";
+import Line from "@/components/ui/Line";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import Modal from "@/components/ui/modal";
 import SMART_LIST_IDS from '@/constants/smartListIds';
 import useUserMe from "@/hooks/useUserMe";
 import { Folder, FolderFields, List, ListFields } from "@/types";
@@ -10,13 +17,7 @@ import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useGlobalContex } from "./Provider";
-import UserListDropDown from "./UserListDropDown";
-import { DropdownMenu, DropdownMenuItem } from "./ui/DropdownMenu";
-import Input from "./ui/Input";
-import Line from "./ui/Line";
-import LoadingSpinner from "./ui/LoadingSpinner";
-import Modal from "./ui/modal";
+import ActionButtons from './ActionButtons';
 
 export default function ListsPanel() {
   return (
@@ -34,14 +35,9 @@ export default function ListsPanel() {
         <AddListButton />
       </div>
       <Lists />
-      {/* <div className="mt-auto flex flex-col gap-3">
-        <Modal trigger={<Button variation="ghost">Tasks </Button>}>
-          <div className="h-12"></div>
-          <div>
-            <Pre>{JSON.stringify(tasks, null, 2)}</Pre>
-          </div>
-        </Modal>
-      </div> */}
+      <div className="mt-auto">
+        <ActionButtons />
+      </div>
     </div>
   );
 }

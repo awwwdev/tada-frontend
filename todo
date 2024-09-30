@@ -3,7 +3,7 @@ instead of smart list + user list -> lists with filtes + initate default lists f
 in version 1 only user lists. samrt lists are hard coded. 
 
 for tasks -> only select label + status + id + starred + pinned
-for taas -> select all
+for task -> select all
 
 - detail panel editing
 -- click to edit note and task label

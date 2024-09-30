@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
 import Modal from "../ui/modal";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import AccountDropdown from './AccountDropdown';
 
 const Header = () => {
   return (
@@ -17,15 +18,6 @@ const Header = () => {
       <h1 className=" H3 ">TADA</h1>
 
       <div className="mis-auto flex items-center gap-3">
-        <LinkButton variation="ghost" href="/settings" className="" iconButton>
-          <Icon name="bf-i-ph-gear-six" className="c-base11" />
-          <span className="sr-only">Settings</span>
-        </LinkButton>
-        <LinkButton iconButton variation="ghost" href="https://github.com/awwwdev/tada" className="justify-center">
-          <Icon name="bf-i-ph-github-logo" className="c-base11" />
-          <span className="sr-only">Source Code</span>
-        </LinkButton>
-        <ThemeSwitcher theme="dark" />
         <AuthButtons />
       </div>
     </header>
@@ -40,9 +32,8 @@ function AuthButtons() {
 
   return (
     <>
-      {userMeQ.data && <p>{userMeQ.data.email}</p>}
       {userMeQ.data ? (
-        <LogoutButton />
+        <AccountDropdown />
       ) : (
         <>
           <Modal

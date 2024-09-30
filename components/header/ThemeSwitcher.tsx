@@ -1,49 +1,64 @@
 // components/client/theme-swither.tsx
 "use client";
 
-import { Settings } from "@/types";
-import { useState } from "react";
-import { useGlobalContex } from "../Provider";
-import Button from "@/components/ui/button";
+import { setThemeCookie } from "@/app/actions";
 import Icon from "@/components/ui/Icon";
 import ToggleGroup from "@/components/ui/ToggleGroup";
-import { setThemeCookie } from "@/app/actions";
+import useOSTheme from "@/hooks/useOSTheme";
+import { Settings } from "@/types";
+import { useEffect, useState } from "react";
+import { useGlobalContex } from "../Provider";
 
 type Theme = Settings["theme"];
 
-interface Props {
-  theme: Theme;
-}
-
-const THEMES = {
-  dark: "dark-theme",
-  light: "light-theme",
-  // system: 'system-theme',
-};
-
 export const ThemeSwitcher = () => {
-  const { theme } = useGlobalContex();
-  const [_theme, _setTheme] = useState<Theme>(theme);
+  const { theme: themeFromCookie } = useGlobalContex();
+  const [_theme, _setTheme] = useState<Theme | null>(null);
 
-  const setTheme = async (th: Theme) => {
-    const root = document.getElementsByTagName("html")[0];
+  const theme = _theme ?? themeFromCookie;
 
-    if (th === "dark") {
-      // document.cookie = `theme=dark`;
+  const systemTheme = useOSTheme();
+
+  const setTheme = async ({to, currentSystemTheme}: {to: Theme, currentSystemTheme: 'dark' | 'light'}) => {
+    async function changeToDark() {
       root.classList.remove("light-theme");
       root.classList.add("dark-theme");
+    }
+
+    async function changeToLight() {
+      root.classList.remove("dark-theme");
+      root.classList.add("light-theme");
+    }
+
+    const root = document.getElementsByTagName("html")[0];
+
+    if (to === "dark") {
+      changeToDark();
       _setTheme("dark");
       await setThemeCookie({ theme: "dark" });
     }
-    if (th === "light") {
-      // document.cookie = `theme=light`;
-      root.classList.remove("dark-theme");
-      root.classList.add("light-theme");
+    if (to === "light") {
+      changeToLight();
       _setTheme("light");
       await setThemeCookie({ theme: "light" });
     }
-    // if (theme === "system") {
+    if (to === "system" && currentSystemTheme === "light") {
+      changeToLight();
+      _setTheme("system");
+      await setThemeCookie({ theme: "system" });
+    }
+    if (to === "system" && currentSystemTheme === "dark") {
+      changeToDark();
+      _setTheme("system");
+      await setThemeCookie({ theme: "system" });
+    }
   };
+
+  useEffect(() => {
+    if (theme === "system" && systemTheme) {
+      setTheme({to: "system", currentSystemTheme: systemTheme});
+    }
+  }, [systemTheme]);
 
   // const toogleTheme = () => {
   //   const root = document.getElementsByTagName("html")[0];
@@ -58,20 +73,24 @@ export const ThemeSwitcher = () => {
   // };
 
   return (
-    <ToggleGroup value={_theme} setValue={setTheme}>
-      <ToggleGroup.Item value="dark">
-        <Icon name="bf-i-ph-moon" />
-        <span>Dark</span>
-      </ToggleGroup.Item>
-      <ToggleGroup.Item value="light">
-        <Icon name="bf-i-ph-sun" />
-        <span>Light</span>
-      </ToggleGroup.Item>
-      {/* <ToggleGroup.Item value="system">
-        <Icon name="bf-i-ph-computer" />
-        <span>System</span>
-      </ToggleGroup.Item> */}
-    </ToggleGroup>
+    <div>
+      <p>systemTheme: {systemTheme}</p>
+      <ToggleGroup<Theme> value={theme} setValue={(v: Theme) => setTheme({to: v, currentSystemTheme: systemTheme})} className=" ???">
+        <ToggleGroup.Item value="light">
+          <Icon name="bf-i-ph-sun" />
+          <span className="sr-only">Light Color Scheme</span>
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="dark">
+          <Icon name="bf-i-ph-moon" />
+          <span className="sr-only">Dark Color Scheme</span>
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="system">
+          <Icon name="bf-i-ph-device-mobile" className="sm:hidden" />
+          <Icon name="bf-i-ph-laptop" className="lt-sm:hidden" />
+          <span className="sr-only">Follow System Color Scheme</span>
+        </ToggleGroup.Item>
+      </ToggleGroup>
+    </div>
   );
 };
 

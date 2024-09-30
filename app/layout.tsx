@@ -11,8 +11,7 @@ import type { Metadata } from "next";
 import MyToaster from "@/components/Toaster";
 import { cookies } from "next/headers";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
-import { Settings } from '@/types';
-
+import { Settings } from "@/types";
 
 const title = "Hamid K.";
 const description = "A Developer with Design Superpowers";
@@ -54,11 +53,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const theme = cookies().get("theme");
   return (
-    <html className={`${theme?.value ?? "light"}-theme style-scroll-bar  `} lang="en">
+    <html className={`${theme?.value === "dark" ? "dark" : "light"}-theme style-scroll-bar  `} lang="en">
       <head></head>
       <body className={`bg-base3 c-base12 relative isolate  overflow-hidden`}>
         <ReactQueryProvider>
-          <Providers theme={theme?.value as Settings['theme']}>
+          <Providers theme={theme?.value as Settings["theme"]}>
             {/* <main className={`  max-w-screen max-h-full`}>{children}</main> */}
             {children}
             <MyToaster />
