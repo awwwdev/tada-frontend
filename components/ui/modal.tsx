@@ -30,7 +30,7 @@ export default function Modal({
           className="fixed z-50 max-h-[90vh] overflow-y-auto 
             w-[95vw] max-w-30rem rd-6 p-6 md:w-full 
             top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] 
-          bg-white   b-t-1 b-l-1 b-r-1 b-base4A shadow-2xl shadow-black "
+          bg-base1 b-t-1 b-l-1 b-r-1 b-base4A shadow-2xl shadow-black "
           style={{ width }}
         >
           <div className="relative">

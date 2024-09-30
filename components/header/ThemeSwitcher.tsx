@@ -4,7 +4,6 @@
 import { setThemeCookie } from "@/app/actions";
 import Icon from "@/components/ui/Icon";
 import ToggleGroup from "@/components/ui/ToggleGroup";
-import useOSTheme from "@/hooks/useOSTheme";
 import { Settings } from "@/types";
 import { useEffect, useState } from "react";
 import { useGlobalContex } from "../Provider";
@@ -12,14 +11,17 @@ import { useGlobalContex } from "../Provider";
 type Theme = Settings["theme"];
 
 export const ThemeSwitcher = () => {
-  const { theme: themeFromCookie } = useGlobalContex();
+  const { theme: themeFromCookie , useSystemTheme} = useGlobalContex();
   const [_theme, _setTheme] = useState<Theme | null>(null);
 
-  const theme = _theme ?? themeFromCookie;
+  const theme = _theme ?? (useSystemTheme ? 'system' : themeFromCookie);
 
-  const systemTheme = useOSTheme();
+  const getSystemTheme = () => {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  };
+  // const systemTheme = useOSTheme();
 
-  const setTheme = async ({to, currentSystemTheme}: {to: Theme, currentSystemTheme: 'dark' | 'light'}) => {
+  const setTheme = async (to: Theme) => {
     async function changeToDark() {
       root.classList.remove("light-theme");
       root.classList.add("dark-theme");
@@ -35,30 +37,31 @@ export const ThemeSwitcher = () => {
     if (to === "dark") {
       changeToDark();
       _setTheme("dark");
-      await setThemeCookie({ theme: "dark" });
+      await setThemeCookie({ theme: "dark", useSystemTheme: false });
     }
     if (to === "light") {
       changeToLight();
       _setTheme("light");
-      await setThemeCookie({ theme: "light" });
+      await setThemeCookie({ theme: "light" , useSystemTheme: false });
     }
-    if (to === "system" && currentSystemTheme === "light") {
+    if (to === "system" && getSystemTheme() === "light") {
       changeToLight();
       _setTheme("system");
-      await setThemeCookie({ theme: "system" });
+      await setThemeCookie({ theme: "light" , useSystemTheme: true });
     }
-    if (to === "system" && currentSystemTheme === "dark") {
+    if (to === "system" && getSystemTheme() === "dark") {
       changeToDark();
       _setTheme("system");
-      await setThemeCookie({ theme: "system" });
+      await setThemeCookie({ theme: "dark" , useSystemTheme: true });
     }
   };
 
   useEffect(() => {
-    if (theme === "system" && systemTheme) {
-      setTheme({to: "system", currentSystemTheme: systemTheme});
-    }
-  }, [systemTheme]);
+    if (theme === "system") setTheme("system");
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
+      if (theme === "system") setTheme("system");
+    });
+  }, []);
 
   // const toogleTheme = () => {
   //   const root = document.getElementsByTagName("html")[0];
@@ -74,8 +77,11 @@ export const ThemeSwitcher = () => {
 
   return (
     <div>
-      <p>systemTheme: {systemTheme}</p>
-      <ToggleGroup<Theme> value={theme} setValue={(v: Theme) => setTheme({to: v, currentSystemTheme: systemTheme})} className=" ???">
+      <ToggleGroup<Theme>
+        value={theme}
+        setValue={setTheme}
+        className=" ???"
+      >
         <ToggleGroup.Item value="light">
           <Icon name="bf-i-ph-sun" />
           <span className="sr-only">Light Color Scheme</span>

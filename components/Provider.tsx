@@ -20,6 +20,7 @@ type ContextType = {
   setSelectedSmartListId: (listId: SmartListId) => void;
   setSelectedTaskId: React.Dispatch<SetStateAction<string | null>>;
   theme: Settings["theme"];
+  useSystemTheme: boolean;
 };
 const GloblaContext = createContext<ContextType>({
   isSideMenuOpen: false,
@@ -30,11 +31,13 @@ const GloblaContext = createContext<ContextType>({
   setSelectedUserListId: () => {},
   setSelectedSmartListId: () => {},
   theme: "light",
+  useSystemTheme: false,
 });
 
 export default function Providers({
   children,
   theme,
+  useSystemTheme,
 }: {
   children: React.ReactNode;
   theme: Settings["theme"];
@@ -60,6 +63,7 @@ export default function Providers({
         isSideMenuOpen,
         setIsSideMenuOpen,
         theme,
+        useSystemTheme,
       }}
     >
       {children}

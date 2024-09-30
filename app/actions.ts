@@ -3,9 +3,9 @@
 import { Settings } from '@/types';
 import { cookies } from "next/headers";
 
-export async function setThemeCookie({ theme }: { theme: Settings['theme'] }) {
+export async function setThemeCookie({ theme , useSystemTheme}: { theme: Settings['theme'], useSystemTheme: boolean }) {
   cookies().set("theme", theme);
-
-  const th = cookies().get("theme");
+  cookies().set("useSystemTheme", String(useSystemTheme));
+  // const th = cookies().get("theme");
   // or
 }

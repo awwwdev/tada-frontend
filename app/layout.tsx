@@ -51,13 +51,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const theme = cookies().get("theme");
+  const theme = cookies().get("theme")?.value;
+  const useSystemTheme = cookies().get("useSystemTheme")?.value === 'true' ? true : false;
   return (
-    <html className={`${theme?.value === "dark" ? "dark" : "light"}-theme style-scroll-bar  `} lang="en">
+    <html className={`${theme ?? "light"}-theme style-scroll-bar  `} lang="en">
       <head></head>
       <body className={`bg-base3 c-base12 relative isolate  overflow-hidden`}>
         <ReactQueryProvider>
-          <Providers theme={theme?.value as Settings["theme"]}>
+          <Providers theme={theme as Settings["theme"]} useSystemTheme={useSystemTheme}>
             {/* <main className={`  max-w-screen max-h-full`}>{children}</main> */}
             {children}
             <MyToaster />
