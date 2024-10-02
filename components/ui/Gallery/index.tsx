@@ -1,8 +1,8 @@
 "use client";
-import { useMemo, useState } from "react";
-import Button from "../button";
-import Icon from "../Icon";
 import Image from "next/image";
+import { useMemo, useState } from "react";
+import Button from "../Button";
+import Icon from "../Icon";
 
 type Image = {
   src: string;
@@ -30,7 +30,7 @@ export default function Gallery({ images }: { images: Image[] }) {
           <div style={{ gridArea: "1/1/-1/-1" }} className="flex items-center p-1 ">
             <Button
               iconButton
-              variation="soft"
+              variant="soft"
               className=" text-xs "
               onClick={() => {
                 setCurrentImageIndex((s) => (s - 1 + images.length) % images.length);
@@ -44,7 +44,7 @@ export default function Gallery({ images }: { images: Image[] }) {
           <div style={{ gridArea: "1/1/-1/-1" }} className="flex items-center justify-end p-1">
             <Button
               iconButton
-              variation="soft"
+              variant="soft"
               className=" text-xs"
               onClick={() => {
                 setCurrentImageIndex((s) => (s + 1) % images.length);
