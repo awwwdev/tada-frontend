@@ -5,8 +5,8 @@ import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
+import Button from "./ui/Button";
 import Input from "./ui/Input";
-import Button from "./ui/button";
 
 export default function TaskInput() {
   const queryClient = useQueryClient();
@@ -53,7 +53,7 @@ export default function TaskInput() {
               onChange={(e) => setDraft((s) => ({ ...s, label: e.target.value }))}
             />
           </div>
-          <Button variation="solid" type="submit" isLoading={addTaskM.isPending} disabled={!userMeQ.data?.id}>
+          <Button variant="solid" type="submit" isLoading={addTaskM.isPending} disabled={!userMeQ.data?.id}>
             Add Task
           </Button>
         </div>

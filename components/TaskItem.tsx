@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
 import Icon from "@/components/ui/Icon";
 import useTaskMutation from "@/hooks/useTaskMutation";
@@ -45,15 +45,15 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
         <span className="sr-only">Select This Task</span>
       </button>
       <div className="mis-auto flex opacity-20 hover:opacity-100">
-        {/* <Button variation="text" iconButton onClick={() => setTask({ ...task, deleted: true })}>
+        {/* <Button variant="text" iconButton onClick={() => setTask({ ...task, deleted: true })}>
           <Icon name="bf-i-ph-trash" className="c-base11" />
           <span className="sr-only">Delete</span>
         </Button> */}
-        <Button variation="text" iconButton onClick={() => duplicateTaskMutation.mutate(task)}>
+        <Button variant="text" iconButton onClick={() => duplicateTaskMutation.mutate(task)}>
           <Icon name="bf-i-ph-copy" className="c-base11" />
           <span className="sr-only">Duplicate</span>
         </Button>
-        <Button variation="text" iconButton onClick={() => taskMutation.mutate({ id: task.id, pinned: !task.pinned })}>
+        <Button variant="text" iconButton onClick={() => taskMutation.mutate({ id: task.id, pinned: !task.pinned })}>
           {task.pinned ? (
             <Icon name="bf-i-ph-push-pin-fill" className="c-accent11" />
           ) : (
@@ -67,7 +67,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
         </Button>
 
         <Button
-          variation="text"
+          variant="text"
           iconButton
           onClick={() => taskMutation.mutate({ id: task.id, starred: !task.starred })}
         >

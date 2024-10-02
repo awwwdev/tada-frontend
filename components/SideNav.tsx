@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import darsoonLogo from "@/public/static/logo/darsoon-logo.png";
-import darsoonLogoIcon from "@/public/static/logo/darsoon-logo-icon.png";
-import Image from "next/image";
-import * as Toggle from "@radix-ui/react-toggle";
-import { createContext, useContext, useState } from "react";
-import MobileOnly from "@/components/ui/MobileOnly";
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+import MobileOnly from "@/components/ui/MobileOnly";
+import darsoonLogoIcon from "@/public/static/logo/darsoon-logo-icon.png";
+import darsoonLogo from "@/public/static/logo/darsoon-logo.png";
+import * as Toggle from "@radix-ui/react-toggle";
+import Image from "next/image";
+import Link from "next/link";
+import { createContext, useContext, useState } from "react";
 import { useGlobalContex } from "./Provider";
 
 const NavContext = createContext<{
@@ -61,7 +61,7 @@ function SideNav({ className }: { className?: string }) {
         <MobileOnly>
           <div className="flex mt-3 ml-1">
             <Button
-              variation="text"
+              variant="text"
               className="!rd-full"
               iconButton
               onClick={() => {

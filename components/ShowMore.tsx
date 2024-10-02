@@ -1,10 +1,9 @@
 "use client";
 
-import { CSSProperties, useState } from "react";
-import Icon from "@/components/ui/Icon";
-import Space from "@/components/ui/Space";
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/Button";
 import GradientBorderOverlay from "@/components/ui/GradientBorderOverlay";
+import Icon from "@/components/ui/Icon";
+import { CSSProperties, useState } from "react";
 
 export default function ShowMore({ children, minHeight = "0fr" }: { children: React.ReactNode; minHeight?: string }) {
   const [expanded, setExpanded] = useState(false);
@@ -40,7 +39,7 @@ export default function ShowMore({ children, minHeight = "0fr" }: { children: Re
       <div className="flex justify-center items-center">
         <div className="c-base5 h-1px grow bg-gradient-to-l from-current-color via-current-color to-transparent via-80%"></div>
         <Button
-          variation="ghost"
+          variant="ghost"
           rounded
           className="fs-xs flex gap-1.5 items-center !h-2.25em !b-0 relative !bg-transparent hover:bg-gradient-to-br from-transparent via-transparent via-30% to-base3A"
           onClick={() => {
