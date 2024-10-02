@@ -7,14 +7,18 @@ import ToggleGroup from "@/components/ui/ToggleGroup";
 import { Settings } from "@/types";
 import { useEffect, useState } from "react";
 import { useGlobalContex } from "../Provider";
+import Card from "../ui/Card";
+import Button from "../ui/Button";
+import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
+
 
 type Theme = Settings["theme"];
 
 export const ThemeSwitcher = () => {
-  const { theme: themeFromCookie , useSystemTheme} = useGlobalContex();
+  const { theme: themeFromCookie, useSystemTheme } = useGlobalContex();
   const [_theme, _setTheme] = useState<Theme | null>(null);
 
-  const theme = _theme ?? (useSystemTheme ? 'system' : themeFromCookie);
+  const theme = _theme ?? (useSystemTheme ? "system" : themeFromCookie);
 
   const getSystemTheme = () => {
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -42,17 +46,17 @@ export const ThemeSwitcher = () => {
     if (to === "light") {
       changeToLight();
       _setTheme("light");
-      await setThemeCookie({ theme: "light" , useSystemTheme: false });
+      await setThemeCookie({ theme: "light", useSystemTheme: false });
     }
     if (to === "system" && getSystemTheme() === "light") {
       changeToLight();
       _setTheme("system");
-      await setThemeCookie({ theme: "light" , useSystemTheme: true });
+      await setThemeCookie({ theme: "light", useSystemTheme: true });
     }
     if (to === "system" && getSystemTheme() === "dark") {
       changeToDark();
       _setTheme("system");
-      await setThemeCookie({ theme: "dark" , useSystemTheme: true });
+      await setThemeCookie({ theme: "dark", useSystemTheme: true });
     }
   };
 
@@ -63,27 +67,31 @@ export const ThemeSwitcher = () => {
     });
   }, []);
 
-
   return (
     <div>
-      <ToggleGroup<Theme>
-        value={theme}
-        setValue={setTheme}
-      >
-        <ToggleGroup.Item value="light">
-          <Icon name="bf-i-ph-sun" />
-          <span className="sr-only">Light Color Scheme</span>
-        </ToggleGroup.Item>
-        <ToggleGroup.Item value="dark">
-          <Icon name="bf-i-ph-moon" />
-          <span className="sr-only">Dark Color Scheme</span>
-        </ToggleGroup.Item>
-        <ToggleGroup.Item value="system">
-          <Icon name="bf-i-ph-device-mobile" className="sm:hidden" />
-          <Icon name="bf-i-ph-laptop" className="lt-sm:hidden" />
-          <span className="sr-only">Follow System Color Scheme</span>
-        </ToggleGroup.Item>
-      </ToggleGroup>
+      <RadixToggleGroup.Root value={theme} onValueChange={setTheme}  type="single" >
+        <Card className="flex gap-1 w-fit !b-none" size='sm' >
+          <RadixToggleGroup.Item  value="light" asChild>
+            <Button variant="ghost"  iconButton size='sm'>
+              <Icon name="bf-i-ph-sun" />
+              <span className="sr-only">Light Color Scheme</span>
+            </Button>
+          </RadixToggleGroup.Item>
+          <RadixToggleGroup.Item  value="dark" asChild>
+            <Button variant="ghost"  iconButton size='sm'>
+              <Icon name="bf-i-ph-moon" />
+              <span className="sr-only">Dark Color Scheme</span>
+            </Button>
+          </RadixToggleGroup.Item>
+          <RadixToggleGroup.Item  value="system" asChild>
+            <Button variant="ghost"  iconButton size='sm'>
+              <Icon name="bf-i-ph-device-mobile" className="sm:hidden" />
+              <Icon name="bf-i-ph-laptop" className="lt-sm:hidden" />
+              <span className="sr-only">Follow System Color Scheme</span>
+            </Button>
+          </RadixToggleGroup.Item>
+        </Card>
+      </RadixToggleGroup.Root>
     </div>
   );
 };
