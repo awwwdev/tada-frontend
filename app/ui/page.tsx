@@ -15,6 +15,7 @@ import { ButtonProps } from "@/components/ui/Button/types";
 import Card from "@/components/ui/Card";
 import { CardProps } from "@/components/ui/Card/Card";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
+import MenuItem from "@/components/ui/MenuItem/MenuItem";
 
 export default function Page() {
   const [theme, setTheme] = useState<Settings["theme"]>("light");
@@ -43,6 +44,12 @@ export default function Page() {
           </select>
         </div>
         <div className="grid gap-12">
+          <Card className="flex flex-col gap-1">
+            <MenuItem>Menu Item</MenuItem>
+            <MenuItem>Menu Item</MenuItem>
+            <MenuItem>Menu Item</MenuItem>
+            <MenuItem>Menu Item</MenuItem>
+          </Card>
           <Card size={size} className="flex gap-2 items-center" elevation={elevation}>
             <Button {...{ isLoading, disabled }} size={size} variant="solid">
               Mediom
@@ -53,12 +60,11 @@ export default function Page() {
           <Card size={size} className="" elevation={elevation}>
             <Card.Header>Hellow</Card.Header>
             <Card.Body>
+              <Button {...{ isLoading, disabled }} size={size} variant="solid">
+                Mediom
+              </Button>
 
-            <Button {...{ isLoading, disabled }} size={size} variant="solid">
-              Mediom
-            </Button>
-
-            <span>This is a card </span>
+              <span>This is a card </span>
             </Card.Body>
             <Card.Footer>Footer</Card.Footer>
           </Card>
