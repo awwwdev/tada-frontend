@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
+import { useGlobalContex } from "./Provider";
 
 export default function TaskInput() {
   const queryClient = useQueryClient();
@@ -16,9 +17,14 @@ export default function TaskInput() {
     authorId: "",
   });
   const userMeQ = useUserMe();
-  // const { addTask } = useGlobalContex();
+  const { currentList } = useGlobalContex();
   const addTaskM = useMutation({
-    mutationFn: (task: TaskFields) => fetchAPI.POST(`/tasks`, { ...task, authorId: userMeQ.data?.id }),
+    mutationFn: (task: TaskFields) =>
+      fetchAPI.POST(`/tasks`, {
+        ...task,
+        authorId: userMeQ.data?.id,
+        listId: currentList.type === "user-list" ? currentList.id : undefined,
+      }),
     onError: (err) => {
       toast.error("Error: " + err.message);
     },
