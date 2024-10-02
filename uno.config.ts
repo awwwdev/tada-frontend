@@ -1,9 +1,8 @@
-import { presetIcons, presetUno, transformerVariantGroup, defineConfig } from "unocss";
+import { defineConfig, presetIcons, presetUno, transformerVariantGroup } from "unocss";
 import { presetRadix } from "unocss-preset-radix";
 // import * as radixColors from '@radix-ui/colors';
 import { rules, shortcuts } from "./uno-rules";
 // import presetPrimitives from "unocss-preset-primitives";
-
 export default defineConfig({
   rules,
   // @ts-ignore
