@@ -12,8 +12,8 @@ import { Settings } from "@/types";
 import { useId, useState } from "react";
 
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
-import { To } from 'devextreme-react/cjs/autocomplete';
-import { ButtonProps } from '@/components/ui/Button/types';
+import { To } from "devextreme-react/cjs/autocomplete";
+import { ButtonProps } from "@/components/ui/Button/types";
 
 export default function Page() {
   const [theme, setTheme] = useState<Settings["theme"]>("light");
@@ -21,7 +21,7 @@ export default function Page() {
   const [value, setValue] = useState("some value");
   const [isLoading, setIsLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [variant , setVariant] = useState<ButtonProps["variant"]>("ghost");
+  const [variant, setVariant] = useState<ButtonProps["variant"]>("ghost");
 
   return (
     <div className="max-w-page mx-auto">
@@ -31,7 +31,7 @@ export default function Page() {
           <div className="flex mis-auto gap-3">
             <Button
               size="sm"
-              variant='ghost'
+              variant="ghost"
               onClick={() => {
                 setDisabled(!disabled);
               }}
@@ -47,25 +47,28 @@ export default function Page() {
             >
               {isLoading ? "Stop Loading" : "Set Loading"}
             </Button>
-         <select name="" id="" className='bg-base1 c-base12'
-          value={variant} onChange={(e) => setVariant(e.target.value as ButtonProps["variant"])}
-         >
-          <option value="ghost">ghost</option>
-          <option value="ghost-accent">ghost accnet</option>
-          <option value="outline">outline</option>
-          <option value="outline-accent">outline accnet</option>
-          <option value="text">text</option>
-          <option value="text">text accent</option>
-          <option value='solid'>Solid</option>
-          <option value='solid'>Solid accent</option>
-          <option value='soft'>Soft</option>
-          <option value='soft-accent'>Soft accent</option>
-         </select>
+            <select
+              name=""
+              id=""
+              className="bg-base1 c-base12"
+              value={variant}
+              onChange={(e) => setVariant(e.target.value as ButtonProps["variant"])}
+            >
+              <option value="ghost">ghost</option>
+              <option value="ghost-accent">ghost accnet</option>
+              <option value="outline">outline</option>
+              <option value="outline-accent">outline accnet</option>
+              <option value="text">text</option>
+              <option value="text">text accent</option>
+              <option value="solid">Solid</option>
+              <option value="solid">Solid accent</option>
+              <option value="soft">Soft</option>
+              <option value="soft-accent">Soft accent</option>
+            </select>
           </div>
-          
         </div>
-        <Buttons {...{isLoading, variant , disabled}} className=''/>
-        <Buttons {...{isLoading, variant , disabled}}  className='flex flex-col max-w-40rem'/>
+        <Buttons {...{ isLoading, variant, disabled }} className="" />
+        <Buttons {...{ isLoading, variant, disabled }} className="flex flex-col max-w-40rem" />
 
         <div className="h-12"></div>
         <div className="flex flex-wrap gap-3 ">
@@ -194,52 +197,65 @@ export default function Page() {
   );
 }
 
-function Buttons({ disabled, isLoading, className , variant }: { disabled: boolean; isLoading: boolean; className: string, variant: ButtonProps['variant'] }) {
+function Buttons({
+  disabled,
+  isLoading,
+  className,
+  variant,
+}: {
+  disabled: boolean;
+  isLoading: boolean;
+  className: string;
+  variant: ButtonProps["variant"];
+}) {
   return (
     <div className={className}>
-      <Button  {...{ disabled, isLoading ,variant }}>
-        Button
+      <Button {...{ disabled, isLoading, variant }}>No Icon</Button>
+      <br />
+      <Button before={<Icon name="bf-i-ph-sun" className="c-base11 " />} {...{ disabled, isLoading, variant }}>
+        With Prefix
       </Button>
       <br />
-      <Button  before={<Icon name="bf-i-ph-sun" className="c-base11 " />} {...{ disabled, isLoading ,variant }}>
-        Before
-      </Button>
-      <br />
-      <Button  suffix={<Icon name="bf-i-ph-sun" className="c-base11 " />} {...{ disabled, isLoading ,variant }}>
-        Ssuffix
+      <Button suffix={<Icon name="bf-i-ph-sun" className="c-base11 " />} {...{ disabled, isLoading, variant }}>
+        With Suffix
       </Button>
       <br />
       <Button
-        
         before={<Icon name="bf-i-ph-moon" className="c-base11 " />}
         suffix={<Icon name="bf-i-ph-sun" className="c-base11 " />}
-        {...{ disabled, isLoading ,variant }}
+        {...{ disabled, isLoading, variant }}
       >
         Suffix + before
       </Button>
-      {/* <br /> */}
-      <Button  className="" {...{ disabled, isLoading ,variant }}>
+      <br />
+      <Button
+        className=""
+        {...{ disabled, isLoading, variant }}
+        before={<Icon name="bf-i-ph-sun" className="c-base11 " />}
+      >
         <Icon name="bf-i-ph-sun" className="c-base11 " />
         <span className="inline-flex items-center">
-        <Icon name="bf-i-ph-sun" className="c-base11 " />
-        <span className='???'>
-        Icon inside
-        </span>
+          <Icon name="bf-i-ph-sun" className="c-base11 " />
+          <span className="">Icon inside</span>
         </span>
       </Button>
       <br />
-      <Button  className="" {...{ disabled, isLoading ,variant }}>
+      <Button className="" {...{ disabled, isLoading, variant }}>
         Icon inside
         <Icon name="bf-i-ph-sun" className="c-base11 " />
       </Button>
       <br />
       <Button
-        
         before={<Icon name="bf-i-ph-moon" className="c-base11 " />}
         suffix={<Icon name="bf-i-ph-sun" className="c-base11 " />}
-        {...{ disabled, isLoading ,variant }}
+        {...{ disabled, isLoading, variant }}
       >
         suffix + before
+      </Button>
+      <br />
+      <p>Icon Button</p>
+      <Button iconButton {...{ disabled, isLoading, variant }}>
+        <Icon name="bf-i-ph-sun" className="c-base11 " />
       </Button>
     </div>
   );

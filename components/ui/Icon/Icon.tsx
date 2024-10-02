@@ -16,7 +16,7 @@ export default function Icon({
         className={`${name} 
         select-none shrink-0 grow-0
         vertical-align-[-0.125em] 
-        before:scale-120 
+        before:scale-140 
         ${className}  ${
         subdued ? "opacity-50" : ''
         }`}
