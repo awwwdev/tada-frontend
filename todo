@@ -1,20 +1,8 @@
-design system
-- button
--- menu Item
--- Tab.Trigger
-
+- rewrite button classes with css properties -> easily add more data attributes (write in css?)
+- match menu item and button sizes
 - input
 
-- card 
-
-
-add task to selected list
-consisntent paddings for elemetns
-github btn -> link
-setting btn -> link
 style them switcher -> no borders for each btn
-avatar -> profile picture
-tiangle beside selected task
 textarea -> div contenteditable
 duplicate btn -> hide on @hover:not(hover)
 pin task -> top of the list

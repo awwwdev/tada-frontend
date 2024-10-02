@@ -30,7 +30,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
   });
 
   return (
-    <li className={`b-base6 rd-3 p-3 pis-6 flex items-center bg-base1 relative  `}>
+    <li className={`b-base6 rd-3 p-3 pis-6 flex items-center bg-base1 relative  group `}>
       {selectedTaskId === task.id && <TraingleIndicator />}
       <Checkbox
         checked={task.status === "done"}
@@ -45,16 +45,16 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
         <span className="mis-3">{task.label}</span>
         <span className="sr-only">Select This Task</span>
       </button>
-      <div className="mis-auto flex opacity-20 hover:opacity-100">
+      <div className="mis-auto flex  hover:opacity-100 ">
         {/* <Button variant="text" iconButton onClick={() => setTask({ ...task, deleted: true })}>
           <Icon name="bf-i-ph-trash" className="c-base11" />
           <span className="sr-only">Delete</span>
         </Button> */}
-        <Button variant="text" iconButton onClick={() => duplicateTaskMutation.mutate(task)}>
+        <Button variant="text" className={`group-hover:visible invisible `}  iconButton onClick={() => duplicateTaskMutation.mutate(task)}>
           <Icon name="bf-i-ph-copy" className="c-base11" />
           <span className="sr-only">Duplicate</span>
         </Button>
-        <Button variant="text" iconButton onClick={() => taskMutation.mutate({ id: task.id, pinned: !task.pinned })}>
+        <Button variant="text" className={`group-hover:visible ${task.pinned ? "visible" : "invisible"} `}  iconButton onClick={() => taskMutation.mutate({ id: task.id, pinned: !task.pinned })}>
           {task.pinned ? (
             <Icon name="bf-i-ph-push-pin-fill" className="c-accent11" />
           ) : (
@@ -67,7 +67,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
           )}
         </Button>
 
-        <Button variant="text" iconButton onClick={() => taskMutation.mutate({ id: task.id, starred: !task.starred })}>
+        <Button variant="text" className={`group-hover:visible ${task.starred ? "visible" : "invisible"} `}  iconButton onClick={() => taskMutation.mutate({ id: task.id, starred: !task.starred })}>
           {task.starred ? (
             <Icon name="bf-i-ph-star-fill" className="c-accent11" />
           ) : (
