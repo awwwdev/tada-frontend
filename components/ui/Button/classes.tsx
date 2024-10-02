@@ -8,8 +8,8 @@ const parts = {
   },
   bg: {
     transparent: {
-      gray: "hover:bg-base2A active:bg-base3A",
-      accent: "hover:bg-accent2A active:bg-accent3A",
+      gray: "hover:bg-base2A active:bg-base3A data-[state=on]:bg-base3A",
+      accent: "hover:bg-accent2A active:bg-accent3A data-[state=on]:bg-accent3A",
     },
     soft: {
       gray: "bg-base3A hover:bg-base4 active:bg-base5",
