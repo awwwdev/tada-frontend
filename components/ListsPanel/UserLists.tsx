@@ -4,8 +4,6 @@ import Input from "@/components/ui/Input";
 import Modal from "@/components/ui/modal";
 import { ListFields } from "@/types";
 import { useState } from "react";
-"use client";
-
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
