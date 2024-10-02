@@ -15,6 +15,7 @@ import { List } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import MenuItem from '../ui/MenuItem/MenuItem';
 
 export default function UserLists() {
   const userMeQ = useUserMe();
@@ -56,7 +57,7 @@ export default function UserLists() {
                   preStyled={false}
                   className="!text-start w-full"
                   onClick={() => setSelectedUserListId(list.id)}
-                >
+                  >
                   <Icon name="bf-i-ph-list" className="c-base11" />
                   <span className="grow">{list.name}</span>
                 </Button>

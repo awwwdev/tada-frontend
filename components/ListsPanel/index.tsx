@@ -7,7 +7,7 @@ import UserLists from "./UserLists";
 
 export default function ListsPanel() {
   return (
-    <div className="flex flex-col b-ie-1 b-base6 pie-6 py-6 pis-3  gap-3 overflow-y-auto ">
+    <div className="flex flex-col b-ie-1 b-base6 pie-7.5 py-6 pis-3  gap-3 overflow-y-auto ">
       <SmartLists />
       <Line />
       <UserLists />
