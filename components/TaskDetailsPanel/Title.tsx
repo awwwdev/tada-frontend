@@ -1,7 +1,7 @@
 "use client";
 
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
-import Button from "@/components/ui/button";
 import useAutosizeTextArea from "@/hooks/useAutoSizeTextArea";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task } from "@/types";
@@ -45,12 +45,12 @@ export default function Title({ task }: { task: Task }) {
         // autoFocus
       ></textarea>
       {showEdit ? (
-        <Button variation="solid" onClick={() => taskMutation.mutate({ id: task.id, label: value })}>
+        <Button variant="solid" onClick={() => taskMutation.mutate({ id: task.id, label: value })}>
           Save
         </Button>
       ) : (
         <Button
-          variation="ghost"
+          variant="ghost"
           onClick={() => {
             setShowEdit(true);
             if (textareaRef.current) {

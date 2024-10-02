@@ -1,7 +1,7 @@
 "use client";
 
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
-import Button from "@/components/ui/button";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
@@ -30,7 +30,7 @@ export default function Delete({ task }: { task: Task }) {
     <div>
       <Modal
         trigger={
-          <Button variation="ghost">
+          <Button variant="ghost">
             <Icon name="bf-i-ph-trash" className="c-base11" />
             Delete
           </Button>
@@ -40,10 +40,10 @@ export default function Delete({ task }: { task: Task }) {
         <div className="h-6"></div>
         <div className="flex justify-end gap-3">
           <Modal.Close>
-            <Button variation="soft">Cancel</Button>
+            <Button variant="soft">Cancel</Button>
           </Modal.Close>
           <Modal.Close>
-            <Button variation="solid" onClick={() => deleteTaskM.mutate(task.id)} isLoading={deleteTaskM.isPending}>
+            <Button variant="solid" onClick={() => deleteTaskM.mutate(task.id)} isLoading={deleteTaskM.isPending}>
               <Icon name="bf-i-ph-trash" className="c-base11" />
               <span className="">Delete</span>
             </Button>

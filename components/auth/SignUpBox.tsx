@@ -1,15 +1,10 @@
-import { z } from "zod";
-import { useCallback, useState } from "react";
-import { Form, useFormHook, ErrMsg } from "@/components/react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import Fieldset from "@/components/ui/Fieldset";
-import Button from "@/components/ui/button";
-import { useRouter } from "next/router";
+import { Form, useFormHook } from "@/components/react-hook-form";
 import Icon from "@/components/ui/Icon";
-import { API } from "@/consts";
-import { useGlobalContex } from "../Provider";
 import fetchAPI from "@/utils/fetchAPI";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { z } from "zod";
 
 const schema = z.object({
   email: z
@@ -89,7 +84,7 @@ export default function SignUpBox() {
           />
           <div className="h-6"></div>
           <Form.ServerErrorMessage />
-          <Form.SubmitButton variation='solid' className="w-full">{"Submit"}</Form.SubmitButton>
+          <Form.SubmitButton variant='solid' className="w-full">{"Submit"}</Form.SubmitButton>
         </Form>
       </div>
     </div>

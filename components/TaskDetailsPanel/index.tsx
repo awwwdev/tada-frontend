@@ -24,7 +24,7 @@ export default function TaskDetailsPanel() {
   });
 
   return (
-    <div className=" px-6   pie-0 b-s-1 b-base6 h-full bg-base1">
+    <div className=" p-6   b-s-1 b-base6 h-full bg-base1">
       {!selectedTaskQ.data && <EmptyState />}
       {selectedTaskQ.data && <TaskDetailsContent task={selectedTaskQ.data} />}
     </div>

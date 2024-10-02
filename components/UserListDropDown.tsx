@@ -4,16 +4,16 @@ import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
-import Button from "@/components/ui/button";
 
 import useDeleteList from "@/hooks/useDeleteList";
 import useListMutation from "@/hooks/useListMutation";
 import useUserMe from "@/hooks/useUserMe";
 import QUERY_KEYS from "@/react-query/queryKeys";
+import { DropdownMenu, DropdownMenuItem } from "./ui/DropdownMenu";
 import Input from "./ui/Input";
 import LoadingSpinner from "./ui/LoadingSpinner";
-import { DropdownMenu, DropdownMenuItem } from "./ui/DropdownMenu";
 import Modal from "./ui/modal";
 
 export default function UserListDropDown({ listId }: { listId: string }) {
@@ -37,7 +37,7 @@ export default function UserListDropDown({ listId }: { listId: string }) {
     <div>
       <DropdownMenu
         trigger={
-          <Button variation="text" className="shrink-0" iconButton>
+          <Button variant="text" className="shrink-0" iconButton>
             <Icon name="bf-i-ph-dots-three" className=" c-base11" />
           </Button>
         }
@@ -77,7 +77,7 @@ export default function UserListDropDown({ listId }: { listId: string }) {
               </div>
                 <Button
                   className="w-full"
-                  variation="solid"
+                  variant="solid"
                   type="submit"
                   isLoading={listMutation.isPending}
                   disabled={!userMeQ.data?.id}

@@ -1,14 +1,11 @@
-import { z } from "zod";
+import { Form, useFormHook } from "@/components/react-hook-form";
 import { useState } from "react";
-import { Form, useFormHook, ErrMsg } from "@/components/react-hook-form";
+import { z } from "zod";
 // import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import Icon from "@/components/ui/Icon";
+import fetchAPI from "@/utils/fetchAPI";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
-import Icon from "@/components/ui/Icon";
-import { API } from "@/consts";
-import { useGlobalContex } from "../Provider";
-import fetchAPI from "@/utils/fetchAPI";
 
 export default function LoginBox() {
 
@@ -52,7 +49,7 @@ export default function LoginBox() {
       />
       <div className="h-6"></div>
       <Form.ServerErrorMessage />
-      <Form.SubmitButton variation='solid' className="w-full">Login</Form.SubmitButton>
+      <Form.SubmitButton variant='solid' className="w-full">Login</Form.SubmitButton>
     </Form>
   );
 }

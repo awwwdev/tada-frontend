@@ -1,14 +1,14 @@
-import { FormProvider, useForm, useFormContext, UseFormProps } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z, ZodObject } from "zod";
-import LoadingSpinner from "@/components/ui/LoadingSpinner";
-import Input from "@/components/ui/Input";
-import TextArea from "@/components/ui/TextArea";
-import Button from "@/components/ui/button";
-import { forwardRef, useId } from "react";
-import Label from "@/components/ui/Label";
-import { HTMLProps } from "@/types";
+import Button from "@/components/ui/Button";
 import ErrorMessage from "@/components/ui/ErrorMessage";
+import Input from "@/components/ui/Input";
+import Label from "@/components/ui/Label";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import TextArea from "@/components/ui/TextArea";
+import { HTMLProps } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { forwardRef, useId } from "react";
+import { FormProvider, useForm, useFormContext, UseFormProps } from "react-hook-form";
+import { z, ZodObject } from "zod";
 
 type FormProps = React.ComponentPropsWithoutRef<"form"> & {
   form: any;
@@ -143,7 +143,7 @@ export const ErrMsg = ({ name }: { name: string }) => {
 // );
 
 type ButtonProps = {
-  variation?: "ghost" | "ghost-prm" | "solid" | "solid-prm" | "text" | "text-prm" | "soft" | "soft-prm";
+  variant?: "ghost" | "ghost-prm" | "solid" | "solid-prm" | "text" | "text-prm" | "soft" | "soft-prm";
   iconButton?: boolean;
   noPreStyle?: boolean;
   width?: "parent" | "content" | "default";
@@ -151,7 +151,7 @@ type ButtonProps = {
 
 const FormSubmitButton = function ({
   children,
-  variation = "solid-prm",
+  variant = "solid-prm",
   className = "",
   width = "content",
 }: ButtonProps) {
@@ -161,7 +161,7 @@ const FormSubmitButton = function ({
     <Button
       type="submit"
       className={className}
-      variation={variation}
+      variant={variant}
       width={width}
       disabled={formState.isSubmitting}
       isLoading={formState.isSubmitting}

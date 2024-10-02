@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQueryClient } from "@tanstack/react-query";
@@ -25,7 +25,7 @@ function LogoutButton() {
   const queryClient = useQueryClient();
   return (
     <Button
-      variation="ghost"
+      variant="ghost"
       onClick={async () => {
         const data = await fetchAPI.POST(`/auth/logout`);
         // queryClient.invalidateQueries({ queryKey: ["userMe"] });

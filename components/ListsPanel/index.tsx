@@ -1,7 +1,7 @@
 "use client";
 
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
-import Button from "@/components/ui/button";
 
 import { useGlobalContex } from "@/components/Provider";
 import UserListDropDown from "@/components/UserListDropDown";
@@ -45,7 +45,7 @@ export default function ListsPanel() {
 function MenuItem({ icon, children, onClick, active }: { icon: string; children: React.ReactNode; onClick?: () => void; active?: boolean }) {
   return (
     <li>
-      <Button variation="text" className={`!text-start w-full !px-3 ${active ? "" : ""}`} onClick={onClick}>
+      <Button variant="text" className={`!text-start w-full !px-3 ${active ? "" : ""}`} onClick={onClick}>
         <Icon name={icon} className="mie-1.5 c-base11" />
         {children}{" "}
       </Button>
@@ -127,12 +127,12 @@ function Folders() {
             return (
               <li key={"menu-item-folder-" + index} className="flex gap-3 items-center">
                 <Icon name="bf-i-ph-folder" className="c-base11" />
-                {/* <Button variation="text" className="!text-start w-full"> */}
+                {/* <Button variant="text" className="!text-start w-full"> */}
                 <span className="grow">{folder.name}</span>
                 {/* </Button> */}
                 <DropdownMenu
                   trigger={
-                    <Button variation="text" className="shrink-0" iconButton>
+                    <Button variant="text" className="shrink-0" iconButton>
                       <Icon name="bf-i-ph-dots-three" className=" c-base11" />
                     </Button>
                   }
@@ -189,7 +189,7 @@ function AddFolderButton() {
       open={showModal}
       setOpen={setShowModal}
       trigger={
-        <Button variation="text" iconButton className=" shrink-0">
+        <Button variant="text" iconButton className=" shrink-0">
           <Icon name="bf-i-ph-plus" className=" c-base11" />
           <span className="sr-only">Add a Folder</span>
         </Button>
@@ -220,7 +220,7 @@ function AddFolderButton() {
             <Modal.Close>
               <Button
                 className="w-full"
-                variation="solid"
+                variant="solid"
                 type="submit"
                 isLoading={addFolderM.isPending}
                 disabled={!userMeQ.data?.id}
@@ -266,13 +266,13 @@ function Lists() {
           listQ.data.map((list: List, index: number) => {
             return (
               <li key={"menu-item-list-" + index} className="flex gap-3 items-center pis-3 hover:bg-base4 rd-1.5">
-                <Icon name="bf-i-ph-list" className="c-base11" />
                 <Button
-                  variation="text"
+                  variant="text"
                   preStyled={false}
                   className="!text-start w-full"
                   onClick={() => setSelectedUserListId(list.id)}
                 >
+                <Icon name="bf-i-ph-list" className="c-base11" />
                   <span className="grow">{list.name}</span>
                 </Button>
                 <UserListDropDown listId={list.id} />
@@ -314,7 +314,7 @@ function AddListButton() {
       open={showModal}
       setOpen={setShowModal}
       trigger={
-        <Button variation="text" iconButton className="shrink-0">
+        <Button variant="text" iconButton className="shrink-0">
           <Icon name="bf-i-ph-plus" className=" c-base11" />
           <span className="sr-only">Add a List</span>
         </Button>
@@ -342,7 +342,7 @@ function AddListButton() {
                 onChange={(e) => setListDraft((s) => ({ ...s, name: e.target.value }))}
               />
             </div>
-            <Button variation="solid" type="submit" isLoading={addListM.isPending} disabled={!userMeQ.data?.id}>
+            <Button variant="solid" type="submit" isLoading={addListM.isPending} disabled={!userMeQ.data?.id}>
               <Icon name="bf-i-ph-plus" className="c-base11" />
               <span className="">Create</span>
             </Button>

@@ -1,7 +1,7 @@
 "use client";
 
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
-import Button from "@/components/ui/button";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
@@ -46,12 +46,12 @@ export default function Note({ task }: { task: Task }) {
             // autoFocus
           ></textarea>
           {showEdit ? (
-            <Button variation="solid" onClick={() => taskMutation.mutate({ id: task.id, note: value })}>
+            <Button variant="solid" onClick={() => taskMutation.mutate({ id: task.id, note: value })}>
               Save
             </Button>
           ) : (
             <Button
-              variation="ghost"
+              variant="ghost"
               onClick={() => {
                 setShowEdit(true);
                 // if (textareaRef.current) {

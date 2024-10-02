@@ -1,7 +1,7 @@
 "use client";
 
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
-import Button from "@/components/ui/button";
 import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
@@ -22,7 +22,7 @@ export default function Archive({ task }: { task: Task }) {
   });
   return (
     <div>
-      <Button variation="ghost" onClick={() => archiveTaskM.mutate(task.id)} isLoading={archiveTaskM.isPending}>
+      <Button variant="ghost" onClick={() => archiveTaskM.mutate(task.id)} isLoading={archiveTaskM.isPending}>
         <Icon name="bf-i-ph-archive" className="c-base11" />
         {task?.archived ? "Unarchive" : "Archive"}
       </Button>

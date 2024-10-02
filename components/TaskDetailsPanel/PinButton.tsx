@@ -1,14 +1,14 @@
-import { Task } from "@/types";
-import Button from "../ui/button";
-import Icon from "../ui/Icon";
 import useTaskMutation from "@/hooks/useTaskMutation";
+import { Task } from "@/types";
+import Button from "../ui/Button";
+import Icon from "../ui/Icon";
 
 export default function PinButton({ task }: { task: Task }) {
   const taskMutation = useTaskMutation();
 
   return (
     <Button
-      variation="ghost"
+      variant="ghost"
       iconButton
       onClick={() => {
         taskMutation.mutate({ id: task.id, pinned: !task.pinned });

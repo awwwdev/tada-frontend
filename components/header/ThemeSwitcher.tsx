@@ -89,7 +89,7 @@ export const ThemeSwitcher = () => {
 };
 
 {
-  /* <Button variation="ghost" onClick={toogleTheme}>
+  /* <Button variant="ghost" onClick={toogleTheme}>
 {_theme == "dark" && (
   <>
     <Icon name="bf-i-ph-moon" />
