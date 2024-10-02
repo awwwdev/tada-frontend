@@ -88,7 +88,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
 }
 
 function TraingleIndicator() {
-  return <div className="absolute top-50% -translate-y-50% -right-[1.15rem]  z-100  w-6 h-6 overflow-clip scale-y-80 scale-x-100">
+  return <div className="lt-sm:hidden absolute top-50% -translate-y-50% -right-[1.15rem]  z-100  w-6 h-6 overflow-clip scale-y-80 scale-x-100">
     <div className='h-full w-full rotate-135deg rd-br-1.5  b-base7 b-1 bg-base1 translate-x-70%'></div>
   </div>;
 }
