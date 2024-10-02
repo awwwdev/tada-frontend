@@ -1,14 +1,13 @@
 "use client";
 
-
-import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 import { DropdownMenu, DropdownMenuItem } from "@/components/ui/DropdownMenu";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import useLogOut from "@/hooks/useLogOut";
 import useUserMe from "@/hooks/useUserMe";
-import Avatar from '../ui/Avatar';
+import Avatar from "../ui/Avatar";
+import MenuItem from "../ui/MenuItem/MenuItem";
 
 export default function AccountDropdown() {
   const userMeQ = useUserMe();
@@ -19,10 +18,10 @@ export default function AccountDropdown() {
     <div>
       <DropdownMenu
         trigger={
-          <Button variant="text" className="shrink-0 flex items-center gap-3 justify-start text-start"  >
-            <Avatar src=''  size='1.2em' />
-            <span className='c-base11'>{userMeQ.data?.email}</span>
-          </Button>
+          <MenuItem size="xl" className="flex gap-1.5 ">
+            <Avatar src="" size="1em" />
+            <span className="c-base11">{userMeQ.data?.email}</span>
+          </MenuItem>
         }
       >
         <DropdownMenuItem onSelect={() => logoutMutation.mutate()}>

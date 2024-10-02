@@ -14,7 +14,7 @@ export default function SmartLists() {
   return (
     <ul className="flex flex-col gap-3  ">
       <MenuItemLocal
-        icon="bf-i-ph-list"
+        icon="bf-i-ph-house-simple"
         onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS)}
         active={currentList.id === SMART_LIST_IDS.ALL_TASKS}
       >
@@ -71,12 +71,12 @@ function MenuItemLocal({
 }) {
   return (
     <li>
-      <MenuItem size="xl">
-        <Button variant="text" preStyled={false} onClick={onClick}>
+      <Button variant="text" className="w-full" preStyled={false} onClick={onClick}>
+        <MenuItem size="xl">
           <Icon name={icon} className="mie-1.5 c-base11" />
           {children}{" "}
-        </Button>
-      </MenuItem>
+        </MenuItem>
+      </Button>
     </li>
   );
 }
