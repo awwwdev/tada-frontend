@@ -35,7 +35,7 @@ const Button = forwardRef<HTMLButtonElement, AllProps>(function Button(
   return (
     <button
       ref={ref}
-      className={`${preStyled && cls} ${className}`}
+      className={`${preStyled ? cls : ""} ${className}`}
       aria-disabled={disabled}
       aria-busy={isLoading}
       type={type}
