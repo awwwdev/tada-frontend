@@ -46,12 +46,12 @@ const Button = forwardRef<HTMLButtonElement, AllProps>(function Button(
           props?.onClick?.(e);
         }
       }}
-      style={{
+      style={preStyled ? {
         minWidth: iconButton ? "fit-content" : "max(6rem , wit-content)",
         ...getSizeStyles(size, iconButton),
         paddingInline: iconButton ? undefined : `calc(2 * ${getSizeStyles(size, iconButton).padding})`,
         ...props?.style,
-      }}
+      } : {}}
       {...props}
     >
       <Wrapper isLoading={isLoading}>
@@ -117,20 +117,6 @@ function Box({
 // radio card
 // checkbox card
 
-// select item
-// drop down menu item
-// context menu Item
-
-// data-state="on"
-// data-state="off"
-// data-disabled="true"
-// data-highlighted="true"
-
-// dropdown menu
-// data-state='open'
-// data-state='closed'
-// data-state='checked'
-// data-state='unchecked'
 
 // tabs
 // data-state='active'
