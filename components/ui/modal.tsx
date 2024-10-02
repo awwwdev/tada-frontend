@@ -1,7 +1,7 @@
 "use client";
 import { RNode } from "@/types";
 import * as RadixDialog from "@radix-ui/react-dialog";
-import Button from "./button";
+import Button from "./Button";
 import Icon from "./Icon";
 
 export default function Modal({
@@ -36,7 +36,7 @@ export default function Modal({
           <div className="relative">
             <div className="flex justify-end absolute right-0">
               <RadixDialog.Close asChild>
-                <Button iconButton variation="ghost">
+                <Button iconButton variant="ghost">
                   <Icon className="c-base11" name="bf-i-ph-x" />
                 </Button>
               </RadixDialog.Close>
