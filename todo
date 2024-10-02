@@ -1,17 +1,36 @@
-instead of smart list + user list -> lists with filtes + initate default lists for users in the database
+design system
+- button
+-- menu Item
+-- Tab.Trigger
 
-in version 1 only user lists. samrt lists are hard coded. 
+- input
 
-for tasks -> only select label + status + id + starred + pinned
-for task -> select all
+- card 
+
+
+add task to selected list
+consisntent paddings for elemetns
+github btn -> link
+setting btn -> link
+style them switcher -> no borders for each btn
+avatar -> profile picture
+tiangle beside selected task
+textarea -> div contenteditable
+duplicate btn -> hide on @hover:not(hover)
+pin task -> top of the list
+in lists -> checkbox to radio group
+
+desktop only -> responsiveness
+setting page -> setting panel
+solid-black btn -> less black btn
+
 
 - detail panel editing
+-- fading scroll area
 -- click to edit note and task label
-- account dropdown
 
 - style 
--- fading scroll area
--- dark mode light mode
+-- detailPanel
 
 - auth confirm email 
 - auth reset password + magic link

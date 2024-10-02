@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 import Icon from "../Icon";
-import { getSizeStyles, ui } from "../ui-config";
+import { getSizeStyles, Size, ui } from "../ui-config";
 import { classes } from "./classes";
 import { AllProps } from "./types";
 
@@ -49,14 +49,13 @@ const Button = forwardRef<HTMLButtonElement, AllProps>(function Button(
       style={{
         minWidth: iconButton ? "fit-content" : "max(6rem , wit-content)",
         ...getSizeStyles(size, iconButton),
-        height: '5rem',
-        // paddingInline: iconButton ? undefined : `calc(3 * ${getSizeStyles(size, iconButton).padding})`,
+        paddingInline: iconButton ? undefined : `calc(2 * ${getSizeStyles(size, iconButton).padding})`,
         ...props?.style,
       }}
       {...props}
     >
       <Wrapper isLoading={isLoading}>
-        <Box prefix={before} suffic={suffix}>
+        <Box prefix={before} suffic={suffix} size={size}>
           {children}
         </Box>
       </Wrapper>
@@ -85,23 +84,26 @@ function Box({
   suffic,
   className,
   style,
+  size
 }: {
   prefix?: React.ReactNode;
   children?: React.ReactNode;
   suffic?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  size: Size
 }) {
   if (!prefix && !suffic) return <>{children}</>;
 
   return (
     <span
-      className={className}
+      className={`${className} w-full`}
       style={{
         ...style,
         display: "inline-grid",
         gridTemplateColumns: `${prefix ? "auto" : ""} 1fr ${suffic ? "auto" : ""}`,
         alignItems: "center",
+        gap: getSizeStyles(size).padding,
       }}
     >
       {prefix}
