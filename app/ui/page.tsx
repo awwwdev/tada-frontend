@@ -27,7 +27,7 @@ export default function Page() {
   return (
     <div className="max-w-page mx-auto">
       <Section title="Cards">
-        <div className="flex mb-4 justify-end gap-2" >
+        <div className="flex mb-4 justify-end gap-2">
           <label htmlFor="elevation">Elevation</label>
           <select
             name="elevation"
@@ -42,7 +42,7 @@ export default function Page() {
             <option value="lg">lg</option>
           </select>
         </div>
-        <div className='grid gap-12'>
+        <div className="grid gap-12">
           <Card size={size} className="flex gap-2 items-center" elevation={elevation}>
             <Button {...{ isLoading, disabled }} size={size} variant="solid">
               Mediom
@@ -50,11 +50,17 @@ export default function Page() {
             <span>This is a card </span>
           </Card>
 
-          <Card size={size} className="flex gap-2 items-center" elevation={elevation}>
+          <Card size={size} className="" elevation={elevation}>
+            <Card.Header>Hellow</Card.Header>
+            <Card.Body>
+
             <Button {...{ isLoading, disabled }} size={size} variant="solid">
               Mediom
             </Button>
+
             <span>This is a card </span>
+            </Card.Body>
+            <Card.Footer>Footer</Card.Footer>
           </Card>
         </div>
       </Section>
