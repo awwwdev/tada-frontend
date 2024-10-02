@@ -30,10 +30,11 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
   });
 
   return (
-    <li className={`b-base6 rd-3 p-3 pis-6 flex items-center bg-base1 ${selectedTaskId === task.id && "!b-accent8"}`}>
+    <li className={`b-base6 rd-3 p-3 pis-6 flex items-center bg-base1 relative  `}>
+      {selectedTaskId === task.id && <TraingleIndicator />}
       <Checkbox
         checked={task.status === "done"}
-        onChange={(checked) => taskMutation.mutate({ id: task.id, status: task.status === 'done' ? "to-do" : "done" })}
+        onChange={(checked) => taskMutation.mutate({ id: task.id, status: task.status === "done" ? "to-do" : "done" })}
       />
       <button
         type="button"
@@ -66,11 +67,7 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
           )}
         </Button>
 
-        <Button
-          variant="text"
-          iconButton
-          onClick={() => taskMutation.mutate({ id: task.id, starred: !task.starred })}
-        >
+        <Button variant="text" iconButton onClick={() => taskMutation.mutate({ id: task.id, starred: !task.starred })}>
           {task.starred ? (
             <Icon name="bf-i-ph-star-fill" className="c-accent11" />
           ) : (
@@ -88,4 +85,10 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
       </div>
     </li>
   );
+}
+
+function TraingleIndicator() {
+  return <div className="absolute top-50% -translate-y-50% -right-[1.15rem]  z-100  w-6 h-6 overflow-clip scale-y-80 scale-x-100">
+    <div className='h-full w-full rotate-135deg rd-br-1.5  b-base7 b-1 bg-base1 translate-x-70%'></div>
+  </div>;
 }
