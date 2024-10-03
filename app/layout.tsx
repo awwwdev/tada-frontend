@@ -12,6 +12,7 @@ import MyToaster from "@/components/Toaster";
 import { cookies } from "next/headers";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
 import { Settings } from "@/types";
+import 'draft-js/dist/Draft.css';
 
 const title = "Hamid K.";
 const description = "A Developer with Design Superpowers";

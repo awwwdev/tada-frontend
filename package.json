@@ -40,6 +40,7 @@
     "classnames": "^2.5.1",
     "colorjs.io": "^0.5.2",
     "devextreme-react": "^24.1.5",
+    "draft-js": "^0.11.7",
     "framer-motion": "^11.3.24",
     "gray-matter": "^4.0.3",
     "next": "^14.2.6",

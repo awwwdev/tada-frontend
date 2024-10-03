@@ -1,8 +1,6 @@
 "use client";
 
 import { useGlobalContex } from "@/components/Provider";
-import useUserMe from "@/hooks/useUserMe";
-import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
@@ -38,20 +36,19 @@ function EmptyState() {
 function TaskDetailsContent({ task }: { task: Task }) {
   return (
     <div className="flex flex-col gap-3 h-full ">
-      <div className="flex  gap-3">
+      <div className="flex gap-3">
         <Title task={task} />
+      </div>
+      <Line />
+      <div className="flex  gap-3">
         <div className="mis-auto flex gap-3">
           <StarButton task={task} />
-
           <PinButton task={task} />
         </div>
       </div>
-      <div className="h-6"></div>
-      <Line />
-      <Lists task={task} />
       <Line />
       <Note task={task} />
-      <Line />
+      {/* <Line /> */}
       {/* <Steps task={task} /> */}
       {/* <Line /> */}
       {/* <Emojies task={task} /> */}
@@ -72,7 +69,11 @@ function TaskDetailsContent({ task }: { task: Task }) {
       {/* <Line /> */}
       {/* <Comments task={task} /> */}
       {/* <Line /> */}
-      <div className="flex gap-3 justify-end mt-auto ">
+      <div className="mt-auto"></div>
+      <Line />
+      <Lists task={task} />
+      <Line />
+      <div className="flex gap-3 justify-end ">
         <Archive task={task} />
         <Delete task={task} />
       </div>

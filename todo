@@ -4,7 +4,9 @@
 
 style them switcher -> no borders for each btn
 textarea -> div contenteditable
-in lists -> checkbox to radio group
+optimistic update to task mutation
+
+
 
 desktop only -> responsiveness
 setting page -> setting panel

@@ -14,7 +14,7 @@ export default function StarButton({ task }: { task: Task }) {
         taskMutation.mutate({ id: task.id, starred: !task.starred });
       }}
     >
-      <Icon name={task.starred ? "bf-i-ph-star-fill" : "bf-i-ph-star"} className="c-base11" />
+      <Icon name={task.starred ? "bf-i-ph-star-fill" : "bf-i-ph-star"} className={task.starred ? "c-accent11" : "c-base11"  } />
       <span className="sr-only">Star</span>
     </Button>
   );

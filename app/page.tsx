@@ -1,6 +1,6 @@
 "use client";
 
-import TaskDetailsPanel from "@/components/TaskDetailsPanel";
+import TaskDetailsPanel from "@/components/DetailsPanel";
 
 import Header from "@/components/header";
 import ListsPanel from "@/components/ListsPanel";
