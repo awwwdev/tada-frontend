@@ -12,8 +12,29 @@ import Note from "./Note";
 import PinButton from "./PinButton";
 import StarButton from "./StarButton";
 import Title from "./Title";
+import MobileOnly from '../ui/MobileOnly';
+import DesktopOnly from '../ui/DesktopOnly';
+import Drawer from '../ui/Drawer';
 
 export default function TaskDetailsPanel() {
+
+  const { detailsPanelOpen , setDetailsPanelOpen  } = useGlobalContex();
+  return (
+    <>
+      <MobileOnly>
+        <Drawer open={detailsPanelOpen} setOpen={setDetailsPanelOpen} disabled={false} side="right">
+          <TaskDetailsPanelContent />
+        </Drawer>
+      </MobileOnly>
+      <DesktopOnly>
+        <TaskDetailsPanelContent />
+      </DesktopOnly>
+    </>
+  );
+}
+
+
+function TaskDetailsPanelContent() {
   const { selectedTaskId } = useGlobalContex();
   const selectedTaskQ = useQuery({
     queryKey: ["tasks", selectedTaskId],

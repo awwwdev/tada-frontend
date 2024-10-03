@@ -4,10 +4,35 @@ import Line from "@/components/ui/Line";
 import ActionButtons from "./ActionButtons";
 import SmartLists from "./SmartLists";
 import UserLists from "./UserLists";
+import MobileOnly from "../ui/MobileOnly";
+import DesktopOnly from "../ui/DesktopOnly";
+import Drawer from "../ui/Drawer";
+import { useGlobalContex } from "../Provider";
 
-export default function ListsPanel() {
+export default function ListPanel() {
+  const { listsPanelOpen, setListsPanelOpen } = useGlobalContex();
   return (
-    <div className="flex flex-col b-ie-1 b-base6 pie-7.5 py-6 pis-3  gap-3 overflow-y-auto ">
+    <>
+      <MobileOnly>
+        <Drawer open={listsPanelOpen} setOpen={setListsPanelOpen} disabled={false} side="left">
+          <ListsPanelContent />
+        </Drawer>
+      </MobileOnly>
+      <DesktopOnly>
+        <ListsPanelContent />
+      </DesktopOnly>
+    </>
+  );
+}
+
+function ListsPanelContent() {
+  return (
+    <div
+      className={`
+      flex flex-col b-ie-1 b-base6 pie-7.5 py-6 pis-3  gap-3 overflow-y-auto bg-base4
+      
+      `}
+    >
       <SmartLists />
       <Line />
       <UserLists />
@@ -23,5 +48,3 @@ export default function ListsPanel() {
     </div>
   );
 }
-
-

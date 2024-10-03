@@ -1,4 +1,4 @@
-import type { Rule, Shortcut, UserShortcuts } from "unocss";
+import type { Rule, UserShortcuts } from "unocss";
 export const rules: Rule[] = [
   ["max-w-page", { "max-width": "var(--max-w-page)" }],
   ["font-display", { "font-family": "var(--font-display)" }],
@@ -60,7 +60,7 @@ export const rules: Rule[] = [
   // [/^g-span-row-(.*)$/, ([, gridRow]) => ({ "grid-row": `span ${gridRow}` })],
   // [/^g-span-col-(.*)$/, ([, gridCol]) => ({ "grid-column": `span ${gridCol}` })],
   [/^g-row-(.*)$/, ([, gridRow]) => ({ "grid-row": gridRow })],
-  [/^g-col-(.*)$/, ([, gridCol]) => ({ "grid-column": gridCol })],
+  [/^g-col-(.*)$/, ([, gridCol]) => ({ "grid-col": gridCol })],
   [
     "glass-effect",
     {

@@ -21,6 +21,10 @@ type ContextType = {
   setSelectedTaskId: React.Dispatch<SetStateAction<string | null>>;
   theme: Settings["theme"];
   useSystemTheme: boolean;
+  listsPanelOpen: boolean;
+  detailsPanelOpen: boolean;
+  setListsPanelOpen: React.Dispatch<SetStateAction<boolean>>;
+  setDetailsPanelOpen: React.Dispatch<SetStateAction<boolean>>;
 };
 const GloblaContext = createContext<ContextType>({
   isSideMenuOpen: false,
@@ -32,6 +36,10 @@ const GloblaContext = createContext<ContextType>({
   setSelectedSmartListId: () => {},
   theme: "light",
   useSystemTheme: false,
+  listsPanelOpen: false,
+  detailsPanelOpen: false, 
+  setListsPanelOpen: () => {},
+  setDetailsPanelOpen: () => {},
 });
 
 export default function Providers({
@@ -46,6 +54,11 @@ export default function Providers({
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
   const [currentList , _setCurrentList] = useState<CurrentList>(initialCurrentList);
+
+  const [listsPanelOpen, setListsPanelOpen] = useState(false);
+  const [detailsPanelOpen, setDetailsPanelOpen] = useState(false);
+
+
   const setSelectedUserListId = (id: string) => {
     _setCurrentList({id, type: 'user-list'});
   }
@@ -64,6 +77,10 @@ export default function Providers({
         setIsSideMenuOpen,
         theme,
         useSystemTheme,
+        listsPanelOpen,
+        detailsPanelOpen,
+        setDetailsPanelOpen,
+        setListsPanelOpen
       }}
     >
       {children}
