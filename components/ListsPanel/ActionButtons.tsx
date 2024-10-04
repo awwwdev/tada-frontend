@@ -8,21 +8,24 @@ import LinkButton from "../ui/Button/LinkButton";
 import Icon from "../ui/Icon";
 import MenuItem from "../ui/MenuItem/MenuItem";
 import Modal from "../ui/modal";
+import { useGlobalContex } from '../Provider';
 
 export default function ActionButtons() {
+
+  const { setListsPanelOpen } = useGlobalContex();
   return (
     <div className="grid gap-1.5">
       <ThemeSwitcher />
       <AuthButtons />
       <Link href="/settings" className=" justify-start gap-3 text-start">
-        <MenuItem size="xl" className="">
+        <MenuItem size="xl" className="" onClick={() => setListsPanelOpen(false)}>
           <Icon name="bf-i-ph-gear-six" className="mie-1.5 c-base11" />
           <span className="c-base11">Settings</span>
         </MenuItem>
       </Link>
       {/* <LinkButton variant="text"  className="justify-start gap-3"> */}
       <a href="https://github.com/awwwdev/tada" className="text-start">
-        <MenuItem size="xl" className="flex gap-1.5">
+        <MenuItem size="xl" className="flex gap-1.5" onClick={() => setListsPanelOpen(false)}>
           <Icon name="bf-i-ph-github-logo" className="c-base11" />
           <span className="c-base11">View source code</span>
         </MenuItem>
@@ -33,6 +36,7 @@ export default function ActionButtons() {
 
 function AuthButtons() {
   const userMeQ = useUserMe();
+  const { setListsPanelOpen } = useGlobalContex();
 
   return (
     <>
@@ -42,7 +46,7 @@ function AuthButtons() {
         <>
           <Modal
             trigger={
-              <MenuItem size="xl" className="justify-start">
+              <MenuItem size="xl" className="justify-start" onClick={() => setListsPanelOpen(false)} >
                 <Icon name="bf-i-ph-sign-in" className="mie-1.5 c-base11" />
                 Login
               </MenuItem>
@@ -52,7 +56,7 @@ function AuthButtons() {
           </Modal>
           <Modal
             trigger={
-              <MenuItem size="xl" className="justify-start">
+              <MenuItem size="xl" className="justify-start" onClick={() => setListsPanelOpen(false)}>
                 <Icon name="bf-i-ph-sign-in" />
                 Sign Up
               </MenuItem>

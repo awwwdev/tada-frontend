@@ -15,7 +15,7 @@ import { List } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import MenuItem from '../ui/MenuItem/MenuItem';
+import MenuItem from "../ui/MenuItem/MenuItem";
 
 export default function UserLists() {
   const userMeQ = useUserMe();
@@ -37,6 +37,7 @@ export default function UserLists() {
       queryClient.invalidateQueries({ queryKey: ["lists"] });
     },
   });
+  const { setListsPanelOpen } = useGlobalContex();
 
   return (
     <>
@@ -56,8 +57,11 @@ export default function UserLists() {
                   variant="text"
                   preStyled={false}
                   className="!text-start w-full"
-                  onClick={() => setSelectedUserListId(list.id)}
-                  >
+                  onClick={() => {
+                    setSelectedUserListId(list.id);
+                    setListsPanelOpen(false);
+                  }}
+                >
                   <Icon name="bf-i-ph-list" className="c-base11" />
                   <span className="grow">{list.name}</span>
                 </Button>
@@ -69,7 +73,6 @@ export default function UserLists() {
     </>
   );
 }
-
 
 function AddListButton() {
   const queryClient = useQueryClient();

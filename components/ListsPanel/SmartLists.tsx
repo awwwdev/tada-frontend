@@ -9,13 +9,16 @@ import React from "react";
 import MenuItem from "../ui/MenuItem/MenuItem";
 
 export default function SmartLists() {
-  const { setSelectedSmartListId, currentList } = useGlobalContex();
+  const { setSelectedSmartListId, currentList, setListsPanelOpen } = useGlobalContex();
 
   return (
     <ul className="flex flex-col gap-3  ">
       <MenuItemLocal
         icon="bf-i-ph-house-simple"
-        onClick={() => setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS)}
+        onClick={() => {
+          setSelectedSmartListId(SMART_LIST_IDS.ALL_TASKS);
+          setListsPanelOpen(false);
+        }}
         active={currentList.id === SMART_LIST_IDS.ALL_TASKS}
       >
         All Tasks
@@ -28,7 +31,10 @@ export default function SmartLists() {
       </MenuItemLocal> */}
       <MenuItemLocal
         icon="bf-i-ph-star"
-        onClick={() => setSelectedSmartListId(SMART_LIST_IDS.STARRED)}
+        onClick={() => {
+          setSelectedSmartListId(SMART_LIST_IDS.STARRED);
+          setListsPanelOpen(false);
+        }}
         active={currentList.id === SMART_LIST_IDS.STARRED}
       >
         Starred
