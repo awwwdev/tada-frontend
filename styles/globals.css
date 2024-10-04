@@ -19,7 +19,7 @@ button:focus-visible {
   --line-height: 1.5em;
   line-height: 1.5;
 
-  --font-display: geist, inter, "sans-serif", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  --font-display: nohemi, geist, inter, "sans-serif", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   --font-content: geist, "Roboto", "sans-serif", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -270,6 +270,7 @@ p a,
   outline: 3px solid rgba(255, 0, 195, 0.237);
   outline-offset: -1px;
 }
+
 
 .\?\?\?\? {
   outline: 2px dashed rgba(0, 229, 255, 0.345);
@@ -760,11 +761,11 @@ p a,
 
 /* ================= */
 
-.intro,
+/* .intro,
 footer {
   width: 400px;
   margin: auto;
-}
+} */
 
 .list {
   width: 430px;
