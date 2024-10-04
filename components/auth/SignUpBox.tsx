@@ -5,6 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { z } from "zod";
+import Button from '../ui/Button';
 
 const schema = z.object({
   email: z
@@ -68,12 +69,12 @@ export default function SignUpBox() {
             type={isPassVisible ? "text" : "password"}
             required
             label={"Password"}
-            suffix={
-              <button className="px-1em" type="button" onClick={() => setIsPassVisible((s) => !s)}>
+            outerSuffix={
+              <Button iconButton  variant='text' type="button" onClick={() => setIsPassVisible((s) => !s)}>
                 <span className="sr-only">Show Password</span>
                 {!isPassVisible && <Icon name="bf-i-ph-eye" subdued={false} />}
                 {isPassVisible && <Icon name="bf-i-ph-eye-closed" subdued={false} />}
-              </button>
+              </Button>
             }
           />
           <Form.Input

@@ -17,7 +17,7 @@ export default async function fetchAPI(url: string, body?: Body, options?: Reque
       json = await res.json();
       throw new Error(json.message);
     } catch (err) {
-      throw new Error("Something went wrong");
+      throw new Error(err?.message ?? "Something went wrong");
     }
   } else {
     json = await res.json();

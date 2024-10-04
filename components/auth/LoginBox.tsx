@@ -6,6 +6,7 @@ import Icon from "@/components/ui/Icon";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import Button from '../ui/Button';
 
 export default function LoginBox() {
 
@@ -20,7 +21,7 @@ export default function LoginBox() {
 
   const onSubmit = async ({ email, password }: { email: string; password: string }) => {
     const data = await fetchAPI.POST("/auth/login/with-password", { email, password });
-    if (data.error) throw new Error("Something went wrong");
+    if (data.error) throw new Error(data.error.message ?? 'Something went wrong');
     toast.success("You are Logged in.");
     queryClient.setQueryData(["userMe"], () => data.user);
     queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
@@ -40,15 +41,16 @@ export default function LoginBox() {
         required
         label={"Password"}
         suffix={
-          <button className="px-1em" type="button" onClick={() => setIsPassVisible((s) => !s)}>
+          <Button variant="text" iconButton  type="button" onClick={() => setIsPassVisible((s) => !s)}>
             <span className="sr-only">Show Password</span>
             {!isPassVisible && <Icon name="bf-i-ph-eye" subdued={false} />}
             {isPassVisible && <Icon name="bf-i-ph-eye-closed" subdued={false} />}
-          </button>
+          </Button>
         }
       />
-      <div className="h-6"></div>
+      <div className="h-3"></div>
       <Form.ServerErrorMessage />
+      <div className="h-3"></div>
       <Form.SubmitButton variant='solid' className="w-full">Login</Form.SubmitButton>
     </Form>
   );
