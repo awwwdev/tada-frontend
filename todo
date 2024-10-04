@@ -1,6 +1,4 @@
-- deploy to vercel
-- deply postgresql
-- deploy node 
+- fix: task input layput 
 
 optimistic update to task mutation
 

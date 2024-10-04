@@ -39,8 +39,8 @@ const MenuItem = forwardRef<HTMLDivElement, AllProps>(function (
   );
 });
 
+MenuItem.displayName = "MenuItem";
 export default MenuItem;
-
 // select item
 // drop down menu item
 // context menu Item
