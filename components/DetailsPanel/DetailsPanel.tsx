@@ -22,8 +22,8 @@ export default function TaskDetailsPanel() {
   return (
     <>
       <MobileOnly>
-        <Drawer open={detailsPanelOpen} setOpen={setDetailsPanelOpen} disabled={false} side="right">
-          <TaskDetailsPanelContent />
+        <Drawer open={detailsPanelOpen} setOpen={setDetailsPanelOpen} disabled={false} side="right" >
+          <TaskDetailsPanelContent className="max-w-[70vw] " />
         </Drawer>
       </MobileOnly>
       <DesktopOnly>
@@ -34,7 +34,7 @@ export default function TaskDetailsPanel() {
 }
 
 
-function TaskDetailsPanelContent() {
+function TaskDetailsPanelContent({className}: {className?: string}) {
   const { selectedTaskId } = useGlobalContex();
   const selectedTaskQ = useQuery({
     queryKey: ["tasks", selectedTaskId],
@@ -43,7 +43,7 @@ function TaskDetailsPanelContent() {
   });
 
   return (
-    <div className=" p-6   b-s-1 b-base6 h-full bg-base1">
+    <div className={` p-6   b-s-1 b-base6 h-full bg-base1 ${className}`}>
       {!selectedTaskQ.data && <EmptyState />}
       {selectedTaskQ.data && <TaskDetailsContent task={selectedTaskQ.data} />}
     </div>

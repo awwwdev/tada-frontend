@@ -9,6 +9,8 @@ type Props = {
   open: boolean;
   setOpen: (open: boolean) => void;
   disabled: boolean;
+  className?: string;
+  style?: CSSProperties;
 };
 
 export default function Drawer({ side, disabled, open, setOpen, children }: Props) {
@@ -20,14 +22,7 @@ export default function Drawer({ side, disabled, open, setOpen, children }: Prop
 
   return (
     <>
-      <Portal.Root className="" style={{
-        // position: "fixed",
-        // zIndex: 100,
-        // top: '50%',
-        // bottom: 0,
-        // left: 0,
-        // right: 0,
-      }}>
+      <Portal.Root >
         {<Overlay open={open} setOepn={setOpen} />}
         <div
           style={
@@ -43,6 +38,7 @@ export default function Drawer({ side, disabled, open, setOpen, children }: Prop
               height: side === "left" || side === "right" ? "100%" : undefined,
               transform: open ? "translateX(0%) translateY(0%)" : closedTranalate,
               transition: "transform 0.3s ease-in-out",
+
             } as CSSProperties
           }
         >
