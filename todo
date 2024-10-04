@@ -1,26 +1,26 @@
+- deploy to vercel
+- deply postgresql
+- deploy node 
+
+optimistic update to task mutation
+
+in mobile: click on task -> opendetails
+
+setting page -> setting panel
+
+- detail panel editing
+
+- style
 - rewrite button classes with css properties -> easily add more data attributes (write in css?)
 - match menu item and button sizes
 - input
+  -- detailPanel
 
-style them switcher -> no borders for each btn
-textarea -> div contenteditable
-optimistic update to task mutation
-
-
-
-desktop only -> responsiveness
-setting page -> setting panel
 solid-black btn -> less black btn
-
-
-- detail panel editing
--- fading scroll area
--- click to edit note and task label
-
-- style 
--- detailPanel
-
-- auth confirm email 
+textarea -> div contenteditable
+  -- fading scroll area
+style them switcher -> no borders for each btn
+- auth confirm email
 - auth reset password + magic link
 
 --- ready for public use ---
@@ -34,8 +34,8 @@ solid-black btn -> less black btn
 - sort by
 
 - show or hide lists
-- fix draggable list hydration error  
-- arrows for post task and pre task  
+- fix draggable list hydration error
+- arrows for post task and pre task
 - formkit list animation
 - emoji picker
 
