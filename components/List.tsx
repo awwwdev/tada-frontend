@@ -5,9 +5,11 @@ import { useGlobalContex } from "./Provider";
 import TaskItem from "./TaskItem";
 import Button from "./ui/Button";
 import EmptyState from "./ui/EmptyState";
+import GradientMask from "./ui/GradientMask";
 import Icon from "./ui/Icon";
 import MenuItem from "./ui/MenuItem/MenuItem";
 import Modal from "./ui/modal";
+import ScrollArea from "./ui/ScrollArea";
 
 export default function List({
   tasks,
@@ -73,7 +75,7 @@ function ListTemplate({
         <div className="flex gap-1.5 items-center">
           <Button
             variant="text"
-            className='sm:hidden'
+            className="sm:hidden"
             onClick={() => {
               setListsPanelOpen(!listsPanelOpen);
             }}
@@ -87,7 +89,19 @@ function ListTemplate({
         </div>
         <div className="mis-auto">{listControls}</div>
       </div>
-      <div className="h-full ">{children}</div>
+      <GradientMask
+        className="h-full overflow-hidden"
+        transparencyStops={[
+          [0, 0],
+          [5, 100],
+          [95, 100],
+          [100, 0],
+        ]}
+      >
+        <ScrollArea orientation="vertical">
+          <div className="py-8">{children}</div>
+        </ScrollArea>
+      </GradientMask>
     </div>
   );
 }
