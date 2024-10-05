@@ -16,6 +16,7 @@ import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import MenuItem from "../ui/MenuItem/MenuItem";
+import LoginOrSignUpBox from '../auth/LoginOrSignUpBox';
 
 export default function UserLists() {
   const userMeQ = useUserMe();
@@ -98,6 +99,23 @@ function AddListButton() {
       setShowModal(false);
     },
   });
+
+  if (!userMeQ.data) {
+    return (
+      <Modal
+      trigger={
+        <Button variant="text" iconButton className="shrink-0">
+          <Icon name="bf-i-ph-plus" className=" c-base11" />
+          <span className="sr-only">Add a List</span>
+        </Button>
+      }
+      title="Please Sign-up or Login first"
+    >
+      <LoginOrSignUpBox initalTab="login" />
+    </Modal>
+
+    )
+  }
 
   return (
     <Modal

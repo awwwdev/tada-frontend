@@ -66,14 +66,7 @@ export default function TaskInput() {
               Add Task
             </Button>
           ) : (
-            <Modal
-              trigger={
-                <Button variant="solid" isLoading={addTaskM.isPending}>
-                  Add Task
-                </Button>
-              }
-              title="Please Sign-up or Login first"
-            >
+            <Modal trigger={<Button variant="solid">Add Task</Button>} title="Please Sign-up or Login first">
               <LoginOrSignUpBox initalTab="login" />
             </Modal>
           )}
