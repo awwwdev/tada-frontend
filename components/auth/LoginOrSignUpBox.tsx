@@ -8,7 +8,11 @@ import SignUpBox from "./SignUpBox";
 
 type TabValue = "signup" | "login";
 
-export default function LoginOrSignUpBox({ initalTab = "signup" }: { initalTab?: TabValue }) {
+export default function LoginOrSignUpBox({
+  initalTab = "signup",
+}: {
+  initalTab?: TabValue;
+}) {
   const [tabVelue, setTabValue] = useState<TabValue>(initalTab);
   return (
     <div className=" b-solid rd-lg w-full ">

@@ -1,6 +1,11 @@
 import { Task } from "@/types";
 import TaskItem from "./TaskItem";
-import Icon from './ui/Icon';
+import Icon from "./ui/Icon";
+import useUserMe from "@/hooks/useUserMe";
+import EmptyState from "./ui/EmptyState";
+import Modal from "./ui/modal";
+import MenuItem from "./ui/MenuItem/MenuItem";
+import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
 
 export default function List({
   tasks,
@@ -12,10 +17,30 @@ export default function List({
   listControls?: React.ReactNode;
 }) {
   const notDeletedTasks = tasks.filter((t: Task) => !t.deleted) ?? [];
+  const userMeQ = useUserMe();
   if (notDeletedTasks.length === 0)
     return (
       <ListTemplate listName={listName} listControls={listControls}>
-        <EmptyState />;
+        {userMeQ.data ? (
+          <EmptyState title="No Tasks" subtitle="Add tasks using the input below" icon={<Icon name="bf-i-ph-info" />} />
+        ) : (
+          <EmptyState
+            title="Please Sign-up/Login."
+            subtitle=""
+            icon={<Icon name="bf-i-ph-info" />}
+          >
+            <Modal
+              trigger={
+                <MenuItem size="xl" className="justify-start">
+                  <Icon name="bf-i-ph-sign-in" className="mie-1.5 c-base11" />
+                  Login
+                </MenuItem>
+              }
+            >
+              <LoginOrSignUpBox initalTab="login" />
+            </Modal>
+          </EmptyState>
+        )}
       </ListTemplate>
     );
 
@@ -49,23 +74,37 @@ function ListTemplate({
         <h2 className="H2">{listName}</h2>
         <div className="mis-auto">{listControls}</div>
       </div>
-      <div className='h-full '>{children}</div>
+      <div className="h-full ">{children}</div>
     </div>
   );
 }
 
-function EmptyState() {
-  return (
-    <div className="h-full w-full flex justify-center items-center">
-      <div className='text-center'>
-      <p className="fs-xl">
-        <Icon name="bf-i-ph-info" className="c-base11 mie-1" />
-        No Task in this list.</p>
-      <p className='c-base11 italic'>Add new tasks to see them here.</p>
-      </div>
-    </div>
-  );
-}
+// function EmptyState() {
+//   const userMeQ = useUserMe();
+//   return (
+//     <div className="h-full w-full flex justify-center items-center">
+//       <div className="text-center">
+//         {userMeQ.data ? (
+//           <>
+//             <p className="fs-xl">
+//               <Icon name="bf-i-ph-info" className="c-base11 mie-1" />
+//               No Tasks.
+//             </p>
+//             <p className="c-base11 italic">Add new tasks to see them here.</p>
+//           </>
+//         ) : (
+//           <>
+//             <p className="fs-xl">
+//               <Icon name="bf-i-ph-info" className="c-base11 mie-1" />
+//               No Task in this list.
+//             </p>
+//             <p className="c-base11 italic">Add new tasks to see them here.</p>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
 
 // function ListContent({ tasks, listName }: { tasks: Task[]; listName: string }) {
 //   const listContainerRef = useRef<HTMLDivElement>(null);

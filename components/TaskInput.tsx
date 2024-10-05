@@ -8,6 +8,8 @@ import { useLocalStorage } from "usehooks-ts";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import { useGlobalContex } from "./Provider";
+import Modal from "./ui/modal";
+import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
 
 export default function TaskInput() {
   const queryClient = useQueryClient();
@@ -59,9 +61,22 @@ export default function TaskInput() {
               onChange={(e) => setDraft((s) => ({ ...s, label: e.target.value }))}
             />
           </div>
-          <Button variant="solid" type="submit" isLoading={addTaskM.isPending} disabled={!userMeQ.data?.id}>
-            Add Task
-          </Button>
+          {userMeQ.data ? (
+            <Button variant="solid" type="submit" isLoading={addTaskM.isPending}>
+              Add Task
+            </Button>
+          ) : (
+            <Modal
+              trigger={
+                <Button variant="solid" isLoading={addTaskM.isPending}>
+                  Add Task
+                </Button>
+              }
+              title="Please Sign-up or Login first"
+            >
+              <LoginOrSignUpBox initalTab="login" />
+            </Modal>
+          )}
         </div>
       </form>
     </div>
