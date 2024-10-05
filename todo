@@ -1,4 +1,3 @@
-- modal underneath the drawer
 - fix: task input layput 
 - menu item rewrite 
 
@@ -7,7 +6,6 @@
 - rewrite input
   rewrite button classes with css properties -> easily add more data attributes (write in css?)
 
-- focus task input after enter
 - optimistic update to task mutation
 - tests for backend
 

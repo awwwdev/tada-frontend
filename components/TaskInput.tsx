@@ -10,7 +10,7 @@ import Input from "./ui/Input";
 import { useGlobalContex } from "./Provider";
 import Modal from "./ui/modal";
 import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function TaskInput() {
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -41,7 +41,12 @@ export default function TaskInput() {
       });
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TASKS] });
     },
+    onSettled: () => {
+      if (inputRef.current) inputRef.current.focus();
+    },
   });
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="relative">
@@ -57,6 +62,7 @@ export default function TaskInput() {
         <div className="flex gap-3 items-end px-3">
           <div className="grow">
             <Input
+              ref={inputRef}
               name="new-task"
               label=""
               type="text"
