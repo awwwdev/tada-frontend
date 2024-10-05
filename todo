@@ -1,4 +1,3 @@
-- signup hint
 - modal underneath the drawer
 - fix: task input layput 
 - menu item rewrite 
@@ -12,7 +11,6 @@
 - optimistic update to task mutation
 - tests for backend
 
-- setting page -> setting panel
 - tiptap on task note
 
 - style (add color themes. eventually each list has its own color)

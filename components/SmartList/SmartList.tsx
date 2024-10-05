@@ -2,26 +2,19 @@ import { SmartListId, Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import TaskItem from "../TaskItem";
+import List from "../List";
 
 export default function SmartList({ listId }: { listId: SmartListId }) {
   const tasksQ = useQuery<Task[]>({
-    queryKey: ['tasks'], // TODO add query key per list and send filters to api
+    queryKey: ["tasks"], // TODO add query key per list and send filters to api
     queryFn: () => fetchAPI.GET(`/tasks`),
     select: (data: Task[]) => smartListSelect[listId](data),
   });
   return (
-    <div className="grid gap-3 overflow-hidden " style={{ gridTemplateRows: "auto 1fr" }}>
-      <div className="px-4.5 flex gap-3">
-        <h3 className="capitalize H2 fw-500 tracking-tight">{listId.replaceAll("_", " ").toLowerCase()}</h3>
-      </div>
-      <ul className=" gap-3 flex flex-col overflow-y-scroll px-4.5 pb-9">
-        {tasksQ.data &&
-          tasksQ.data.length > 0 &&
-          tasksQ.data.map((task, index) => {
-            return <TaskItem key={index} task={task} dragHandleProps={{}} />;
-          })}
-      </ul>
-    </div>
+    <List
+      tasks={tasksQ.data ?? []}
+      listName={<span className="capitalize">{listId.replaceAll("_", " ").toLowerCase()}</span>}
+    />
   );
 }
 

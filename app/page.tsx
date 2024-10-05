@@ -40,26 +40,6 @@ export default function Page() {
           <div>
             <MobileOnly>
               <div className="flex gap-3 justify-between px-4.5 ">
-                <Button
-                  variant="ghost"
-                  onClick={() => {
-                    setListsPanelOpen(!listsPanelOpen);
-                  }}
-                  iconButton
-                >
-                  <Icon name="bf-i-ph-list" className="c-base11" />
-                  <span className="sr-only">menu {listsPanelOpen ? "open" : "closed"}</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => {
-                    setDetailsPanelOpen(!detailsPanelOpen);
-                  }}
-                  iconButton
-                >
-                  <Icon name="bf-i-ph-list" className="c-base11" />
-                  <span className="sr-only">menu {detailsPanelOpen ? "open" : "closed"}</span>
-                </Button>
               </div>
               <div className="h-3"></div>
             </MobileOnly>

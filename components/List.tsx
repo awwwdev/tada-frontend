@@ -1,11 +1,13 @@
-import { Task } from "@/types";
-import TaskItem from "./TaskItem";
-import Icon from "./ui/Icon";
 import useUserMe from "@/hooks/useUserMe";
-import EmptyState from "./ui/EmptyState";
-import Modal from "./ui/modal";
-import MenuItem from "./ui/MenuItem/MenuItem";
+import { Task } from "@/types";
 import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
+import { useGlobalContex } from "./Provider";
+import TaskItem from "./TaskItem";
+import Button from "./ui/Button";
+import EmptyState from "./ui/EmptyState";
+import Icon from "./ui/Icon";
+import MenuItem from "./ui/MenuItem/MenuItem";
+import Modal from "./ui/modal";
 
 export default function List({
   tasks,
@@ -13,7 +15,7 @@ export default function List({
   listControls,
 }: {
   tasks: Task[];
-  listName: string;
+  listName: React.ReactNode;
   listControls?: React.ReactNode;
 }) {
   const notDeletedTasks = tasks.filter((t: Task) => !t.deleted) ?? [];
@@ -24,11 +26,7 @@ export default function List({
         {userMeQ.data ? (
           <EmptyState title="No Tasks" subtitle="Add tasks using the input below" icon={<Icon name="bf-i-ph-info" />} />
         ) : (
-          <EmptyState
-            title="Please Sign-up/Login."
-            subtitle=""
-            icon={<Icon name="bf-i-ph-info" />}
-          >
+          <EmptyState title="Please Sign-up/Login." subtitle="" icon={<Icon name="bf-i-ph-info" />}>
             <Modal
               trigger={
                 <MenuItem size="xl" className="justify-start">
@@ -65,13 +63,28 @@ function ListTemplate({
   listControls,
 }: {
   children: React.ReactNode;
-  listName: string;
+  listName: React.ReactNode;
   listControls: React.ReactNode;
 }) {
+  const { setListsPanelOpen, listsPanelOpen } = useGlobalContex();
   return (
     <div className="gap-3 grid overflow-hidden h-full" style={{ gridTemplateRows: "auto 1fr" }}>
       <div className="px-4.5 flex gap-3 w-full ">
-        <h2 className="H2">{listName}</h2>
+        <div className="flex gap-1.5 items-center">
+          <Button
+            variant="text"
+            className='sm:hidden'
+            onClick={() => {
+              setListsPanelOpen(!listsPanelOpen);
+            }}
+            iconButton
+          >
+            <Icon name="bf-i-ph-list" className="c-base11 " />
+            <span className="sr-only">menu {listsPanelOpen ? "open" : "closed"}</span>
+          </Button>
+
+          <h2 className="H3">{listName}</h2>
+        </div>
         <div className="mis-auto">{listControls}</div>
       </div>
       <div className="h-full ">{children}</div>

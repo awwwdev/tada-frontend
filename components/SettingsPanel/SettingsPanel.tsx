@@ -17,7 +17,7 @@ export default function SettingsPanel() {
   if (userMeQ.isLoading || !settings) return <LoadingSpinner />;
 
   return (
-    <div className="p-6 bg-base2">
+    <div className="p-6 bg-base2 max-w-[70vw]">
       {/* <Link href="/" className="c-base11 text-sm">
         <Icon name="bf-i-ph-arrow-left" className="mie-1.5 c-base11" />
         <span className="">Back to Home</span>

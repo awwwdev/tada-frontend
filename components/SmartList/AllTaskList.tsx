@@ -5,7 +5,6 @@ import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
 import List from '../List';
-import TaskItem from "../TaskItem";
 
 export default function AllTasksList() {
   const allTasksQ = useQuery({
