@@ -4,16 +4,16 @@ const classes = {
 };
 
 type LabelProps = {
-  noPreStyle?: boolean;
+  preStyled?: boolean;
   children?: React.ReactNode;
   required?: boolean;
 };
 
-export default function Label({ children, required, noPreStyle = false }: LabelProps) {
+export default function Legend({ children, required, preStyled = false }: LabelProps) {
   if (!children) return <></>;
   return (
     <legend>
-      <span className={` ${!noPreStyle && classes.labelText} `}>{children}</span>
+      <span className={`${preStyled ?  classes.labelText : ""}`}>{children}</span>
       {required && (
         <span aria-hidden={true} className={classes.requiredStar}>
           *

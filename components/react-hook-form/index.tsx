@@ -145,7 +145,7 @@ export const ErrMsg = ({ name }: { name: string }) => {
 type ButtonProps = {
   variant?: "ghost" | "ghost-prm" | "solid" | "solid-prm" | "text" | "text-prm" | "soft" | "soft-prm";
   iconButton?: boolean;
-  noPreStyle?: boolean;
+  prereStyled?: boolean;
   width?: "parent" | "content" | "default";
 } & React.ComponentPropsWithoutRef<"button">;
 
