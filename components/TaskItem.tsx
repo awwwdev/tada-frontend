@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useGlobalContex } from "./Provider";
 import MobileOnly from "./ui/MobileOnly";
 import DesktopOnly from "./ui/DesktopOnly";
+import useBreakPoint from "@/hooks/useBreakPoint";
 
 export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHandleProps: Object }) {
   const { setSelectedTaskId, selectedTaskId } = useGlobalContex();
@@ -44,50 +45,51 @@ export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHa
           <Icon name="bf-i-ph-trash" className="c-base11" />
           <span className="sr-only">Delete</span>
         </Button> */}
-        <Button
-          variant="text"
-          className={`group-hover:visible invisible `}
-          iconButton
-          onClick={() => duplicateTaskMutation.mutate(task)}
-        >
-          <Icon name="bf-i-ph-copy" className="c-base11" />
-          <span className="sr-only">Duplicate</span>
-        </Button>
-        <Button
-          variant="text"
-          className={`group-hover:visible ${task.pinned ? "visible" : "invisible"} `}
-          iconButton
-          onClick={() => taskMutation.mutate({ id: task.id, pinned: !task.pinned })}
-        >
-          {task.pinned ? (
-            <Icon name="bf-i-ph-push-pin-fill" className="c-accent11" />
-          ) : (
-            <Icon name="bf-i-ph-push-pin" className="c-base11" />
-          )}
-          {task.pinned ? (
-            <span className="sr-only">Un pin this task</span>
-          ) : (
-            <span className="sr-only">Pin this task</span>
-          )}
-        </Button>
-
-        <Button
-          variant="text"
-          className={`group-hover:visible ${task.starred ? "visible" : "invisible"} `}
-          iconButton
-          onClick={() => taskMutation.mutate({ id: task.id, starred: !task.starred })}
-        >
-          {task.starred ? (
-            <Icon name="bf-i-ph-star-fill" className="c-accent11" />
-          ) : (
-            <Icon name="bf-i-ph-star" className="c-base11" />
-          )}
-          {task.starred ? (
-            <span className="sr-only">Un-star this task</span>
-          ) : (
-            <span className="sr-only">Star this task</span>
-          )}
-        </Button>
+        <DesktopOnly>
+          <Button
+            variant="text"
+            className={`group-hover:visible invisible `}
+            iconButton
+            onClick={() => duplicateTaskMutation.mutate(task)}
+          >
+            <Icon name="bf-i-ph-copy" className="c-base11" />
+            <span className="sr-only">Duplicate</span>
+          </Button>
+          <Button
+            variant="text"
+            className={`group-hover:visible ${task.pinned ? "visible" : "invisible"} `}
+            iconButton
+            onClick={() => taskMutation.mutate({ id: task.id, pinned: !task.pinned })}
+          >
+            {task.pinned ? (
+              <Icon name="bf-i-ph-push-pin-fill" className="c-accent11" />
+            ) : (
+              <Icon name="bf-i-ph-push-pin" className="c-base11" />
+            )}
+            {task.pinned ? (
+              <span className="sr-only">Un pin this task</span>
+            ) : (
+              <span className="sr-only">Pin this task</span>
+            )}
+          </Button>
+          <Button
+            variant="text"
+            className={`group-hover:visible ${task.starred ? "visible" : "invisible"} `}
+            iconButton
+            onClick={() => taskMutation.mutate({ id: task.id, starred: !task.starred })}
+          >
+            {task.starred ? (
+              <Icon name="bf-i-ph-star-fill" className="c-accent11" />
+            ) : (
+              <Icon name="bf-i-ph-star" className="c-base11" />
+            )}
+            {task.starred ? (
+              <span className="sr-only">Un-star this task</span>
+            ) : (
+              <span className="sr-only">Star this task</span>
+            )}
+          </Button>
+        </DesktopOnly>
         <div className={`cursor-move px-2 flex items-center`} {...dragHandleProps}>
           <Icon name="bf-i-ph-dots-six-vertical" />
         </div>
@@ -106,36 +108,27 @@ function TraingleIndicator() {
 
 function SelectArea({ task, dragHandleProps }: { task: Task; dragHandleProps: Object }) {
   const { setSelectedTaskId, setDetailsPanelOpen } = useGlobalContex();
+  const breakpoints = useBreakPoint();
 
   return (
-    <>
+    <button
+      type="button"
+      className=" grow cursor-default  h-10 self-stretch text-start flex items-center"
+      onClick={() => {
+        if (!breakpoints.sm) setDetailsPanelOpen(true);
+        setSelectedTaskId(task.id);
+      }}
+      {...dragHandleProps}
+    >
+      <span className="mis-3">{task.label}</span>
+      <span className="sr-only">Select This Task</span>
+      <span className="mis-auto"></span>
       <MobileOnly>
-        <button
-          type="button"
-          className="grow cursor-default  h-10 self-stretch text-start"
-          onClick={() => {
-            setSelectedTaskId(task.id);
-            setDetailsPanelOpen(true);
-          }}
-          {...dragHandleProps}
-        >
-          <span className="mis-3">{task.label}</span>
-          <span className="sr-only">Select This Task</span>
-        </button>
+        <span className="flex gap-6 items-center pie-3 ">
+          {task.starred && <Icon name="bf-i-ph-star-fill" className="c-accent11" />}
+          {task.pinned && <Icon name="bf-i-ph-push-pin-fill" className="c-accent11" />}
+        </span>
       </MobileOnly>
-      <DesktopOnly>
-        <button
-          type="button"
-          className="grow cursor-default  h-10 self-stretch text-start"
-          onClick={() => {
-            setSelectedTaskId(task.id);
-          }}
-          {...dragHandleProps}
-        >
-          <span className="mis-3">{task.label}</span>
-          <span className="sr-only">Select This Task</span>
-        </button>
-      </DesktopOnly>
-    </>
+    </button>
   );
 }
