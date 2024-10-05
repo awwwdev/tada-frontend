@@ -1,4 +1,4 @@
-export const RADIC_HUES = [
+export const RADIX_HUES = [
   "amber",
   "blue",
   "bronze",

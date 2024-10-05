@@ -1,5 +1,6 @@
 import { RuleContext } from "unocss/index";
-import { Alias, Alpha, P3, RadixHue, radixHues, Token } from "./types";
+import { Alias, Alpha, P3, RadixHue, Token } from "./types";
+import { RADIX_HUES } from './consts';
 
 // 🔴 test dynamic aliasing
 // 🔴 dynamic aliasing => how to add color to the theme?
@@ -48,7 +49,7 @@ const createRule = ({ prefix, aliasesInUse }) => [
   /^alias-([A-Za-z][A-Za-z0-9-]*[A-Za-z0-9])-is-([A-Za-z]+)$/,
   ([token, alias, hue, p3, alpha]: [Token, Alias, RadixHue, P3, Alpha], context: RuleContext) => {
     // discard mismatched rules
-    if (!radixHues.includes(hue as RadixHue)) return;
+    if (!RADIX_HUES.includes(hue as RadixHue)) return;
     addHueToAnAliasInUse({ alias, hue });
 
     // add colors that are used by this alies
