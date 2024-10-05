@@ -79,7 +79,7 @@ function AddListButton() {
 
   const initialListDraft: ListFields = {
     name: "",
-    author: "",
+    authorId: "",
     tasks: [],
     emojies: [],
   };
@@ -89,7 +89,7 @@ function AddListButton() {
   const userMeQ = useUserMe();
 
   const addListM = useMutation({
-    mutationFn: async (list: ListFields) => fetchAPI.POST(`/lists`, { ...list, author: userMeQ.data?.id }),
+    mutationFn: async (list: ListFields) => fetchAPI.POST(`/lists`, { ...list, authorId: userMeQ.data?.id }),
     onError: (err) => toast.error("Error: " + err.message),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userMe"] });

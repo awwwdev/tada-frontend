@@ -48,9 +48,9 @@ export default function Avatar({ src, name, size }: { size: string; src: string;
 
 function ProfilePicturePlaceholder({ name }: { name?: string }) {
   return (
-    <div className="h-full w-full relative isolate overflow-clip bg-base7">
-      <div className="absolute rd-full h-1/2 w-1/2 top-40% left-50% -translate-x-1/2 -translate-y-1/2 bg-base4 "></div>
-      <div className="absolute rd-full h-4/5 w-4/5 top-110% left-50% -translate-x-1/2 -translate-y-1/2 bg-base4"></div>
+    <div className="h-full w-full relative isolate overflow-clip bg-base11">
+      <div className="absolute rd-full h-1/2 w-1/2 top-40% left-50% -translate-x-1/2 -translate-y-1/2 bg-base7"></div>
+      <div className="absolute rd-full h-4/5 w-4/5 top-110% left-50% -translate-x-1/2 -translate-y-1/2 bg-base7"></div>
       <div
         className=" h-full w-full z-100 absolute top-50% left-50% -translate-x-50%  -translate-y-50%   flex justify-center items-center
       opacity-0 hover:opacity-100 transition-opacity duration-300 "

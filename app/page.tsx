@@ -12,13 +12,21 @@ import Drawer from "@/components/ui/Drawer";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 import MobileOnly from "@/components/ui/MobileOnly";
-import Icon from '@/components/ui/Icon';
+import Icon from "@/components/ui/Icon";
+import SettingsPanel from "@/components/SettingsPanel";
 
 export default function Page() {
   const { currentList } = useGlobalContex();
   const [open, setOpen] = useState(false);
 
-  const { listsPanelOpen, setListsPanelOpen, detailsPanelOpen, setDetailsPanelOpen } = useGlobalContex();
+  const {
+    listsPanelOpen,
+    setListsPanelOpen,
+    detailsPanelOpen,
+    setDetailsPanelOpen,
+    settingsPanelOpen,
+    setSettingsPanelOpen,
+  } = useGlobalContex();
 
   return (
     <div className="grid gap-6 h-[100vh] w-[100vw]" style={{ gridTemplateRows: "1fr" }}>
@@ -62,6 +70,9 @@ export default function Page() {
         </div>
         <TaskDetailsPanel />
       </main>
+      <Drawer side="right" open={settingsPanelOpen} setOpen={setSettingsPanelOpen}>
+        <SettingsPanel />
+      </Drawer>
     </div>
   );
 }

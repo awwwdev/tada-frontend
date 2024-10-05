@@ -23,12 +23,12 @@ export default function ActionButtons() {
         variant="text"
         className=" justify-start gap-3 text-start"
         onClick={() => {
-          if (userMeQ.data) {
+          // if (userMeQ.data) {
             setListsPanelOpen(false);
             setSettingsPanelOpen(true);
-          } else {
-            setShowAuthModal(true);
-          }
+          // } else {
+            // setShowAuthModal(true);
+          // }
         }}
       >
         <Icon name="bf-i-ph-gear-six" className="mie-1.5 c-base11" />
@@ -37,8 +37,8 @@ export default function ActionButtons() {
       {/* <LinkButton variant="text"  className="justify-start gap-3"> */}
       <a href="https://github.com/awwwdev/tada" className="text-start">
         <MenuItem size="xl" className="flex gap-1.5" onClick={() => setListsPanelOpen(false)}>
-          <Icon name="bf-i-ph-github-logo" className="c-base11" />
-          <span className="c-base11">View source code</span>
+          <Icon name="bf-i-ph-github-logo" className="c-base11 mie-1.5" />
+          <span className="c-base11">Source Code</span>
         </MenuItem>
       </a>
       <Modal title="Please Sign-up or Login first" open={showAuthModal} setOpen={setShowAuthModal}>

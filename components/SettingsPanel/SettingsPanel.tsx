@@ -7,8 +7,9 @@ import useSettingsMutation from '@/hooks/useSettingsMutation';
 import useUserMe from "@/hooks/useUserMe";
 import { Settings } from "@/types";
 import Link from "next/link";
+import { ThemeSwitcher } from '../header/ThemeSwitcher';
 
-export default function Page() {
+export default function SettingsPanel() {
   const userMeQ = useUserMe();
   const settings = userMeQ.data?.settings;
   const settingsMutation = useSettingsMutation();
@@ -16,23 +17,14 @@ export default function Page() {
   if (userMeQ.isLoading || !settings) return <LoadingSpinner />;
 
   return (
-    <div className="p-6 max-w-page mx-auto">
-      <Link href="/" className="c-base11 text-sm">
+    <div className="p-6 bg-base2">
+      {/* <Link href="/" className="c-base11 text-sm">
         <Icon name="bf-i-ph-arrow-left" className="mie-1.5 c-base11" />
         <span className="">Back to Home</span>
-      </Link>
+      </Link> */}
       <h1 className="H1"> Settings</h1>
       <div className="h-12"></div>
-      <RadioGroup
-        legend={<span className="H3">Theme</span>}
-        name="theme"
-        value={settings.theme}
-        setValue={(th) => settingsMutation.mutate({ theme: th as Settings["theme"] })}
-      >
-        <RadioGroup.Item label="Light" value="light"></RadioGroup.Item>
-        <RadioGroup.Item label="Dark" value="dark"></RadioGroup.Item>
-        <RadioGroup.Item label="System" value="system"></RadioGroup.Item>
-      </RadioGroup>
+      <ThemeSwitcher />
       <div className="h-12"></div>
       <RadioGroup
         legend={<span className="H3">Start of Week</span>}

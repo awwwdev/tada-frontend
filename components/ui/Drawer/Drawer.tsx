@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode;
   open: boolean;
   setOpen: (open: boolean) => void;
-  disabled: boolean;
+  disabled?: boolean;
   className?: string;
   style?: CSSProperties;
 };

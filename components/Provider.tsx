@@ -25,6 +25,8 @@ type ContextType = {
   detailsPanelOpen: boolean;
   setListsPanelOpen: React.Dispatch<SetStateAction<boolean>>;
   setDetailsPanelOpen: React.Dispatch<SetStateAction<boolean>>;
+  settingsPanelOpen: boolean;
+  setSettingsPanelOpen: React.Dispatch<SetStateAction<boolean>>;
 };
 const GloblaContext = createContext<ContextType>({
   isSideMenuOpen: false,
@@ -40,6 +42,8 @@ const GloblaContext = createContext<ContextType>({
   detailsPanelOpen: false, 
   setListsPanelOpen: () => {},
   setDetailsPanelOpen: () => {},
+  settingsPanelOpen: false,
+  setSettingsPanelOpen: () => {}
 });
 
 export default function Providers({
@@ -49,6 +53,7 @@ export default function Providers({
 }: {
   children: React.ReactNode;
   theme: Settings["theme"];
+  useSystemTheme: boolean;
 }) {
   useUserMe(); // to initialize userMe
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
@@ -57,6 +62,7 @@ export default function Providers({
 
   const [listsPanelOpen, setListsPanelOpen] = useState(false);
   const [detailsPanelOpen, setDetailsPanelOpen] = useState(false);
+  const [settingsPanelOpen, setSettingsPanelOpen] = useState(false);
 
 
   const setSelectedUserListId = (id: string) => {
@@ -80,7 +86,9 @@ export default function Providers({
         listsPanelOpen,
         detailsPanelOpen,
         setDetailsPanelOpen,
-        setListsPanelOpen
+        setListsPanelOpen,
+        settingsPanelOpen,
+        setSettingsPanelOpen
       }}
     >
       {children}

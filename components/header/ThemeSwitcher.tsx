@@ -10,6 +10,7 @@ import { useGlobalContex } from "../Provider";
 import Card from "../ui/Card";
 import Button from "../ui/Button";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
+import useSettingsMutation from '@/hooks/useSettingsMutation';
 
 
 type Theme = Settings["theme"];
@@ -24,6 +25,7 @@ export const ThemeSwitcher = () => {
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   };
   // const systemTheme = useOSTheme();
+  const settingsMutation = useSettingsMutation();
 
   const setTheme = async (to: Theme) => {
     async function changeToDark() {
@@ -58,6 +60,7 @@ export const ThemeSwitcher = () => {
       _setTheme("system");
       await setThemeCookie({ theme: "dark", useSystemTheme: true });
     }
+    settingsMutation.mutate({ theme: to});
   };
 
   useEffect(() => {

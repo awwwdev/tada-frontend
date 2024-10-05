@@ -15,7 +15,6 @@ export default () => {
       toast.error("Error: " + err.message);
     },
     onSuccess: (data) => {
-      toast.success("Settings updated successfully");
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USER_ME] });
     },
   });
