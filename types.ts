@@ -54,7 +54,7 @@ type FolderListProperties = {
 export type ListFields = {
   name: string;
   authorId: string;
-  emojies: string[];
+  emojies?: string[];
   tasks: TasktPorpertisInList[];
   description?: string | null;
   folderId?: string | null;

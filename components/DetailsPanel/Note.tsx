@@ -54,12 +54,14 @@ export default function Note({ task }: { task: Task }) {
               name="notel"
               ref={textareaRef}
               value={value}
+              placeholder="Add a note to this task..."
               // defaultValue={task.label}
               onChange={(e) => {
                 setValue(e.target.value);
                 setShowEdit(true);
               }}
               className={` 
+                placeholder:italic
             focus:bg-base3
             focus:outline-none
             bg-base1 b-transparent b-1 px-1.5 rd-1.5 w-full overflow-hidden resize-none`}

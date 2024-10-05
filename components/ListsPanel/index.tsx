@@ -29,7 +29,7 @@ function ListsPanelContent() {
   return (
     <div
       className={`
-      flex flex-col b-ie-1 b-base6 pie-7.5 py-6 pis-3  gap-3 overflow-y-auto bg-base4
+      flex flex-col b-ie-1 b-base6 pie-3 py-6 pis-3  gap-3 overflow-y-auto bg-base4
       
       `}
     >

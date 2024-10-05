@@ -1,7 +1,8 @@
-- fix: task input layput 
-- menu item rewrite 
-
+- delete lists -> detlete tasks inside
+- update types for list
 --- match menu item and button sizes
+
+- menu item rewrite
 - btn rewrite
 - rewrite input
   rewrite button classes with css properties -> easily add more data attributes (write in css?)
@@ -10,13 +11,13 @@
 - tests for backend
 
 - tiptap on task note
-
-- style (add color themes. eventually each list has its own color)
+- uno css preset
+  |
+  |-> radix (add color themes. eventually each list has its own color)
 
 solid-black btn -> less black btn
-textarea -> div contenteditable
---- fading scroll area
 style them switcher -> no borders for each btn
+
 - auth confirm email
 - auth reset password + magic link
 
@@ -30,7 +31,7 @@ style them switcher -> no borders for each btn
 - smart lists
 - sort by
 - a dedicated list for shopping
-- steps for each tasks 
+- steps for each tasks
 
 - show or hide lists
 - fix draggable list hydration error

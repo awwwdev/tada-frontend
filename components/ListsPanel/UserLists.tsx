@@ -62,7 +62,7 @@ export default function UserLists() {
                     setListsPanelOpen(false);
                   }}
                 >
-                  <Icon name="bf-i-ph-list" className="c-base11" />
+                  <Icon name="bf-i-ph-list" className="c-base11 mie-1.5" />
                   <span className="grow">{list.name}</span>
                 </Button>
                 <UserListDropDown listId={list.id} />

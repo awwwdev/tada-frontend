@@ -59,13 +59,12 @@ function TaskDetailsContent({ task }: { task: Task }) {
     <div className="flex flex-col gap-3 h-full ">
       <div className="flex gap-3">
         <Title task={task} />
-      </div>
-      <Line />
-      <div className="flex  gap-3">
+
         <div className="mis-auto flex gap-3">
           <StarButton task={task} />
           <PinButton task={task} />
         </div>
+
       </div>
       <Line />
       <Note task={task} />

@@ -37,15 +37,8 @@ export default function Page() {
       >
         <ListsPanel />
         <div className="grid gap-0 py-6 overflow-hidden" style={{ gridTemplateRows: "1fr auto" }}>
-          <div>
-            <MobileOnly>
-              <div className="flex gap-3 justify-between px-4.5 ">
-              </div>
-              <div className="h-3"></div>
-            </MobileOnly>
             {currentList.type === "user-list" && <UserList listId={currentList.id} />}
             {currentList.type === "smart-list" && <SmartList listId={currentList.id} />}
-          </div>
           <TaskInput />
         </div>
         <TaskDetailsPanel />

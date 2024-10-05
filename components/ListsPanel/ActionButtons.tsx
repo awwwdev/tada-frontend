@@ -17,17 +17,16 @@ export default function ActionButtons() {
   const userMeQ = useUserMe();
   return (
     <div className="grid gap-1.5">
-      <ThemeSwitcher />
       <AuthButtons />
       <Button
         variant="text"
         className=" justify-start gap-3 text-start"
         onClick={() => {
           // if (userMeQ.data) {
-            setListsPanelOpen(false);
-            setSettingsPanelOpen(true);
+          setListsPanelOpen(false);
+          setSettingsPanelOpen(true);
           // } else {
-            // setShowAuthModal(true);
+          // setShowAuthModal(true);
           // }
         }}
       >
@@ -44,6 +43,7 @@ export default function ActionButtons() {
       <Modal title="Please Sign-up or Login first" open={showAuthModal} setOpen={setShowAuthModal}>
         <LoginOrSignUpBox initalTab="login" />
       </Modal>
+      <ThemeSwitcher />
     </div>
   );
 }
