@@ -5,7 +5,7 @@ import RadioGroup from "@/components/ui/RadioGroup";
 import useSettingsMutation from '@/hooks/useSettingsMutation';
 import useUserMe from "@/hooks/useUserMe";
 import { Settings } from "@/types";
-import { ThemeSwitcher } from '../header/ThemeSwitcher';
+import { ThemeSwitcher } from '../Header/ThemeSwitcher';
 
 export default function SettingsPanel() {
   const userMeQ = useUserMe();

@@ -1,7 +1,7 @@
 import Button from "@/components/ui/Button";
 import useUserMe from "@/hooks/useUserMe";
-import AccountDropdown from "../header/AccountDropdown";
-import { ThemeSwitcher } from "../header/ThemeSwitcher";
+import AccountDropdown from "../Header/AccountDropdown";
+import { ThemeSwitcher } from "../Header/ThemeSwitcher";
 import { useGlobalContext } from "../Provider";
 import Icon from "../ui/Icon";
 import MenuItem from "../ui/MenuItem/MenuItem";
