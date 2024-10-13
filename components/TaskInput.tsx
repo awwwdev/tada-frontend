@@ -3,14 +3,14 @@ import QUERY_KEYS from "@/react-query/queryKeys";
 import { TaskFields } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
+import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
+import { useGlobalContex } from "./Provider";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import { useGlobalContex } from "./Provider";
 import Modal from "./ui/modal";
-import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
-import { useRef, useState } from "react";
 
 export default function TaskInput() {
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -55,8 +55,13 @@ export default function TaskInput() {
       <form
         className="mt-auto"
         onSubmit={(e) => {
+          if (!userMeQ.data) {
+            setShowAuthModal(true);
+            return;
+          }
           e.preventDefault();
           addTaskM.mutate(draft);
+
         }}
       >
         <div className="flex gap-3 items-end px-3">
