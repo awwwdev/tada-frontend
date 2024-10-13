@@ -1,4 +1,3 @@
-import { API } from "@/consts";
 import QUERY_KEYS from '@/react-query/queryKeys';
 import { User } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
@@ -9,6 +8,6 @@ export default function useUserMe() {
   return useQuery<Res, Error, User>({
     queryKey: [QUERY_KEYS.USER_ME],
     queryFn: () => fetchAPI.GET(`/auth/user`),
-    select: (data) => data.user,
+    select: (data: Res) => data.user,
   });
 }
