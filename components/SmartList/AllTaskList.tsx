@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import List from '../List';
 
 export default function AllTasksList() {
-  const allTasksQ = useQuery({
+  const allTasksQ = useQuery<Task[], Error>({
     queryKey: [QUERY_KEYS.TASKS],
     queryFn: () => fetchAPI.GET(`/tasks`),
   });

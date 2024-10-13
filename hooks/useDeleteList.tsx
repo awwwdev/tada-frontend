@@ -7,7 +7,7 @@ export default function useDeleteList() {
 
   return useMutation({
     mutationFn: async (id: string) => fetchAPI.DELETE(`/lists/${id}`),
-    onError: (err) => toast.error("Error: " + err.message),
+    onError: (err: Error) => toast.error("Error: " + err.message),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["lists"] }),
   });
 }

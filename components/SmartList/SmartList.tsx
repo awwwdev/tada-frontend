@@ -1,7 +1,6 @@
 import { SmartListId, Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
-import TaskItem from "../TaskItem";
 import List from "../List";
 
 export default function SmartList({ listId }: { listId: SmartListId }) {

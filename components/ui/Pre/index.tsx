@@ -26,7 +26,7 @@ const Pre = ({
             },
             () => {
               setIsCopied(false);
-              toast.error("Faild to copy. Please Try Again!");
+              toast.error("Failed to copy. Please Try Again!");
             }
           )
         }
