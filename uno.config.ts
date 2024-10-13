@@ -35,6 +35,7 @@ export default defineConfig({
         warning: "amber",
         error: "tomato",
         info: "blue",
+        danger: "tomato"
       },
       useP3Colors: true,
     }),

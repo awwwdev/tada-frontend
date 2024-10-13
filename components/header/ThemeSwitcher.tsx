@@ -2,15 +2,14 @@
 
 import { setThemeCookie } from "@/app/actions";
 import Icon from "@/components/ui/Icon";
-import useSettingsMutation from '@/hooks/useSettingsMutation';
+import useSettingsMutation from "@/hooks/useSettingsMutation";
+import useUserMe from "@/hooks/useUserMe";
 import { Settings } from "@/types";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../Provider";
 import Button from "../ui/Button";
 import Card from "../ui/Card";
-import useUserMe from '@/hooks/useUserMe';
-
 
 type Theme = Settings["theme"];
 
@@ -61,35 +60,36 @@ export const ThemeSwitcher = () => {
       await setThemeCookie({ theme: "dark", useSystemTheme: true });
     }
     if (userMeQ.data) {
-     settingsMutation.mutate({ theme: to});
+      settingsMutation.mutate({ theme: to });
     }
   };
 
   useEffect(() => {
+    if (!setTheme || !theme) return;
     if (theme === "system") setTheme("system");
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
       if (theme === "system") setTheme("system");
     });
-  }, []);
+  }, [setTheme, theme]);
 
   return (
     <div>
-      <RadixToggleGroup.Root value={theme} onValueChange={setTheme}  type="single" >
-        <Card className="flex gap-1 w-fit !b-none" size='sm' >
-          <RadixToggleGroup.Item  value="light" asChild>
-            <Button variant="ghost"  iconButton size='sm'>
+      <RadixToggleGroup.Root value={theme} onValueChange={setTheme} type="single">
+        <Card className="flex gap-1 w-fit !b-none" size="sm">
+          <RadixToggleGroup.Item value="light" asChild>
+            <Button variant="ghost" iconButton size="sm">
               <Icon name="bf-i-ph-sun" />
               <span className="sr-only">Light Color Scheme</span>
             </Button>
           </RadixToggleGroup.Item>
-          <RadixToggleGroup.Item  value="dark" asChild>
-            <Button variant="ghost"  iconButton size='sm'>
+          <RadixToggleGroup.Item value="dark" asChild>
+            <Button variant="ghost" iconButton size="sm">
               <Icon name="bf-i-ph-moon" />
               <span className="sr-only">Dark Color Scheme</span>
             </Button>
           </RadixToggleGroup.Item>
-          <RadixToggleGroup.Item  value="system" asChild>
-            <Button variant="ghost"  iconButton size='sm'>
+          <RadixToggleGroup.Item value="system" asChild>
+            <Button variant="ghost" iconButton size="sm">
               <Icon name="bf-i-ph-device-mobile" className="sm:hidden" />
               <Icon name="bf-i-ph-laptop" className="lt-sm:hidden" />
               <span className="sr-only">Follow System Color Scheme</span>
@@ -100,4 +100,3 @@ export const ThemeSwitcher = () => {
     </div>
   );
 };
-

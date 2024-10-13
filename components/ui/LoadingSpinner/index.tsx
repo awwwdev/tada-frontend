@@ -12,7 +12,6 @@ export default function LoadingSpinner({ className, wrapped = false, color = "or
       <span
         className={`bf-i-svg-spinners:3-dots-bounce  before:opacity-80
         !mie-0 inline-flex justify-center items-center
-        ${color === "orange" ? "c-brand-accent" : ""}
         ${className} `}
       ></span>
       {` `}
@@ -20,7 +19,7 @@ export default function LoadingSpinner({ className, wrapped = false, color = "or
   );
 }
 
-function Wrapper({ wrapped, children }) {
+function Wrapper({ wrapped, children }: { wrapped: boolean; children: React.ReactNode }) {
   if (!wrapped) return <>{children}</>;
   return <div className="flex w-full justify-center items-center min-h-30">{children}</div>;
 }

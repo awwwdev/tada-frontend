@@ -67,6 +67,7 @@ export default function Lists({ task }: { task: Task }) {
                 lists.map((list: List, index: number) => {
                   return (
                     <InputItem
+                      key={`list-input-item-${index}`}
                       index={index}
                       list={list}
                       checked={list.id === task.listId}
