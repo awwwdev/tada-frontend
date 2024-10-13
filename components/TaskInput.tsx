@@ -3,14 +3,12 @@ import QUERY_KEYS from "@/react-query/queryKeys";
 import { TaskFields } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
-import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
 import { useGlobalContext } from "./Provider";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import Modal from "./ui/modal";
 
 export default function TaskInput() {
 

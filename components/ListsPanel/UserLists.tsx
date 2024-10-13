@@ -15,7 +15,6 @@ import { List } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
 
 export default function UserLists() {
   const userMeQ = useUserMe();
@@ -99,8 +98,7 @@ function AddListButton() {
     },
   });
 
-  const [showAuthModal, setShowAuthModal] = useState(false);
-
+  const { setShowAuthModal } = useGlobalContext();
   return (
     <>
       <Button
@@ -146,9 +144,6 @@ function AddListButton() {
             </div>
           </form>
         </div>
-      </Modal>
-      <Modal open={showAuthModal} setOpen={setShowAuthModal} title="Please Sign-up or Login first">
-        <LoginOrSignUpBox initialTab="login" />
       </Modal>
     </>
   );

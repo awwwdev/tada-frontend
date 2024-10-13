@@ -1,17 +1,13 @@
 import Button from "@/components/ui/Button";
 import useUserMe from "@/hooks/useUserMe";
-import { useState } from "react";
-import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
 import AccountDropdown from "../header/AccountDropdown";
 import { ThemeSwitcher } from "../header/ThemeSwitcher";
 import { useGlobalContext } from "../Provider";
 import Icon from "../ui/Icon";
 import MenuItem from "../ui/MenuItem/MenuItem";
-import Modal from "../ui/modal";
 
 export default function ActionButtons() {
-  const { setListsPanelOpen, setSettingsPanelOpen } = useGlobalContext();
-  const [showAuthModal, setShowAuthModal] = useState(false);
+  const { setListsPanelOpen, setSettingsPanelOpen, setShowAuthModal } = useGlobalContext();
   const userMeQ = useUserMe();
   return (
     <div className="grid gap-1.5">
@@ -20,12 +16,12 @@ export default function ActionButtons() {
         variant="text"
         className=" justify-start gap-3 text-start"
         onClick={() => {
-          // if (userMeQ.data) {
-          setListsPanelOpen(false);
-          setSettingsPanelOpen(true);
-          // } else {
-          // setShowAuthModal(true);
-          // }
+          if (userMeQ.data) {
+            setListsPanelOpen(false);
+            setSettingsPanelOpen(true);
+          } else {
+            setShowAuthModal(true);
+          }
         }}
       >
         <Icon name="bf-i-ph-gear-six" className="mie-1.5 c-base11" />
@@ -38,9 +34,6 @@ export default function ActionButtons() {
           <span className="c-base11">Source Code</span>
         </MenuItem>
       </a>
-      <Modal title="Please Sign-up or Login first" open={showAuthModal} setOpen={setShowAuthModal}>
-        <LoginOrSignUpBox initialTab="login" />
-      </Modal>
       <ThemeSwitcher />
     </div>
   );
@@ -48,35 +41,24 @@ export default function ActionButtons() {
 
 function AuthButtons() {
   const userMeQ = useUserMe();
-  const { setListsPanelOpen } = useGlobalContext();
+  const { setListsPanelOpen, setShowAuthModal } = useGlobalContext();
 
   return (
     <>
       {userMeQ.data ? (
         <AccountDropdown />
       ) : (
-        <>
-          <Modal
-            trigger={
-              <MenuItem size="xl" className="justify-start" onClick={() => setListsPanelOpen(false)}>
-                <Icon name="bf-i-ph-sign-in" className="mie-1.5 c-base11" />
-                Login
-              </MenuItem>
-            }
+          <Button
+            variant="text"
+            className="text-start c-base11"
+            onClick={() => {
+              setListsPanelOpen(false);
+              setShowAuthModal(true);
+            }}
           >
-            <LoginOrSignUpBox initialTab="login" />
-          </Modal>
-          <Modal
-            trigger={
-              <MenuItem size="xl" className="justify-start" onClick={() => setListsPanelOpen(false)}>
-                <Icon name="bf-i-ph-sign-in" />
-                Sign Up
-              </MenuItem>
-            }
-          >
-            <LoginOrSignUpBox initialTab="signup" />
-          </Modal>
-        </>
+            <Icon name="bf-i-ph-sign-in" className="mie-1.5 c-base11" />
+            Sign Up / Login
+          </Button>
       )}
     </>
   );

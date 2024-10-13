@@ -1,4 +1,5 @@
-import { API } from "@/consts";
+import { API } from "@/constants";
+
 type Body = Object | string | undefined;
 export default async function fetchAPI(url: string, body?: Body, options?: RequestInit) {
   const _url = url.startsWith("/") ? url.replace("/", "") : url;

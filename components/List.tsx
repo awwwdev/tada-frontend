@@ -1,14 +1,11 @@
 import useUserMe from "@/hooks/useUserMe";
 import { Task } from "@/types";
-import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
 import { useGlobalContext } from "./Provider";
 import TaskItem from "./TaskItem";
 import Button from "./ui/Button";
 import EmptyState from "./ui/EmptyState";
 import GradientMask from "./ui/GradientMask";
 import Icon from "./ui/Icon";
-import MenuItem from "./ui/MenuItem/MenuItem";
-import Modal from "./ui/modal";
 import ScrollArea from "./ui/ScrollArea";
 
 export default function List({
@@ -24,24 +21,6 @@ export default function List({
   const userMeQ = useUserMe();
 
   const { setShowAuthModal } = useGlobalContext();
-  // if (notDeletedTasks.length === 0)
-  //   return (
-  //     <EmptyState
-  //       title="Please Sign-up/Login."
-  //       subtitle=""
-  //       icon={<Icon name="bf-i-ph-info" />}
-  //       content={
-  //         <>
-  //           <Button variant="ghost" className="mt-3 justify-start" onClick={() => setShowAuthModal(true)}>
-  //             <Icon name="bf-i-ph-sign-in" className="mie-1.5 c-base11" />
-  //             Sign Up / Login
-  //           </Button>
-  //         </>
-  //       }
-  //     >
-  //       <ListTemplate listName={listName} listControls={listControls}></ListTemplate>
-  //     </EmptyState>
-  //   );
 
   const pinnedTasks = notDeletedTasks.filter((t: Task) => t.pinned);
   const notPinnedTasks = notDeletedTasks.filter((t: Task) => !t.pinned);
@@ -49,7 +28,7 @@ export default function List({
 
   return (
     <EmptyState
-      isEmpty={notDeletedTasks.length === 0 || !userMeQ.data}
+      isEmpty={!userMeQ.data}
       title="Please Sign-up/Login."
       subtitle=""
       icon={<Icon name="bf-i-ph-info" />}
@@ -62,13 +41,20 @@ export default function List({
         </>
       }
     >
-      <ListTemplate listName={listName} listControls={listControls}>
-        <ul className=" gap-3 flex flex-col overflow-y-scroll px-4.5">
-          {orderedTasks.map((task, index) => {
-            return <TaskItem key={index} task={task} dragHandleProps={{}} />;
-          })}
-        </ul>
-      </ListTemplate>
+      <EmptyState
+        isEmpty={!orderedTasks.length}
+        title="No Tasks"
+        subtitle="Add tasks using the input below"
+        icon={<Icon name="bf-i-ph-info" />}
+      >
+        <ListTemplate listName={listName} listControls={listControls}>
+          <ul className=" gap-3 flex flex-col overflow-y-scroll px-4.5">
+            {orderedTasks.map((task, index) => {
+              return <TaskItem key={index} task={task} dragHandleProps={{}} />;
+            })}
+          </ul>
+        </ListTemplate>
+      </EmptyState>
     </EmptyState>
   );
 }
@@ -119,34 +105,6 @@ function ListTemplate({
     </div>
   );
 }
-
-// function EmptyState() {
-//   const userMeQ = useUserMe();
-//   return (
-//     <div className="h-full w-full flex justify-center items-center">
-//       <div className="text-center">
-//         {userMeQ.data ? (
-//           <>
-//             <p className="fs-xl">
-//               <Icon name="bf-i-ph-info" className="c-base11 mie-1" />
-//               No Tasks.
-//             </p>
-//             <p className="c-base11 italic">Add new tasks to see them here.</p>
-//           </>
-//         ) : (
-//           <>
-//             <p className="fs-xl">
-//               <Icon name="bf-i-ph-info" className="c-base11 mie-1" />
-//               No Task in this list.
-//             </p>
-//             <p className="c-base11 italic">Add new tasks to see them here.</p>
-//           </>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
 // function ListContent({ tasks, listName }: { tasks: Task[]; listName: string }) {
 //   const listContainerRef = useRef<HTMLDivElement>(null);
 //   // const [parent, enableAnimations] = useAutoAnimate(/* optional config */)
