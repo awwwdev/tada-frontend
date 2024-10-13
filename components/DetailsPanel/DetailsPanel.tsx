@@ -1,10 +1,13 @@
 "use client";
 
-import { useGlobalContex } from "@/components/Provider";
+import { useGlobalContext } from "@/components/Provider";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQuery } from "@tanstack/react-query";
+import DesktopOnly from '../ui/DesktopOnly';
+import Drawer from '../ui/Drawer';
 import Line from "../ui/Line";
+import MobileOnly from '../ui/MobileOnly';
 import Archive from "./Archive";
 import Delete from "./Delete";
 import Lists from "./Lists";
@@ -12,13 +15,10 @@ import Note from "./Note";
 import PinButton from "./PinButton";
 import StarButton from "./StarButton";
 import Title from "./Title";
-import MobileOnly from '../ui/MobileOnly';
-import DesktopOnly from '../ui/DesktopOnly';
-import Drawer from '../ui/Drawer';
 
 export default function TaskDetailsPanel() {
 
-  const { detailsPanelOpen , setDetailsPanelOpen  } = useGlobalContex();
+  const { detailsPanelOpen , setDetailsPanelOpen  } = useGlobalContext();
   return (
     <>
       <MobileOnly>
@@ -35,7 +35,7 @@ export default function TaskDetailsPanel() {
 
 
 function TaskDetailsPanelContent({className}: {className?: string}) {
-  const { selectedTaskId } = useGlobalContex();
+  const { selectedTaskId } = useGlobalContext();
   const selectedTaskQ = useQuery({
     queryKey: ["tasks", selectedTaskId],
     queryFn: () => fetchAPI.GET(`/tasks/${selectedTaskId}`),

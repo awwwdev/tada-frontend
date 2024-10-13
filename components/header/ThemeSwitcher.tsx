@@ -3,20 +3,19 @@
 
 import { setThemeCookie } from "@/app/actions";
 import Icon from "@/components/ui/Icon";
-import ToggleGroup from "@/components/ui/ToggleGroup";
-import { Settings } from "@/types";
-import { useEffect, useState } from "react";
-import { useGlobalContex } from "../Provider";
-import Card from "../ui/Card";
-import Button from "../ui/Button";
-import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import useSettingsMutation from '@/hooks/useSettingsMutation';
+import { Settings } from "@/types";
+import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
+import { useEffect, useState } from "react";
+import { useGlobalContext } from "../Provider";
+import Button from "../ui/Button";
+import Card from "../ui/Card";
 
 
 type Theme = Settings["theme"];
 
 export const ThemeSwitcher = () => {
-  const { theme: themeFromCookie, useSystemTheme } = useGlobalContex();
+  const { theme: themeFromCookie, useSystemTheme } = useGlobalContext();
   const [_theme, _setTheme] = useState<Theme | null>(null);
 
   const theme = _theme ?? (useSystemTheme ? "system" : themeFromCookie);

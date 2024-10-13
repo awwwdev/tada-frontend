@@ -1,7 +1,7 @@
 import useUserMe from "@/hooks/useUserMe";
 import { Task } from "@/types";
 import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
-import { useGlobalContex } from "./Provider";
+import { useGlobalContext } from "./Provider";
 import TaskItem from "./TaskItem";
 import Button from "./ui/Button";
 import EmptyState from "./ui/EmptyState";
@@ -68,7 +68,7 @@ function ListTemplate({
   listName: React.ReactNode;
   listControls: React.ReactNode;
 }) {
-  const { setListsPanelOpen, listsPanelOpen } = useGlobalContex();
+  const { setListsPanelOpen, listsPanelOpen } = useGlobalContext();
   return (
     <div className="gap-3 grid overflow-hidden h-full" style={{ gridTemplateRows: "auto 1fr" }}>
       <div className="px-4.5 flex gap-3 w-full ">

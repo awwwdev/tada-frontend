@@ -1,16 +1,16 @@
 "use client";
 
 import Line from "@/components/ui/Line";
+import { useGlobalContext } from "../Provider";
+import DesktopOnly from "../ui/DesktopOnly";
+import Drawer from "../ui/Drawer";
+import MobileOnly from "../ui/MobileOnly";
 import ActionButtons from "./ActionButtons";
 import SmartLists from "./SmartLists";
 import UserLists from "./UserLists";
-import MobileOnly from "../ui/MobileOnly";
-import DesktopOnly from "../ui/DesktopOnly";
-import Drawer from "../ui/Drawer";
-import { useGlobalContex } from "../Provider";
 
 export default function ListPanel() {
-  const { listsPanelOpen, setListsPanelOpen } = useGlobalContex();
+  const { listsPanelOpen, setListsPanelOpen } = useGlobalContext();
   return (
     <>
       <MobileOnly>

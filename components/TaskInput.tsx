@@ -7,7 +7,7 @@ import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
 import LoginOrSignUpBox from "./auth/LoginOrSignUpBox";
-import { useGlobalContex } from "./Provider";
+import { useGlobalContext } from "./Provider";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Modal from "./ui/modal";
@@ -22,7 +22,7 @@ export default function TaskInput() {
     authorId: "",
   });
   const userMeQ = useUserMe();
-  const { currentList } = useGlobalContex();
+  const { currentList } = useGlobalContext();
   const addTaskM = useMutation({
     mutationFn: (task: TaskFields) =>
       fetchAPI.POST(`/tasks`, {

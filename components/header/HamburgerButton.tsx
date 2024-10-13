@@ -1,9 +1,9 @@
 "use client";
 
-import { useGlobalContex } from "../Provider";
+import { useGlobalContext } from "../Provider";
 
 export default function HamburgerButton() {
-  const { setIsSideMenuOpen } = useGlobalContex();
+  const { setIsSideMenuOpen } = useGlobalContext();
   return (
     <button
       className=" bf-i-ph-list before:mie-0"

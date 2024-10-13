@@ -9,7 +9,7 @@ import * as Toggle from "@radix-ui/react-toggle";
 import Image from "next/image";
 import Link from "next/link";
 import { createContext, useContext, useState } from "react";
-import { useGlobalContex } from "./Provider";
+import { useGlobalContext } from "./Provider";
 
 const NavContext = createContext<{
   isCollapsed: boolean;
@@ -17,7 +17,7 @@ const NavContext = createContext<{
 }>({ isCollapsed: false, setIsCollapsed: () => {} });
 
 export default function SideMenu() {
-  const { isSideMenuOpen } = useGlobalContex();
+  const { isSideMenuOpen } = useGlobalContext();
   return (
     <>
       <MobileSideMenuOverlay />
@@ -31,7 +31,7 @@ export default function SideMenu() {
 }
 
 const MobileSideMenuOverlay = () => {
-  const { isSideMenuOpen, setIsSideMenuOpen } = useGlobalContex();
+  const { isSideMenuOpen, setIsSideMenuOpen } = useGlobalContext();
   return (
     <div
       className={` drawer-overlay sm:hidden fixed z-20 inset-0 bg-black2A 
@@ -47,7 +47,7 @@ const MobileSideMenuOverlay = () => {
 };
 
 function SideNav({ className }: { className?: string }) {
-  const { isSideMenuOpen, setIsSideMenuOpen } = useGlobalContex();
+  const { isSideMenuOpen, setIsSideMenuOpen } = useGlobalContext();
   const [isCollapsed, _setIsCollapsed] = useState(false);
 
   const setIsCollapsed = (v: boolean) => {

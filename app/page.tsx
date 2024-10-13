@@ -2,21 +2,17 @@
 
 import TaskDetailsPanel from "@/components/DetailsPanel";
 
-import Header from "@/components/header";
 import ListsPanel from "@/components/ListsPanel";
-import { useGlobalContex } from "@/components/Provider";
-import TaskInput from "@/components/TaskInput";
-import UserList from "@/components/UserList";
-import SmartList from "@/components/SmartList";
-import Drawer from "@/components/ui/Drawer";
-import { useState } from "react";
-import Button from "@/components/ui/Button";
-import MobileOnly from "@/components/ui/MobileOnly";
-import Icon from "@/components/ui/Icon";
+import { useGlobalContext } from "@/components/Provider";
 import SettingsPanel from "@/components/SettingsPanel";
+import SmartList from "@/components/SmartList";
+import TaskInput from "@/components/TaskInput";
+import Drawer from "@/components/ui/Drawer";
+import UserList from "@/components/UserList";
+import { useState } from "react";
 
 export default function Page() {
-  const { currentList } = useGlobalContex();
+  const { currentList } = useGlobalContext();
   const [open, setOpen] = useState(false);
 
   const {
@@ -26,7 +22,7 @@ export default function Page() {
     setDetailsPanelOpen,
     settingsPanelOpen,
     setSettingsPanelOpen,
-  } = useGlobalContex();
+  } = useGlobalContext();
 
   return (
     <div className="grid gap-6 h-[100vh] w-[100vw]" style={{ gridTemplateRows: "1fr" }}>

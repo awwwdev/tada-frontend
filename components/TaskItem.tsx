@@ -3,19 +3,19 @@
 import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
 import Icon from "@/components/ui/Icon";
+import useBreakPoint from "@/hooks/useBreakPoint";
 import useTaskMutation from "@/hooks/useTaskMutation";
 import useUserMe from "@/hooks/useUserMe";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useGlobalContex } from "./Provider";
-import MobileOnly from "./ui/MobileOnly";
+import { useGlobalContext } from "./Provider";
 import DesktopOnly from "./ui/DesktopOnly";
-import useBreakPoint from "@/hooks/useBreakPoint";
+import MobileOnly from "./ui/MobileOnly";
 
 export default function TaskItem({ task, dragHandleProps }: { task: Task; dragHandleProps: Object }) {
-  const { setSelectedTaskId, selectedTaskId } = useGlobalContex();
+  const { setSelectedTaskId, selectedTaskId } = useGlobalContext();
 
   const taskMutation = useTaskMutation();
   const queryClient = useQueryClient();
@@ -107,7 +107,7 @@ function TraingleIndicator() {
 }
 
 function SelectArea({ task, dragHandleProps }: { task: Task; dragHandleProps: Object }) {
-  const { setSelectedTaskId, setDetailsPanelOpen } = useGlobalContex();
+  const { setSelectedTaskId, setDetailsPanelOpen } = useGlobalContext();
   const breakpoints = useBreakPoint();
 
   return (

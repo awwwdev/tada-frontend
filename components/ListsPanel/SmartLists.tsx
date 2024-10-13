@@ -3,13 +3,13 @@
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
-import { useGlobalContex } from "@/components/Provider";
+import { useGlobalContext } from "@/components/Provider";
 import SMART_LIST_IDS from "@/constants/smartListIds";
 import React from "react";
 import MenuItem from "../ui/MenuItem/MenuItem";
 
 export default function SmartLists() {
-  const { setSelectedSmartListId, currentList, setListsPanelOpen } = useGlobalContex();
+  const { setSelectedSmartListId, currentList, setListsPanelOpen } = useGlobalContext();
 
   return (
     <ul className="flex flex-col gap-3  ">

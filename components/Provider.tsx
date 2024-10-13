@@ -96,6 +96,6 @@ export default function Providers({
   );
 }
 
-export const useGlobalContex = () => {
+export const useGlobalContext = () => {
   return useContext(GloblaContext);
 };

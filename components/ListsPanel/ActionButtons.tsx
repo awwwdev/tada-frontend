@@ -1,18 +1,16 @@
 import Button from "@/components/ui/Button";
 import useUserMe from "@/hooks/useUserMe";
-import Link from "next/link";
+import { useState } from "react";
 import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
 import AccountDropdown from "../header/AccountDropdown";
 import { ThemeSwitcher } from "../header/ThemeSwitcher";
-import LinkButton from "../ui/Button/LinkButton";
+import { useGlobalContext } from "../Provider";
 import Icon from "../ui/Icon";
 import MenuItem from "../ui/MenuItem/MenuItem";
 import Modal from "../ui/modal";
-import { useGlobalContex } from "../Provider";
-import { useState } from "react";
 
 export default function ActionButtons() {
-  const { setListsPanelOpen, setSettingsPanelOpen } = useGlobalContex();
+  const { setListsPanelOpen, setSettingsPanelOpen } = useGlobalContext();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const userMeQ = useUserMe();
   return (
@@ -50,7 +48,7 @@ export default function ActionButtons() {
 
 function AuthButtons() {
   const userMeQ = useUserMe();
-  const { setListsPanelOpen } = useGlobalContex();
+  const { setListsPanelOpen } = useGlobalContext();
 
   return (
     <>

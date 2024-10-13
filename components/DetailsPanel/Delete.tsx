@@ -7,13 +7,13 @@ import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useGlobalContex } from '../Provider';
+import { useGlobalContext } from '../Provider';
 import Modal from '../ui/modal';
 
 
 export default function Delete({ task }: { task: Task }) {
   const queryClient = useQueryClient();
-  const { setSelectedTaskId } = useGlobalContex();
+  const { setSelectedTaskId } = useGlobalContext();
   const deleteTaskM = useMutation({
     mutationFn: (id: string) => fetchAPI.DELETE(`/tasks/${id}`),
     onError: (err) => {

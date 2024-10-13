@@ -7,7 +7,7 @@ import Modal from "@/components/ui/modal";
 import { ListFields } from "@/types";
 import { useState } from "react";
 
-import { useGlobalContex } from "@/components/Provider";
+import { useGlobalContext } from "@/components/Provider";
 import UserListDropDown from "@/components/UserListDropDown";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import useUserMe from "@/hooks/useUserMe";
@@ -19,7 +19,7 @@ import LoginOrSignUpBox from "../auth/LoginOrSignUpBox";
 
 export default function UserLists() {
   const userMeQ = useUserMe();
-  const { setSelectedUserListId } = useGlobalContex();
+  const { setSelectedUserListId } = useGlobalContext();
   const listQ = useQuery({
     queryKey: ["lists"],
     queryFn: () => fetchAPI.GET("/lists"),
@@ -37,7 +37,7 @@ export default function UserLists() {
       queryClient.invalidateQueries({ queryKey: ["lists"] });
     },
   });
-  const { setListsPanelOpen } = useGlobalContex();
+  const { setListsPanelOpen } = useGlobalContext();
 
   return (
     <>
