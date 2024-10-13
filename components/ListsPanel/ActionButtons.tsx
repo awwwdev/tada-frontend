@@ -39,7 +39,7 @@ export default function ActionButtons() {
         </MenuItem>
       </a>
       <Modal title="Please Sign-up or Login first" open={showAuthModal} setOpen={setShowAuthModal}>
-        <LoginOrSignUpBox initalTab="login" />
+        <LoginOrSignUpBox initialTab="login" />
       </Modal>
       <ThemeSwitcher />
     </div>
@@ -64,7 +64,7 @@ function AuthButtons() {
               </MenuItem>
             }
           >
-            <LoginOrSignUpBox initalTab="login" />
+            <LoginOrSignUpBox initialTab="login" />
           </Modal>
           <Modal
             trigger={
@@ -74,7 +74,7 @@ function AuthButtons() {
               </MenuItem>
             }
           >
-            <LoginOrSignUpBox initalTab="signup" />
+            <LoginOrSignUpBox initialTab="signup" />
           </Modal>
         </>
       )}

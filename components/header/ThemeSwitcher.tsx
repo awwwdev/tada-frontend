@@ -1,4 +1,3 @@
-// components/client/theme-swither.tsx
 "use client";
 
 import { setThemeCookie } from "@/app/actions";
@@ -10,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useGlobalContext } from "../Provider";
 import Button from "../ui/Button";
 import Card from "../ui/Card";
+import useUserMe from '@/hooks/useUserMe';
 
 
 type Theme = Settings["theme"];
@@ -25,6 +25,7 @@ export const ThemeSwitcher = () => {
   };
   // const systemTheme = useOSTheme();
   const settingsMutation = useSettingsMutation();
+  const userMeQ = useUserMe();
 
   const setTheme = async (to: Theme) => {
     async function changeToDark() {
@@ -59,7 +60,9 @@ export const ThemeSwitcher = () => {
       _setTheme("system");
       await setThemeCookie({ theme: "dark", useSystemTheme: true });
     }
-    settingsMutation.mutate({ theme: to});
+    if (userMeQ.data) {
+     settingsMutation.mutate({ theme: to});
+    }
   };
 
   useEffect(() => {
@@ -98,25 +101,3 @@ export const ThemeSwitcher = () => {
   );
 };
 
-{
-  /* <Button variant="ghost" onClick={toogleTheme}>
-{_theme == "dark" && (
-  <>
-    <Icon name="bf-i-ph-moon" />
-    <span>Dark</span>
-  </>
-)}
-{_theme == "light" && (
-  <>
-    <Icon name="bf-i-ph-sun" />
-    <span>Light</span>
-  </>
-)}
-{_theme == "system" && (
-  <>
-    <Icon name="bf-i-ph-computer" />
-    <span>System</span>
-  </>
-)}
-</Button> */
-}
