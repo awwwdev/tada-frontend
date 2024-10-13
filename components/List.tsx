@@ -22,40 +22,54 @@ export default function List({
 }) {
   const notDeletedTasks = tasks.filter((t: Task) => !t.deleted) ?? [];
   const userMeQ = useUserMe();
-  if (notDeletedTasks.length === 0)
-    return (
-      <ListTemplate listName={listName} listControls={listControls}>
-        {userMeQ.data ? (
-          <EmptyState title="No Tasks" subtitle="Add tasks using the input below" icon={<Icon name="bf-i-ph-info" />} />
-        ) : (
-          <EmptyState title="Please Sign-up/Login." subtitle="" icon={<Icon name="bf-i-ph-info" />}>
-            <Modal
-              trigger={
-                <MenuItem size="xl" className="justify-start">
-                  <Icon name="bf-i-ph-sign-in" className="mie-1.5 c-base11" />
-                  Login
-                </MenuItem>
-              }
-            >
-              <LoginOrSignUpBox initalTab="login" />
-            </Modal>
-          </EmptyState>
-        )}
-      </ListTemplate>
-    );
+
+  const { setShowAuthModal } = useGlobalContext();
+  // if (notDeletedTasks.length === 0)
+  //   return (
+  //     <EmptyState
+  //       title="Please Sign-up/Login."
+  //       subtitle=""
+  //       icon={<Icon name="bf-i-ph-info" />}
+  //       content={
+  //         <>
+  //           <Button variant="ghost" className="mt-3 justify-start" onClick={() => setShowAuthModal(true)}>
+  //             <Icon name="bf-i-ph-sign-in" className="mie-1.5 c-base11" />
+  //             Sign Up / Login
+  //           </Button>
+  //         </>
+  //       }
+  //     >
+  //       <ListTemplate listName={listName} listControls={listControls}></ListTemplate>
+  //     </EmptyState>
+  //   );
 
   const pinnedTasks = notDeletedTasks.filter((t: Task) => t.pinned);
   const notPinnedTasks = notDeletedTasks.filter((t: Task) => !t.pinned);
   const orderedTasks = [...pinnedTasks, ...notPinnedTasks];
 
   return (
-    <ListTemplate listName={listName} listControls={listControls}>
-      <ul className=" gap-3 flex flex-col overflow-y-scroll px-4.5">
-        {orderedTasks.map((task, index) => {
-          return <TaskItem key={index} task={task} dragHandleProps={{}} />;
-        })}
-      </ul>
-    </ListTemplate>
+    <EmptyState
+      isEmpty={notDeletedTasks.length === 0 || !userMeQ.data}
+      title="Please Sign-up/Login."
+      subtitle=""
+      icon={<Icon name="bf-i-ph-info" />}
+      content={
+        <>
+          <Button variant="ghost" className="mt-3 justify-start" onClick={() => setShowAuthModal(true)}>
+            <Icon name="bf-i-ph-sign-in" className="mie-1.5 c-base11" />
+            Sign Up / Login
+          </Button>
+        </>
+      }
+    >
+      <ListTemplate listName={listName} listControls={listControls}>
+        <ul className=" gap-3 flex flex-col overflow-y-scroll px-4.5">
+          {orderedTasks.map((task, index) => {
+            return <TaskItem key={index} task={task} dragHandleProps={{}} />;
+          })}
+        </ul>
+      </ListTemplate>
+    </EmptyState>
   );
 }
 
@@ -99,7 +113,7 @@ function ListTemplate({
         ]}
       >
         <ScrollArea orientation="vertical">
-          <div className="py-8">{children}</div>
+          <div className="py-8 ">{children}</div>
         </ScrollArea>
       </GradientMask>
     </div>
@@ -189,4 +203,14 @@ function ListItemTemplate({ item, itemSelected, dragHandleProps }: TemplateProps
       </div>
     </div>
   );
+}
+
+{
+  /* {userMeQ.data && (
+            <EmptyState
+              title="No Tasks"
+              subtitle="Add tasks using the input below"
+              icon={<Icon name="bf-i-ph-info" />}
+            />
+          )} */
 }
