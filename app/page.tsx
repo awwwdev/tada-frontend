@@ -9,17 +9,11 @@ import SmartList from "@/components/SmartList";
 import TaskInput from "@/components/TaskInput";
 import Drawer from "@/components/ui/Drawer";
 import UserList from "@/components/UserList";
-import { useState } from "react";
 
 export default function Page() {
   const { currentList } = useGlobalContext();
-  const [open, setOpen] = useState(false);
 
   const {
-    listsPanelOpen,
-    setListsPanelOpen,
-    detailsPanelOpen,
-    setDetailsPanelOpen,
     settingsPanelOpen,
     setSettingsPanelOpen,
   } = useGlobalContext();

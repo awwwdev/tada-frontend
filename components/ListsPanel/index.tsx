@@ -28,10 +28,7 @@ export default function ListPanel() {
 function ListsPanelContent() {
   return (
     <div
-      className={`
-      flex flex-col b-ie-1 b-base6 pie-3 py-6 pis-3  gap-3 overflow-y-auto bg-base4
-      
-      `}
+      className={`flex flex-col b-ie-1 b-base6 pie-3 py-6 pis-3  gap-3 overflow-y-auto bg-base4`}
     >
       <SmartLists />
       <Line />

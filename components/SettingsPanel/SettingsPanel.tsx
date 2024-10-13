@@ -1,12 +1,10 @@
 "use client";
 
-import Icon from "@/components/ui/Icon";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import RadioGroup from "@/components/ui/RadioGroup";
 import useSettingsMutation from '@/hooks/useSettingsMutation';
 import useUserMe from "@/hooks/useUserMe";
 import { Settings } from "@/types";
-import Link from "next/link";
 import { ThemeSwitcher } from '../header/ThemeSwitcher';
 
 export default function SettingsPanel() {

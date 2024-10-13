@@ -1,6 +1,6 @@
 "use client";
 
-import { QueryClientProvider, useQueries } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { getQueryClient } from "@/react-query/getQueryClient";
 import type * as React from "react";

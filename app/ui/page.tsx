@@ -191,7 +191,7 @@ export default function Page() {
             Link Button
           </LinkButton>
         </div>
-        <Icon name="bf-i-ph-sun" className="???" />
+        <Icon name="bf-i-ph-sun" className="" />
         <TextArea label="dfdsflhd" name="dfdsf">
           d;fjdsf dkjfls dfl kdfl ksdf
         </TextArea>

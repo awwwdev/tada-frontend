@@ -148,7 +148,7 @@ function AddListButton() {
         </div>
       </Modal>
       <Modal open={showAuthModal} setOpen={setShowAuthModal} title="Please Sign-up or Login first">
-        <LoginOrSignUpBox initalTab="login" />
+        <LoginOrSignUpBox initialTab="login" />
       </Modal>
     </>
   );
