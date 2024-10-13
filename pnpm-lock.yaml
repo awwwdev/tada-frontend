@@ -214,9 +214,6 @@ devDependencies:
   unocss-preset-primitives:
     specifier: 0.0.1-beta.5
     version: 0.0.1-beta.5
-  unocss-preset-radix:
-    specifier: ^2.5.5
-    version: 2.5.5
 
 packages:
 
@@ -2591,10 +2588,6 @@ packages:
     resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
     dev: false
 
-  /@radix-ui/colors@3.0.0-rc.4:
-    resolution: {integrity: sha512-dUG9WQCdjKPiiqbQsahUGmOuC+9kCltckQtej7hkVIQp56xirLaMsNrOs9xMYXnIbNqK/vZCmoEk+q1Nda+2AA==}
-    dev: true
-
   /@radix-ui/number@1.0.1:
     resolution: {integrity: sha512-T5gIdVO2mmPW3NNhjNgEP3cqMXjXL9UbO0BzWcXfvdBs+BohbQxvd/K5hSVKmn9/lbTdsQVKbUcP5WLCwvUbBg==}
     dependencies:
@@ -4155,10 +4148,6 @@ packages:
 
   /@unocss/core@0.47.4:
     resolution: {integrity: sha512-4yyjWeHhhB+7PMGj3ZFDD8bGfpMxeH1shgu+sLrFOB8Kt0eaiR+Z07/rZecazGqJDzCX539CMaGpcfxGsvmHsQ==}
-
-  /@unocss/core@0.55.7:
-    resolution: {integrity: sha512-c+bWe844Xjlwc1EPwHj0+n3LpntJG7ELPbEOOxNIG+CQdcEX0l1G0rkM8+nKstJ9WJmgpf1HdJQLVMF62HXvhw==}
-    dev: true
 
   /@unocss/core@0.58.5:
     resolution: {integrity: sha512-qbPqL+46hf1/UelQOwUwpAuvm6buoss43DPYHOPdfNJ+NTWkSpATQMF0JKT04QE0QRQbHNSHdMe9ariG+IIlCw==}
@@ -8818,13 +8807,6 @@ packages:
     resolution: {integrity: sha512-nt6umfhP5QMjnifmtwY6iEfzc2yt2wUrJXXD/yyw5oVK8mus1Drgw/nZH7mWDpnBPQuMZTfIwnk2rOHwBTv+tw==}
     dependencies:
       '@unocss/core': 0.45.30
-    dev: true
-
-  /unocss-preset-radix@2.5.5:
-    resolution: {integrity: sha512-lSnnKbfY37rC58Seosblr0j1V0Rcz3NCB501rHkdMm2iCH3oFBQkYn19O9VHO27vj1a2ZcHr0eZYYmJYbtHB/g==}
-    dependencies:
-      '@radix-ui/colors': 3.0.0-rc.4
-      '@unocss/core': 0.55.7
     dev: true
 
   /unocss-preset-theme@0.13.0(@unocss/core@0.62.3):

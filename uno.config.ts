@@ -8,7 +8,7 @@ export default defineConfig({
   // @ts-ignore
   shortcuts,
   theme: {
-    color: {
+    colors: {
       subdued: "var(--rx-slate11)",
     },
     breakpoints: {
@@ -28,45 +28,6 @@ export default defineConfig({
       prefix: "--rx-",
       darkSelector: ".dark-theme",
       lightSelector: ".light-theme",
-      palette: [
-        // neutrals
-        "gray",
-        "slate",
-        "mauve",
-        "olive",
-        "sage",
-        "sand",
-        // forground-colors
-        "amber",
-        "sky",
-        "yellow",
-        "lime",
-        "mint",
-        // orangish-colors
-        "bronze",
-        "gold",
-        "brown",
-        "orange",
-        "tomato",
-        //red-ish colors
-        "red",
-        "ruby",
-        "crimson",
-        "pink",
-        "plum",
-        // purplish-colors
-        "purple",
-        "violet",
-        "iris",
-        "indigo",
-        "blue",
-        // green-ish colors
-        "cyan",
-        "teal",
-        "jade",
-        "green",
-        "grass",
-      ],
       aliases: {
         accent: "orange",
         base: "slate",
@@ -75,6 +36,7 @@ export default defineConfig({
         error: "tomato",
         info: "blue",
       },
+      useP3Colors: true,
     }),
   ],
 });
