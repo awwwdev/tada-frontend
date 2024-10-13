@@ -13,7 +13,6 @@ import Input from "./ui/Input";
 import Modal from "./ui/modal";
 
 export default function TaskInput() {
-  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const queryClient = useQueryClient();
   const [draft, setDraft, removeValue] = useLocalStorage<TaskFields>("darft-task", {
@@ -22,7 +21,7 @@ export default function TaskInput() {
     authorId: "",
   });
   const userMeQ = useUserMe();
-  const { currentList } = useGlobalContext();
+  const { currentList ,  setShowAuthModal } = useGlobalContext();
   const addTaskM = useMutation({
     mutationFn: (task: TaskFields) =>
       fetchAPI.POST(`/tasks`, {
@@ -89,9 +88,6 @@ export default function TaskInput() {
           </Button>
         </div>
       </form>
-      <Modal open={showAuthModal} setOpen={setShowAuthModal} title="Please Sign-up or Login first">
-        <LoginOrSignUpBox initalTab="login" />
-      </Modal>
     </div>
   );
 }

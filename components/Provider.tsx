@@ -5,6 +5,8 @@ import useUserMe from "@/hooks/useUserMe";
 import { CurrentList, Settings, SmartListId } from "@/types";
 import type * as React from "react";
 import { createContext, SetStateAction, useContext, useState } from "react";
+import LoginOrSignUpBox from './auth/LoginOrSignUpBox';
+import Modal from './ui/modal';
 
 const initialCurrentList: CurrentList = {
   id: SMART_LIST_IDS.ALL_TASKS,
@@ -27,8 +29,10 @@ type ContextType = {
   setDetailsPanelOpen: React.Dispatch<SetStateAction<boolean>>;
   settingsPanelOpen: boolean;
   setSettingsPanelOpen: React.Dispatch<SetStateAction<boolean>>;
+  showAuthModal: boolean;
+  setShowAuthModal: React.Dispatch<SetStateAction<boolean>>;
 };
-const GloblaContext = createContext<ContextType>({
+const GlobalContext = createContext<ContextType>({
   isSideMenuOpen: false,
   selectedTaskId: null,
   currentList: initialCurrentList,
@@ -43,7 +47,9 @@ const GloblaContext = createContext<ContextType>({
   setListsPanelOpen: () => {},
   setDetailsPanelOpen: () => {},
   settingsPanelOpen: false,
-  setSettingsPanelOpen: () => {}
+  setSettingsPanelOpen: () => {},
+  showAuthModal: false,
+  setShowAuthModal: () => {}
 });
 
 export default function Providers({
@@ -64,6 +70,7 @@ export default function Providers({
   const [detailsPanelOpen, setDetailsPanelOpen] = useState(false);
   const [settingsPanelOpen, setSettingsPanelOpen] = useState(false);
 
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const setSelectedUserListId = (id: string) => {
     _setCurrentList({id, type: 'user-list'});
@@ -71,8 +78,11 @@ export default function Providers({
   const setSelectedSmartListId = (id: SmartListId) => {
     _setCurrentList({id, type: 'smart-list'});
   }
+
+
+
   return (
-    <GloblaContext.Provider
+    <GlobalContext.Provider
       value={{
         selectedTaskId,
         currentList,
@@ -88,14 +98,20 @@ export default function Providers({
         setDetailsPanelOpen,
         setListsPanelOpen,
         settingsPanelOpen,
-        setSettingsPanelOpen
+        setSettingsPanelOpen,
+        setShowAuthModal,
+        showAuthModal
       }}
     >
       {children}
-    </GloblaContext.Provider>
+      <Modal open={showAuthModal} setOpen={setShowAuthModal} title="Please Sign-up or Login first">
+        <LoginOrSignUpBox initialTab="login" />
+      </Modal>
+
+    </GlobalContext.Provider>
   );
 }
 
 export const useGlobalContext = () => {
-  return useContext(GloblaContext);
+  return useContext(GlobalContext);
 };

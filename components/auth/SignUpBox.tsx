@@ -6,6 +6,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { z } from "zod";
 import Button from '../ui/Button';
+import { useGlobalContext } from '../Provider';
 
 const schema = z.object({
   email: z
@@ -30,6 +31,7 @@ export default function SignUpBox() {
   // const queryClient = useQueryClient();
 
   const queryClient = useQueryClient();
+  const {setShowAuthModal} = useGlobalContext();
 
   const onSubmit = async ({
     email,
@@ -51,6 +53,7 @@ export default function SignUpBox() {
     // queryClient.setQueryData(['userMe'], () => data.user);
     queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
     queryClient.setQueryData(["userMe"], () => data.user);
+    setShowAuthModal(false);
   };
 
   const form = useFormHook({ schema, onSubmit });

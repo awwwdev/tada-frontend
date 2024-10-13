@@ -1,12 +1,13 @@
 import { Form, useFormHook } from "@/components/react-hook-form";
 import { useState } from "react";
-import { z } from "zod";
+import { set, z } from "zod";
 // import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Icon from "@/components/ui/Icon";
 import fetchAPI from "@/utils/fetchAPI";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Button from '../ui/Button';
+import { useGlobalContext } from '../Provider';
 
 export default function LoginBox() {
 
@@ -19,6 +20,8 @@ export default function LoginBox() {
 
   const queryClient = useQueryClient();
 
+  const {setShowAuthModal} = useGlobalContext();
+
   const onSubmit = async ({ email, password }: { email: string; password: string }) => {
     const data = await fetchAPI.POST("/auth/login/with-password", { email, password });
     if (data.error) throw new Error(data.error.message ?? 'Something went wrong');
@@ -27,6 +30,7 @@ export default function LoginBox() {
     queryClient.invalidateQueries({ queryKey: ["userMe"], refetchType: "all" });
     queryClient.removeQueries(); // removes cached data for all queries
     await queryClient.resetQueries(); // reset all queyries to their initial state
+    setShowAuthModal(false);
   };
 
   const form = useFormHook({ schema, onSubmit });
