@@ -28,7 +28,7 @@ export default function Checkbox({
   const id = useId();
 
   return (
-    <div className="grid  ">
+    <div className="grid">
       <label htmlFor={id} className="flex gap-2 items-center ">
         <div
           className={`w-1.5em h-1.5em b-1 b-base4 flex justify-center items-center p-1 rd-1.5 bg-base1
