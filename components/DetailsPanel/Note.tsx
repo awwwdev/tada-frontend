@@ -6,9 +6,9 @@ import QUERY_KEYS from "@/react-query/queryKeys";
 import { Task } from "@/types";
 import fetchAPI from "@/utils/fetchAPI";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { EditorState } from "draft-js";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { Editor, EditorState } from "draft-js";
 
 export default function Note({ task }: { task: Task }) {
   const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
@@ -19,7 +19,7 @@ export default function Note({ task }: { task: Task }) {
     setValue(task.note ?? "");
   }, [task.note]);
   const taskMutation = useMutation({
-    mutationFn: async ({ id, note }: { id: string; note: string }) => fetchAPI.PUT(`/tasks/${id}`, { note }),
+    mutationFn: async ({ id, note }: { id: string; note: string }) => fetchAPI.PATCH(`/tasks/${id}`, { note }),
     onError: (err) => {
       toast.error("Error: " + err.message);
     },

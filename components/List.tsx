@@ -41,20 +41,20 @@ export default function List({
         </>
       }
     >
-      <EmptyState
-        isEmpty={!orderedTasks.length}
-        title="No Tasks"
-        subtitle="Add tasks using the input below"
-        icon={<Icon name="bf-i-ph-info" />}
-      >
-        <ListTemplate listName={listName} listControls={listControls}>
+      <ListTemplate listName={listName} listControls={listControls}>
+        <EmptyState
+          isEmpty={!orderedTasks.length}
+          title="No Tasks"
+          subtitle="Add tasks using the input below"
+          icon={<Icon name="bf-i-ph-info" />}
+        >
           <ul className=" gap-3 flex flex-col overflow-y-scroll px-4.5">
             {orderedTasks.map((task, index) => {
               return <TaskItem key={index} task={task} dragHandleProps={{}} />;
             })}
           </ul>
-        </ListTemplate>
-      </EmptyState>
+        </EmptyState>
+      </ListTemplate>
     </EmptyState>
   );
 }
@@ -68,23 +68,11 @@ function ListTemplate({
   listName: React.ReactNode;
   listControls: React.ReactNode;
 }) {
-  const { setListsPanelOpen, listsPanelOpen } = useGlobalContext();
   return (
     <div className="gap-3 grid overflow-hidden h-full" style={{ gridTemplateRows: "auto 1fr" }}>
       <div className="px-4.5 flex gap-3 w-full ">
         <div className="flex gap-1.5 items-center">
-          <Button
-            variant="text"
-            className="sm:hidden"
-            onClick={() => {
-              setListsPanelOpen(!listsPanelOpen);
-            }}
-            iconButton
-          >
-            <Icon name="bf-i-ph-list" className="c-base11 " />
-            <span className="sr-only">menu {listsPanelOpen ? "open" : "closed"}</span>
-          </Button>
-
+          <MobileHamburgerMenuButton />
           <h2 className="H3">{listName}</h2>
         </div>
         <div className="mis-auto">{listControls}</div>
@@ -105,6 +93,25 @@ function ListTemplate({
     </div>
   );
 }
+
+function MobileHamburgerMenuButton() {
+  const { setListsPanelOpen, listsPanelOpen } = useGlobalContext();
+
+  return (
+    <Button
+      variant="text"
+      className="sm:hidden"
+      onClick={() => {
+        setListsPanelOpen(!listsPanelOpen);
+      }}
+      iconButton
+    >
+      <Icon name="bf-i-ph-list" className="c-base11 " />
+      <span className="sr-only">menu {listsPanelOpen ? "open" : "closed"}</span>
+    </Button>
+  );
+}
+
 // function ListContent({ tasks, listName }: { tasks: Task[]; listName: string }) {
 //   const listContainerRef = useRef<HTMLDivElement>(null);
 //   // const [parent, enableAnimations] = useAutoAnimate(/* optional config */)

@@ -2,16 +2,16 @@ EmptyState as wrapper
 LoadingState as wrapper
 ErrorState as wrapper
 LoggedOutState as wrapper
+- --- match menu item and button sizes
+- btn rewrite
+- rewrite input
+  rewrite button classes with css properties -> easily add more data attributes (write in css?)
 
 
 - delete lists -> delete tasks inside
 - update types for list
-- --- match menu item and button sizes
 
 - menu item rewrite
-- btn rewrite
-- rewrite input
-  rewrite button classes with css properties -> easily add more data attributes (write in css?)
 
 - optimistic update to task mutation
 - tests for backend

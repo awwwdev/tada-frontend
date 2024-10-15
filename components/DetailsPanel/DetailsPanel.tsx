@@ -71,7 +71,7 @@ function TaskDetailsContent({ task }: { task: Task }) {
       {/* <Line /> */}
       {/* <Steps task={task} /> */}
       {/* <Line /> */}
-      {/* <Emojies task={task} /> */}
+      {/* <emojis task={task} /> */}
       {/* <Line /> */}
       {/* <Due task={task} /> */}
       {/* <Line /> */}
@@ -112,8 +112,8 @@ function Due({ task }: { task: Task }) {
   return <div>Due Date</div>;
 }
 
-function Emojies({ task }: { task: Task }) {
-  return <div>Emojies</div>;
+function emojis({ task }: { task: Task }) {
+  return <div>emojis</div>;
 }
 
 function Reminders({ task }: { task: Task }) {

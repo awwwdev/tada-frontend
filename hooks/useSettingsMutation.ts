@@ -10,7 +10,7 @@ export default () => {
   const queryClient = useQueryClient();
   const settingsMutation = useMutation({
     mutationFn: async (changedSettings: Partial<Settings>) =>
-      fetchAPI.PUT(`/settings/${userMeQ.data?.id}`, changedSettings),
+      fetchAPI.PATCH(`/settings/${userMeQ.data?.id}`, changedSettings),
     onError: (err) => {
       toast.error("Error: " + err.message);
     },

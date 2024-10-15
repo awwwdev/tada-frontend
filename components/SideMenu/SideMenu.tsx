@@ -9,23 +9,23 @@ import ActionButtons from "./ActionButtons";
 import SmartLists from "./SmartLists";
 import UserLists from "./UserLists";
 
-export default function ListPanel() {
+export default function SideMenu() {
   const { listsPanelOpen, setListsPanelOpen } = useGlobalContext();
   return (
     <>
       <MobileOnly>
         <Drawer open={listsPanelOpen} setOpen={setListsPanelOpen} disabled={false} side="left">
-          <ListsPanelContent />
+          <SideMenuContent/>
         </Drawer>
       </MobileOnly>
       <DesktopOnly>
-        <ListsPanelContent />
+        <SideMenuContent/>
       </DesktopOnly>
     </>
   );
 }
 
-function ListsPanelContent() {
+function SideMenuContent () {
   return (
     <div
       className={`flex flex-col b-ie-1 b-base6 pie-3 py-6 pis-3  gap-3 overflow-y-auto bg-base4`}

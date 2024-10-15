@@ -5,13 +5,13 @@ export type SmartListId = (typeof SMART_LIST_IDS)[keyof typeof SMART_LIST_IDS];
 
 export type CurrentList =
   | {
-      type: "user-list";
-      id: string;
-    }
+    type: "user-list";
+    id: string;
+  }
   | {
-      type: "smart-list";
-      id: SmartListId;
-    };
+    type: "smart-list";
+    id: SmartListId;
+  };
 
 type Document = {
   // _id: string;
@@ -39,7 +39,7 @@ type UserPopulated = {
 
 export type FolderFields = {
   name: string;
-  emojies?: Emoji[];
+  emojis?: Emoji[];
   authorId: string;
   lists?: FolderListProperties[];
 };
@@ -54,10 +54,11 @@ type FolderListProperties = {
 export type ListFields = {
   name: string;
   authorId: string;
-  emojies?: string[];
+  emojis?: string[];
   tasks: TasktPorpertisInList[];
   description?: string | null;
   folderId?: string | null;
+  theme: any;
   // show?: boolean;
 };
 
@@ -74,7 +75,7 @@ export type TaskFields = {
   label: string;
   status: "done" | "to-do";
 
-  emojies?: string[];
+  emojis?: string[];
   note?: string | null;
   // lists?: TaskListPorpertis[];
 

@@ -30,5 +30,6 @@ fetchAPI.GET = (url: string, body?: Body, options?: RequestInit) => fetchAPI(url
 fetchAPI.POST = (url: string, body?: Body, options?: RequestInit) =>
   fetchAPI(url, body, { method: "POST", ...options });
 fetchAPI.PUT = (url: string, body?: Body, options?: RequestInit) => fetchAPI(url, body, { method: "PUT", ...options });
+fetchAPI.PATCH = (url: string, body?: Body, options?: RequestInit) => fetchAPI(url, body, { method: "PATCH", ...options });
 fetchAPI.DELETE = (url: string, body?: Body, options?: RequestInit) =>
   fetchAPI(url, body, { method: "DELETE", ...options });

@@ -20,7 +20,7 @@ export default function Title({ task }: { task: Task }) {
   const [showEdit, setShowEdit] = useState(false);
 
   const taskMutation = useMutation({
-    mutationFn: async ({ id, label }: { id: string; label: string }) => fetchAPI.PUT(`/tasks/${id}`, { label }),
+    mutationFn: async ({ id, label }: { id: string; label: string }) => fetchAPI.PATCH(`/tasks/${id}`, { label }),
     onError: (err) => {
       toast.error("Error: " + err.message);
     },

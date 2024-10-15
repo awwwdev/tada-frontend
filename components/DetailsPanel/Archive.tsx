@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 export default function Archive({ task }: { task: Task }) {
   const queryClient = useQueryClient();
   const archiveTaskM = useMutation({
-    mutationFn: async (id: string) => fetchAPI.PUT(`/tasks/${id}`, { archived: !task?.archived }),
+    mutationFn: async (id: string) => fetchAPI.PATCH(`/tasks/${id}`, { archived: !task?.archived }),
     onError: (err) => {
       toast.error("Error: " + err.message);
     },

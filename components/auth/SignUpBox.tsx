@@ -5,8 +5,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { z } from "zod";
-import Button from '../ui/Button';
-import { useGlobalContext } from '../Provider';
+import Button from "../ui/Button";
+import { useGlobalContext } from "../Provider";
 
 const schema = z.object({
   email: z
@@ -31,7 +31,7 @@ export default function SignUpBox() {
   // const queryClient = useQueryClient();
 
   const queryClient = useQueryClient();
-  const {setShowAuthModal} = useGlobalContext();
+  const { setShowAuthModal } = useGlobalContext();
 
   const onSubmit = async ({
     email,
@@ -73,7 +73,7 @@ export default function SignUpBox() {
             required
             label={"Password"}
             outerSuffix={
-              <Button iconButton  variant='text' type="button" onClick={() => setIsPassVisible((s) => !s)}>
+              <Button iconButton variant="text" type="button" onClick={() => setIsPassVisible((s) => !s)}>
                 <span className="sr-only">Show Password</span>
                 {!isPassVisible && <Icon name="bf-i-ph-eye" subdued={false} />}
                 {isPassVisible && <Icon name="bf-i-ph-eye-closed" subdued={false} />}
@@ -85,10 +85,19 @@ export default function SignUpBox() {
             type={isPassVisible ? "text" : "password"}
             required
             label={"Confirm Password"}
+            outterSuffix={
+              <Button iconButton variant="text" type="button" onClick={() => setIsPassVisible((s) => !s)}>
+                <span className="sr-only">Show Password</span>
+                {!isPassVisible && <Icon name="bf-i-ph-eye" subdued={false} />}
+                {isPassVisible && <Icon name="bf-i-ph-eye-closed" subdued={false} />}
+              </Button>
+            }
           />
           <div className="h-6"></div>
           <Form.ServerErrorMessage />
-          <Form.SubmitButton variant='solid' className="w-full">{"Submit"}</Form.SubmitButton>
+          <Form.SubmitButton variant="solid" className="w-full">
+            {"Submit"}
+          </Form.SubmitButton>
         </Form>
       </div>
     </div>

@@ -9,7 +9,7 @@ export default function useListMutation({ onSuccess }: { onSuccess?: () => void 
 
   return useMutation({
     mutationFn: async ({ id, ...updates }: Partial<ListFields> & { id: string }) =>
-      fetchAPI.PUT(`/lists/${id}`, { ...updates, id: undefined, _id: undefined }),
+      fetchAPI.PATCH(`/lists/${id}`, { ...updates, id: undefined, _id: undefined }),
     onError: (err: Error) => {
       toast.error("Error: " + err.message);
     },
